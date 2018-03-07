@@ -11,7 +11,7 @@ Andrei - Navigation bar (on_all_Pages), Logo, Footer
 Mihai - News (main_page): 
   All relevant news for customers
   
-Erik - About  (secondary_page): 
+Eric - About  (secondary_page): 
   All about each fitness instructor.
   
 Ron - Fitness_Classes (secondary_page): 
