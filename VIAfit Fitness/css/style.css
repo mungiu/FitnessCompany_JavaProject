@@ -1,9 +1,10 @@
 body {
     background-image: url(../images/background.jpg);
     box-sizing: border-box;
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+    
 }
 
 tr {
