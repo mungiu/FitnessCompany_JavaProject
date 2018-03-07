@@ -70,11 +70,12 @@ body{
     height: 5%;
     clear: both;
 }   
-#event1 {
+.event1 {
     float: left;
     width: 45%;
+    padding-right: 5px;
 }
-#event2 {
+.event2 {
     width: 45%;
     float: right;
 }
