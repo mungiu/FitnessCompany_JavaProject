@@ -11,7 +11,7 @@ tr {
     color: white;
     border-bottom: 2px solid whitesmoke;
     border-width: thin;
-     background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .navButton {
