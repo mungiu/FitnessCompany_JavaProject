@@ -46,3 +46,8 @@ tr {
     height: 10%;
     float: left;
 }
+
+#outerbox {
+    height: 100%;
+    width: 100%;
+}
