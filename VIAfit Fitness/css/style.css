@@ -65,6 +65,11 @@ tr {
     border: none;
 }
 
+.likeBtn {
+    position: relative;
+    right: 200px;
+}
+
 #logo {
     width: 50%;
     height: 10%;
