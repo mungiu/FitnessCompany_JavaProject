@@ -1,22 +1,13 @@
-body
-{
+body {
     font-family: sans-serif;
 }
 
-
-
-
-
-
-
-
-#logo 
-{
+#logo {
     width: 200px;
     margin: 10px auto 25px auto;
 }
-#text
-{
+
+#text {
     width: 500px;
     margin: 10px auto 25px auto;
 }
