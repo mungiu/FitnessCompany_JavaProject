@@ -82,6 +82,15 @@ tr {
     width: 100%;
 }
 
+#navbar {
+    color: white;
+    border-width: 20px;
+    border-color: white;
+    width: 100%;
+    height: 10%;
+    float: left;
+}
+
 #andrei {
     color: white;
 }
@@ -110,6 +119,7 @@ tr {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
     background:transparent;
+    background: rgba(0, 0, 0, 0.7);
     border-collapse: collapse;
 }
 
@@ -119,6 +129,7 @@ tr {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
     background:transparent;
+    background: rgba(0, 0, 0, 0.7);
     border-collapse: collapse;
 }
 
@@ -128,6 +139,7 @@ tr {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
     background:transparent;
+    background: rgba(0, 0, 0, 0.7);
     border-collapse: collapse;
 }
 
@@ -137,6 +149,7 @@ tr {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
     background:transparent;
+    background: rgba(0, 0, 0, 0.7);
     border-collapse: collapse;
 }
 
