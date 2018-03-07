@@ -1,7 +1,7 @@
-body {
-    background-color: aqua;
+body{
+    background-image: url(../images/test_background.jpg);
+    box-sizing: border-box;
 }
-
 .navButton {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -12,31 +12,48 @@ body {
     display: inline-block;
     font-size: 16px;
 }
-
+#outerbox {
+    height: 100%;
+    width: 100%;
+}
 #navbar {
-    background-color: green;
+    color: white;
+    border-width: 20px;
+    border-color: white;
     width: 100%;
     height: 10%;
 }
-
 #content {
-    background-color: purple;
+    color: white;
+    border-width: 20px;
+    border-color: white;
     float: left;
     width: 60%;
     height: 700px;
 }
-
 #events {
-    background-color: yellow;
+    color: white;
+    border-width: 20px;
+    border-color: white;
     float: right;
     width: 40%;
-    height: 700px;
-
+    height: 75%;
 }
-
 #footer {
-    background-color: gray;
+    color: white;
+    border-width: 2px;
+    border-color: white;
     width: 100%;
     height: 5%;
     clear: both;
+}   
+#event1 {
+    float: left;
+    width: 45%;
+}
+#event2 {
+    width: 45%;
+    float: right;
+}
+
 }
