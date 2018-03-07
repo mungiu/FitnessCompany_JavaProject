@@ -1,18 +1,21 @@
 body {
-    background-color: black;
-    color: greenyellow;
-}
-
-table {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    border: none;
+    /* background-image: url(../images/test_background.jpg);
+    box-sizing: border-box; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 tr {
     border-bottom: solid;
     border-width: thin;
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border: none;
 }
 
 .navButton {
@@ -38,6 +41,13 @@ tr {
     color: black;
 }
 
+#logo {
+
+    width: 500px;
+    height: 100px;
+    margin: 20px auto 15px auto;
+}
+
 #navbar {
     color: white;
     border-width: 20px;
@@ -45,6 +55,11 @@ tr {
     width: 100%;
     height: 10%;
     float: left;
+}
+
+#text {
+    width: 800px;
+    margin: 10px auto 25px auto;
 }
 
 #outerbox {

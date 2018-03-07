@@ -1,5 +1,9 @@
 body {
-    font-family: sans-serif;
+    /* background-image: url(../images/test_background.jpg);
+    box-sizing: border-box; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navButton {
