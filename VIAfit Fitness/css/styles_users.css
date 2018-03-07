@@ -2,6 +2,29 @@ body {
     font-family: sans-serif;
 }
 
+.navButton {
+    padding: 15px 32px;
+    margin: 1% 1% 1% 0px;
+    border: 2px solid whitesmoke;
+    color: white;
+    width: 11%;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    cursor: pointer;
+    float: right;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Removes text underline */
+    text-decoration: none;
+}
+
+.navButton:hover,
+.navbutton:active {
+    background-color: white;
+    color: black;
+}
+
 #logo {
     width: 200px;
     margin: 10px auto 25px auto;
