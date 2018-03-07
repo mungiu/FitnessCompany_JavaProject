@@ -12,11 +12,15 @@ body {
     border: 2px solid whitesmoke;
     color: white;
     width: 11%;
-    font-size: 16px;
-    background-color: Transparent;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
     cursor: pointer;
-    font-weight: bold;
     float: right;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Removes text underline */
+    text-decoration: none; 
 }
 
 .navButton:hover,
