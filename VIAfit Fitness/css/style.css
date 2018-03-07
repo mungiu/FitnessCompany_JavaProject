@@ -1,7 +1,6 @@
 body{
    /* background-image: url(../images/test_background.jpg);
     box-sizing: border-box; */
-    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -42,26 +41,6 @@ body{
     float: right;
     width: 40%;
     height: 75%;
-}
-#table1{
-    border: 1px solid black;
-    background: white;
-    border-collapse: collapse;
-}
-#table2{
-    border: 1px solid black;
-    background: blue;
-    border-collapse: collapse;
-}
-#table3{
-    border: 1px solid black;
-    background:orange;
-    border-collapse: collapse;
-}
-#table4{
-    border: 1px solid black;
-    background: brown;
-    border-collapse: collapse;
 }
 #footer {
     color: white;
