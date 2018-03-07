@@ -1,6 +1,6 @@
 body {
-    /* background-image: url(../images/test_background.jpg);
-    box-sizing: border-box; */
+    background-image: url(../images/background.jpg);
+    box-sizing: border-box;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -53,20 +53,21 @@ tr {
 }
 
 #logo {
-
-    width: 500px;
-    height: 100px;
+    width: 50%;
+    height: 10%;
     margin: 20px auto 15px auto;
+    color: whitesmoke;
+}
+
+#text {
+    width: 800px;
+    margin: 10px 0px 25px 0px;
+    color: whitesmoke;
 }
 
 #outerbox {
     height: 100%;
     width: 100%;
-}
-
-#text {
-    width: 800px;
-    margin: 10px auto 25px auto;
 }
 
 #navbar {
