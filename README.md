@@ -19,3 +19,6 @@ Ron - Fitness_Classes (secondary_page):
 
 Unassigned:
 About_VIAFit (secondary_page)
+
+Template webpage (HiFiveFitness)
+http://www.hifivefitness.dk
