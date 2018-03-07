@@ -1,14 +1,17 @@
 body {
-    /* background-image: url(../images/test_background.jpg);
-    box-sizing: border-box; */
+    background-image: url(../images/background.jpg);
+    box-sizing: border-box;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 tr {
-    border-bottom: solid;
+    font-family: Tahoma, Verdana, Segoe;
+    color: white;
+    border-bottom: 2px solid whitesmoke;
     border-width: thin;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .navButton {
@@ -53,10 +56,20 @@ tr {
 }
 
 #logo {
-
-    width: 500px;
-    height: 100px;
+    width: 50%;
+    height: 10%;
     margin: 20px auto 15px auto;
+<<<<<<< HEAD
+    color: white;
+=======
+    color: whitesmoke;
+}
+
+#text {
+    width: 800px;
+    margin: 10px 0px 25px 0px;
+    color: whitesmoke;
+>>>>>>> 3489e0658c3828f8804dc69e44a6f5fab591f676
 }
 
 #outerbox {
@@ -64,11 +77,19 @@ tr {
     width: 100%;
 }
 
+<<<<<<< HEAD
 #text {
     width: 800px;
     margin: 10px auto 25px auto;
+    color: white;
+}
+#andrei
+{
+    color: white;
 }
 
+=======
+>>>>>>> 3489e0658c3828f8804dc69e44a6f5fab591f676
 #navbar {
     color: white;
     border-width: 20px;
