@@ -35,11 +35,13 @@ body {
 }
 
 #logo {
-    width: 200px;
-    margin: 10px auto 25px auto;
+    
+    width: 500px;
+    height: 100px;
+    margin: 20px auto 15px auto;
 }
 
 #text {
-    width: 500px;
+    width: 800px;
     margin: 10px auto 25px auto;
 }
