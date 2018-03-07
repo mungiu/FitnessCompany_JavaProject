@@ -1,0 +1,22 @@
+body
+{
+    font-family: sans-serif;
+}
+
+
+
+
+
+
+
+
+#logo 
+{
+    width: 200px;
+    margin: 10px auto 25px auto;
+}
+#text
+{
+    width: 500px;
+    margin: 10px auto 25px auto;
+}
