@@ -4,6 +4,7 @@ body {
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+
 }
 
 tr {
@@ -44,6 +45,7 @@ tr {
     width: 100%;
     height: 10%;
     float: left;
+    text-align: center;
 }
 
 .event1 {
@@ -98,6 +100,7 @@ tr {
     width: 100%;
     height: 10%;
     float: left;
+    clear: both;
 }
 
 div.pic img {
@@ -105,8 +108,7 @@ div.pic img {
     height: auto;
 }
 
-.image
-{
+.image {
     padding: 0 43px;
     float: left;
     width: 200px;
@@ -116,7 +118,6 @@ div.pic img {
     color: whitesmoke;
     background-color: rgba(255, 255, 255, 0.1);
     height: 100px;
-    padding: 25px;
     text-align: center;
     line-height: 0.8;
 }
