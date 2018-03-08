@@ -154,18 +154,23 @@ a:hover {
     width: 40%;
     height: 75%;
 }
-
+#content a:visited{
+    color:darkgreen;
+}
 #table1 {
-    font-size: 20px;
+    
+    font-size: 15px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
+    color: black
     border: 1px solid black;
     background: transparent;
     border-collapse: collapse;
 }
 
+
 #table2 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
@@ -174,7 +179,7 @@ a:hover {
 }
 
 #table3 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
@@ -183,7 +188,7 @@ a:hover {
 }
 
 #table4 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     border: 1px solid black;
