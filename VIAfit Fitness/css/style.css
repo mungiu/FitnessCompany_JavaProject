@@ -69,7 +69,7 @@ tr {
     right: 200px;
 }
 
-#logo {
+.logo {
     width: 250px;
     margin: 1px 1px 1px 200px;
     color: whitesmoke;
@@ -78,7 +78,7 @@ tr {
     
 }
 
-#text {
+.text {
     width: 800px;
     margin: 10px 0px 25px 0px;
     color: whitesmoke;
@@ -114,9 +114,8 @@ div.pic img {
 
 .desc {
     color: whitesmoke;
-    background-color: rgba(255, 255, 255, 0.1);
-    height: 100px;
-    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 120px;
     text-align: center;
     line-height: 0.8;
 }
