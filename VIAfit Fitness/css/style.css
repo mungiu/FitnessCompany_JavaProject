@@ -71,7 +71,7 @@ tr {
     right: 200px;
 }
 
-#logo {
+.logo {
     width: 250px;
     margin: 1px 1px 1px 200px;
     color: whitesmoke;
@@ -80,7 +80,7 @@ tr {
     clear: both;
 }
 
-#text {
+.text {
     width: 800px;
     margin: 10px 0px 25px 0px;
     color: whitesmoke;
