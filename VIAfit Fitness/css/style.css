@@ -3,8 +3,7 @@ body {
     box-sizing: border-box;
     background-position: top;
     background-repeat: no-repeat;
-    background-size: cover;
-
+    background-size: 120% auto;
 }
 
 tr {
@@ -38,7 +37,7 @@ a:hover {
     margin: 1% 1% 1% 0px;
     border: 2px solid whitesmoke;
     color: white;
-    width: 11%;
+    width: 10%;
     font-size: 20px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
@@ -97,11 +96,6 @@ a:hover {
     margin-right: auto;
     width: 80%;
     border: none;
-}
-
-.likeBtn {
-    position: relative;
-    right: 200px;
 }
 
 .logo {
@@ -197,4 +191,11 @@ a:hover {
     width: 100%;
     height: 5%;
     clear: both;
+    position: absolute;
+    bottom: -105px;
+}
+
+#likeBtn {
+    width: 50px;
+    height: 50px;
 }
