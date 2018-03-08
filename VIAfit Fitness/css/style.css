@@ -186,16 +186,15 @@ a:hover {
 
 #footer {
     color: white;
-    border-width: 2px;
-    border-color: white;
     width: 100%;
     height: 5%;
     clear: both;
-    position: absolute;
-    bottom: -105px;
+    background-color: rgba(0, 0, 0, 0.70);
 }
 
-#likeBtn {
-    width: 50px;
-    height: 50px;
+.footerBtn {
+    width: 2%;
+    height: 2%;
+    position: relative;
+    left: 50%;
 }
