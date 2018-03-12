@@ -71,7 +71,7 @@ tr {
 }
 
 .logo {
-    width: 200px;
+    width: 20%;
     margin: 1px 1px 1px 200px;
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
@@ -80,7 +80,7 @@ tr {
 }
 
 .text {
-    width: 800px;
+    width: 50%;
     margin: 10px 0px 25px 42px;
     color: whitesmoke;
     text-align: center;
@@ -110,7 +110,7 @@ div.pic img {
 .image {
     padding: 0 43px;
     float: left;
-    width: 200px;
+    width: 10%;
 }
 
 .desc {
@@ -124,10 +124,10 @@ div.pic img {
 .Description {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
-    height: 200px;
+    height: 20%;
     text-align: center;
     clear: both;
-    width: 600px;
+    width: 55%;
     margin: 0px 0px 0px 42px;
 }
 
