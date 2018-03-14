@@ -145,7 +145,7 @@ div.pic img {
 }
 
 .image {
-    padding:43px;
+    padding: 43px;
     float: left;
     width: 13.5%;
 }
@@ -180,6 +180,7 @@ a:visited {
 a:hover {
     color: deepskyblue;
 }
+
 #content {
     color: white;
     border-width: 20px;
@@ -203,7 +204,6 @@ a:hover {
 }
 
 #table1 {
-
     font-size: 12px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
@@ -211,7 +211,6 @@ a:hover {
     background: transparent;
     border-collapse: collapse;
 }
-
 
 #table2 {
     font-size: 12px;
