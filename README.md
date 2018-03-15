@@ -1,4 +1,4 @@
-### FitnessCompany_WebProject
+# FitnessCompany_WebProject
 
 Project Description:
 •	Deadline Week14 2018
@@ -50,7 +50,7 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 
 
 
-# Background description
+### Background description
   •	1 page –What does the customer want to do
   •	Do not mention solution
   •	Need at least 3 references (prepare questions for librarian)
