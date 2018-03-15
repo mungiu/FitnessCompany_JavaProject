@@ -130,22 +130,22 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 - Zumba we have room for a lot more people
 - I suppose the maximum number of participants is something it would also be nice to be able to state when I add a new class to the system.
     
-Definition of purpose
-  •	Why? (A well formulated purpose) (2/3 sentences)
+**Definition of purpose**
+- Why? (A well formulated purpose) (2/3 sentences)
   
-Problem statement:
-  •	Use background descry statements
+**Problem statement:**
+- Use background descry statements
 
-Delimitation
+**Delimitation**
 
-Choices of model and methods
-  •	What/Why/Which/How/Who/When
+**Choices of model and methods**
+- What/Why/Which/How/Who/When
 
-Time Schedule
-  •	Start from last day backwards
+**Time Schedule**
+- Start from last day backwards
 
-Sources  references and literature
-  •	Books, interviews, websites (type of source matters, diversity is key)
+**Sources  references and literature**
+- Books, interviews, websites (type of source matters, diversity is key)
 
 
 
