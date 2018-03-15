@@ -101,36 +101,34 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 - We list which classes will run at which days, and at which time, so the members will know when to show up. Furthermore, we add the name of the instructor who will teach each class, so that the instructors can take a look to know when to show up for work
 - I would like to be able to use the system you are making to register the date and time that a class will run, and the instructor teaching it
 - I would definitely like to be able to add new classes to the system, when needed.
-- we have two different kinds of memberships
-    o	regular membership for €19 per month, which allows the member to use all the equipment at the centre
-    o	premium membership for €29, which also allows the member to sign up for the classes. 
-  •	Sometimes a regular member will ask whether they can also sign up for a class, and we are actually thinking about maybe allowing them to do that in the future, by paying a fee for each class they sign up for. For now, the only way is for them to upgrade to the premium membership instead, and we are okay with that solution at the moment
+- we have two different kinds of memberships: regular membership for €19 per month, which allows the member to use all the equipment at the centre and premium membership for €29, which also allows the member to sign up for the classes. 
+- Sometimes a regular member will ask whether they can also sign up for a class, and we are actually thinking about maybe allowing them to do that in the future, by paying a fee for each class they sign up for. For now, the only way is for them to upgrade to the premium membership instead, and we are okay with that solution at the moment
 
-Sign up for classes (process):
-  •	“They talk to the receptionist at the front desk
-  •	if the class is not already full, then they are added to the list of participants, which you have probably already guessed is stored on a piece of paper
+**Sign up for classes (process):**
+- “They talk to the receptionist at the front desk
+- If the class is not already full, then they are added to the list of participants, which you have probably already guessed is stored on a piece of paper
 
 
 
-Fitness Member Data to register:
-  •	Name
-  •	Address
-  •	Phone number
-  •	Email
-  •	Basic membership or premium membership
+**Fitness Member Data to register:**
+- Name
+- Address
+- Phone number
+- Email
+- Basic membership or premium membership
   
-Instructor data to register:
-  •	Name
-  •	Address
-  •	Phone number
-  •	Email
-  •	Classes they can teach
+**Instructor data to register:**
+- Name
+- Address
+- Phone number
+- Email
+- Classes they can teach
   
-How many participants will be able to attend a class?”
-  •	varies from class to class
-    o	spinning classes we are limited by how many bikes we have, only 10 at the moment
-    o	Zumba we have room for a lot more people
-    o	I suppose the maximum number of participants is something it would also be nice to be able to state when I add a new class to the system.
+**How many participants will be able to attend a class?**
+ - varies from class to class
+- spinning classes we are limited by how many bikes we have, only 10 at the moment
+- Zumba we have room for a lot more people
+- I suppose the maximum number of participants is something it would also be nice to be able to state when I add a new class to the system.
     
 Definition of purpose
   •	Why? (A well formulated purpose) (2/3 sentences)
