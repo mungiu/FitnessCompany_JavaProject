@@ -75,21 +75,24 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 
 
 **IMPORTANT:**
-- What I would like from you is a system that runs on a single computer at the front desk, NOT ONLINE, we prefer being in direct contact with the members when they sign up.
 
-- We don’t want passwords and logins and things like that for the system - it will just slow down our work
+>49% of people in Denmark attend Gym (2016 data) - http://www.statbank.dk/statbank5a/default.asp?w=1536
+>19% of people in Denmark Gym 5 or more times a week (2016 data) - http://www.statbank.dk/statbank5a/default.asp?w=1536
+>26% of people in Denmark send 6 or more hours per week in gym (2016 data) - http://www.statbank.dk/statbank5a/default.asp?w=1536
+>61% of people in Denmark participate in sporting activities (2016 data) - http://www.statbank.dk/statbank5a/default.asp?w=1536
+>there are 4 Gyms in horsens (2018 data) - https://binged.it/2pe3LFE
 
-- The owner has recently decided to start preparing for retirement, by leaving the daily management to his son, former spinning instructor superstar, Bob Sixpack
+- a system that runs on a single computer at the front desk, NOT ONLINE (we prefer being in direct contact with the members when they sign up)
 
-- Mr. Sixpack wants to move VIAFit into the digital age, by replacing his father’s old-fashioned way of managing the centre, with a new management software system.  
+- We don’t want passwords and logins
 
 - It’s a small fitness centre
 
-- We have a group of loyal members, who are happy with what we provide, and most people stay as members for several years
+- most people stay as members for several years
 
-- Payments are handled though a different system that even my father had to accept to start using a few years ago, so you don’t have to worry about that part in your system.
+- Payments are handled though a different system, you don’t have to worry about that part in your system.
 
-- Standard looking program that we can use with a keyboard and mouse, has save & search
+- Standard looking program that we can use with a keyboard and mouse, and has save/search
 
 - I would like it to be ready in the beginning of June.
 
@@ -97,7 +100,8 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 
 **On a virtual whiteboard:**
 - What I need from you is a software system that we can use to store all the information that we have.
-- keep information about the instructors working at the fitness centre, and the members of the centre  keep track of the various    classes our instructors teach at the centre
+- keep information about the instructors working at the fitness centre, and the members of the centre
+- keep track of the various    classes our instructors teach at the centre
 - We list which classes will run at which days, and at which time, so the members will know when to show up. Furthermore, we add the name of the instructor who will teach each class, so that the instructors can take a look to know when to show up for work
 - I would like to be able to use the system you are making to register the date and time that a class will run, and the instructor teaching it
 - I would definitely like to be able to add new classes to the system, when needed.
@@ -130,21 +134,21 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 - Zumba we have room for a lot more people
 - I suppose the maximum number of participants is something it would also be nice to be able to state when I add a new class to the system.
     
-**Definition of purpose**
+### Definition of purpose
 - Why? (A well formulated purpose) (2/3 sentences)
   
-**Problem statement:**
+### Problem statement
 - Use background descry statements
 
-**Delimitation**
+### Delimitation
 
-**Choices of model and methods**
+### Choices of model and methods
 - What/Why/Which/How/Who/When
 
-**Time Schedule**
+### Time Schedule
 - Start from last day backwards
 
-**Sources  references and literature**
+### Sources  references and literature
 - Books, interviews, websites (type of source matters, diversity is key)
 
 
