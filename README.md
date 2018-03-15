@@ -28,6 +28,8 @@ Will become a sub heading
 - Use first semester books as sources.
 - Relevant Problem?
 - First chapters (1,2) references
+- Start as Divergent and Finish as Convergent
+- USE: Brainstorm, Campfire, Reverse brainstorm, What if, 6 thinking hats
 
 
 
@@ -136,14 +138,25 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
     
 ### Definition of purpose
 - Why? (A well formulated purpose) (2/3 sentences)
+- 
   
 ### Problem statement
 - Use background descry statements
+- Do not present the solution here, only the problem
+- Problem oriented not solution oriented
+- Define one overall problem + 3/5 subproblems (subquestions) (in order to be able to make a solution that fulfils the wishes and meets the requirements from the end user) Example: restrictions that might appear because of class types, machinery use, space required, instructor availability
 
 ### Delimitation
+- you can only delimit areas that are described in the background description
+- essentially a list of boundaries
 
 ### Choices of model and methods
-- What/Why/Which/How/Who/When
+- What
+- Why
+- Which
+- How
+- Who
+- When
 
 ### Time Schedule
 - Start from last day backwards
