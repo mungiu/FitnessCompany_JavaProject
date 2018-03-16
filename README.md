@@ -141,6 +141,8 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 - 
   
 ### Problem statement
+
+
 - Use background descry statements
 - Do not present the solution here, only the problem
 - Problem oriented not solution oriented
@@ -151,12 +153,13 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 - essentially a list of boundaries
 
 ### Choices of model and methods
-- What
-- Why
-- Which
-- How
-- Who
-- When
+- Ask the customer again? (Allan, Mona)
+- What (The problem)
+- Why (Why the problem is important)
+- Which (Which level of depth we will use to solve this problem)
+- How (making use cases and use case desriptions)
+- Who ( who is responsible for this point)
+- Priorities & their extent (what problems and how much time dedication)
 
 ### Time Schedule
 - Start from last day backwards
