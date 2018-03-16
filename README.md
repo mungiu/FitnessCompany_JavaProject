@@ -173,6 +173,7 @@ Sub: What do we display on the screen.
 What: What information do we need to keep track of for the fitness center.
 Extent and Priority: List all information types as high priority task.
 How: Capturing requirements.
+
 Priorities: Ensuring necessity of data.
 
 What: What classes will there be.
@@ -195,9 +196,9 @@ Priorities: Avoid displaying too much information on screen.
 ### Time Schedule
 - Start from last day backwards
 
-**Project Description and Group contract signed by everybody before:**
-**4 April before 23.59**
-FORMAT **PDF** NOT WORD
+Upload to group folder in **PDF**:
+- Project Description - **BEFORE 4 April 23:59**
+- Group contract signed by everybody before - **BEFORE 4 April 23:59**
 - send project description copy to peer review group **Group 2** **AFTER uploading**
 
 **12 April Thursday Presentation and Peer Review.**
@@ -215,6 +216,7 @@ FORMAT **PDF** NOT WORD
 - The most relevant risks for the project as you see it
 EG: Experience from previous group work.
 Outcome from reverse brainstor
+
 **Determine:**
 - How to identify these risks
 - Action
