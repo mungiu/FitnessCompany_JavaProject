@@ -15,6 +15,10 @@ Will become a sub heading
 
     Add a indent and this will end up as code
 
+
+
+
+
 # FitnessCompany_WebProject
 
 **Project Description:**
@@ -69,12 +73,13 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 
 
 
+
 ### Background description
+
 - 1 page –What does the customer want to do
 - Do not mention solution
 - Need at least 3 references (prepare questions for librarian)
 - Current system that are already on the market (do not mention how you will be different in here)
-
 
 **IMPORTANT:**
 
@@ -98,8 +103,6 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 
 - I would like it to be ready in the beginning of June.
 
-
-
 **On a virtual whiteboard:**
 - What I need from you is a software system that we can use to store all the information that we have.
 - keep information about the instructors working at the fitness centre, and the members of the centre
@@ -113,8 +116,6 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 **Sign up for classes (process):**
 - “They talk to the receptionist at the front desk
 - If the class is not already full, then they are added to the list of participants, which you have probably already guessed is stored on a piece of paper
-
-
 
 **Fitness Member Data to register:**
 - Name
@@ -135,34 +136,74 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 - spinning classes we are limited by how many bikes we have, only 10 at the moment
 - Zumba we have room for a lot more people
 - I suppose the maximum number of participants is something it would also be nice to be able to state when I add a new class to the system.
-    
+   
+   
+   
+   
 ### Definition of purpose
-- Why? (A well formulated purpose) (2/3 sentences)
-- 
+Enable the fitness center to keep track of all relevant data.
+  
+  
+  
   
 ### Problem statement
 
+Main: What information do we need to keep track of for the fitness center.
+Sub: What classes do they run.
+Sub: What information should be stored about the members and staff.
+Sub: What do we display on the screen.
 
-- Use background descry statements
-- Do not present the solution here, only the problem
-- Problem oriented not solution oriented
-- Define one overall problem + 3/5 subproblems (subquestions) (in order to be able to make a solution that fulfils the wishes and meets the requirements from the end user) Example: restrictions that might appear because of class types, machinery use, space required, instructor availability
+
+
 
 ### Delimitation
-- you can only delimit areas that are described in the background description
-- essentially a list of boundaries
+- Amount of equipment available per class and the size of the class-room.
+- Gym opening time.
+- Number and type of classes taught by trainers.
+
+
+
 
 ### Choices of model and methods
 - Ask the customer again? (Allan, Mona)
 - What (The problem)
-- Why (Why the problem is important)
-- Which (Which level of depth we will use to solve this problem)
 - How (making use cases and use case desriptions)
-- Who ( who is responsible for this point)
 - Priorities & their extent (what problems and how much time dedication)
+
+What: What information do we need to keep track of for the fitness center.
+Extent and Priority: List all information types as high priority task.
+How: Capturing requirements.
+Priorities: Ensuring necessity of data.
+
+What: What classes will there be.
+Extent and Priority: Fully analyze what other elements do classes impact at medium priority.
+How: Registering class details.
+Priorities: Block input of incorrect data format.
+
+What: What information should be stored about the members and staff.
+Extent and Priority: List all user characteristics as a medium priority task.
+How: Categorize the information.
+Priorities: Block input of incorrect data format.
+
+What: What do we display on the screen.
+Extent and Priority: Display the data in a simple manner as a low priority task.
+How: Display categorized data in an organized manner.
+Priorities: Avoid displaying too much information on screen.
+
+
 
 ### Time Schedule
 - Start from last day backwards
+
+**Project Description and Group contract signed by everybody before:**
+**4 April before 23.59**
+FORMAT **PDF** NOT WORD
+- send project description copy to peer review group **Group 2** **AFTER uploading**
+
+**12 April Thursday Presentation and Peer Review.**
+**13 April Friday Final Version upload**
+
+
 
 ### Sources  references and literature
 - Books, interviews, websites (type of source matters, diversity is key)
@@ -170,3 +211,23 @@ Adequate punishment is more difficult to implement that adequate rewarding, many
 
 
 
+### Risk Assessment
+- The most relevant risks for the project as you see it
+EG: Experience from previous group work.
+Outcome from reverse brainstor
+**Determine:**
+- How to identify these risks
+- Action
+- Who is respnsible
+
+EG: Running out of time
+How to ensure propper time management:
+- setting goals
+- reviewing progress
+- prioritising
+- organising work schedule
+- managin with interruptions
+
+Steps of Action: (describe what we will do to address)
+The pomodore technique
+Free time management software
