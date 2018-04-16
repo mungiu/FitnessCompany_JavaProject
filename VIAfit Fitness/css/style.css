@@ -52,33 +52,6 @@ div.pic img {
     height: auto;
 }
 
-.navButton {
-    border: 2px solid whitesmoke;
-    color: white;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.7);
-    /* Removes text underline */
-    text-decoration: none;
-}
-
-.navButton:hover,
-.navbutton:active {
-    background-color: white;
-    color: black;
-}
-
-.navbar {
-    color: white;
-    border-width: 20px;
-    border-color: white;
-    width: 100%;
-    height: 10%;
-    float: left;
-    text-align: center;
-}
-
 .image {
     padding: 0 43px;
     float: left;
@@ -154,16 +127,6 @@ div.pic img {
 #outerbox {
     height: 100%;
     width: 100%;
-}
-
-#navbar {
-    color: white;
-    border-width: 20px;
-    border-color: white;
-    width: 100%;
-    height: 10%;
-    float: left;
-    clear: both;
 }
 
 #content {
