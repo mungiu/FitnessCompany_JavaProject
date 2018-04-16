@@ -16,48 +16,6 @@ tr {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-div.pic img {
-    width: 100%;
-    height: auto;
-}
-
-a:link {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-a:visited {
-    color: whitesmoke;
-}
-
-a:hover {
-    color: deepskyblue;
-}
-
-a:link {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-a:visited {
-    color: whitesmoke;
-}
-
-a:hover {
-    color: deepskyblue;
-}
-
-div.pic img {
-    width: 100%;
-    height: auto;
-}
-
-.image {
-    padding: 0 43px;
-    float: left;
-    width: 200px;
-}
-
 .event1 {
     float: left;
     width: 45%;
@@ -124,6 +82,17 @@ div.pic img {
     display: block;
 }
 
+.footer {
+    color: white;
+    clear: both;
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;  
+    bottom: 0px;
+    right: 0;
+    left: 0;
+    padding: 0rem;
+}
+
 #outerbox {
     height: 100%;
     width: 100%;
@@ -184,17 +153,6 @@ div.pic img {
     border: 1px solid black;
     background: transparent;
     border-collapse: collapse;
-}
-
-.footer {
-    color: white;
-    clear: both;
-    background-color: rgba(0, 0, 0, 0.70);
-    position: fixed;  
-    bottom: 0px;
-    right: 0;
-    left: 0;
-    padding: 0rem;
 }
 
 @media screen and (max-width: 950px){
