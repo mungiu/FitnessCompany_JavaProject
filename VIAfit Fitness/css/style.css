@@ -16,81 +16,6 @@ tr {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-div.pic img {
-    width: 100%;
-    height: auto;
-}
-
-a:link {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-a:visited {
-    color: whitesmoke;
-}
-
-a:hover {
-    color: deepskyblue;
-}
-
-a:link {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-a:visited {
-    color: whitesmoke;
-}
-
-a:hover {
-    color: deepskyblue;
-}
-
-div.pic img {
-    width: 100%;
-    height: auto;
-}
-
-.navButton {
-    padding: 1% 3% 1% 3%;
-    margin: 1% 1% 1% 1%;
-    border: 2px solid whitesmoke;
-    color: white;
-    width: 10%;
-    font-size: 100%;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    cursor: pointer;
-    float: right;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    /* Removes text underline */
-    text-decoration: none;
-}
-
-.navButton:hover,
-.navbutton:active {
-    background-color: white;
-    color: black;
-}
-
-.navbar {
-    color: white;
-    border-width: 20px;
-    border-color: white;
-    width: 100%;
-    height: 10%;
-    float: left;
-    text-align: center;
-}
-
-.image {
-    padding: 0 43px;
-    float: left;
-    width: 200px;
-}
-
 .event1 {
     float: left;
     width: 45%;
@@ -157,19 +82,20 @@ div.pic img {
     display: block;
 }
 
+.footer {
+    color: white;
+    clear: both;
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;  
+    bottom: 0px;
+    right: 0;
+    left: 0;
+    padding: 0rem;
+}
+
 #outerbox {
     height: 100%;
     width: 100%;
-}
-
-#navbar {
-    color: white;
-    border-width: 20px;
-    border-color: white;
-    width: 100%;
-    height: 10%;
-    float: left;
-    clear: both;
 }
 
 #content {
@@ -227,17 +153,6 @@ div.pic img {
     border: 1px solid black;
     background: transparent;
     border-collapse: collapse;
-}
-
-.footer {
-    color: white;
-    clear: both;
-    background-color: rgba(0, 0, 0, 0.70);
-    position: fixed;  
-    bottom: 0px;
-    right: 0;
-    left: 0;
-    padding: 0rem;
 }
 
 @media screen and (max-width: 950px){
