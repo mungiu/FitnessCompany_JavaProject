@@ -77,13 +77,6 @@ tr {
     text-align: center;
 }
 
-.footer {
-    color: white;
-    clear: both;
-    background-color: rgba(0, 0, 0, 0.70);
-    padding: 0rem;
-}
-
 #content {
     color: white;
     border-width: 20px;
@@ -136,14 +129,4 @@ tr {
     border: 1px solid black;
     background: transparent;
     border-collapse: collapse;
-}
-
-@media screen and (max-width: 950px){
-    .image {
-        width: 300px;
-    }
-
-    .desc {
-        font-size-adjust: inherit;
-    }
 }
