@@ -130,13 +130,3 @@ tr {
     background: transparent;
     border-collapse: collapse;
 }
-
-@media screen and (max-width: 950px){
-    .image {
-        width: 300px;
-    }
-
-    .desc {
-        font-size-adjust: inherit;
-    }
-}
