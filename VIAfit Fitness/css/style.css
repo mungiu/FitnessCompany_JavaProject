@@ -13,19 +13,18 @@ body {
     background-size: cover;
 }
 .logo {
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.3);
+    color: #000000;
     border-radius:30%;
 
 }
 .text {
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.4);
+    color: #000000;
+
 }
 
 .Description {
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.7);
+    color: #000000;
+ 
 }
 .footer {
     color: white;
