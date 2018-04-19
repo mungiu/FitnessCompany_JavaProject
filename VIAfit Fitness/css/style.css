@@ -1,13 +1,6 @@
 body, wrapper {
     min-height:100vh;
  }
- 
-.flex-fill {
-    flex:1 1 auto;
- }
-h1 {
-    color: white;
-}
 
 body {
     background-image: url(../images/background.jpg);
@@ -18,17 +11,12 @@ body {
     height: 100%;
     background-size: cover;
 }
-.table {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    border: none;
-}
 
 .logo {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
 }
+
 .text {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.4);
@@ -38,6 +26,7 @@ body {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 .footer {
     color: white;
     clear: both;
@@ -48,6 +37,7 @@ body {
     left: 0;
     padding: 0rem;
 }
+
 #content {
     color: white;
     border-width: 20px;
@@ -56,7 +46,8 @@ body {
     width: 60%;
     height: 700px;
 }
-#events{
+
+.eventBoxes{
     font-size: 12px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
@@ -68,6 +59,7 @@ body {
     border-width: thin;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 .tableNews {
     font-size: 12px;
     font-weight: 700;
