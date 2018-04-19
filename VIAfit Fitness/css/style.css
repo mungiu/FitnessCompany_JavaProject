@@ -38,15 +38,11 @@ tr {
 
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
-    text-align: center;
-    clear: both;
+  
 }
 
 .text {
-    width: 50%;
-    margin: 10px 0px 25px 42px;
     color: whitesmoke;
-    text-align: center;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -74,11 +70,6 @@ tr {
 .Description {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.7);
-    text-align: center;
-    clear: both;
-    width: 50%;
-    margin: 25% 25% 5% 25%;
-    display: block;
 }
 
 .footer {
