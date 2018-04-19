@@ -5,12 +5,17 @@ body, wrapper {
 .flex-fill {
     flex:1 1 auto;
  }
+h1 {
+    color: white;
+}
 
 body {
     background-image: url(../images/background.jpg);
     box-sizing: border-box;
     background-position: top;
     background-repeat: no-repeat;
+    background-size: 120% auto;
+    height: 100%;
     background-size: cover;
 }
 
@@ -22,17 +27,6 @@ tr {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.event1 {
-    float: left;
-    width: 45%;
-    padding-right: 5px;
-}
-
-.event2 {
-    width: 45%;
-    float: right;
-}
-
 .table {
     margin-left: auto;
     margin-right: auto;
@@ -41,92 +35,56 @@ tr {
 }
 
 .logo {
-    width: 20%;
-    margin: 1px 1px 1px 200px;
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
-    text-align: center;
-    clear: both;
 }
-
 .text {
-    width: 50%;
-    margin: 10px 0px 25px 42px;
     color: whitesmoke;
-    text-align: center;
     background-color: rgba(0, 0, 0, 0.4);
-}
-
-.desc {
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.6);
-    height: 120px;
-    text-align: center;
-    line-height: 0.8;
-}
-
-.image {
-    padding: 43px;
-    float: left;
-    width: 220px;
 }
 
 .Description {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.7);
-    text-align: center;
+}
+.footer {
+    color: white;
+    clear: both;
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;  
+    bottom: 0px;
+    right: 0;
+    left: 0;
+    padding: 0rem;
+}
+
+#outerbox {
+    height: 100%;
+    width: 100%;
 }
 
 #content {
     color: white;
     border-width: 20px;
     border-color: white;
+    float: left;
+    width: 60%;
+    height: 700px;
 }
 
-#events {
+.eventsBoxes {
     color: white;
-    border-width: 20px;
-    border-color: white;
-    float: right;
-    width: 40%;
 }
 
 #content a:visited {
     color: darkgreen;
 }
 
-#table1 {
+.tableNews {
     font-size: 12px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     color: black border 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-}
-
-#table2 {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-}
-
-#table3 {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-}
-
-#table4 {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: 1px solid black;
     background: transparent;
     border-collapse: collapse;
 }
