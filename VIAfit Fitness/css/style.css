@@ -3,6 +3,8 @@ body, wrapper{
     min-height:100vh;
 }
 
+a:hover { text-decoration: none; 
+}
 body {
     background-image: url(../images/background.jpg);
     box-sizing: border-box;
