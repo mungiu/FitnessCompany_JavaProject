@@ -5,7 +5,9 @@ body, wrapper {
 .flex-fill {
     flex:1 1 auto;
  }
-
+h1 {
+    color: white;
+}
 body {
     background-image: url(../images/background.jpg);
     box-sizing: border-box;
@@ -20,17 +22,6 @@ tr {
     border-bottom: 2px solid whitesmoke;
     border-width: thin;
     background-color: rgba(0, 0, 0, 0.7);
-}
-
-.event1 {
-    float: left;
-    width: 45%;
-    padding-right: 5px;
-}
-
-.event2 {
-    width: 45%;
-    float: right;
 }
 
 .table {
@@ -79,7 +70,7 @@ tr {
 
 
 
-#events {
+.eventsBoxes {
     color: white;
 }
 
