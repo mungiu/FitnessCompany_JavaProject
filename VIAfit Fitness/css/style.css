@@ -77,18 +77,10 @@ tr {
     text-align: center;
 }
 
-#content {
-    color: white;
-    border-width: 20px;
-    border-color: white;
-}
+
 
 #events {
     color: white;
-    border-width: 20px;
-    border-color: white;
-    float: right;
-    width: 40%;
 }
 
 #content a:visited {
