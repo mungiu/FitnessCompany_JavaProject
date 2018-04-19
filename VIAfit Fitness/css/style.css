@@ -1,6 +1,7 @@
-body, wrapper {
+body, wrapper{
+    
     min-height:100vh;
- }
+}
 
 body {
     background-image: url(../images/background.jpg);
