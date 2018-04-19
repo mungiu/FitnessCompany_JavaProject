@@ -13,24 +13,11 @@ body {
     background-size: cover;
 }
 
-.logo {
-    color: #000000;
-    border-radius: 30%;
-}
-
-.text {
-    color: #000000;
-}
-
 .carousel-indicators .active {
     background-color: #fff;
     max-width: 12px;
     margin: 0 3px;
     height: 12px;
-}
-
-.Description {
-    color: #000000;
 }
 
 .footer {
