@@ -1,10 +1,7 @@
 body, wrapper{
     
     min-height:100vh;
-}
-
-a:hover { text-decoration: none; 
-}
+ }
 body {
     background-image: url(../images/background.jpg);
     box-sizing: border-box;
@@ -14,12 +11,10 @@ body {
     height: 100%;
     background-size: cover;
 }
-
 .logo {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
 }
-
 .text {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.4);
@@ -29,7 +24,6 @@ body {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.7);
 }
-
 .footer {
     color: white;
     clear: both;
@@ -40,17 +34,7 @@ body {
     left: 0;
     padding: 0rem;
 }
-
-#content {
-    color: white;
-    border-width: 20px;
-    border-color: white;
-    float: left;
-    width: 60%;
-    height: 700px;
-}
-
-.eventBoxes{
+.row{
     font-size: 12px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
@@ -58,20 +42,6 @@ body {
     background: transparent;
     border-collapse: collapse;
     color: white;
-    border-bottom: 2px solid whitesmoke;
-    border-width: thin;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.tableNews {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    color: black border 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-    color: white;
-    border-bottom: 2px solid whitesmoke;
     border-width: thin;
     background-color: rgba(0, 0, 0, 0.7);
 }
