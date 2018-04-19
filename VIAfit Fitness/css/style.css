@@ -57,20 +57,6 @@ tr {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.desc {
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.6);
-    height: 120px;
-    text-align: center;
-    line-height: 0.8;
-}
-
-.image {
-    padding: 43px;
-    float: left;
-    width: 220px;
-}
-
 .Description {
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.7);
