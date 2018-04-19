@@ -80,38 +80,11 @@ tr {
     color: darkgreen;
 }
 
-#table1 {
+.tableNews {
     font-size: 12px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     color: black border 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-}
-
-#table2 {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-}
-
-#table3 {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-}
-
-#table4 {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: 1px solid black;
     background: transparent;
     border-collapse: collapse;
 }
