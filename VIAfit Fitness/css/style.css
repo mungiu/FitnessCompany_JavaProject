@@ -18,15 +18,6 @@ body {
     height: 100%;
     background-size: cover;
 }
-
-tr {
-    font-family: Tahoma, Verdana, Segoe;
-    color: white;
-    border-bottom: 2px solid whitesmoke;
-    border-width: thin;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
 .table {
     margin-left: auto;
     margin-right: auto;
@@ -57,12 +48,6 @@ tr {
     left: 0;
     padding: 0rem;
 }
-
-#outerbox {
-    height: 100%;
-    width: 100%;
-}
-
 #content {
     color: white;
     border-width: 20px;
@@ -71,15 +56,18 @@ tr {
     width: 60%;
     height: 700px;
 }
-
-.eventsBoxes {
+#events{
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    color: black border 1px solid black;
+    background: transparent;
+    border-collapse: collapse;
     color: white;
+    border-bottom: 2px solid whitesmoke;
+    border-width: thin;
+    background-color: rgba(0, 0, 0, 0.7);
 }
-
-#content a:visited {
-    color: darkgreen;
-}
-
 .tableNews {
     font-size: 12px;
     font-weight: 700;
@@ -87,4 +75,8 @@ tr {
     color: black border 1px solid black;
     background: transparent;
     border-collapse: collapse;
+    color: white;
+    border-bottom: 2px solid whitesmoke;
+    border-width: thin;
+    background-color: rgba(0, 0, 0, 0.7);
 }
