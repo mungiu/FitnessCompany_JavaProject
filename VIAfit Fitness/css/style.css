@@ -33,35 +33,20 @@ body {
     left: 0;
     padding: 0rem;
 }
-#content {
+.row{
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    color: black border 1px solid black;
+    background: transparent;
+    border-collapse: collapse;
     color: white;
-    border-width: 20px;
-    border-color: white;
-    float: left;
-    width: 60%;
-    height: 700px;
+    border-width: thin;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 .eventBoxes{
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    color: black border 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-    color: white;
-    border-bottom: 2px solid whitesmoke;
-    border-width: thin;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: none;
 }
-.tableNews {
-    font-size: 12px;
-    font-weight: 700;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    color: black border 1px solid black;
-    background: transparent;
-    border-collapse: collapse;
-    color: white;
-    border-bottom: 2px solid whitesmoke;
-    border-width: thin;
-    background-color: rgba(0, 0, 0, 0.7);
+.eventBoxes img {
+    
 }
