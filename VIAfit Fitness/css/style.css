@@ -1,6 +1,6 @@
-body, wrapper{
-    
-    min-height:100vh;
+body,
+wrapper {
+    min-height: 100vh;
 }
 
 body {
@@ -12,31 +12,39 @@ body {
     height: 100%;
     background-size: cover;
 }
+
 .logo {
     color: #000000;
-    border-radius:30%;
-
+    border-radius: 30%;
 }
+
 .text {
     color: #000000;
+}
 
+.carousel-indicators .active {
+    background-color: #fff;
+    max-width: 12px;
+    margin: 0 3px;
+    height: 12px;
 }
 
 .Description {
     color: #000000;
- 
 }
+
 .footer {
     color: white;
     clear: both;
     background-color: rgba(0, 0, 0, 0.70);
-    position: fixed;  
+    position: fixed;
     bottom: 0px;
     right: 0;
     left: 0;
     padding: 0rem;
 }
-.simon{
+
+.simon {
     font-size: 12px;
     font-weight: 700;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
