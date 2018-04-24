@@ -55,3 +55,11 @@ body {
     border-width: thin;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
+/* invalid mid-width create on purpose 
+* media query is implemented but should not change anything */
+@media screen and (min-width: 100000000px) {
+    img {
+        float: left;
+    }
+}
