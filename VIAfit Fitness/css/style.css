@@ -42,3 +42,18 @@ body {
     border-width: thin;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
+#withoutText {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+
+    #withText {
+        display: none;
+    }
+
+    #withoutText {
+        display: initial;
+    }
+}
