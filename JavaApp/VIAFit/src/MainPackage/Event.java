@@ -49,5 +49,4 @@ public class Event
 	{
 		return endTime;
 	}
-
 }
