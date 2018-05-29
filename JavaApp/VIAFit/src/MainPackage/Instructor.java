@@ -1,4 +1,5 @@
 package MainPackage;
+
 import java.util.ArrayList;
 
 import org.w3c.dom.events.Event;
@@ -6,31 +7,55 @@ import org.w3c.dom.events.Event;
 public class Instructor
 {
    private int instructorID;
-   private String firstName;
-   private String lastName;
-   private ArrayList<ClassType> qualification;
-   private ArrayList<Event> event;
-   
-   public Instructor(int instructorID, String firstName, String lastName)
+   private String firstName, lastName;
+   private boolean qualified;
+   private ArrayList<ClassType> qualifiedClassList;
+   private ArrayList<Main> allTaughtEventsList;
+
+   public Instructor(int instructorID, String firstName, String lastName,
+         boolean qualified)
    {
-      int newID = instructorID++;
-      this.instructorID = instructorID;
-      Main.setInstructorID(newID);
       this.firstName = firstName;
       this.lastName = lastName;
+      this.instructorID = instructorID;
+      this.qualified = qualified;
    }
+
    public String getFirstName()
    {
       return firstName;
    }
+
+   public void setFirstName(String firstName)
+   {
+      this.firstName = firstName;
+   }
+
    public String getLastName()
    {
       return lastName;
    }
+
+   public void setLastName(String lastName)
+   {
+      this.lastName = lastName;
+   }
+
+   public int getInstructorID()
+   {
+      return instructorID;
+   }
+
    public boolean isAvailable()
    {
-      if(event.get(assignInstructor))
+      
    }
+   
+   public boolean isQualified()
+   {
+      return qualified;
+   }
+
    
 
 }
