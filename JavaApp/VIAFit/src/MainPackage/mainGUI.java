@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -27,12 +29,19 @@ private JPanel homeNorthCenterAlign;
 private JPanel memberAlign;
 private JPanel instructorAlign;
 private JPanel eventAlign;
+private JPanel homeCorner;
+private JPanel memberAlign2;
+private JPanel instructorAlign2;
+private JPanel eventAlign2;
+private JPanel homeAlign;
+private JPanel homeAlign2;
 
 private JLabel ongoingEventsLabel;
 private JLabel upcomingEventsLabel;
 private JLabel memberLabel;
 private JLabel instructorLabel;
 private JLabel eventLabel;
+private JLabel homeLabel;
 
 private JTextField ongoingEvents;
 private JTextField upcomingEvents;
@@ -83,6 +92,12 @@ public mainGUI()
    memberAlign = new JPanel();
    instructorAlign = new JPanel();
    eventAlign = new JPanel();
+   homeCorner = new JPanel();
+   memberAlign2 = new JPanel();
+   instructorAlign2 = new JPanel();
+   eventAlign2 = new JPanel();
+   homeAlign = new JPanel();
+   homeAlign2 = new JPanel();
    
    ongoingEventsLabel = new JLabel("On-going events");
    upcomingEventsLabel = new JLabel("Upcoming events");
@@ -91,6 +106,7 @@ public mainGUI()
    eventLabel = new JLabel("Event");
    ongoingEvents = new JTextField();
    upcomingEvents = new JTextField();
+   homeLabel = new JLabel("ViaFit Fitness Centre");
    
    bigInfoBox = new JTextField();
    search = new JTextField("Search");
@@ -106,7 +122,8 @@ public mainGUI()
    homeDetails = new JButton("Details");
    homeHome = new JButton("Home");
    
-   String[] options = {"Member", "Instructor", "Event"}; searchOption = new JComboBox<String>(options); 
+   String[] options = {"Member", "Instructor", "Event"}; 
+   searchOption = new JComboBox<String>(options); 
    
    menubar = new JMenuBar();
    
@@ -118,7 +135,12 @@ public mainGUI()
    
    
    //setting borders to see how it looks in GUI ----------------------- Delete later!
-//   Color col1 = new Color(100, 100, 255);
+     Color col1 = new Color(100, 100, 255);
+     Color grey = new Color(220, 220, 220);
+     member.setBorder(new LineBorder(grey, 1));
+     instructor.setBorder(new LineBorder(grey, 1));
+     event.setBorder(new LineBorder(grey, 1));
+     
 //   events.setBorder(new LineBorder(col1, 1));
 //   ongoingPanel.setBorder(new LineBorder(col1, 1));
 //   upcomingPanel.setBorder(new LineBorder(col1, 1));
@@ -129,7 +151,12 @@ public mainGUI()
    
    
    //Visual updates to textFields and labels
-   
+   ongoingEventsLabel.setFont(new Font(ongoingEventsLabel.getFont().getFamily(), Font.BOLD, 30));
+   upcomingEventsLabel.setFont(new Font(upcomingEventsLabel.getFont().getFamily(), Font.BOLD, 30));
+   memberLabel.setFont(new Font(memberLabel.getFont().getFamily(), Font.BOLD, 20));
+   instructorLabel.setFont(new Font(instructorLabel.getFont().getFamily(), Font.BOLD, 20));
+   eventLabel.setFont(new Font(eventLabel.getFont().getFamily(), Font.BOLD, 20));
+   homeLabel.setFont(new Font(homeLabel.getFont().getFamily(), Font.BOLD, 30));
    
    //adding stuff to the menuBar
    fileMenu.add(exitButton);
@@ -160,29 +187,49 @@ public mainGUI()
    ongoingEvents.setPreferredSize(new Dimension(380, 380));
    upcomingEvents.setPreferredSize(new Dimension(380, 380));
    
+   //adding buttons to home panel
+   homeCorner.setLayout(new GridLayout(2, 1));
+   homeHome.setPreferredSize(new Dimension(250, 25));
+   homeAlign.add(homeHome);
+   homeAlign2.add(homeLabel);
+   homeCorner.add(homeAlign2);
+   homeCorner.add(homeAlign);
+   
+  
+   
    //adding buttons to member panel
-   member.setLayout(new BoxLayout(member, BoxLayout.Y_AXIS));
-   member.add(memberLabel);
+   member.setLayout(new GridLayout(2, 1));
+   memberAlign2.add(memberLabel);
+   memberNew.setPreferredSize(new Dimension(150, 25));
+   memberAll.setPreferredSize(new Dimension(150, 25));
+   member.add(memberAlign2);
    member.add(memberAlign);
    memberAlign.add(memberNew);
    memberAlign.add(memberAll);
    
-   //adding buttons to member panel
-   instructor.setLayout(new BoxLayout(instructor, BoxLayout.Y_AXIS));
-   instructor.add(instructorLabel);
+   //adding buttons to instructor panel
+   instructor.setLayout(new GridLayout(2, 1));
+   instructorAlign2.add(instructorLabel);
+   instructor.add(instructorAlign2);
    instructor.add(instructorAlign);
+   instructorNew.setPreferredSize(new Dimension(150, 25));
+   instructorAll.setPreferredSize(new Dimension(150, 25));
    instructorAlign.add(instructorNew);
    instructorAlign.add(instructorAll);
    
    //adding buttons to event panel
-   event.setLayout(new BoxLayout(event, BoxLayout.Y_AXIS));
-   event.add(eventLabel);
+   event.setLayout(new GridLayout(2, 1));
+   eventAlign2.add(eventLabel);
+   event.add(eventAlign2);
    event.add(eventAlign);
+   eventNew.setPreferredSize(new Dimension(150, 25));
+   eventAll.setPreferredSize(new Dimension(150, 25));
    eventAlign.add(eventNew);
    eventAlign.add(eventAll);
   
    //adding panels to top frame
    topFrame.setLayout(new BoxLayout(topFrame, BoxLayout.X_AXIS));
+   topFrame.add(homeCorner);
    topFrame.add(member);
    topFrame.add(instructor);
    topFrame.add(event);
@@ -191,7 +238,6 @@ public mainGUI()
    //adding panels to homeNorth frame
    homeNorth.setLayout(new BorderLayout());
    homeNorthAlign.setLayout(new BorderLayout());
-   homeNorthAlign.add(homeHome, BorderLayout.WEST);
    homeNorthCenterAlign.setLayout(new FlowLayout());
    homeNorthCenterAlign.add(search);
    homeNorthCenterAlign.add(searchOption);
@@ -208,9 +254,7 @@ public mainGUI()
    bigInfoBox.setEnabled(false);
    homeCenter.add(homeDetails);
    
-   
    //adding panels to homeSouth frame
-//   homeSouth.add(homeDetails);
    
    //adding panels to home frame
    home.setLayout(new BorderLayout());
