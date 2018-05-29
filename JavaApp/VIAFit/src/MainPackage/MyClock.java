@@ -1,13 +1,13 @@
 package MainPackage;
 
-public class Clock
+public class MyClock
 {
    private int hour;
    private int minute;
    private int second;
 
    // 3-argument constructor
-   public Clock(int hour, int min, int sec)
+   public MyClock(int hour, int min, int sec)
    {
       // the class has a set method that does exactly
       // what I need, so no need to implement everything twice
@@ -15,14 +15,14 @@ public class Clock
    }
 
    // 1-argument constructor
-   public Clock(int timeInSeconds)
+   public MyClock(int timeInSeconds)
    {
       // we got a set method for this too now
       setTime(timeInSeconds);
    }
 
    // 1-argument copy constructor
-   public Clock(Clock obj)
+   public MyClock(MyClock obj)
    {
       hour = obj.hour;
       minute = obj.minute;
@@ -30,7 +30,7 @@ public class Clock
    }
 
    // no-arg constructor
-   public Clock()
+   public MyClock()
    {
       hour = 0;
       minute = 0;
@@ -112,14 +112,14 @@ public class Clock
 
    // returns whether or not the time is before the time in the Clock object
    // given as argument
-   public boolean isBefore(Clock time)
+   public boolean isBefore(MyClock time)
    {
       return convertToSeconds() < time.convertToSeconds();
    }
 
    // returns the number of seconds between the time and the time in the Clock
    // object given as argument
-   public int timeInSecondsTo(Clock time)
+   public int timeInSecondsTo(MyClock time)
    {
       if(isBefore(time))
       {
@@ -133,9 +133,9 @@ public class Clock
 
    // returns the time difference between the time and the time in the Clock
    // object given as argument as a Clock object
-   public Clock timeTo(Clock time)
+   public MyClock timeTo(MyClock time)
    {
-      return new Clock(timeInSecondsTo(time));
+      return new MyClock(timeInSecondsTo(time));
    }
 
    // returns the time as a String in the format hh:mm:ss
@@ -165,14 +165,14 @@ public class Clock
 
    // returns whether or not the Clock object given as argument is identical to
    // the current one
-   public boolean equals(Clock obj)
+   public boolean equals(MyClock obj)
    {
       return (hour == obj.hour && minute == obj.minute && second == obj.second);
    }
 
    // returns a new Clock object identical to the current one
-   public Clock copy()
+   public MyClock copy()
    {
-      return new Clock(hour, minute, second);
+      return new MyClock(hour, minute, second);
    }
 }
