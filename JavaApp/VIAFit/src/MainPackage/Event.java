@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Event
 {
 	private String className;
-	private boolean requiresQualification;
 	private int maxMembers;
+	private boolean requiresQualification;
+	private boolean requiresPremium;
 	private MyDate startDate;
 	private MyDate endDate;
 	private MyClock startTime;
@@ -15,10 +16,30 @@ public class Event
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
 
-	public Event(String className, MyDate startDate, MyDate endDate, MyClock startTIme, MyClock endTime)
+	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
+			MyClock startTime, MyClock endTime)
 	{
+		this.requiresPremium = true;
+		this.requiresQualification = true;
+		this.classType = classType;
 		this.className = className;
-		attendingInstructorsList = new ArrayList<Instructor>();
+		this.maxMembers = maxMembers;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.attendingInstructorsList = new ArrayList<Instructor>();
+		this.attendingMembersList = new ArrayList<Member>();
+	}
+
+	public int getMaxMembers()
+	{
+		return maxMembers;
+	}
+
+	public void setMaxMembers(int maxMembers)
+	{
+		this.maxMembers = maxMembers;
 	}
 
 	public String getClassName()
@@ -26,9 +47,19 @@ public class Event
 		return className;
 	}
 
+	public void setClassName(String className)
+	{
+		this.className = className;
+	}
+
 	public MyDate getStartDate()
 	{
 		return startDate;
+	}
+
+	public void getStartDate(MyDate startDate)
+	{
+		this.startDate = startDate;
 	}
 
 	public MyDate getEndDate()
@@ -36,9 +67,19 @@ public class Event
 		return endDate;
 	}
 
+	public void setEndDate(MyDate endDate)
+	{
+		this.endDate = endDate;
+	}
+
 	public MyClock getStarTime()
 	{
 		return startTime;
+	}
+
+	public void setStartTime(MyClock startTime)
+	{
+		this.startTime = startTime;
 	}
 
 	public MyClock getEndTime()
@@ -46,36 +87,58 @@ public class Event
 		return endTime;
 	}
 
-	public ArrayList<Member> getMemberList()
+	public void setEndTime(MyClock endTime)
+	{
+		this.endTime = endTime;
+	}
+
+	public ArrayList<Member> getMembersList()
 	{
 		return attendingMembersList;
 	}
 
-	public ArrayList<Instructor> getInstructorList()
+	public void setMembersList(ArrayList<Member> attendingMembersList)
+	{
+		this.attendingMembersList = new ArrayList<Member>(attendingMembersList.size());
+
+		for (int i = 0; i < attendingMembersList.size(); i++)
+			this.attendingMembersList.add(attendingMembersList.get(i));
+	}
+
+	public ArrayList<Instructor> getInstructorsList()
 	{
 		return attendingInstructorsList;
 	}
 
-	public void assignInstructor(Instructor instructor)
+	public void setInstructorsList(ArrayList<Instructor> attendingInstructorsList)
 	{
-		if(requiresQualification)
-			if()
-		attendingInstructorsList.add(instructor);
+		this.attendingInstructorsList = new ArrayList<Instructor>(attendingInstructorsList.size());
+
+		for (int i = 0; i < attendingInstructorsList.size(); i++)
+			this.attendingInstructorsList.add(attendingInstructorsList.get(i));
 	}
 
-	public void removeInstructor(Instructor instructor)
+	public void assignInstructorToEvent(Instructor instructor)
+	{
+		if (requiresQualification)
+			if (instructor.isQualified())
+				attendingInstructorsList.add(instructor);
+	}
+
+	public void removeInstructorFromEvent(Instructor instructor)
 	{
 		attendingInstructorsList.remove(instructor);
 	}
 
-	public void removeMember(Member member)
+	public void assignMemberToEvent(Member member)
 	{
-		attendingMembersList.remove(member);
+		if (member.getIsPremium())
+			attendingMembersList.add(member);
 	}
 
-	public void assignMember(Member member)
+	public void removeMemberFromEvent(Member member)
 	{
-		attendingMembersList.add(member);
+		attendingMembersList.remove(member);
 	}
 
 	public String toString()
