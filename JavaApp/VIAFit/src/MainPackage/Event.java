@@ -26,26 +26,6 @@ public class Event
 		return className;
 	}
 
-	public void assignInstructor(Instructor instructor)
-	{
-		attendingInstructorsList.add(instructor);
-	}
-
-	public void removeInstructor(Instructor instructor)
-	{
-		attendingInstructorsList.remove(instructor);
-	}
-
-	public void assignMember(Member member)
-	{
-		attendingMembersList.add(member);
-	}
-
-	public void removeMember(Member member)
-	{
-		attendingMembersList.remove(member);
-	}
-
 	public MyDate getStartDate()
 	{
 		return startDate;
@@ -66,7 +46,40 @@ public class Event
 		return endTime;
 	}
 
-	public String toString() {
+	public ArrayList<Member> getMemberList()
+	{
+		return attendingMembersList;
+	}
+
+	public ArrayList<Instructor> getInstructorList()
+	{
+		return attendingInstructorsList;
+	}
+
+	public void assignInstructor(Instructor instructor)
+	{
+		if(requiresQualification)
+			if()
+		attendingInstructorsList.add(instructor);
+	}
+
+	public void removeInstructor(Instructor instructor)
+	{
+		attendingInstructorsList.remove(instructor);
+	}
+
+	public void removeMember(Member member)
+	{
+		attendingMembersList.remove(member);
+	}
+
+	public void assignMember(Member member)
+	{
+		attendingMembersList.add(member);
+	}
+
+	public String toString()
+	{
 		return "asd";
 	}
 
