@@ -11,6 +11,7 @@ public class Event
 	private MyDate endDate;
 	private MyClock startTime;
 	private MyClock endTime;
+	private ClassType classType;
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
 
@@ -25,9 +26,24 @@ public class Event
 		return className;
 	}
 
-	public void addInstructor(Instructor instructor)
+	public void assignInstructor(Instructor instructor)
 	{
 		attendingInstructorsList.add(instructor);
+	}
+
+	public void removeInstructor(Instructor instructor)
+	{
+		attendingInstructorsList.remove(instructor);
+	}
+
+	public void assignMember(Member member)
+	{
+		attendingMembersList.add(member);
+	}
+
+	public void removeMember(Member member)
+	{
+		attendingMembersList.remove(member);
 	}
 
 	public MyDate getStartDate()
@@ -49,4 +65,9 @@ public class Event
 	{
 		return endTime;
 	}
+
+	public String toString() {
+		return "asd";
+	}
+
 }
