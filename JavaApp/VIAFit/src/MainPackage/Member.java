@@ -25,9 +25,13 @@ public class Member
    }
    public boolean getIsPremium()
    {
-      if
+      return isPremium;
+      
    }
-   
+   public void memberIsQualified()
+   {
+      
+   }
    
 
 }
