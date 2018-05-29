@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class mainGUI extends JFrame
@@ -24,7 +25,6 @@ private JPanel upcomingPanel;
 private JPanel homeNorth;
 private JPanel homeCenter;
 private JPanel homeSouth;
-private JPanel homeNorthAlign;
 private JPanel homeNorthCenterAlign;
 private JPanel memberAlign;
 private JPanel instructorAlign;
@@ -35,6 +35,8 @@ private JPanel instructorAlign2;
 private JPanel eventAlign2;
 private JPanel homeAlign;
 private JPanel homeAlign2;
+private JPanel homeCenterAlign;
+private JPanel homeCenterAlign2;
 
 private JLabel ongoingEventsLabel;
 private JLabel upcomingEventsLabel;
@@ -69,6 +71,8 @@ private JMenu aboutMenu;
 private JMenuItem exitButton;
 private JMenuItem versionButton;
 
+private ImageIcon vialogo;
+
 public mainGUI()
 {
    super("ViaFit Fitness center V. 1.0");
@@ -87,7 +91,6 @@ public mainGUI()
    homeCenter = new JPanel();
    homeSouth = new JPanel();
    bigArea = new JPanel();
-   homeNorthAlign = new JPanel();
    homeNorthCenterAlign = new JPanel();
    memberAlign = new JPanel();
    instructorAlign = new JPanel();
@@ -98,6 +101,8 @@ public mainGUI()
    eventAlign2 = new JPanel();
    homeAlign = new JPanel();
    homeAlign2 = new JPanel();
+   homeCenterAlign = new JPanel();
+   homeCenterAlign2 = new JPanel();
    
    ongoingEventsLabel = new JLabel("On-going events");
    upcomingEventsLabel = new JLabel("Upcoming events");
@@ -106,7 +111,7 @@ public mainGUI()
    eventLabel = new JLabel("Event");
    ongoingEvents = new JTextField();
    upcomingEvents = new JTextField();
-   homeLabel = new JLabel("ViaFit Fitness Centre");
+   homeLabel = new JLabel();
    
    bigInfoBox = new JTextField();
    search = new JTextField("Search");
@@ -133,21 +138,27 @@ public mainGUI()
    exitButton = new JMenuItem("Exit");
    versionButton = new JMenuItem("Version: 1.0 (DONT FUCKING COMPLAIN, yet");
    
+   vialogo = new ImageIcon("img/vialogoah.gif");
    
-   //setting borders to see how it looks in GUI ----------------------- Delete later!
+   
+   //adding borders
      Color col1 = new Color(100, 100, 255);
      Color grey = new Color(220, 220, 220);
      member.setBorder(new LineBorder(grey, 1));
      instructor.setBorder(new LineBorder(grey, 1));
      event.setBorder(new LineBorder(grey, 1));
      
-//   events.setBorder(new LineBorder(col1, 1));
-//   ongoingPanel.setBorder(new LineBorder(col1, 1));
-//   upcomingPanel.setBorder(new LineBorder(col1, 1));
-//   member.setBorder(new LineBorder(col1 , 1));
-//   instructor.setBorder(new LineBorder(col1 , 1));
-//   event.setBorder(new LineBorder(col1 , 1));
-//   bigInfoBox.setBorder(new LineBorder(col1, 1));
+   //setting borders to see how it looks in GUI ----------------------- Delete later!
+     //   events.setBorder(new LineBorder(col1, 1));
+     //   ongoingPanel.setBorder(new LineBorder(col1, 1));
+     //   upcomingPanel.setBorder(new LineBorder(col1, 1));
+     //   member.setBorder(new LineBorder(col1 , 1));
+     //   instructor.setBorder(new LineBorder(col1 , 1));
+     //   event.setBorder(new LineBorder(col1 , 1));
+     //   bigInfoBox.setBorder(new LineBorder(col1, 1));
+     //   main.setBorder(new LineBorder(col1, 1));
+     //   home.setBorder(new LineBorder(col1, 1));
+     //   homeCenter.setBorder(new LineBorder(col1, 1));
    
    
    //Visual updates to textFields and labels
@@ -157,6 +168,10 @@ public mainGUI()
    instructorLabel.setFont(new Font(instructorLabel.getFont().getFamily(), Font.BOLD, 20));
    eventLabel.setFont(new Font(eventLabel.getFont().getFamily(), Font.BOLD, 20));
    homeLabel.setFont(new Font(homeLabel.getFont().getFamily(), Font.BOLD, 30));
+   search.setFont(new Font(homeLabel.getFont().getFamily(), Font.PLAIN, 17));
+   searchOption.setFont(new Font(homeLabel.getFont().getFamily(), Font.PLAIN, 17));
+   homeDetails.setFont(new Font(homeLabel.getFont().getFamily(), Font.BOLD, 14));
+   
    
    //adding stuff to the menuBar
    fileMenu.add(exitButton);
@@ -188,14 +203,13 @@ public mainGUI()
    upcomingEvents.setPreferredSize(new Dimension(380, 380));
    
    //adding buttons to home panel
-   homeCorner.setLayout(new GridLayout(2, 1));
+//   homeCorner.setLayout(new GridLayout(2, 1));
    homeHome.setPreferredSize(new Dimension(250, 25));
    homeAlign.add(homeHome);
+   homeLabel.setIcon(vialogo);
    homeAlign2.add(homeLabel);
    homeCorner.add(homeAlign2);
-   homeCorner.add(homeAlign);
-   
-  
+//   homeCorner.add(homeAlign);
    
    //adding buttons to member panel
    member.setLayout(new GridLayout(2, 1));
@@ -236,23 +250,25 @@ public mainGUI()
    topFrame.setPreferredSize(new Dimension(900, 80));
    
    //adding panels to homeNorth frame
-   homeNorth.setLayout(new BorderLayout());
-   homeNorthAlign.setLayout(new BorderLayout());
+   homeNorth.setLayout(new BoxLayout(homeNorth, BoxLayout.Y_AXIS));
    homeNorthCenterAlign.setLayout(new FlowLayout());
    homeNorthCenterAlign.add(search);
    homeNorthCenterAlign.add(searchOption);
-   search.setPreferredSize(new Dimension(400, 25));
-   searchOption.setPreferredSize(new Dimension(75, 24));
-   homeNorth.add(homeNorthAlign, BorderLayout.WEST);
-   homeNorth.add(homeNorthCenterAlign, BorderLayout.CENTER);
+   homeNorthCenterAlign.setBorder(new EmptyBorder(40, 0, 40, 0));
+   search.setPreferredSize(new Dimension(400, 45));
+   searchOption.setPreferredSize(new Dimension(125, 44));
+   homeNorth.add(homeNorthCenterAlign);
+   
    
    //adding panels to homeCenter frame
    homeCenter.setLayout(new BoxLayout(homeCenter, BoxLayout.Y_AXIS));
-   homeCenter.add(bigInfoBox);
-   bigInfoBox.setMinimumSize(new Dimension(1400, 800));
-   bigInfoBox.setMaximumSize(new Dimension(1400, 800));
+   homeCenterAlign2.add(bigInfoBox);
+   homeCenter.add(homeCenterAlign2);
+   bigInfoBox.setPreferredSize(new Dimension(1400, 700));
    bigInfoBox.setEnabled(false);
-   homeCenter.add(homeDetails);
+   homeDetails.setPreferredSize(new Dimension(125, 35));
+   homeCenterAlign.add(homeDetails);
+   homeCenter.add(homeCenterAlign);
    
    //adding panels to homeSouth frame
    
