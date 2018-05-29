@@ -164,9 +164,9 @@ public mainGUI()
    //Visual updates to textFields and labels
    ongoingEventsLabel.setFont(new Font(ongoingEventsLabel.getFont().getFamily(), Font.BOLD, 30));
    upcomingEventsLabel.setFont(new Font(upcomingEventsLabel.getFont().getFamily(), Font.BOLD, 30));
-   memberLabel.setFont(new Font(memberLabel.getFont().getFamily(), Font.BOLD, 20));
-   instructorLabel.setFont(new Font(instructorLabel.getFont().getFamily(), Font.BOLD, 20));
-   eventLabel.setFont(new Font(eventLabel.getFont().getFamily(), Font.BOLD, 20));
+   memberLabel.setFont(new Font(memberLabel.getFont().getFamily(), Font.BOLD, 35));
+   instructorLabel.setFont(new Font(instructorLabel.getFont().getFamily(), Font.BOLD, 35));
+   eventLabel.setFont(new Font(eventLabel.getFont().getFamily(), Font.BOLD, 35));
    homeLabel.setFont(new Font(homeLabel.getFont().getFamily(), Font.BOLD, 30));
    search.setFont(new Font(homeLabel.getFont().getFamily(), Font.PLAIN, 17));
    searchOption.setFont(new Font(homeLabel.getFont().getFamily(), Font.PLAIN, 17));
@@ -193,14 +193,14 @@ public mainGUI()
    upcomingPanel.add(upcomingDetails);
          //setting size of panels and fields in JPanel events (Left side)
    events.setPreferredSize(new Dimension(380, 1080));
-   ongoingPanel.setMinimumSize(new Dimension(380, 500));
-   ongoingPanel.setMaximumSize(new Dimension(380, 500));
-   upcomingPanel.setMinimumSize(new Dimension(380, 500));
-   upcomingPanel.setMaximumSize(new Dimension(380, 500));
+   ongoingPanel.setMinimumSize(new Dimension(380, 370));
+   ongoingPanel.setMaximumSize(new Dimension(380, 370));
+   upcomingPanel.setMinimumSize(new Dimension(380, 370));
+   upcomingPanel.setMaximumSize(new Dimension(380, 370));
    ongoingEventsLabel.setPreferredSize(new Dimension(380, 70));
    upcomingEventsLabel.setPreferredSize(new Dimension(380, 70));
-   ongoingEvents.setPreferredSize(new Dimension(380, 380));
-   upcomingEvents.setPreferredSize(new Dimension(380, 380));
+   ongoingEvents.setPreferredSize(new Dimension(380, 160));
+   upcomingEvents.setPreferredSize(new Dimension(380, 160));
    
    //adding buttons to home panel
 //   homeCorner.setLayout(new GridLayout(2, 1));
@@ -247,7 +247,7 @@ public mainGUI()
    topFrame.add(member);
    topFrame.add(instructor);
    topFrame.add(event);
-   topFrame.setPreferredSize(new Dimension(900, 80));
+   topFrame.setPreferredSize(new Dimension(900, 130));
    
    //adding panels to homeNorth frame
    homeNorth.setLayout(new BoxLayout(homeNorth, BoxLayout.Y_AXIS));
@@ -355,7 +355,7 @@ public mainGUI()
    
    setJMenuBar(menubar);
    add(main);
-   setSize(1920, 1080);
+   setSize(1366, 768);
    setResizable(false);
    setVisible(true);
    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
