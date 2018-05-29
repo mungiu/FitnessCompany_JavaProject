@@ -24,9 +24,6 @@ public class Event
 	{
 		return className;
 	}
-<<<<<<< HEAD
-	
-=======
 
 	public void addInstructor(Instructor instructor)
 	{
@@ -52,6 +49,4 @@ public class Event
 	{
 		return endTime;
 	}
-
->>>>>>> master
 }
