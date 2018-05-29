@@ -16,5 +16,4 @@ public class Event
 		return className;
 	}
 	
-	public MyDate 
 }

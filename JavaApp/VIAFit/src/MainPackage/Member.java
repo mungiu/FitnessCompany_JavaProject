@@ -33,7 +33,7 @@ public class Member
       return firstName;
    }
 
-   public void setFirstName()
+   public void setFirstName(String firstName)
    {
       this.firstName = firstName;
    }
@@ -43,7 +43,7 @@ public class Member
       return lastName;
    }
 
-   public void setLastName()
+   public void setLastName(String lastName)
    {
       this.lastName = lastName;
    }
@@ -53,23 +53,34 @@ public class Member
       return phoneNumber;
    }
 
-   public void setPhoneNumber()
+   public void setPhoneNumber(int phoneNumber)
    {
       this.phoneNumber = phoneNumber;
+   }
+
+   public String getemail()
+   {
+      return email;
+   }
+
+   public void setemail(String email)
+   {
+      this.email = email;
    }
 
    public boolean getIsPremium()
    {
       return isPremium;
    }
-   public MyDate getMemberSince()
-   {
-      return memberSince;
-   }
 
    public void setIsPremium(boolean isPremium)
    {
       this.isPremium = isPremium;
+   }
+
+   public MyDate getMemberSince()
+   {
+      return memberSince;
    }
 
    public ArrayList<Event> getMemberEvents()
