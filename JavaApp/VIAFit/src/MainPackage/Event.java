@@ -6,8 +6,6 @@ public class Event
 {
 	private String className;
 	private int maxMembers;
-	private boolean requiresQualification;
-	private boolean requiresPremium;
 	private MyDate startDate;
 	private MyDate endDate;
 	private MyClock startTime;
@@ -19,8 +17,6 @@ public class Event
 	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
 			MyClock startTime, MyClock endTime)
 	{
-		this.requiresPremium = true;
-		this.requiresQualification = true;
 		this.classType = classType;
 		this.className = className;
 		this.maxMembers = maxMembers;
@@ -120,8 +116,7 @@ public class Event
 
 	public void assignInstructorToEvent(Instructor instructor)
 	{
-		if (requiresQualification)
-			if (instructor.isQualified())
+			if (instructor.getIsQualified() && instructor.getIsAvailable())
 				attendingInstructorsList.add(instructor);
 	}
 
