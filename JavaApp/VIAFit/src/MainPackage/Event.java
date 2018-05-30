@@ -6,8 +6,7 @@ public class Event
 {
 	private String className;
 	private int maxMembers;
-	private boolean requiresQualification;
-	private boolean requiresPremium;
+	private boolean requiresQualification, requiresPremium;
 	private MyDate startDate;
 	private MyDate endDate;
 	private MyClock startTime;
