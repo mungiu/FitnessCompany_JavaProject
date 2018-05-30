@@ -3,6 +3,15 @@ package MainPackage;
 import java.util.ArrayList;
 
 public class Main {
+   
+   
+   public boolean IAvailable()
+   {
+      
+   }
+   
+   
+   
 	public static void main(String[] args) {
    
 }
