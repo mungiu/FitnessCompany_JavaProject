@@ -1,11 +1,13 @@
 package MainPackage;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class newMemberGUI extends JFrame
 {
@@ -114,6 +116,7 @@ public class newMemberGUI extends JFrame
    
    //styling the text and labels
    headLine.setFont(new Font(headLine.getFont().getFamily(), Font.BOLD, 30));
+   Color col1 = new Color(1, 1, 255);
    
    //adding content to the menuBar
    fileMenu.add(exit);
@@ -127,8 +130,8 @@ public class newMemberGUI extends JFrame
    logoLabel.setIcon(logo);
    topContainer.setLayout(new GridLayout(1, 2));
    logoLabel.setBorder(new EmptyBorder(20, 20, 0, 0));
-   topContainer.setMinimumSize(new Dimension(800, 300));
-   topContainer.setMaximumSize(new Dimension(800, 300));
+   topContainer.setMinimumSize(new Dimension(800, 180));
+   topContainer.setMaximumSize(new Dimension(800, 180));
    headLine.setBorder(new EmptyBorder(50, 0, 0, 0));
    topContainer.add(logoLabel);
    topContainer.add(headLine);
@@ -179,7 +182,7 @@ public class newMemberGUI extends JFrame
    membershipTypeInput.setPreferredSize(fields);
   
    //adding content to the outputContainer
-   allEventsScroll.setPreferredSize(new Dimension(677, 250));
+   allEventsScroll.setPreferredSize(new Dimension(677, 220));
    allEventsScroll.add(allEvents);
    allEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
    allEvents.setEditable(false);
@@ -191,6 +194,8 @@ public class newMemberGUI extends JFrame
    
    //adding the JLabel attendedEvents
    attendedAlign.add(attendedEvents);
+   attendedAlign.setMinimumSize(new Dimension(750, 30));
+   attendedAlign.setMaximumSize(new Dimension(750, 30));
    
    //adding content to the main frame
    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
