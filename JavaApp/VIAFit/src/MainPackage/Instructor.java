@@ -8,17 +8,19 @@ public class Instructor
 {
    private int instructorID;
    private String firstName, lastName;
-   private boolean qualified;
+   private boolean isQualified;
    private ArrayList<ClassType> qualifiedClassList;
    private ArrayList<Main> allTaughtEventsList;
 
    public Instructor(int instructorID, String firstName, String lastName,
-         boolean qualified)
+         boolean isQualified)
    {
       this.firstName = firstName;
       this.lastName = lastName;
       this.instructorID = instructorID;
-      this.qualified = qualified;
+      this.isQualified = isQualified;
+      allTaughtEventsList = new ArrayList<Main>();
+      qualifiedClassList = new ArrayList<ClassType>();
    }
 
    public String getFirstName()
@@ -46,16 +48,28 @@ public class Instructor
       return instructorID;
    }
 
-   public boolean isAvailable()
+   public boolean getIsAvailable()
    {
-      
+      //TODO
    }
    
-   public boolean isQualified()
+   public boolean getIsQualified()
    {
-      return qualified;
+      return isQualified;
    }
 
+   public void setIsQualified(boolean isQualified)
+   {
+      this.isQualified = isQualified;
+   }
+   public ArrayList<ClassType> getQualifiedClassesList()
+   {
+      return qualifiedClassList;
+   }
+   public ArrayList<Main> getAllTaughtEvents()
+   {
+      return allTaughtEventsList;
+   }
    
 
 }
