@@ -75,7 +75,7 @@ private ImageIcon vialogo;
 
 public mainGUI()
 {
-   super("ViaFit Fitness center V. 1.0");
+   super("ViaFit Fitness centre V. 1.0");
    
    //Initialising
    main = new JPanel();
@@ -138,7 +138,7 @@ public mainGUI()
    exitButton = new JMenuItem("Exit");
    versionButton = new JMenuItem("Version: 1.0 (DONT FUCKING COMPLAIN, yet");
    
-   vialogo = new ImageIcon("img/vialogoah.gif");
+   vialogo = new ImageIcon("img/logoTransBigger.png");
    
    
    //adding borders
@@ -192,15 +192,15 @@ public mainGUI()
    ongoingPanel.add(ongoingDetails);
    upcomingPanel.add(upcomingDetails);
          //setting size of panels and fields in JPanel events (Left side)
-   events.setPreferredSize(new Dimension(380, 1080));
-   ongoingPanel.setMinimumSize(new Dimension(380, 370));
-   ongoingPanel.setMaximumSize(new Dimension(380, 370));
-   upcomingPanel.setMinimumSize(new Dimension(380, 370));
-   upcomingPanel.setMaximumSize(new Dimension(380, 370));
-   ongoingEventsLabel.setPreferredSize(new Dimension(380, 70));
-   upcomingEventsLabel.setPreferredSize(new Dimension(380, 70));
-   ongoingEvents.setPreferredSize(new Dimension(380, 160));
-   upcomingEvents.setPreferredSize(new Dimension(380, 160));
+   events.setPreferredSize(new Dimension(330, 1080));
+   ongoingPanel.setMinimumSize(new Dimension(330, 370));
+   ongoingPanel.setMaximumSize(new Dimension(330, 370));
+   upcomingPanel.setMinimumSize(new Dimension(330, 370));
+   upcomingPanel.setMaximumSize(new Dimension(330, 370));
+   ongoingEventsLabel.setPreferredSize(new Dimension(330, 70));
+   upcomingEventsLabel.setPreferredSize(new Dimension(330, 70));
+   ongoingEvents.setPreferredSize(new Dimension(330, 160));
+   upcomingEvents.setPreferredSize(new Dimension(330, 155));
    
    //adding buttons to home panel
 //   homeCorner.setLayout(new GridLayout(2, 1));
@@ -264,7 +264,7 @@ public mainGUI()
    homeCenter.setLayout(new BoxLayout(homeCenter, BoxLayout.Y_AXIS));
    homeCenterAlign2.add(bigInfoBox);
    homeCenter.add(homeCenterAlign2);
-   bigInfoBox.setPreferredSize(new Dimension(1400, 700));
+   bigInfoBox.setPreferredSize(new Dimension(900, 700));
    bigInfoBox.setEnabled(false);
    homeDetails.setPreferredSize(new Dimension(125, 35));
    homeCenterAlign.add(homeDetails);
