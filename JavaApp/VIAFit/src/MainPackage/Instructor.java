@@ -47,11 +47,6 @@ public class Instructor
    {
       return instructorID;
    }
-
-   public boolean getIsAvailable(Instructor event)
-   {
-
-   }
    
    public boolean getIsQualified()
    {
