@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 public class Member
 {
+   	
    private String firstName, lastName, email;
-   private int memberID, phoneNumber;
+   private int memberID=1;
+   private int phoneNumber;
    private boolean isPremium;
    private MyDate memberSince;
    private ArrayList<Event> allAttendedEventsList;
 
    public Member(String firstName, String lastName, String email, int memberID,
-         int phoneNumber, boolean isPremium, MyDate memberSince)
+         int phoneNumber, boolean isPremium)
    {
       this.firstName = firstName;
       this.lastName = lastName;
@@ -19,8 +21,8 @@ public class Member
       this.memberID = memberID;
       this.phoneNumber = phoneNumber;
       this.isPremium = isPremium;
-      this.memberSince = memberSince;
       allAttendedEventsList = new ArrayList<Event>();
+      
    }
 
    public int getMemberID()
