@@ -4,148 +4,144 @@ import java.util.ArrayList;
 
 public class Event
 {
-	private String className;
-	private int maxMembers;
-<<<<<<< HEAD
-	private boolean requiresQualification, requiresPremium;
-	private MyDate startDate;
-	private MyDate endDate;
-	private MyClock startTime;
-	private MyClock endTime;
-=======
-	
-	private MyDate startDate, endDate;
-	private MyClock startTime, endTime;
->>>>>>> master
-	private ClassType classType;
-	private ArrayList<Instructor> attendingInstructorsList;
-	private ArrayList<Member> attendingMembersList;
+   private String className;
+   private int maxMembers;
 
-	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
-			MyClock startTime, MyClock endTime)
-	{
-		this.classType = classType;
-		this.className = className;
-		this.maxMembers = maxMembers;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.attendingInstructorsList = new ArrayList<Instructor>();
-		this.attendingMembersList = new ArrayList<Member>();
-	}
+   private boolean requiresQualification, requiresPremium;
+   private MyDate startDate, endDate;
+   private MyClock startTime, endTime;
+   private ClassType classType;
+   private ArrayList<Instructor> attendingInstructorsList;
+   private ArrayList<Member> attendingMembersList;
 
-	public int getMaxMembers()
-	{
-		return maxMembers;
-	}
+   public Event(ClassType classType, String className, int maxMembers,
+         MyDate startDate, MyDate endDate, MyClock startTime, MyClock endTime)
+   {
+      this.classType = classType;
+      this.className = className;
+      this.maxMembers = maxMembers;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      this.startTime = startTime;
+      this.endTime = endTime;
+      this.attendingInstructorsList = new ArrayList<Instructor>();
+      this.attendingMembersList = new ArrayList<Member>();
+   }
 
-	public void setMaxMembers(int maxMembers)
-	{
-		this.maxMembers = maxMembers;
-	}
+   public int getMaxMembers()
+   {
+      return maxMembers;
+   }
 
-	public String getClassName()
-	{
-		return className;
-	}
+   public void setMaxMembers(int maxMembers)
+   {
+      this.maxMembers = maxMembers;
+   }
 
-	public void setClassName(String className)
-	{
-		this.className = className;
-	}
+   public String getClassName()
+   {
+      return className;
+   }
 
-	public MyDate getStartDate()
-	{
-		return startDate;
-	}
+   public void setClassName(String className)
+   {
+      this.className = className;
+   }
 
-	public void getStartDate(MyDate startDate)
-	{
-		this.startDate = startDate;
-	}
+   public MyDate getStartDate()
+   {
+      return startDate;
+   }
 
-	public MyDate getEndDate()
-	{
-		return endDate;
-	}
+   public void getStartDate(MyDate startDate)
+   {
+      this.startDate = startDate;
+   }
 
-	public void setEndDate(MyDate endDate)
-	{
-		this.endDate = endDate;
-	}
+   public MyDate getEndDate()
+   {
+      return endDate;
+   }
 
-	public MyClock getStarTime()
-	{
-		return startTime;
-	}
+   public void setEndDate(MyDate endDate)
+   {
+      this.endDate = endDate;
+   }
 
-	public void setStartTime(MyClock startTime)
-	{
-		this.startTime = startTime;
-	}
+   public MyClock getStarTime()
+   {
+      return startTime;
+   }
 
-	public MyClock getEndTime()
-	{
-		return endTime;
-	}
+   public void setStartTime(MyClock startTime)
+   {
+      this.startTime = startTime;
+   }
 
-	public void setEndTime(MyClock endTime)
-	{
-		this.endTime = endTime;
-	}
+   public MyClock getEndTime()
+   {
+      return endTime;
+   }
 
-	public ArrayList<Member> getMembersList()
-	{
-		return attendingMembersList;
-	}
+   public void setEndTime(MyClock endTime)
+   {
+      this.endTime = endTime;
+   }
 
-	public void setMembersList(ArrayList<Member> attendingMembersList)
-	{
-		this.attendingMembersList = new ArrayList<Member>(attendingMembersList.size());
+   public ArrayList<Member> getMembersList()
+   {
+      return attendingMembersList;
+   }
 
-		for (int i = 0; i < attendingMembersList.size(); i++)
-			this.attendingMembersList.add(attendingMembersList.get(i));
-	}
+   public void setMembersList(ArrayList<Member> attendingMembersList)
+   {
+      this.attendingMembersList = new ArrayList<Member>(
+            attendingMembersList.size());
 
-	public ArrayList<Instructor> getInstructorsList()
-	{
-		return attendingInstructorsList;
-	}
+      for (int i = 0; i < attendingMembersList.size(); i++)
+         this.attendingMembersList.add(attendingMembersList.get(i));
+   }
 
-	public void setInstructorsList(ArrayList<Instructor> attendingInstructorsList)
-	{
-		this.attendingInstructorsList = new ArrayList<Instructor>(attendingInstructorsList.size());
+   public ArrayList<Instructor> getInstructorsList()
+   {
+      return attendingInstructorsList;
+   }
 
-		for (int i = 0; i < attendingInstructorsList.size(); i++)
-			this.attendingInstructorsList.add(attendingInstructorsList.get(i));
-	}
+   public void setInstructorsList(
+         ArrayList<Instructor> attendingInstructorsList)
+   {
+      this.attendingInstructorsList = new ArrayList<Instructor>(
+            attendingInstructorsList.size());
 
-	public void assignInstructorToEvent(Instructor instructor)
-	{
-			if (instructor.getIsQualified() && instructor.getIsAvailable())
-				attendingInstructorsList.add(instructor);
-	}
+      for (int i = 0; i < attendingInstructorsList.size(); i++)
+         this.attendingInstructorsList.add(attendingInstructorsList.get(i));
+   }
 
-	public void removeInstructorFromEvent(Instructor instructor)
-	{
-		attendingInstructorsList.remove(instructor);
-	}
+   public void assignInstructorToEvent(Instructor instructor)
+   {
+      if (instructor.getIsQualified() && instructor.getIsAvailable())
+         attendingInstructorsList.add(instructor);
+   }
 
-	public void assignMemberToEvent(Member member)
-	{
-		if (member.getIsPremium())
-			attendingMembersList.add(member);
-	}
+   public void removeInstructorFromEvent(Instructor instructor)
+   {
+      attendingInstructorsList.remove(instructor);
+   }
 
-	public void removeMemberFromEvent(Member member)
-	{
-		attendingMembersList.remove(member);
-	}
+   public void assignMemberToEvent(Member member)
+   {
+      if (member.getIsPremium())
+         attendingMembersList.add(member);
+   }
 
-	public String toString()
-	{
-		return "asd";
-	}
+   public void removeMemberFromEvent(Member member)
+   {
+      attendingMembersList.remove(member);
+   }
+
+   public String toString()
+   {
+      return "asd";
+   }
 
 }

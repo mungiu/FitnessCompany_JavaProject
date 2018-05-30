@@ -48,9 +48,9 @@ public class Instructor
       return instructorID;
    }
 
-   public boolean getIsAvailable()
+   public boolean getIsAvailable(Instructor event)
    {
-      //TODO
+
    }
    
    public boolean getIsQualified()
