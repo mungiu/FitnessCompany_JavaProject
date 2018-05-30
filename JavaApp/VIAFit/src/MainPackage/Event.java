@@ -6,10 +6,9 @@ public class Event
 {
 	private String className;
 	private int maxMembers;
-	private MyDate startDate;
-	private MyDate endDate;
-	private MyClock startTime;
-	private MyClock endTime;
+	
+	private MyDate startDate, endDate;
+	private MyClock startTime, endTime;
 	private ClassType classType;
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
