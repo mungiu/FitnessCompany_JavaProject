@@ -43,7 +43,7 @@ public class newMemberGUI extends JFrame
    private JTextField phoneInput;
    private JTextArea allEvents;
    private JScrollPane allEventsScroll;
-   private JTextField membershipTypeInput;
+   private JComboBox<String> membershipTypeInput;
    
    private JButton save;
    private JButton cancel;
@@ -96,7 +96,8 @@ public class newMemberGUI extends JFrame
    phoneInput = new JTextField();
    allEvents = new JTextArea(10, 20);
    allEventsScroll = new JScrollPane();
-   membershipTypeInput = new JTextField();
+   String[] temp = {"Premium", "Standard"};
+   membershipTypeInput = new JComboBox<String>(temp);
    
    save = new JButton("Save");
    cancel = new JButton("Cancel");
