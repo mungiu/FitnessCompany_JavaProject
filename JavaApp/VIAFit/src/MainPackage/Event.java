@@ -135,9 +135,11 @@ public class Event
 		attendingMembersList.remove(member);
 	}
 
-	public String toString()
-	{
-		return "asd";
+	@Override
+	public String toString() {
+		return "Event [className=" + className + ", maxMembers=" + maxMembers + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", classType="
+				+ classType + "]";
 	}
 
 }
