@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Member
 {
-   private int memberID, phoneNumber;
    private String firstName, lastName, email;
+   private int memberID, phoneNumber;
    private boolean isPremium;
    private MyDate memberSince;
-   private ArrayList<Event> attendedEvents;
+   private ArrayList<Event> allAttendedEventsList;
 
    public Member(String firstName, String lastName, String email, int memberID,
          int phoneNumber, boolean isPremium, MyDate memberSince)
@@ -20,7 +20,7 @@ public class Member
       this.phoneNumber = phoneNumber;
       this.isPremium = isPremium;
       this.memberSince = memberSince;
-      attendedEvents = new ArrayList<Event>();
+      allAttendedEventsList = new ArrayList<Event>();
    }
 
    public int getMemberID()
@@ -85,6 +85,6 @@ public class Member
 
    public ArrayList<Event> getMemberEvents()
    {
-      return attendedEvents;
+      return allAttendedEventsList;
    }
 }
