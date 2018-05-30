@@ -6,11 +6,17 @@ public class Event
 {
 	private String className;
 	private int maxMembers;
+<<<<<<< HEAD
 	private boolean requiresQualification, requiresPremium;
 	private MyDate startDate;
 	private MyDate endDate;
 	private MyClock startTime;
 	private MyClock endTime;
+=======
+	
+	private MyDate startDate, endDate;
+	private MyClock startTime, endTime;
+>>>>>>> master
 	private ClassType classType;
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
@@ -18,8 +24,6 @@ public class Event
 	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
 			MyClock startTime, MyClock endTime)
 	{
-		this.requiresPremium = true;
-		this.requiresQualification = true;
 		this.classType = classType;
 		this.className = className;
 		this.maxMembers = maxMembers;
@@ -119,8 +123,7 @@ public class Event
 
 	public void assignInstructorToEvent(Instructor instructor)
 	{
-		if (requiresQualification)
-			if (instructor.isQualified())
+			if (instructor.getIsQualified() && instructor.getIsAvailable())
 				attendingInstructorsList.add(instructor);
 	}
 
