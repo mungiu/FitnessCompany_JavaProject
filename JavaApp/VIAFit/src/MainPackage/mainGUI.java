@@ -108,7 +108,7 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
    {
       if(e.getSource()==about)
       {
-         JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre. Version 1.0", "About", JOptionPane.PLAIN_MESSAGE);
+         JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre.\nVersion 1.0", "About", JOptionPane.PLAIN_MESSAGE);
       }
       if(e.getSource()==exitButton)
       {
