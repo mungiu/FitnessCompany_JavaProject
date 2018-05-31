@@ -1,10 +1,16 @@
 package MainPackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Member
+public class Member implements Serializable
 {
-
+	
+	/**
+	 * Generated serial version UID
+	 */
+	private static final long serialVersionUID = 4437337227753008510L;
+	
 	private String firstName, lastName, email;
 	private int memberID = 1;
 	private int phoneNumber;
