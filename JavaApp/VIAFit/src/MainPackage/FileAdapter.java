@@ -24,7 +24,7 @@ public class FileAdapter
 
 	}
 
-	public ArrayList<Event> getOnGoingEventList()
+	public ArrayList<Event> getOnGoingEventsList()
 	{
 		return onGoingEventsList;
 	}
@@ -32,6 +32,21 @@ public class FileAdapter
 	public ArrayList<Event> getUpComingEventsList()
 	{
 		return upComingEventsList;
+	}
+
+	public ArrayList<ClassType> getClassTypeList()
+	{
+		return allClassTypeList;
+	}
+
+	public ArrayList<Member> getMembersList()
+	{
+		return memberList;
+	}
+
+	public ArrayList<Instructor> getInstructorsList()
+	{
+		return instructorList;
 	}
 
 	public boolean getInstructorIsAvailable(Instructor instructor, Event event)
@@ -44,21 +59,6 @@ public class FileAdapter
 						return true;
 
 		return false;
-	}
-
-	public ArrayList<ClassType> getAllClassTypeList()
-	{
-		return allClassTypeList;
-	}
-
-	public ArrayList<Member> getMemberList()
-	{
-		return memberList;
-	}
-
-	public ArrayList<Instructor> getInstructorList()
-	{
-		return instructorList;
 	}
 
 	public void updateOnGoingEventsList()
