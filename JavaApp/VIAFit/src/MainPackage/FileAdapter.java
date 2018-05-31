@@ -1,6 +1,7 @@
 package MainPackage;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class FileAdapter
 {
@@ -55,7 +56,7 @@ public class FileAdapter
 			if (allEventsList.get(i).getInstructorsList().contains(instructor))
 				for (int j = 0; j < allEventsList.size(); j++)
 					if (allEventsList.get(i).getStarTime().isBefore(event.getStarTime())
-							&& (event.getStarTime().isBefore(allEventsList.get(i).getEndTime()) == false))
+							&& (!event.getStarTime().isBefore(allEventsList.get(i).getEndTime())))
 						return true;
 
 		return false;
@@ -63,7 +64,17 @@ public class FileAdapter
 
 	public void updateOnGoingEventsList()
 	{
-		// TODO finalize
+		GregorianCalendar cal = new GregorianCalendar();
+
+		// add new events
+		
+		// TODO: FINALIZE
+		for (int i = 0; i < allEventsList.size(); i++)
+			if (allEventsList.get(i).getStarTime().isBefore(time) < cal.get(GregorianCalendar.HOUR_OF_DAY))
+				if (allEventsList.get(i).getEndTime() > cal.get(GregorianCalendar.HOUR_OF_DAY))
+					onGoingEventsList.add(allEventsList.get(i));
+
+		// remove old events
 	}
 
 	public void updateUpComingEventsList()
