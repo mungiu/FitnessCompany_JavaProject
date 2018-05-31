@@ -63,22 +63,91 @@ public class FileAdapter
 
 	public void updateOnGoingEventsList()
 	{
-		GregorianCalendar cal = new GregorianCalendar();
+		GregorianCalendar calendar = new GregorianCalendar();
+		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
+		MyClock thisEventStartTime;
+		MyClock thisEventEndTime;
+		MyDate today = MyDate.today();
+		MyDate thisEventStartDate;
 
-		// add new events
-		
-		// TODO: FINALIZE
-//		for (int i = 0; i < allEventsList.size(); i++)
-//			if (allEventsList.get(i).getStarTime().isBefore(time) < cal.get(GregorianCalendar.HOUR_OF_DAY))
-//				if (allEventsList.get(i).getEndTime() > cal.get(GregorianCalendar.HOUR_OF_DAY))
-//					onGoingEventsList.add(allEventsList.get(i));
 
-		// remove old events
+		for (int i = 0; i < allEventsList.size(); i++)
+		{
+			thisEventStartTime = allEventsList.get(i).getStarTime();
+			thisEventEndTime = allEventsList.get(i).getEndTime();
+			thisEventStartDate = allEventsList.get(i).getStartDate();
+
+			boolean eventIsToday = thisEventStartDate.equals(today);
+			boolean eventStarted = thisEventStartTime.getHour() < currentTime.getHour();
+			boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
+			boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
+			boolean containsEvent = onGoingEventsList.contains(allEventsList.get(i));
+
+			if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
+				onGoingEventsList.add(allEventsList.get(i));
+
+			else if (containsEvent && eventFinished)
+				onGoingEventsList.remove(i);
+		}
+
 	}
 
 	public void updateUpComingEventsList()
 	{
-		// TODO finalize
+		int maxUpcomingEvents = 30;
+		GregorianCalendar calendar = new GregorianCalendar();
+		Event currentEvent;
+
+		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
+		MyClock thisEventStartTime;
+		MyClock thisEventEndTime;
+
+		MyDate today = MyDate.today();
+		MyDate thisEventStartDate;
+		MyDate thisEventEndDate;
+
+		for (int i = 0; i < allEventsList.size(); i++)
+		{
+			currentEvent = allEventsList.get(i);
+
+			thisEventStartTime = currentEvent.getStarTime();
+			thisEventEndTime = currentEvent.getEndTime();
+			thisEventStartDate = currentEvent.getStartDate();
+			thisEventEndDate = currentEvent.getEndDate();
+
+			boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
+			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
+			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
+			boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
+
+			// adding future events (30 max)
+			if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
+			{
+				if (eventIsUpcomingYears)
+					upComingEventsList.add(currentEvent);
+				else if (eventIsUpcomingMonths)
+					upComingEventsList.add(currentEvent);
+				else if (eventIsUpcomingDays)
+					upComingEventsList.add(currentEvent);
+				else if (eventIsUpcomingHours)
+					upComingEventsList.add(currentEvent);
+			}
+
+			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
+			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
+			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
+			boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
+
+			// removing old events
+			if (eventWasBeforeThisYear)
+				upComingEventsList.remove(currentEvent);
+			else if (eventWasBeforeThisMonth)
+				upComingEventsList.remove(currentEvent);
+			else if (eventWasBeforeThisDay)
+				upComingEventsList.remove(currentEvent);
+			else if (eventWasBeforeThisHour)
+				upComingEventsList.remove(currentEvent);
+		}
 	}
 
 	public void updateInstructorsList()

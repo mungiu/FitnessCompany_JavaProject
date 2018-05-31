@@ -115,8 +115,8 @@ public class Event
 
 	public void assignInstructorToEvent(Instructor instructor, Event event)
 	{
-			if (instructor.getIsQualified() && fileAdapter.getInstructorIsAvailable(instructor, event))
-				attendingInstructorsList.add(instructor);
+		if (instructor.getIsQualified() && fileAdapter.getInstructorIsAvailable(instructor, event))
+			attendingInstructorsList.add(instructor);
 	}
 
 	public void removeInstructorFromEvent(Instructor instructor)
@@ -136,7 +136,8 @@ public class Event
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Event [className=" + className + ", maxMembers=" + maxMembers + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", classType="
 				+ classType + "]";
