@@ -8,7 +8,7 @@ public class Instructor
    private String firstName, lastName;
    private boolean isQualified;
    private ArrayList<ClassType> qualifiedClassList;
-   private ArrayList<Main> allTaughtEventsList;
+   private ArrayList<FileAdapter> allTaughtEventsList;
 
    public Instructor(int instructorID, String firstName, String lastName,
          boolean isQualified)
@@ -17,7 +17,7 @@ public class Instructor
       this.lastName = lastName;
       this.instructorID = instructorID;
       this.isQualified = isQualified;
-      allTaughtEventsList = new ArrayList<Main>();
+      allTaughtEventsList = new ArrayList<FileAdapter>();
       qualifiedClassList = new ArrayList<ClassType>();
    }
 
@@ -61,7 +61,7 @@ public class Instructor
       return qualifiedClassList;
    }
 
-   public ArrayList<Main> getAllTaughtEvents()
+   public ArrayList<FileAdapter> getAllTaughtEvents()
    {
       return allTaughtEventsList;
    }
