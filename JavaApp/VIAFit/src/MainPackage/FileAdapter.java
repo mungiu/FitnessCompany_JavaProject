@@ -138,14 +138,17 @@ public class FileAdapter
 			boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
 
 			// removing old events
-			if (eventWasBeforeThisYear)
-				upComingEventsList.remove(currentEvent);
-			else if (eventWasBeforeThisMonth)
-				upComingEventsList.remove(currentEvent);
-			else if (eventWasBeforeThisDay)
-				upComingEventsList.remove(currentEvent);
-			else if (eventWasBeforeThisHour)
-				upComingEventsList.remove(currentEvent);
+			if (upComingEventsList.contains(currentEvent))
+			{
+				if (eventWasBeforeThisYear)
+					upComingEventsList.remove(currentEvent);
+				else if (eventWasBeforeThisMonth)
+					upComingEventsList.remove(currentEvent);
+				else if (eventWasBeforeThisDay)
+					upComingEventsList.remove(currentEvent);
+				else if (eventWasBeforeThisHour)
+					upComingEventsList.remove(currentEvent);
+			}
 		}
 	}
 
