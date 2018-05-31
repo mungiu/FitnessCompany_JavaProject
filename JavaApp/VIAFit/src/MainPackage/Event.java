@@ -6,7 +6,7 @@ public class Event
 {
 	private String className;
 	private int maxMembers;
-	
+	private FileAdapter fileAdapter;
 	private MyDate startDate, endDate;
 	private MyClock startTime, endTime;
 	private ClassType classType;
@@ -113,9 +113,9 @@ public class Event
 			this.attendingInstructorsList.add(attendingInstructorsList.get(i));
 	}
 
-	public void assignInstructorToEvent(Instructor instructor)
+	public void assignInstructorToEvent(Instructor instructor, Event event)
 	{
-			if (instructor.getIsQualified() && instructor.getIsAvailable())
+			if (instructor.getIsQualified() && fileAdapter.getInstructorIsAvailable(instructor, event))
 				attendingInstructorsList.add(instructor);
 	}
 
