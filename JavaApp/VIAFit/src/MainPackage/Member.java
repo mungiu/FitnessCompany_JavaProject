@@ -5,16 +5,17 @@ import java.util.ArrayList;
 
 public class Member implements Serializable
 {
-	
+
 	/**
 	 * Generated serial version UID
 	 */
 	private static final long serialVersionUID = 4437337227753008510L;
-	
+
 	private String firstName, lastName, email;
-	private int memberID = 1;
+	private int memberID = getNewMemberID();
 	private int phoneNumber;
 	private boolean isPremium;
+	private FileAdapter fileAdapter;
 	private MyDate memberSince;
 	private ArrayList<Event> allAttendedEventsList;
 
@@ -31,6 +32,18 @@ public class Member implements Serializable
 
 		allAttendedEventsList = new ArrayList<Event>();
 
+	}
+
+	public int getNewMemberID()
+	{
+		int biggestID = 0;
+		ArrayList<Member> tempMembList = fileAdapter.getMembersList();
+
+		for (int i = 0; i < tempMembList.size(); i++)
+			if (biggestID < tempMembList.get(i).getMemberID())
+				biggestID = tempMembList.get(i).getMemberID();
+
+		return biggestID + 1;
 	}
 
 	public int getMemberID()
