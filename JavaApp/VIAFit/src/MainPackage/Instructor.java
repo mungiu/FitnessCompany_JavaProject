@@ -28,13 +28,6 @@ public class Instructor implements Serializable
 
 	public int getNewInstructorID()
 	{
-<<<<<<< HEAD
-		// TODO return (last instructorID +1)
-		// AND set latest instructor id as new instructor ID
-		
-		//bla bla from ron
-		return 0;
-=======
 		int biggestID = 0;
 		ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
 
@@ -43,7 +36,6 @@ public class Instructor implements Serializable
 				biggestID = tempInstList.get(i).getInstructorID();
 
 		return biggestID + 1;
->>>>>>> master
 	}
 
 	public String getFirstName()
