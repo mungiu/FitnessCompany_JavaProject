@@ -93,6 +93,19 @@ public class Member
 	}
 
 	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof Member))
+			return false;
+		else
+		{
+			Member temp = (Member) obj;
+
+			return memberID == temp.memberID;
+		}
+	}
+
+	@Override
 	public String toString()
 	{
 		return "Member [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", memberID="
