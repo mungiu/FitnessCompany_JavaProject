@@ -11,6 +11,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.peer.WindowPeer;
@@ -92,7 +93,6 @@ private JMenuItem about;
 private ImageIcon vialogo;
 
 private MyListener myListener;
-private WindowListener windowListener;
 private MyListSelectionListener listListener;
 
 
@@ -116,15 +116,18 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       }
       if(e.getSource()==eventNew)
       {
-        new newEventGUI();
+        newEventGUI g = new newEventGUI();
+        g.editEventArea(true);
       }
       if(e.getSource()==memberNew)
       {
-         new newMemberGUI();
+         newMemberGUI g = new newMemberGUI();
+         g.editMemberGUI(true);
       }
       if(e.getSource()==instructorNew)
       {
-         new newInstructorGUI();
+         newInstructorGUI g = new newInstructorGUI();
+         g.editInstructorArea(true);
       }
       if(e.getSource()==searchButton)
       {
@@ -180,8 +183,11 @@ private class MyListSelectionListener implements ListSelectionListener
    }
 }
 
-   public void windowClosing(WindowEvent e)
+
+
+   /*public void windowClosing(WindowEvent e)
    {
+      System.out.println("sdfv");
       //Dosent work, help me, Allan.
       int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Confirm closing application", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
       if(yesno == JOptionPane.YES_OPTION)
@@ -189,14 +195,14 @@ private class MyListSelectionListener implements ListSelectionListener
          System.exit(0);
       }
    }
+*/
 
 
 
 
 
 
-
-
+   
 
 
 
@@ -464,6 +470,22 @@ public mainGUI()
    
    
    
+   //method for asking the user to confirm before closing the JFrame
+   addWindowListener(new WindowAdapter()
+   {
+       public void windowClosing(WindowEvent e)
+       {
+          int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Confirm closing application", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+          if(yesno == JOptionPane.YES_OPTION)
+          {
+             System.exit(0);
+          }
+       }
+   });
+
+   
+   
+   
    
    
    
@@ -528,11 +550,10 @@ public mainGUI()
    
    setJMenuBar(menubar);
    add(main);
-   addWindowListener(windowListener);
    setSize(1366, 768);
    setResizable(false);
    setVisible(true);
-   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
    setLocationRelativeTo(null);
 }
 }

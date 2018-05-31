@@ -191,7 +191,6 @@ public class newEventGUI extends JFrame
       public void focusLost(FocusEvent e)
       {
          // TODO Auto-generated method stub
-         
       }
    }
 
@@ -203,6 +202,7 @@ public class newEventGUI extends JFrame
    {
       if(s==true)
       {
+         editInfo.setSelected(true);
          nameInput.setEditable(true);
          typeCombo.setEnabled(true);
          newTypeCheck.setEnabled(true);
@@ -223,6 +223,7 @@ public class newEventGUI extends JFrame
       }
       if(s==false)
       {
+         editInfo.setSelected(false);
          nameInput.setEditable(false);
          typeCombo.setEnabled(false);
          newTypeCheck.setEnabled(false);
@@ -242,7 +243,11 @@ public class newEventGUI extends JFrame
          removeInstructor.setEnabled(false);
       }
    }
-   
+   public boolean isAnyInfoChanged()
+   {
+      //adapter file needed to check whether something is changed from adapter file to current fields
+      return true; //delete this
+   }
    
    
    
@@ -376,7 +381,6 @@ public newEventGUI()
    about.addActionListener(myListener);
    editInfo = new JCheckBoxMenuItem("Edit event");
    editInfo.addActionListener(myListener);
-   editInfo.setSelected(true);
    logo = new ImageIcon("img/logoTransBigger.png");
    logoLabel = new JLabel();
    
