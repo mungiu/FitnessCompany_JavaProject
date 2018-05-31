@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -114,14 +116,14 @@ public class newEventGUI extends JFrame
    
    private ImageIcon logo;
    private JLabel logoLabel;
-   private ButtonListener buttonListener;
+   private MyListener myListener;
    
    /**
-    * Inner buttonListener
+    * Inner myListener
     * @author sst
     * @version 1.0
     */
-   private class ButtonListener implements ActionListener
+   private class MyListener implements ActionListener, FocusListener
    {
       public void actionPerformed(ActionEvent e)
       {
@@ -129,6 +131,56 @@ public class newEventGUI extends JFrame
          {
             dispose();
          }
+         if(e.getSource()==exit)
+         {
+            dispose();
+         }
+         if(e.getSource()==about)
+         {
+            JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre.\nVersion 1.0", "About", JOptionPane.PLAIN_MESSAGE);
+         }
+      }
+
+      //Focus listener
+      public void focusGained(FocusEvent e)
+      {
+         if(e.getSource()==startDateDay)
+         {
+            startDateDay.setText("");
+         }
+         if(e.getSource()==startDateMonth)
+         {
+            startDateMonth.setText("");
+         }
+         if(e.getSource()==startDateYear)
+         {
+            startDateYear.setText("");
+         }
+         if(e.getSource()==endDateDay)
+         {
+            endDateDay.setText("");
+         }
+         if(e.getSource()==endDateMonth)
+         {
+            endDateMonth.setText("");
+         }
+         if(e.getSource()==endDateYear)
+         {
+            endDateYear.setText("");
+         }
+         if(e.getSource()==startTimeHour)
+         {
+            startTimeHour.setText("");
+         }
+         if(e.getSource()==startTimeMinute)
+         {
+            startTimeMinute.setText("");
+         }
+      }
+      public void focusLost(FocusEvent e)
+      {
+         // TODO Auto-generated method stub
+         
       }
    }
 
@@ -160,7 +212,7 @@ public newEventGUI()
 {
    super("Event - ViaFit Fitness Centre");
  
-   buttonListener = new ButtonListener();
+   myListener = new MyListener();
    main = new JPanel();
    topContainer = new JPanel();
    inputContainer = new JPanel();
@@ -224,13 +276,21 @@ public newEventGUI()
    typeInput = new JTextField();
    maxMembersInput= new JTextField();
    startDateDay= new JTextField("Day");
+   startDateDay.addFocusListener(myListener);
    startDateMonth= new JTextField("Month");
+   startDateMonth.addFocusListener(myListener);
    startDateYear= new JTextField("Year");
+   startDateYear.addFocusListener(myListener);
    endDateDay = new JTextField("Day");
+   endDateDay.addFocusListener(myListener);
    endDateMonth= new JTextField("Month");
+   endDateMonth.addFocusListener(myListener);
    endDateYear= new JTextField("Year");
+   endDateYear.addFocusListener(myListener);
    startTimeHour= new JTextField("Hours");
+   startTimeHour.addFocusListener(myListener);
    startTimeMinute= new JTextField("Minutes");
+   startTimeMinute.addFocusListener(myListener);
  
    instructorCombo = new JComboBox<String>(tempIns);
    typeCombo = new JComboBox<String>(tempType);
@@ -241,13 +301,13 @@ public newEventGUI()
    weeklyCheck = new JCheckBox();
    
    save = new JButton("Save");
-   save.addActionListener(buttonListener);
+   save.addActionListener(myListener);
    close = new JButton("Close");
-   close.addActionListener(buttonListener);
+   close.addActionListener(myListener);
    addInstructor = new JButton("Add instructor");
-   addInstructor.addActionListener(buttonListener);
+   addInstructor.addActionListener(myListener);
    removeInstructor = new JButton("Remove instructor");
-   removeInstructor.addActionListener(buttonListener);
+   removeInstructor.addActionListener(myListener);
    
    menuBar = new JMenuBar();
    
@@ -256,8 +316,11 @@ public newEventGUI()
    aboutMenu = new JMenu("About");
    
    remove = new JMenuItem("Delete event");
+   remove.addActionListener(myListener);
    exit = new JMenuItem("Exit");
-   about = new JMenuItem("Fuck off, Ron");
+   exit.addActionListener(myListener);
+   about = new JMenuItem("About");
+   about.addActionListener(myListener);
    editInfo = new JCheckBoxMenuItem("Edit event");
    logo = new ImageIcon("img/logoTransBigger.png");
    logoLabel = new JLabel();

@@ -6,6 +6,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -84,10 +88,10 @@ public class newMemberGUI extends JFrame
    private JCheckBoxMenuItem editInfo;
    
    private ImageIcon logo;
-   private ButtonListener buttonListener;
+   private MyListener myListener;
    
    
-   private class ButtonListener implements ActionListener
+   private class MyListener implements ActionListener, FocusListener
    {
       public void actionPerformed(ActionEvent e)
       {
@@ -95,6 +99,28 @@ public class newMemberGUI extends JFrame
          {
             dispose();
          }
+      }
+
+      //Focus listener
+      public void focusGained(FocusEvent e)
+      {
+         if(e.getSource()==membershipSinceInputDay)
+         {
+            membershipSinceInputDay.setText("");
+         }
+         if(e.getSource()==membershipSinceInputMonth)
+         {
+            membershipSinceInputMonth.setText("");
+         }
+         if(e.getSource()==membershipSinceInputYear)
+         {
+            membershipSinceInputYear.setText("");
+         }
+      }
+      public void focusLost(FocusEvent e)
+      {
+         // TODO Auto-generated method stub
+         
       }
    }
    
@@ -140,7 +166,7 @@ public class newMemberGUI extends JFrame
    {   
    super("Member - ViaFit Fitness centre");
    
-   buttonListener = new ButtonListener();
+   myListener = new MyListener();
    
    main = new JPanel();
    inputContainer = new JPanel();
@@ -182,8 +208,11 @@ public class newMemberGUI extends JFrame
    memberIDInput = new JTextField();
    emailInput = new JTextField();
    membershipSinceInputDay = new JTextField("Day");
+   membershipSinceInputDay.addFocusListener(myListener);
    membershipSinceInputMonth = new JTextField("Month");
+   membershipSinceInputMonth.addFocusListener(myListener);
    membershipSinceInputYear = new JTextField("Year");
+   membershipSinceInputYear.addFocusListener(myListener);
    phoneInput = new JTextField();
    
    listModel = new DefaultListModel<Event>();
@@ -197,13 +226,13 @@ public class newMemberGUI extends JFrame
    membershipTypeInput = new JComboBox<String>(temp);
    
    save = new JButton("Save");
-   save.addActionListener(buttonListener);
+   save.addActionListener(myListener);
    close = new JButton("Close");
-   close.addActionListener(buttonListener);
+   close.addActionListener(myListener);
    signUp = new JButton("Sign up for event");
-   signUp.addActionListener(buttonListener);
+   signUp.addActionListener(myListener);
    removeFrom = new JButton("Remove from event");
-   removeFrom.addActionListener(buttonListener);
+   removeFrom.addActionListener(myListener);
    
    menuBar = new JMenuBar();
    
