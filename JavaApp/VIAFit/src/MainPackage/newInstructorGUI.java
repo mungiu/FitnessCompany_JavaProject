@@ -74,20 +74,39 @@ public class newInstructorGUI extends JFrame
    private ImageIcon logo;
    private JLabel logoLabel;
    private JLabel headLine;
-   private ButtonListener buttonListener;
+   private MyListener myListener;
    
    /**
     * Inner buttonListener
     * @author sst
     * @version 1.0
     */
-   private class ButtonListener implements ActionListener
+   private class MyListener implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
          if(e.getSource()==close)
          {
             dispose();
+         }
+         if(e.getSource()==exit)
+         {
+            dispose();
+         }
+         if(e.getSource()==about)
+         {
+            JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre.\nVersion 1.0", "About", JOptionPane.PLAIN_MESSAGE);
+         }
+         if(e.getSource()==editInstructor)
+         {
+            if(editInstructor.getState()==true)
+            {
+               editInstructorArea(true);
+            }
+            if(editInstructor.getState()==false)
+            {
+               editInstructorArea(false);
+            }
          }
       }
    }
@@ -104,7 +123,23 @@ public class newInstructorGUI extends JFrame
    
    
    
-   
+   public void editInstructorArea(boolean s)
+   {
+      if(s==true)
+      {
+         nameInput.setEditable(true);
+         instructorInput.setEditable(true);
+         remove.setEnabled(true);
+         add.setEnabled(true);
+      }
+      if(s==false)
+      {
+         nameInput.setEditable(false);
+         instructorInput.setEditable(false);
+         remove.setEnabled(false);
+         add.setEnabled(false);
+      }
+   }
    
    
    
@@ -134,7 +169,8 @@ public newInstructorGUI()
    
    super("Instructor - ViaFit Fitness centre");
    
-   buttonListener = new ButtonListener();
+   
+   myListener = new MyListener();
    main = new JPanel();
    line1Left = new JPanel();
    line1Right = new JPanel();
@@ -165,13 +201,13 @@ public newInstructorGUI()
    taughtEvents = new JLabel("Taught events:");
    
    add = new JButton("Add to qualified");
-   add.addActionListener(buttonListener);
+   add.addActionListener(myListener);
    remove = new JButton("Remove from qualified");
-   remove.addActionListener(buttonListener);
+   remove.addActionListener(myListener);
    save = new JButton("Save");
-   save.addActionListener(buttonListener);
+   save.addActionListener(myListener);
    close = new JButton("Close");
-   close.addActionListener(buttonListener);
+   close.addActionListener(myListener);
    
    nameInput = new JTextField();
    instructorInput = new JTextField();
@@ -192,9 +228,14 @@ public newInstructorGUI()
    editMenu = new JMenu("Edit");
    aboutMenu = new JMenu("About");
    exit = new JMenuItem("Exit");
+   exit.addActionListener(myListener);
    removeIns = new JMenuItem("Delete instructor");
-   about = new JMenuItem("Stop complaining or do it yourself Ron");
+   removeIns.addActionListener(myListener);
+   about = new JMenuItem("About");
+   about.addActionListener(myListener);
    editInstructor = new JCheckBoxMenuItem("Edit instructor");
+   editInstructor.addActionListener(myListener);
+   editInstructor.setSelected(true);
    
    logo = new ImageIcon("img/logoTransBigger.png");
    logoLabel = new JLabel();

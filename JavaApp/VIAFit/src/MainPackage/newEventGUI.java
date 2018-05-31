@@ -139,6 +139,17 @@ public class newEventGUI extends JFrame
          {
             JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre.\nVersion 1.0", "About", JOptionPane.PLAIN_MESSAGE);
          }
+         if(e.getSource()==editInfo)
+         {
+            if(editInfo.isSelected()==true)
+            {
+               editEventArea(true);
+            }
+            if(editInfo.isSelected()==false)
+            {
+               editEventArea(false);
+            }
+         }
       }
 
       //Focus listener
@@ -188,7 +199,49 @@ public class newEventGUI extends JFrame
    
    
    
-   
+   public void editEventArea(boolean s)
+   {
+      if(s==true)
+      {
+         nameInput.setEditable(true);
+         typeCombo.setEnabled(true);
+         newTypeCheck.setEnabled(true);
+         addInstructor.setEnabled(true);
+         instructorCombo.setEnabled(true);
+         maxMembersInput.setEditable(true);
+         startDateDay.setEditable(true);
+         startDateMonth.setEditable(true);
+         startDateYear.setEditable(true);
+         endDateDay.setEditable(true);
+         endDateMonth.setEditable(true);
+         endDateYear.setEditable(true);
+         duraCombo.setEnabled(true);
+         weeklyCheck.setEnabled(true);
+         startTimeHour.setEditable(true);
+         startTimeMinute.setEditable(true);
+         removeInstructor.setEnabled(true);
+      }
+      if(s==false)
+      {
+         nameInput.setEditable(false);
+         typeCombo.setEnabled(false);
+         newTypeCheck.setEnabled(false);
+         addInstructor.setEnabled(false);
+         instructorCombo.setEnabled(false);
+         maxMembersInput.setEditable(false);
+         startDateDay.setEditable(false);
+         startDateMonth.setEditable(false);
+         startDateYear.setEditable(false);
+         endDateDay.setEditable(false);
+         endDateMonth.setEditable(false);
+         endDateYear.setEditable(false);
+         duraCombo.setEnabled(false);
+         weeklyCheck.setEnabled(false);
+         startTimeHour.setEditable(false);
+         startTimeMinute.setEditable(false);
+         removeInstructor.setEnabled(false);
+      }
+   }
    
    
    
@@ -322,6 +375,8 @@ public newEventGUI()
    about = new JMenuItem("About");
    about.addActionListener(myListener);
    editInfo = new JCheckBoxMenuItem("Edit event");
+   editInfo.addActionListener(myListener);
+   editInfo.setSelected(true);
    logo = new ImageIcon("img/logoTransBigger.png");
    logoLabel = new JLabel();
    
