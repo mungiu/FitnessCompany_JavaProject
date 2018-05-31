@@ -5,10 +5,20 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.peer.WindowPeer;
+import java.util.EventListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class mainGUI extends JFrame
 {
@@ -33,7 +43,6 @@ private JPanel homeCorner;
 private JPanel memberAlign2;
 private JPanel instructorAlign2;
 private JPanel eventAlign2;
-private JPanel homeAlign;
 private JPanel homeAlign2;
 private JPanel homeCenterAlign;
 private JPanel homeCenterAlign2;
@@ -45,10 +54,17 @@ private JLabel instructorLabel;
 private JLabel eventLabel;
 private JLabel homeLabel;
 
-private JTextField ongoingEvents;
-private JTextField upcomingEvents;
-private JTextField bigInfoBox;
 private JTextField search;
+
+private JList<String> bigInfoBox;
+private DefaultListModel<String> listModel;
+private JScrollPane bigInfoScroll;
+private JList<Event> ongoingEvents;
+private JList<Event> upcomingEvents;
+private JScrollPane ongoingEventsScroll;
+private JScrollPane upcomingEventsScroll;
+private DefaultListModel<Event> listOngoing;
+private DefaultListModel<Event> listUpcoming;
 
 private JButton memberNew;
 private JButton memberAll;
@@ -59,7 +75,7 @@ private JButton eventAll;
 private JButton upcomingDetails;
 private JButton ongoingDetails;
 private JButton homeDetails;
-private JButton homeHome;
+private JButton searchButton;
 
 private JComboBox<String> searchOption;
 
@@ -73,9 +89,110 @@ private JMenuItem versionButton;
 
 private ImageIcon vialogo;
 
-public mainGUI()
+private ButtonListener buttonListener;
+private WindowListener windowListener;
+private MyListSelectionListener listListener;
+
+
+
+/**
+ * Inner action listener class
+ * @author sst
+ * @version 1.0
+ */
+private class ButtonListener implements ActionListener, ItemListener
+{
+   public void actionPerformed(ActionEvent e)
+   {
+      if(e.getSource()==eventNew)
+      {
+        new newEventGUI();
+      }
+      if(e.getSource()==memberNew)
+      {
+         new newMemberGUI();
+      }
+      if(e.getSource()==instructorNew)
+      {
+         new newInstructorGUI();
+      }
+      
+   }
+   
+   public void itemStateChanged(ItemEvent e)
+   {
+      if(e.getSource()==searchOption)
+      {
+         if(e.getStateChange()==1)
+         {
+            System.out.println(e.getItem());
+         }
+      }
+   }
+}
+
+/**
+ * Inner list listener class
+ * @author sst
+ * @version 1.0
+ */
+private class MyListSelectionListener implements ListSelectionListener
+{
+   public void valueChanged(ListSelectionEvent e)
+   {
+      if(e.getSource()==ongoingEvents)
+      {
+         //what should happen here
+      }
+      if(e.getSource()==upcomingEvents)
+      {
+         //what should happen here
+      }
+      if(e.getSource()==bigInfoBox)
+      {
+         //what should happen here
+      }
+   }
+}
+
+   public void windowClosing(WindowEvent e)
+   {
+      //Dosent work, help me, Allan.
+      int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Confirm closing application", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+      if(yesno == JOptionPane.YES_OPTION)
+      {
+         System.exit(0);
+      }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////// GUI /////////////////////////////////////// 
+
+
+public mainGUI() 
 {
    super("ViaFit Fitness centre V. 1.0");
+   
+   //adding button listener
+   buttonListener = new ButtonListener();
    
    //Initialising
    main = new JPanel();
@@ -99,7 +216,6 @@ public mainGUI()
    memberAlign2 = new JPanel();
    instructorAlign2 = new JPanel();
    eventAlign2 = new JPanel();
-   homeAlign = new JPanel();
    homeAlign2 = new JPanel();
    homeCenterAlign = new JPanel();
    homeCenterAlign2 = new JPanel();
@@ -109,26 +225,47 @@ public mainGUI()
    memberLabel = new JLabel("Member");
    instructorLabel = new JLabel("Instructor");
    eventLabel = new JLabel("Event");
-   ongoingEvents = new JTextField();
-   upcomingEvents = new JTextField();
    homeLabel = new JLabel();
    
-   bigInfoBox = new JTextField();
+   listOngoing = new DefaultListModel<Event>();
+   listUpcoming = new DefaultListModel<Event>();
+   ongoingEvents = new JList<Event>(listOngoing);
+   ongoingEvents.addListSelectionListener(listListener);
+   upcomingEvents = new JList<Event>(listUpcoming);
+   upcomingEvents.addListSelectionListener(listListener);
+   ongoingEventsScroll = new JScrollPane(ongoingEvents);
+   upcomingEventsScroll = new JScrollPane(upcomingEvents);
+   listModel = new DefaultListModel<String>();
+   bigInfoBox = new JList<String>(listModel);
+   bigInfoBox.addListSelectionListener(listListener);
+   bigInfoScroll = new JScrollPane(bigInfoBox);
    search = new JTextField("Search");
    
    memberNew = new JButton("New member");
+   memberNew.addActionListener(buttonListener);
    memberAll = new JButton("Show all");
+   memberAll.addActionListener(buttonListener);
    instructorNew = new JButton("New instructor");
+   instructorNew.addActionListener(buttonListener);
    instructorAll = new JButton("Show all");
+   instructorAll.addActionListener(buttonListener);
    eventNew = new JButton("New event");
+   eventNew.addActionListener(buttonListener);
    eventAll = new JButton("Show all");
+   eventAll.addActionListener(buttonListener);
    upcomingDetails = new JButton("Details");
+   upcomingDetails.addActionListener(buttonListener);
    ongoingDetails = new JButton("Details");
+   ongoingDetails.addActionListener(buttonListener);
    homeDetails = new JButton("Details");
-   homeHome = new JButton("Home");
+   homeDetails.addActionListener(buttonListener);
+   searchButton = new JButton("Search");
+   searchButton.addActionListener(buttonListener);
+   
    
    String[] options = {"Member", "Instructor", "Event"}; 
    searchOption = new JComboBox<String>(options); 
+   searchOption.addItemListener(buttonListener);
    
    menubar = new JMenuBar();
    
@@ -186,9 +323,9 @@ public mainGUI()
    ongoingPanel.setLayout(new BoxLayout(ongoingPanel, BoxLayout.Y_AXIS));
    upcomingPanel.setLayout(new BoxLayout(upcomingPanel, BoxLayout.Y_AXIS));
    ongoingPanel.add(ongoingEventsLabel);
-   ongoingPanel.add(ongoingEvents);
+   ongoingPanel.add(ongoingEventsScroll);
    upcomingPanel.add(upcomingEventsLabel);
-   upcomingPanel.add(upcomingEvents);
+   upcomingPanel.add(upcomingEventsScroll);
    ongoingPanel.add(ongoingDetails);
    upcomingPanel.add(upcomingDetails);
          //setting size of panels and fields in JPanel events (Left side)
@@ -197,15 +334,19 @@ public mainGUI()
    ongoingPanel.setMaximumSize(new Dimension(330, 370));
    upcomingPanel.setMinimumSize(new Dimension(330, 370));
    upcomingPanel.setMaximumSize(new Dimension(330, 370));
+   ongoingPanel.setBorder(new EmptyBorder(0, 15, 0, 0));
+   upcomingPanel.setBorder(new EmptyBorder(0, 15, 0, 0));
    ongoingEventsLabel.setPreferredSize(new Dimension(330, 70));
    upcomingEventsLabel.setPreferredSize(new Dimension(330, 70));
-   ongoingEvents.setPreferredSize(new Dimension(330, 160));
-   upcomingEvents.setPreferredSize(new Dimension(330, 155));
+   ongoingEventsScroll.setPreferredSize(new Dimension(330, 160));
+   ongoingEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+   ongoingEvents.setVisibleRowCount(-1);
+   upcomingEventsScroll.setPreferredSize(new Dimension(330, 155));
+   upcomingEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+   upcomingEvents.setVisibleRowCount(-1);
    
    //adding buttons to home panel
 //   homeCorner.setLayout(new GridLayout(2, 1));
-   homeHome.setPreferredSize(new Dimension(250, 25));
-   homeAlign.add(homeHome);
    homeLabel.setIcon(vialogo);
    homeAlign2.add(homeLabel);
    homeCorner.add(homeAlign2);
@@ -254,18 +395,21 @@ public mainGUI()
    homeNorthCenterAlign.setLayout(new FlowLayout());
    homeNorthCenterAlign.add(search);
    homeNorthCenterAlign.add(searchOption);
+   homeNorthCenterAlign.add(searchButton);
    homeNorthCenterAlign.setBorder(new EmptyBorder(40, 0, 40, 0));
    search.setPreferredSize(new Dimension(400, 45));
    searchOption.setPreferredSize(new Dimension(125, 44));
+   searchButton.setPreferredSize(new Dimension(80, 44));
    homeNorth.add(homeNorthCenterAlign);
    
    
    //adding panels to homeCenter frame
    homeCenter.setLayout(new BoxLayout(homeCenter, BoxLayout.Y_AXIS));
-   homeCenterAlign2.add(bigInfoBox);
+   homeCenterAlign2.add(bigInfoScroll);
    homeCenter.add(homeCenterAlign2);
-   bigInfoBox.setPreferredSize(new Dimension(900, 700));
-   bigInfoBox.setEnabled(false);
+   bigInfoScroll.setPreferredSize(new Dimension(900, 700));
+   bigInfoScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+   bigInfoBox.setVisibleRowCount(-1);
    homeDetails.setPreferredSize(new Dimension(125, 35));
    homeCenterAlign.add(homeDetails);
    homeCenter.add(homeCenterAlign);
@@ -355,6 +499,7 @@ public mainGUI()
    
    setJMenuBar(menubar);
    add(main);
+   addWindowListener(windowListener);
    setSize(1366, 768);
    setResizable(false);
    setVisible(true);
