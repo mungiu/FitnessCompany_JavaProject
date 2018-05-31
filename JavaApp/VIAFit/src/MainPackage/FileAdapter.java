@@ -4,11 +4,21 @@ import java.util.ArrayList;
 
 public class FileAdapter
 {
+	MyFileIO myFileIO;
+	MyTextFileIO myTextFileIO;
 
 	private ArrayList<Event> onGoingEventsList, upComingEventsList, allEventsList;
 	private ArrayList<ClassType> allClassTypeList;
 	private ArrayList<Member> memberList;
 	private ArrayList<Instructor> instructorList;
+
+	public FileAdapter()
+	{
+		myFileIO = new MyFileIO();
+		myTextFileIO = new MyTextFileIO();
+		
+		myFileIO.
+	}
 
 	public ArrayList<Event> getOnGoingEventList()
 	{
@@ -51,8 +61,18 @@ public class FileAdapter
 	{
 		// TODO finalize
 	}
-	
+
 	public void updateUpComingEventsList()
+	{
+		// TODO finalize
+	}
+
+	public void updateInstructorsList()
+	{
+		// TODO finalize
+	}
+
+	public void updateMembersList()
 	{
 		// TODO finalize
 	}
