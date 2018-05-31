@@ -110,23 +110,17 @@ public class newInstructorGUI extends JFrame
          }
       }
    }
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+   /**
+    * Changing the Instructor JFrame to editable or uneditable
+    * @author sst
+    * @param boolean s 
+    * @version 1.0
+    */
    public void editInstructorArea(boolean s)
    {
       if(s==true)
       {
+         editInstructor.setSelected(true);
          nameInput.setEditable(true);
          instructorInput.setEditable(true);
          remove.setEnabled(true);
@@ -134,6 +128,7 @@ public class newInstructorGUI extends JFrame
       }
       if(s==false)
       {
+         editInstructor.setSelected(false);
          nameInput.setEditable(false);
          instructorInput.setEditable(false);
          remove.setEnabled(false);
@@ -235,7 +230,6 @@ public newInstructorGUI()
    about.addActionListener(myListener);
    editInstructor = new JCheckBoxMenuItem("Edit instructor");
    editInstructor.addActionListener(myListener);
-   editInstructor.setSelected(true);
    
    logo = new ImageIcon("img/logoTransBigger.png");
    logoLabel = new JLabel();

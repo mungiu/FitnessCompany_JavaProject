@@ -185,6 +185,7 @@ public class newMemberGUI extends JFrame
       {
          if(s==false)
          {
+            editInfo.setSelected(false);
             nameInput.setEnabled(false);
             membershipTypeInput.setEnabled(false);
             memberIDInput.setEnabled(false);
@@ -198,6 +199,7 @@ public class newMemberGUI extends JFrame
          }
          if(s==true)
          {
+            editInfo.setSelected(true);
             nameInput.setEnabled(true);
             membershipTypeInput.setEnabled(true);
             memberIDInput.setEnabled(true);
@@ -299,7 +301,6 @@ public class newMemberGUI extends JFrame
    about.addActionListener(myListener);
    editInfo = new JCheckBoxMenuItem("Edit member");
    editInfo.addActionListener(myListener);
-   editInfo.setSelected(true);
    
    logo = new ImageIcon("img/logoTransBigger.png");
    
