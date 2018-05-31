@@ -61,7 +61,7 @@ public class MyTextFileIO
 		write.close();
 	}
 
-	public String readingStringFromFile(String fileName) throws FileNotFoundException
+	public String readStringFromFile(String fileName) throws FileNotFoundException
 	{
 		fileIn = new FileInputStream(fileName);
 		read = new Scanner(fileIn);

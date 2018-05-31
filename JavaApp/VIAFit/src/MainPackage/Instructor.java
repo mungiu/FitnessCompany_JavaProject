@@ -1,10 +1,15 @@
 package MainPackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Instructor
+public class Instructor implements Serializable
 {
-   private int instructorID;
+   /**
+	 * Generated serial version UID
+	 */
+	private static final long serialVersionUID = 2596626544601247578L;
+private int instructorID;
    private String firstName, lastName;
    private boolean isQualified;
    private ArrayList<ClassType> qualifiedClassList;
