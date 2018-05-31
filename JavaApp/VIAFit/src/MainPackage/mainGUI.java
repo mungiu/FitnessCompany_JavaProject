@@ -130,6 +130,11 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       {
         System.out.println(search.getText()+" "+searchOption.getSelectedItem());
       }
+      if(e.getSource()==search)
+      {
+         //this should be the same as searchButton (It fires when ENTER is hit)
+         System.out.println(search.getText()+" "+searchOption.getSelectedItem());
+      }
    }
    
    public void itemStateChanged(ItemEvent e)
@@ -261,6 +266,7 @@ public mainGUI()
    bigInfoScroll = new JScrollPane(bigInfoBox);
    search = new JTextField("Search");
    search.addFocusListener(myListener);
+   search.addActionListener(myListener);
    
    memberNew = new JButton("New member");
    memberNew.addActionListener(myListener);

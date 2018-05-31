@@ -88,7 +88,11 @@ public class newMemberGUI extends JFrame
    private JCheckBoxMenuItem editInfo;
    
    private ImageIcon logo;
+   
    private MyListener myListener;
+
+   
+   
    
    
    private class MyListener implements ActionListener, FocusListener
@@ -98,6 +102,26 @@ public class newMemberGUI extends JFrame
          if(e.getSource()==close)
          {
             dispose();
+         }
+         if(e.getSource()==exit)
+         {
+            dispose();
+         }
+         if(e.getSource()==about)
+         {
+            JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre.\nVersion 1.0", "About", JOptionPane.PLAIN_MESSAGE);
+         }
+         if(e.getSource()==editInfo)
+         {
+            if(editInfo.getState()==true)
+            {
+               editMemberGUI(true);
+            }
+            if(editInfo.getState()==false)
+            {
+               editMemberGUI(false);
+            }
+            
          }
       }
 
@@ -120,7 +144,6 @@ public class newMemberGUI extends JFrame
       public void focusLost(FocusEvent e)
       {
          // TODO Auto-generated method stub
-         
       }
    }
    
@@ -158,7 +181,35 @@ public class newMemberGUI extends JFrame
    
    
    
-   
+      public void editMemberGUI(boolean s)
+      {
+         if(s==false)
+         {
+            nameInput.setEnabled(false);
+            membershipTypeInput.setEnabled(false);
+            memberIDInput.setEnabled(false);
+            emailInput.setEnabled(false);
+            phoneInput.setEnabled(false);
+            membershipSinceInputDay.setEnabled(false);
+            membershipSinceInputMonth.setEnabled(false);
+            membershipSinceInputYear.setEnabled(false);
+            signUp.setEnabled(false);
+            removeFrom.setEnabled(false);
+         }
+         if(s==true)
+         {
+            nameInput.setEnabled(true);
+            membershipTypeInput.setEnabled(true);
+            memberIDInput.setEnabled(true);
+            emailInput.setEnabled(true);
+            phoneInput.setEnabled(true);
+            membershipSinceInputDay.setEnabled(true);
+            membershipSinceInputMonth.setEnabled(true);
+            membershipSinceInputYear.setEnabled(true);
+            signUp.setEnabled(true);
+            removeFrom.setEnabled(true);
+         }
+      }
    
 /////////////////////////////////////// GUI ///////////////////////////////////////
    
@@ -241,9 +292,14 @@ public class newMemberGUI extends JFrame
    aboutMenu = new JMenu("About");
    
    remove = new JMenuItem("Delete member");
+   remove.addActionListener(myListener);
    exit = new JMenuItem("Exit");
-   about = new JMenuItem("Version whatever, get lost");
+   exit.addActionListener(myListener);
+   about = new JMenuItem("About");
+   about.addActionListener(myListener);
    editInfo = new JCheckBoxMenuItem("Edit member");
+   editInfo.addActionListener(myListener);
+   editInfo.setSelected(true);
    
    logo = new ImageIcon("img/logoTransBigger.png");
    
