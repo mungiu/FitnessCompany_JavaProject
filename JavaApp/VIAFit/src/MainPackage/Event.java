@@ -7,6 +7,7 @@ public class Event
 	private String className;
 	private int maxMembers;
 	private FileAdapter fileAdapter;
+	private FileAdapter fileAdapter123;
 	private MyDate startDate, endDate;
 	private MyClock startTime, endTime;
 	private ClassType classType;
