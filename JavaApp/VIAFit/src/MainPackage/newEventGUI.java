@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -112,13 +114,53 @@ public class newEventGUI extends JFrame
    
    private ImageIcon logo;
    private JLabel logoLabel;
+   private ButtonListener buttonListener;
+   
+   /**
+    * Inner buttonListener
+    * @author sst
+    * @version 1.0
+    */
+   private class ButtonListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         if(e.getSource()==close)
+         {
+            dispose();
+         }
+      }
+   }
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+///////////////////////////////////// GUI ///////////////////////////////////////   
    
    
 public newEventGUI()
 {
    super("Event - ViaFit Fitness Centre");
  
-   
+   buttonListener = new ButtonListener();
    main = new JPanel();
    topContainer = new JPanel();
    inputContainer = new JPanel();
@@ -199,9 +241,13 @@ public newEventGUI()
    weeklyCheck = new JCheckBox();
    
    save = new JButton("Save");
+   save.addActionListener(buttonListener);
    close = new JButton("Close");
+   close.addActionListener(buttonListener);
    addInstructor = new JButton("Add instructor");
+   addInstructor.addActionListener(buttonListener);
    removeInstructor = new JButton("Remove instructor");
+   removeInstructor.addActionListener(buttonListener);
    
    menuBar = new JMenuBar();
    

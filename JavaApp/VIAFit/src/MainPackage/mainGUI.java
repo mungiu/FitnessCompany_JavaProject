@@ -75,6 +75,7 @@ private JButton eventAll;
 private JButton upcomingDetails;
 private JButton ongoingDetails;
 private JButton homeDetails;
+private JButton searchButton;
 
 private JComboBox<String> searchOption;
 
@@ -91,7 +92,7 @@ private ImageIcon vialogo;
 private ButtonListener buttonListener;
 private WindowListener windowListener;
 private MyListSelectionListener listListener;
-private ComboListener comboListener;
+
 
 
 /**
@@ -99,7 +100,7 @@ private ComboListener comboListener;
  * @author sst
  * @version 1.0
  */
-private class ButtonListener implements ActionListener
+private class ButtonListener implements ActionListener, ItemListener
 {
    public void actionPerformed(ActionEvent e)
    {
@@ -115,19 +116,21 @@ private class ButtonListener implements ActionListener
       {
          new newInstructorGUI();
       }
+      
+   }
+   
+   public void itemStateChanged(ItemEvent e)
+   {
       if(e.getSource()==searchOption)
       {
-         System.out.println(e.getSource().toString());
+         if(e.getStateChange()==1)
+         {
+            System.out.println(e.getItem());
+         }
       }
    }
 }
-private class ComboListener implements ItemListener
-{
-   public void itemStateChanged(ItemEvent e)
-   {
-      //Dosent work, ask Allan
-   }
-}
+
 /**
  * Inner list listener class
  * @author sst
@@ -137,7 +140,18 @@ private class MyListSelectionListener implements ListSelectionListener
 {
    public void valueChanged(ListSelectionEvent e)
    {
-      //if-statements with what e.getSource()==field
+      if(e.getSource()==ongoingEvents)
+      {
+         //what should happen here
+      }
+      if(e.getSource()==upcomingEvents)
+      {
+         //what should happen here
+      }
+      if(e.getSource()==bigInfoBox)
+      {
+         //what should happen here
+      }
    }
 }
 
@@ -245,11 +259,13 @@ public mainGUI()
    ongoingDetails.addActionListener(buttonListener);
    homeDetails = new JButton("Details");
    homeDetails.addActionListener(buttonListener);
+   searchButton = new JButton("Search");
+   searchButton.addActionListener(buttonListener);
    
    
    String[] options = {"Member", "Instructor", "Event"}; 
    searchOption = new JComboBox<String>(options); 
-   searchOption.addItemListener(comboListener);
+   searchOption.addItemListener(buttonListener);
    
    menubar = new JMenuBar();
    
@@ -379,9 +395,11 @@ public mainGUI()
    homeNorthCenterAlign.setLayout(new FlowLayout());
    homeNorthCenterAlign.add(search);
    homeNorthCenterAlign.add(searchOption);
+   homeNorthCenterAlign.add(searchButton);
    homeNorthCenterAlign.setBorder(new EmptyBorder(40, 0, 40, 0));
    search.setPreferredSize(new Dimension(400, 45));
    searchOption.setPreferredSize(new Dimension(125, 44));
+   searchButton.setPreferredSize(new Dimension(80, 44));
    homeNorth.add(homeNorthCenterAlign);
    
    

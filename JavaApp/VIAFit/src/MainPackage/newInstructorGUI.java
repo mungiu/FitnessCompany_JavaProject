@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -44,7 +46,7 @@ public class newInstructorGUI extends JFrame
    private JButton add;
    private JButton remove;
    private JButton save;
-   private JButton cancel;
+   private JButton close;
    
    private JTextField nameInput;
    private JTextField instructorInput;
@@ -72,14 +74,67 @@ public class newInstructorGUI extends JFrame
    private ImageIcon logo;
    private JLabel logoLabel;
    private JLabel headLine;
+   private ButtonListener buttonListener;
+   
+   /**
+    * Inner buttonListener
+    * @author sst
+    * @version 1.0
+    */
+   private class ButtonListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         if(e.getSource()==close)
+         {
+            dispose();
+         }
+      }
+   }
    
    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+///////////////////////////////////// GUI ///////////////////////////////////////   
    
    
 public newInstructorGUI()
 {
+   
    super("Instructor - ViaFit Fitness centre");
    
+   buttonListener = new ButtonListener();
    main = new JPanel();
    line1Left = new JPanel();
    line1Right = new JPanel();
@@ -110,9 +165,13 @@ public newInstructorGUI()
    taughtEvents = new JLabel("Taught events:");
    
    add = new JButton("Add to qualified");
+   add.addActionListener(buttonListener);
    remove = new JButton("Remove from qualified");
+   remove.addActionListener(buttonListener);
    save = new JButton("Save");
-   cancel = new JButton("Close");
+   save.addActionListener(buttonListener);
+   close = new JButton("Close");
+   close.addActionListener(buttonListener);
    
    nameInput = new JTextField();
    instructorInput = new JTextField();
@@ -228,7 +287,7 @@ public newInstructorGUI()
    
    //adding buttons to confirmContainer
    confirmContainer.add(save);
-   confirmContainer.add(cancel);
+   confirmContainer.add(close);
    
    //adding content to the main frame
    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));

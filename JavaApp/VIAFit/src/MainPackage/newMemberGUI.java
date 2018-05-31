@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -66,7 +68,7 @@ public class newMemberGUI extends JFrame
    private JComboBox<String> membershipTypeInput;
    
    private JButton save;
-   private JButton cancel;
+   private JButton close;
    private JButton removeFrom;
    private JButton signUp;
    
@@ -82,10 +84,63 @@ public class newMemberGUI extends JFrame
    private JCheckBoxMenuItem editInfo;
    
    private ImageIcon logo;
+   private ButtonListener buttonListener;
+   
+   
+   private class ButtonListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         if(e.getSource()==close)
+         {
+            dispose();
+         }
+      }
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+/////////////////////////////////////// GUI ///////////////////////////////////////
    
    public newMemberGUI() 
    {   
    super("Member - ViaFit Fitness centre");
+   
+   buttonListener = new ButtonListener();
    
    main = new JPanel();
    inputContainer = new JPanel();
@@ -142,9 +197,13 @@ public class newMemberGUI extends JFrame
    membershipTypeInput = new JComboBox<String>(temp);
    
    save = new JButton("Save");
-   cancel = new JButton("Close");
+   save.addActionListener(buttonListener);
+   close = new JButton("Close");
+   close.addActionListener(buttonListener);
    signUp = new JButton("Sign up for event");
+   signUp.addActionListener(buttonListener);
    removeFrom = new JButton("Remove from event");
+   removeFrom.addActionListener(buttonListener);
    
    menuBar = new JMenuBar();
    
@@ -260,7 +319,7 @@ public class newMemberGUI extends JFrame
    
    //adding content to the confirmContainer
    confirmContainer.add(save);
-   confirmContainer.add(cancel);
+   confirmContainer.add(close);
  
    
    
