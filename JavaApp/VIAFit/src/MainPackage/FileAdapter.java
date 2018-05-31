@@ -1,6 +1,7 @@
 package MainPackage;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class FileAdapter
 {
@@ -24,7 +25,7 @@ public class FileAdapter
 
 	}
 
-	public ArrayList<Event> getOnGoingEventList()
+	public ArrayList<Event> getOnGoingEventsList()
 	{
 		return onGoingEventsList;
 	}
@@ -34,36 +35,46 @@ public class FileAdapter
 		return upComingEventsList;
 	}
 
+	public ArrayList<ClassType> getClassTypeList()
+	{
+		return allClassTypeList;
+	}
+
+	public ArrayList<Member> getMembersList()
+	{
+		return memberList;
+	}
+
+	public ArrayList<Instructor> getInstructorsList()
+	{
+		return instructorList;
+	}
+
 	public boolean getInstructorIsAvailable(Instructor instructor, Event event)
 	{
 		for (int i = 0; i < allEventsList.size(); i++)
 			if (allEventsList.get(i).getInstructorsList().contains(instructor))
 				for (int j = 0; j < allEventsList.size(); j++)
 					if (allEventsList.get(i).getStarTime().isBefore(event.getStarTime())
-							&& (event.getStarTime().isBefore(allEventsList.get(i).getEndTime()) == false))
+							&& (!event.getStarTime().isBefore(allEventsList.get(i).getEndTime())))
 						return true;
 
 		return false;
 	}
 
-	public ArrayList<ClassType> getAllClassTypeList()
-	{
-		return allClassTypeList;
-	}
-
-	public ArrayList<Member> getMemberList()
-	{
-		return memberList;
-	}
-
-	public ArrayList<Instructor> getInstructorList()
-	{
-		return instructorList;
-	}
-
 	public void updateOnGoingEventsList()
 	{
-		// TODO finalize
+		GregorianCalendar cal = new GregorianCalendar();
+
+		// add new events
+		
+		// TODO: FINALIZE
+		for (int i = 0; i < allEventsList.size(); i++)
+			if (allEventsList.get(i).getStarTime().isBefore(time) < cal.get(GregorianCalendar.HOUR_OF_DAY))
+				if (allEventsList.get(i).getEndTime() > cal.get(GregorianCalendar.HOUR_OF_DAY))
+					onGoingEventsList.add(allEventsList.get(i));
+
+		// remove old events
 	}
 
 	public void updateUpComingEventsList()
