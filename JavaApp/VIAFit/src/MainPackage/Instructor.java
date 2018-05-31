@@ -5,70 +5,75 @@ import java.util.ArrayList;
 
 public class Instructor implements Serializable
 {
-   /**
+	/**
 	 * Generated serial version UID
 	 */
 	private static final long serialVersionUID = 2596626544601247578L;
-private int instructorID;
-   private String firstName, lastName;
-   private boolean isQualified;
-   private ArrayList<ClassType> qualifiedClassList;
-   private ArrayList<FileAdapter> allTaughtEventsList;
+	private int instructorID;
+	private String firstName, lastName;
+	private boolean isQualified;
+	private ArrayList<ClassType> qualifiedClassesList;
+	private ArrayList<FileAdapter> allTaughtEventsList;
 
-   public Instructor(int instructorID, String firstName, String lastName,
-         boolean isQualified)
-   {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.instructorID = instructorID;
-      this.isQualified = isQualified;
-      allTaughtEventsList = new ArrayList<FileAdapter>();
-      qualifiedClassList = new ArrayList<ClassType>();
-   }
+	public Instructor(String firstName, String lastName, boolean isQualified)
+	{
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.instructorID = getNewInstructorID();
+		this.isQualified = isQualified;
+		allTaughtEventsList = new ArrayList<FileAdapter>();
+		qualifiedClassesList = new ArrayList<ClassType>();
+	}
 
-   public String getFirstName()
-   {
-      return firstName;
-   }
+	public int getNewInstructorID()
+	{
+		// TODO return (last instructorID +1)
+		// AND set latest instructor id as new instructor ID
+	}
 
-   public void setFirstName(String firstName)
-   {
-      this.firstName = firstName;
-   }
+	public String getFirstName()
+	{
+		return firstName;
+	}
 
-   public String getLastName()
-   {
-      return lastName;
-   }
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
 
-   public void setLastName(String lastName)
-   {
-      this.lastName = lastName;
-   }
+	public String getLastName()
+	{
+		return lastName;
+	}
 
-   public int getInstructorID()
-   {
-      return instructorID;
-   }
+	public void setLastName(String lastName)
+	{
+		this.lastName = lastName;
+	}
 
-   public boolean getIsQualified()
-   {
-      return isQualified;
-   }
+	public int getInstructorID()
+	{
+		return instructorID;
+	}
 
-   public void setIsQualified(boolean isQualified)
-   {
-      this.isQualified = isQualified;
-   }
+	public boolean getIsQualified()
+	{
+		return isQualified;
+	}
 
-   public ArrayList<ClassType> getQualifiedClassesList()
-   {
-      return qualifiedClassList;
-   }
+	public void setIsQualified(boolean isQualified)
+	{
+		this.isQualified = isQualified;
+	}
 
-   public ArrayList<FileAdapter> getAllTaughtEvents()
-   {
-      return allTaughtEventsList;
-   }
+	public ArrayList<ClassType> getQualifiedClassesList()
+	{
+		return qualifiedClassesList;
+	}
+
+	public ArrayList<FileAdapter> getAllTaughtEvents()
+	{
+		return allTaughtEventsList;
+	}
 
 }
