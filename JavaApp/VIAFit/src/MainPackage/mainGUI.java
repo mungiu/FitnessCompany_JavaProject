@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
@@ -85,11 +87,11 @@ private JMenu fileMenu;
 private JMenu aboutMenu;
 
 private JMenuItem exitButton;
-private JMenuItem versionButton;
+private JMenuItem about;
 
 private ImageIcon vialogo;
 
-private ButtonListener buttonListener;
+private MyListener myListener;
 private WindowListener windowListener;
 private MyListSelectionListener listListener;
 
@@ -100,10 +102,18 @@ private MyListSelectionListener listListener;
  * @author sst
  * @version 1.0
  */
-private class ButtonListener implements ActionListener, ItemListener
+private class MyListener implements ActionListener, ItemListener, FocusListener
 {
    public void actionPerformed(ActionEvent e)
    {
+      if(e.getSource()==about)
+      {
+         JOptionPane.showMessageDialog(null, "This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre. Version 1.0", "About", JOptionPane.PLAIN_MESSAGE);
+      }
+      if(e.getSource()==exitButton)
+      {
+         System.exit(0);
+      }
       if(e.getSource()==eventNew)
       {
         new newEventGUI();
@@ -116,18 +126,28 @@ private class ButtonListener implements ActionListener, ItemListener
       {
          new newInstructorGUI();
       }
-      
+      if(e.getSource()==searchButton)
+      {
+        System.out.println(search.getText()+" "+searchOption.getSelectedItem());
+      }
    }
    
    public void itemStateChanged(ItemEvent e)
    {
-      if(e.getSource()==searchOption)
+      //use if a comboBox should fire an action (Else delete this)
+   }
+   
+   //FocusListener uses to fire action upon gaining or losing focus
+   public void focusGained(FocusEvent e)
+   {
+      if(e.getSource()==search)
       {
-         if(e.getStateChange()==1)
-         {
-            System.out.println(e.getItem());
-         }
+         search.setText("");  
       }
+   }
+   public void focusLost(FocusEvent e)
+   {
+      //if something loses focus and should change add functionality here
    }
 }
 
@@ -192,7 +212,7 @@ public mainGUI()
    super("ViaFit Fitness centre V. 1.0");
    
    //adding button listener
-   buttonListener = new ButtonListener();
+   myListener = new MyListener();
    
    //Initialising
    main = new JPanel();
@@ -240,32 +260,33 @@ public mainGUI()
    bigInfoBox.addListSelectionListener(listListener);
    bigInfoScroll = new JScrollPane(bigInfoBox);
    search = new JTextField("Search");
+   search.addFocusListener(myListener);
    
    memberNew = new JButton("New member");
-   memberNew.addActionListener(buttonListener);
+   memberNew.addActionListener(myListener);
    memberAll = new JButton("Show all");
-   memberAll.addActionListener(buttonListener);
+   memberAll.addActionListener(myListener);
    instructorNew = new JButton("New instructor");
-   instructorNew.addActionListener(buttonListener);
+   instructorNew.addActionListener(myListener);
    instructorAll = new JButton("Show all");
-   instructorAll.addActionListener(buttonListener);
+   instructorAll.addActionListener(myListener);
    eventNew = new JButton("New event");
-   eventNew.addActionListener(buttonListener);
+   eventNew.addActionListener(myListener);
    eventAll = new JButton("Show all");
-   eventAll.addActionListener(buttonListener);
+   eventAll.addActionListener(myListener);
    upcomingDetails = new JButton("Details");
-   upcomingDetails.addActionListener(buttonListener);
+   upcomingDetails.addActionListener(myListener);
    ongoingDetails = new JButton("Details");
-   ongoingDetails.addActionListener(buttonListener);
+   ongoingDetails.addActionListener(myListener);
    homeDetails = new JButton("Details");
-   homeDetails.addActionListener(buttonListener);
+   homeDetails.addActionListener(myListener);
    searchButton = new JButton("Search");
-   searchButton.addActionListener(buttonListener);
+   searchButton.addActionListener(myListener);
    
    
    String[] options = {"Member", "Instructor", "Event"}; 
    searchOption = new JComboBox<String>(options); 
-   searchOption.addItemListener(buttonListener);
+   searchOption.addItemListener(myListener);
    
    menubar = new JMenuBar();
    
@@ -273,7 +294,9 @@ public mainGUI()
    aboutMenu = new JMenu("About");
    
    exitButton = new JMenuItem("Exit");
-   versionButton = new JMenuItem("Version: 1.0 (DONT FUCKING COMPLAIN, yet");
+   exitButton.addActionListener(myListener);
+   about = new JMenuItem("About");
+   about.addActionListener(myListener);
    
    vialogo = new ImageIcon("img/logoTransBigger.png");
    
@@ -312,7 +335,7 @@ public mainGUI()
    
    //adding stuff to the menuBar
    fileMenu.add(exitButton);
-   aboutMenu.add(versionButton);
+   aboutMenu.add(about);
    menubar.add(fileMenu);
    menubar.add(aboutMenu);
    
