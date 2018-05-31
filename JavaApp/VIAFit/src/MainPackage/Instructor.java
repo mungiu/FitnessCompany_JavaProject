@@ -12,6 +12,7 @@ public class Instructor implements Serializable
 	private int instructorID;
 	private String firstName, lastName;
 	private boolean isQualified;
+	private FileAdapter fileAdapter;
 	private ArrayList<ClassType> qualifiedClassesList;
 	private ArrayList<FileAdapter> allTaughtEventsList;
 
@@ -27,11 +28,22 @@ public class Instructor implements Serializable
 
 	public int getNewInstructorID()
 	{
+<<<<<<< HEAD
 		// TODO return (last instructorID +1)
 		// AND set latest instructor id as new instructor ID
 		
 		//bla bla from ron
 		return 0;
+=======
+		int biggestID = 0;
+		ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
+
+		for (int i = 0; i < tempInstList.size(); i++)
+			if (biggestID < tempInstList.get(i).getInstructorID())
+				biggestID = tempInstList.get(i).getInstructorID();
+
+		return biggestID + 1;
+>>>>>>> master
 	}
 
 	public String getFirstName()
@@ -77,6 +89,26 @@ public class Instructor implements Serializable
 	public ArrayList<FileAdapter> getAllTaughtEvents()
 	{
 		return allTaughtEventsList;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof Instructor))
+			return false;
+		else
+		{
+			Instructor temp = (Instructor) obj;
+
+			return instructorID == temp.instructorID;
+		}
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Instructor [instructorID=" + instructorID + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", isQualified=" + isQualified + ", fileAdapter=" + fileAdapter + "]";
 	}
 
 }
