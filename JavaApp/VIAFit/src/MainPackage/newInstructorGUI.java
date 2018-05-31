@@ -49,9 +49,12 @@ public class newInstructorGUI extends JFrame
    private JTextField nameInput;
    private JTextField instructorInput;
    
-   private JTextArea qualifiedArea;
-   private JTextArea classtypesArea;
-   private JTextArea taughteventsArea;
+   private JList<ClassType> qualifiedArea;
+   private JList<ClassType> classtypesArea;
+   private JList<Event> taughteventsArea;
+   private DefaultListModel<ClassType> listQualifiedModel;
+   private DefaultListModel<ClassType> listClassTypesModel;
+   private DefaultListModel<Event> listTaughtEvents;
    
    private JScrollPane qualifiedScroll;
    private JScrollPane classtypesScroll;
@@ -62,6 +65,7 @@ public class newInstructorGUI extends JFrame
    private JMenu editMenu;
    private JMenu aboutMenu;
    private JMenuItem exit;
+   private JMenuItem removeIns;
    private JMenuItem about;
    private JCheckBoxMenuItem editInstructor;
    
@@ -108,24 +112,28 @@ public newInstructorGUI()
    add = new JButton("Add to qualified");
    remove = new JButton("Remove from qualified");
    save = new JButton("Save");
-   cancel = new JButton("Cancel");
+   cancel = new JButton("Close");
    
    nameInput = new JTextField();
    instructorInput = new JTextField();
    
-   qualifiedArea = new JTextArea();
-   classtypesArea = new JTextArea();
-   taughteventsArea = new JTextArea();
+   listQualifiedModel = new DefaultListModel<ClassType>();
+   qualifiedArea = new JList<ClassType>(listQualifiedModel);
+   listClassTypesModel = new DefaultListModel<ClassType>();
+   classtypesArea = new JList<ClassType>(listClassTypesModel);
+   listTaughtEvents = new DefaultListModel<Event>();
+   taughteventsArea = new JList<Event>(listTaughtEvents);
    
-   qualifiedScroll = new JScrollPane();
-   classtypesScroll = new JScrollPane();
-   taughtEventsScroll = new JScrollPane();
+   qualifiedScroll = new JScrollPane(qualifiedArea);
+   classtypesScroll = new JScrollPane(classtypesArea);
+   taughtEventsScroll = new JScrollPane(taughteventsArea);
    
    menuBar = new JMenuBar();
    fileMenu = new JMenu("File");
    editMenu = new JMenu("Edit");
    aboutMenu = new JMenu("About");
    exit = new JMenuItem("Exit");
+   removeIns = new JMenuItem("Delete instructor");
    about = new JMenuItem("Stop complaining or do it yourself Ron");
    editInstructor = new JCheckBoxMenuItem("Edit instructor");
    
@@ -160,10 +168,9 @@ public newInstructorGUI()
    inputContainer.add(line1Right);
    
    line5.setLayout(new GridLayout(1, 2));
-   qualifiedScroll.add(qualifiedArea);
    qualifiedScroll.setPreferredSize(new Dimension(300, 100));
    qualifiedScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-   qualifiedArea.setEditable(false);
+   qualifiedArea.setVisibleRowCount(-1);
    line3Left.add(qualifiedScroll);
    line6.setLayout(new BoxLayout(line6, BoxLayout.Y_AXIS));
    qualifiedAlign.setMinimumSize(new Dimension(300, 30));
@@ -174,10 +181,9 @@ public newInstructorGUI()
    line6.add(line8);
    line5.add(line6);
    
-   classtypesScroll.add(classtypesArea);
    classtypesScroll.setPreferredSize(new Dimension(300, 100));
    classtypesScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-   classtypesArea.setEditable(false);
+   classtypesArea.setVisibleRowCount(-1);
    line3Right.add(classtypesScroll);
    line7.setLayout(new BoxLayout(line7, BoxLayout.Y_AXIS));
    allclasstypesAlign.setMinimumSize(new Dimension(300, 30));
@@ -206,10 +212,9 @@ public newInstructorGUI()
    contain.add(taughtPanel);
    contain.add(taughtAreaPanel);
    taughtAreaPanel.add(taughtEventsScroll);
-   taughtEventsScroll.add(taughteventsArea);
    taughtEventsScroll.setPreferredSize(new Dimension(600, 120));
    taughtEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-   taughteventsArea.setEditable(false);
+   taughteventsArea.setVisibleRowCount(-1);
    
    //adding content to the topContainer
    logoLabel.setIcon(logo);
@@ -236,6 +241,7 @@ public newInstructorGUI()
    //adding content to the menuBar
    fileMenu.add(exit);
    editMenu.add(editInstructor);
+   editMenu.add(removeIns);
    aboutMenu.add(about);
    menuBar.add(fileMenu);
    menuBar.add(editMenu);
@@ -243,55 +249,13 @@ public newInstructorGUI()
    
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  
    setJMenuBar(menuBar);
    add(main);
    setSize(800, 600);
    setResizable(false);
    setVisible(true);
-   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
    setLocationRelativeTo(null);
 }
 }
