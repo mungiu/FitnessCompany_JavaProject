@@ -16,7 +16,12 @@ public class FileAdapter
 	{
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
-		
+
+		updateOnGoingEventsList();
+		updateUpComingEventsList();
+		updateInstructorsList();
+		updateMembersList();
+
 	}
 
 	public ArrayList<Event> getOnGoingEventList()
