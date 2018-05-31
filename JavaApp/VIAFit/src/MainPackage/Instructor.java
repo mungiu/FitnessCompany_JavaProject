@@ -2,8 +2,6 @@ package MainPackage;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.events.Event;
-
 public class Instructor
 {
    private int instructorID;
@@ -47,7 +45,7 @@ public class Instructor
    {
       return instructorID;
    }
-   
+
    public boolean getIsQualified()
    {
       return isQualified;
@@ -57,14 +55,15 @@ public class Instructor
    {
       this.isQualified = isQualified;
    }
+
    public ArrayList<ClassType> getQualifiedClassesList()
    {
       return qualifiedClassList;
    }
+
    public ArrayList<Main> getAllTaughtEvents()
    {
       return allTaughtEventsList;
    }
-   
 
 }
