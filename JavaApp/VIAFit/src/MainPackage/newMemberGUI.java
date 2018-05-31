@@ -130,20 +130,52 @@ public class newMemberGUI extends JFrame
       {
          if(e.getSource()==membershipSinceInputDay)
          {
-            membershipSinceInputDay.setText("");
+            if(membershipSinceInputDay.getText().equals("Day"))
+            {
+               membershipSinceInputDay.setText("");
+            }
+            else membershipSinceInputDay.setText(membershipSinceInputDay.getText());
          }
          if(e.getSource()==membershipSinceInputMonth)
          {
-            membershipSinceInputMonth.setText("");
+            if(membershipSinceInputMonth.getText().equals("Month"))
+            {
+               membershipSinceInputMonth.setText("");
+            }
+            else membershipSinceInputMonth.setText(membershipSinceInputMonth.getText());
          }
          if(e.getSource()==membershipSinceInputYear)
          {
-            membershipSinceInputYear.setText("");
+            if(membershipSinceInputYear.getText().equals("Year"))
+            {
+               membershipSinceInputYear.setText("");
+            }
+            else membershipSinceInputYear.setText(membershipSinceInputYear.getText());
          }
       }
       public void focusLost(FocusEvent e)
       {
-         // TODO Auto-generated method stub
+         if(e.getSource()==membershipSinceInputDay)
+         {
+            if(membershipSinceInputDay.getText().equals(""))
+            {
+               membershipSinceInputDay.setText("Day");
+            }
+         }
+         if(e.getSource()==membershipSinceInputMonth)
+         {
+            if(membershipSinceInputMonth.getText().equals(""))
+            {
+               membershipSinceInputMonth.setText("Month");
+            }
+         }
+         if(e.getSource()==membershipSinceInputYear)
+         {
+            if(membershipSinceInputYear.getText().equals(""))
+            {
+               membershipSinceInputYear.setText("Year");
+            }
+         }
       }
    }
    
