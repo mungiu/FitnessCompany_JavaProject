@@ -157,40 +157,127 @@ public class newEventGUI extends JFrame
       {
          if(e.getSource()==startDateDay)
          {
-            startDateDay.setText("");
+            if(startDateDay.getText().equals("Day"))
+            {
+               startDateDay.setText("");
+            }
+            else startDateDay.setText(startDateDay.getText());
          }
          if(e.getSource()==startDateMonth)
          {
-            startDateMonth.setText("");
+            if(startDateMonth.getText().equals("Month"))
+            {
+               startDateMonth.setText("");
+            }
+            else startDateMonth.setText(startDateMonth.getText());
          }
          if(e.getSource()==startDateYear)
          {
-            startDateYear.setText("");
+            if(startDateYear.getText().equals("Year"))
+            {
+               startDateYear.setText("");
+            }
+            else startDateYear.setText(startDateYear.getText());
          }
          if(e.getSource()==endDateDay)
          {
-            endDateDay.setText("");
+            if(endDateDay.getText().equals("Day"))
+            {
+               endDateDay.setText("");
+            }
+            else endDateDay.setText(endDateDay.getText());
          }
          if(e.getSource()==endDateMonth)
          {
-            endDateMonth.setText("");
+            if(endDateMonth.getText().equals("Month"))
+            {
+               endDateMonth.setText("");
+            }
+            else endDateMonth.setText(endDateMonth.getText());
          }
          if(e.getSource()==endDateYear)
          {
-            endDateYear.setText("");
+            if(endDateYear.getText().equals("Year"))
+            {
+               endDateYear.setText("");
+            }
+            else endDateYear.setText(endDateYear.getText());
          }
          if(e.getSource()==startTimeHour)
          {
-            startTimeHour.setText("");
+            if(startTimeHour.getText().equals("Hour"))
+            {
+               startTimeHour.setText("");
+            }
+            else startTimeHour.setText(startTimeHour.getText());
          }
          if(e.getSource()==startTimeMinute)
          {
-            startTimeMinute.setText("");
+            if(startTimeMinute.getText().equals("Minute"))
+            {
+               startTimeMinute.setText("");
+            }
+            else startTimeMinute.setText(startTimeMinute.getText());
          }
       }
       public void focusLost(FocusEvent e)
       {
-         // TODO Auto-generated method stub
+         if(e.getSource()==startDateDay)
+         {
+            if(startDateDay.getText().equals(""))
+            {
+               startDateDay.setText("Day");
+            }
+         }
+         if(e.getSource()==startDateMonth)
+         {
+            if(startDateMonth.getText().equals(""))
+            {
+               startDateMonth.setText("Month");
+            }
+         }
+         if(e.getSource()==startDateYear)
+         {
+            if(startDateYear.getText().equals(""))
+            {
+               startDateYear.setText("Year");
+            }
+         }
+         if(e.getSource()==endDateDay)
+         {
+            if(endDateDay.getText().equals(""))
+            {
+               endDateDay.setText("Day");
+            }
+         }
+         if(e.getSource()==endDateMonth)
+         {
+            if(endDateMonth.getText().equals(""))
+            {
+               endDateMonth.setText("Month");
+            }
+         }
+         if(e.getSource()==endDateYear)
+         {
+            if(endDateYear.getText().equals(""))
+            {
+               endDateYear.setText("Year");
+            }
+         }
+         if(e.getSource()==startTimeHour)
+         {
+            if(startTimeHour.getText().equals(""))
+            {
+               startTimeHour.setText("Hour");
+            }
+         }
+         if(e.getSource()==startTimeMinute)
+         {
+            if(startTimeMinute.getText().equals(""))
+            {
+               startTimeMinute.setText("Minute");
+            }
+         }
       }
    }
 
@@ -345,9 +432,9 @@ public newEventGUI()
    endDateMonth.addFocusListener(myListener);
    endDateYear= new JTextField("Year");
    endDateYear.addFocusListener(myListener);
-   startTimeHour= new JTextField("Hours");
+   startTimeHour= new JTextField("Hour");
    startTimeHour.addFocusListener(myListener);
-   startTimeMinute= new JTextField("Minutes");
+   startTimeMinute= new JTextField("Minute");
    startTimeMinute.addFocusListener(myListener);
  
    instructorCombo = new JComboBox<String>(tempIns);
