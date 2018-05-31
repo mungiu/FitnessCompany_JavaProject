@@ -21,7 +21,7 @@ public class Main
       return upComingEventsList;
    }
 
-   public boolean IsAvailable(Instructor instructor, Event event)
+   public boolean getInstructorIsAvailable(Instructor instructor, Event event)
    {
       for (int i = 0; i < allEventsList.size(); i++)
          if (allEventsList.get(i).getInstructorsList().contains(instructor))
@@ -35,9 +35,19 @@ public class Main
       return false;
    }
 
-   public static void main(String[] args)
+   public ArrayList<ClassType> getAllClassesList()
    {
+      return allClassesList;
+   }
 
+   public ArrayList<Member> getMemberList()
+   {
+      return memberList;
+   }
+
+   public ArrayList<Instructor> getInstructorList()
+   {
+      return instructorList;
    }
 
 }
