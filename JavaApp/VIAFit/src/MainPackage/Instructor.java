@@ -29,6 +29,9 @@ public class Instructor implements Serializable
 	{
 		// TODO return (last instructorID +1)
 		// AND set latest instructor id as new instructor ID
+		
+		//bla bla from ron
+		return 0;
 	}
 
 	public String getFirstName()
