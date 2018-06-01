@@ -93,6 +93,7 @@ public class FileAdapter
 				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
 					onGoingEventsList.add(eventsList.get(i));
 
+
 				else if (containsEvent && eventFinished)
 					onGoingEventsList.remove(i);
 			}
@@ -158,6 +159,15 @@ public class FileAdapter
 						upComingEventsList.remove(currentEvent);
 				}
 			}
+	}
+	
+	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor){
+		   
+		return instructor.getQualifiedClassesList();
+		}
+	
+	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor){
+		return instructor.getAllTaughtEvents();
 	}
 
 	public void updateInstructorsList()

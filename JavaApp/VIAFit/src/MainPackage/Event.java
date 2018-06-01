@@ -123,8 +123,13 @@ public class Event
 
 	public void assignInstructorToEvent(Instructor instructor, Event event)
 	{
-		if (instructor.getIsQualified() && fileAdapter.getInstructorIsAvailable(instructor, event))
-			attendingInstructorsList.add(instructor);
+		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
+		{
+			if(instructor.getQualifiedClassesList().get(i).getClassName().equals(event.getClassType()) && fileAdapter.getInstructorIsAvailable(instructor, event))
+			{
+				event.attendingInstructorsList.add(instructor);
+			}
+		}
 	}
 
 	public void removeInstructorFromEvent(Instructor instructor)

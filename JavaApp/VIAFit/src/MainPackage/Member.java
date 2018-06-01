@@ -127,9 +127,8 @@ public class Member implements Serializable
 	@Override
 	public String toString()
 	{
-		return "Member [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", memberID="
-				+ memberID + ", phoneNumber=" + phoneNumber + ", isPremium=" + isPremium + ", memberSince="
-				+ memberSince + "]";
+		String str = memberID + "\t" + firstName + "\t" + lastName; 
+		return str;
 	}
 
 }
