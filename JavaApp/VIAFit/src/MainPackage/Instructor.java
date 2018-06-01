@@ -12,9 +12,9 @@ public class Instructor implements Serializable
 	private int instructorID;
 	private String firstName, lastName;
 	private boolean isQualified;
-	private FileAdapter fileAdapter;
 	private ArrayList<ClassType> qualifiedClassesList;
 	private ArrayList<FileAdapter> allTaughtEventsList;
+	private FileAdapter fileAdapter;
 
 	public Instructor(String firstName, String lastName, boolean isQualified)
 	{
@@ -28,14 +28,14 @@ public class Instructor implements Serializable
 
 	public int getNewInstructorID()
 	{
-		int biggestID = 0;
-		ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
+	   int biggestID = 0;
+      ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
 
-		for (int i = 0; i < tempInstList.size(); i++)
-			if (biggestID < tempInstList.get(i).getInstructorID())
-				biggestID = tempInstList.get(i).getInstructorID();
+      for (int i = 0; i < tempInstList.size(); i++)
+         if (biggestID < tempInstList.get(i).getInstructorID())
+            biggestID = tempInstList.get(i).getInstructorID();
 
-		return biggestID + 1;
+      return biggestID + 1;
 	}
 
 	public String getFirstName()
@@ -82,25 +82,23 @@ public class Instructor implements Serializable
 	{
 		return allTaughtEventsList;
 	}
-
 	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof Instructor))
-			return false;
-		else
-		{
-			Instructor temp = (Instructor) obj;
+   public boolean equals(Object obj)
+   {
+      if (!(obj instanceof Instructor))
+         return false;
+      else
+      {
+         Instructor temp = (Instructor) obj;
 
-			return instructorID == temp.instructorID;
-		}
-	}
+         return instructorID == temp.instructorID;
+      }
+   }
 
-	@Override
-	public String toString()
-	{
-		return "Instructor [instructorID=" + instructorID + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", isQualified=" + isQualified + ", fileAdapter=" + fileAdapter + "]";
-	}
-
+   @Override
+   public String toString()
+   {
+      return "Instructor [instructorID=" + instructorID + ", firstName=" + firstName + ", lastName=" + lastName
+            + ", isQualified=" + isQualified + ", fileAdapter=" + fileAdapter + "]";
+   }
 }
