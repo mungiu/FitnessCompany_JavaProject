@@ -7,12 +7,14 @@ public class Main
 		mainGUI test = new mainGUI();
 		FileAdapter fileAdapter = new FileAdapter();
 
-		//This will run the updateOnGoingEventsList(); and updateUpComingEventsList(); every 5 min.
+		//This will run every 5 min.
 		try {
 	        while (true) {
 	           fileAdapter.updateOnGoingEventsList();
 	           fileAdapter.updateUpComingEventsList();
 	           test.updateUpcomingEventsArea();
+	           test.updateOnGoingEventsArea();
+	           
 	            Thread.sleep(5 * 60 * 1000);
 	        }
 	    } catch (InterruptedException e) {
