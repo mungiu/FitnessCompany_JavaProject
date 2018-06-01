@@ -268,7 +268,7 @@ public class FileAdapter
 		return allEventOfType;
 	}
 
-	public void saveMembersListToBin()
+	public void saveMembersListToBin(ArrayList<Member> membersList)
 	{
 		try
 		{
@@ -282,6 +282,13 @@ public class FileAdapter
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void saveMemberToAvailableBinList(Member member)
+	{
+		ArrayList<Member> tempList = readMembersListFromBin();
+		tempList.add(member);
+		saveMembersListToBin(tempList);
 	}
 
 	public ArrayList<Member> readMembersListFromBin()
@@ -315,7 +322,7 @@ public class FileAdapter
 		return tempList;
 	}
 
-	public void saveInstructorsListToBin()
+	public void saveInstructorsListToBin(ArrayList<Instructor> instructorsList)
 	{
 		try
 		{
@@ -329,6 +336,13 @@ public class FileAdapter
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void saveInstructorToAvailableBinList(Instructor instructor)
+	{
+		ArrayList<Instructor> tempList = readInstructorsListFromBin();
+		tempList.add(instructor);
+		saveInstructorsListToBin(tempList);
 	}
 
 	public ArrayList<Instructor> readInstructorsListFromBin()
@@ -362,7 +376,7 @@ public class FileAdapter
 		return tempList;
 	}
 
-	public void saveEventsListToBin()
+	public void saveEventsListToBin(ArrayList<Event> eventsList)
 	{
 		try
 		{
@@ -376,6 +390,13 @@ public class FileAdapter
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void saveEventToAvailableBinList(Event event)
+	{
+		ArrayList<Event> tempList = readEventsListFromBin();
+		tempList.add(event);
+		saveEventsListToBin(tempList);
 	}
 
 	public ArrayList<Event> readEventsListFromBin()
