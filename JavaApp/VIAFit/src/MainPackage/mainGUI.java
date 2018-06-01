@@ -192,6 +192,7 @@ public void updateOnGoingEventsArea()
 {
    if(fileAdapter.getOnGoingEventsList()!=null)
    {
+      listOngoing.clear();
       for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
       {
          listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
@@ -203,6 +204,7 @@ public void updateUpcomingEventsArea()
 {
    if(fileAdapter.getUpComingEventsList()!=null)
    {
+      listUpcoming.clear();
       for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
       {
          listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
