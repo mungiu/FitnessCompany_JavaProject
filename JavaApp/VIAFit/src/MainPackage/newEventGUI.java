@@ -292,6 +292,7 @@ public class newEventGUI extends JFrame
             MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText())+duration, 0, 0);
             
             Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
+            fileAdapter.getEventsList().add(temp);
          }
       }
    }

@@ -19,6 +19,10 @@ public class FileAdapter
 
 	public FileAdapter()
 	{
+	   eventsListBinFileName = "allEvents.bin";
+	   instructorsListBinFileName = "allInstructors.bin";
+	   membersListBinFileName = "allMembers.bin";
+	   
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
@@ -54,6 +58,10 @@ public class FileAdapter
 	public ArrayList<Instructor> getInstructorsList()
 	{
 		return instructorsList;
+	}
+	public ArrayList<Event> getEventsList()
+	{
+	   return eventsList;
 	}
 
 	public boolean getInstructorIsAvailable(Instructor instructor, Event event)
@@ -354,7 +362,7 @@ public class FileAdapter
 	{
 		try
 		{
-			myFileIO.writeToFile("allEvents.bin", eventsList);
+			myFileIO.writeToFile(eventsListBinFileName, eventsList);
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
