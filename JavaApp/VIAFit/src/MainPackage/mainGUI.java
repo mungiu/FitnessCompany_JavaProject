@@ -200,7 +200,16 @@ private class MyListSelectionListener implements ListSelectionListener
 
 
 
-
+public void updateUpcomingEventsArea()
+{
+   if(fileAdapter.getUpComingEventsList()!=null)
+   {
+      for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
+      {
+         listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
+      }
+   }
+}
 
 
 /////////////////////////////////////// GUI /////////////////////////////////////// 
@@ -247,14 +256,24 @@ public mainGUI()
    eventLabel = new JLabel("Event");
    homeLabel = new JLabel();
    
+   if(fileAdapter.getOnGoingEventsList()!=null)
+   {
+   for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
+   {
+      listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
+   }
+   }
    listOngoing = new DefaultListModel<Event>();
-   listUpcoming = new DefaultListModel<Event>();
    ongoingEvents = new JList<Event>(listOngoing);
-   ongoingEvents.addListSelectionListener(listListener);
-   upcomingEvents = new JList<Event>(listUpcoming);
-   upcomingEvents.addListSelectionListener(listListener);
    ongoingEventsScroll = new JScrollPane(ongoingEvents);
+   ongoingEvents.addListSelectionListener(listListener);
+   
+   
+   listUpcoming = new DefaultListModel<Event>();
+   upcomingEvents = new JList<Event>(listUpcoming);
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
+   upcomingEvents.addListSelectionListener(listListener);
+   
    listModel = new DefaultListModel<String>();
    bigInfoBox = new JList<String>(listModel);
    bigInfoBox.addListSelectionListener(listListener);
