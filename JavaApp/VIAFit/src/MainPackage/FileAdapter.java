@@ -91,6 +91,7 @@ public class FileAdapter
 				onGoingEventsList.remove(i);
 		}
 	}
+	
 	}
 
 	public void updateUpComingEventsList()
