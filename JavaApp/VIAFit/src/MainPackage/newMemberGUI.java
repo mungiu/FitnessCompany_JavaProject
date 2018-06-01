@@ -51,7 +51,7 @@ public class newMemberGUI extends JFrame
    private JLabel dateD;
    private JLabel dateM;
    private JLabel dateY;
-   private JLabel allEventsLabel;
+   private JLabel showOnly;
    private JLabel allSignedupForLabel;
    
    private JTextField nameInput;
@@ -70,6 +70,7 @@ public class newMemberGUI extends JFrame
    private JScrollPane allSignedUpForScroll;
    
    private JComboBox<String> membershipTypeInput;
+   private JComboBox<String> classTypeInput;
    
    private JButton save;
    private JButton close;
@@ -90,6 +91,7 @@ public class newMemberGUI extends JFrame
    private ImageIcon logo;
    
    private MyListener myListener;
+   private FileAdapter fileAdapter;
 
    
    
@@ -130,20 +132,52 @@ public class newMemberGUI extends JFrame
       {
          if(e.getSource()==membershipSinceInputDay)
          {
-            membershipSinceInputDay.setText("");
+            if(membershipSinceInputDay.getText().equals("Day"))
+            {
+               membershipSinceInputDay.setText("");
+            }
+            else membershipSinceInputDay.setText(membershipSinceInputDay.getText());
          }
          if(e.getSource()==membershipSinceInputMonth)
          {
-            membershipSinceInputMonth.setText("");
+            if(membershipSinceInputMonth.getText().equals("Month"))
+            {
+               membershipSinceInputMonth.setText("");
+            }
+            else membershipSinceInputMonth.setText(membershipSinceInputMonth.getText());
          }
          if(e.getSource()==membershipSinceInputYear)
          {
-            membershipSinceInputYear.setText("");
+            if(membershipSinceInputYear.getText().equals("Year"))
+            {
+               membershipSinceInputYear.setText("");
+            }
+            else membershipSinceInputYear.setText(membershipSinceInputYear.getText());
          }
       }
       public void focusLost(FocusEvent e)
       {
-         // TODO Auto-generated method stub
+         if(e.getSource()==membershipSinceInputDay)
+         {
+            if(membershipSinceInputDay.getText().equals(""))
+            {
+               membershipSinceInputDay.setText("Day");
+            }
+         }
+         if(e.getSource()==membershipSinceInputMonth)
+         {
+            if(membershipSinceInputMonth.getText().equals(""))
+            {
+               membershipSinceInputMonth.setText("Month");
+            }
+         }
+         if(e.getSource()==membershipSinceInputYear)
+         {
+            if(membershipSinceInputYear.getText().equals(""))
+            {
+               membershipSinceInputYear.setText("Year");
+            }
+         }
       }
    }
    
@@ -194,8 +228,6 @@ public class newMemberGUI extends JFrame
             membershipSinceInputDay.setEnabled(false);
             membershipSinceInputMonth.setEnabled(false);
             membershipSinceInputYear.setEnabled(false);
-            signUp.setEnabled(false);
-            removeFrom.setEnabled(false);
          }
          if(s==true)
          {
@@ -208,8 +240,6 @@ public class newMemberGUI extends JFrame
             membershipSinceInputDay.setEnabled(true);
             membershipSinceInputMonth.setEnabled(true);
             membershipSinceInputYear.setEnabled(true);
-            signUp.setEnabled(true);
-            removeFrom.setEnabled(true);
          }
       }
    
@@ -220,6 +250,7 @@ public class newMemberGUI extends JFrame
    super("Member - ViaFit Fitness centre");
    
    myListener = new MyListener();
+   fileAdapter = new FileAdapter();
    
    main = new JPanel();
    inputContainer = new JPanel();
@@ -254,7 +285,7 @@ public class newMemberGUI extends JFrame
    dateD = new JLabel("D:");
    dateM = new JLabel("M:");
    dateY = new JLabel("Y:");
-   allEventsLabel = new JLabel("All events:");
+   showOnly = new JLabel("Show events of type:");
    allSignedupForLabel = new JLabel("Signed up for:");
    
    nameInput = new JTextField();
@@ -277,6 +308,8 @@ public class newMemberGUI extends JFrame
    
    String[] temp = {"Premium", "Standard"};
    membershipTypeInput = new JComboBox<String>(temp);
+   
+   classTypeInput = new JComboBox<String>(fileAdapter.getAllClassTypes());
    
    save = new JButton("Save");
    save.addActionListener(myListener);
@@ -390,7 +423,8 @@ public class newMemberGUI extends JFrame
    outputRight.setLayout(new BoxLayout(outputRight, BoxLayout.Y_AXIS));
    
    outputLeft.add(allEventsbox);
-   allEventsbox.add(allEventsLabel);
+   allEventsbox.add(showOnly);
+   allEventsbox.add(classTypeInput);
    outputLeft.add(leftAreaFrame);
    leftAreaFrame.add(allEventsScroll);
    outputLeft.add(SignUpForButtonbox);
