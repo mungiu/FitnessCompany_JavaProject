@@ -150,7 +150,7 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
    {
       if(e.getSource()==search)
       {
-         search.setText("");  
+        search.setText("");  
       }
    }
    public void focusLost(FocusEvent e)

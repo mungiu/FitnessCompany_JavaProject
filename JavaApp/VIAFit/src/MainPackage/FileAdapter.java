@@ -19,10 +19,12 @@ public class FileAdapter
 
 	public FileAdapter()
 	{
-	   eventsListBinFileName = "allEvents.bin";
-	   instructorsListBinFileName = "allInstructors.bin";
-	   membersListBinFileName = "allMembers.bin";
-	   
+		eventsListBinFileName = "allEvents.bin";
+		instructorsListBinFileName = "allInstructors.bin";
+		membersListBinFileName = "allMembers.bin";
+		///CHECK OR COPY
+		eventsList = new ArrayList<Event>();
+
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
@@ -59,9 +61,10 @@ public class FileAdapter
 	{
 		return instructorsList;
 	}
+
 	public ArrayList<Event> getEventsList()
 	{
-	   return eventsList;
+		return eventsList;
 	}
 
 	public boolean getInstructorIsAvailable(Instructor instructor, Event event)
@@ -100,7 +103,6 @@ public class FileAdapter
 
 				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
 					onGoingEventsList.add(eventsList.get(i));
-
 
 				else if (containsEvent && eventFinished)
 					onGoingEventsList.remove(i);
@@ -168,13 +170,15 @@ public class FileAdapter
 				}
 			}
 	}
-	
-	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor){
-		   
+
+	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
+	{
+
 		return instructor.getQualifiedClassesList();
-		}
-	
-	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor){
+	}
+
+	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor)
+	{
 		return instructor.getAllTaughtEvents();
 	}
 
