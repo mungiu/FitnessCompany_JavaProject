@@ -94,7 +94,7 @@ private ImageIcon vialogo;
 
 private MyListener myListener;
 private MyListSelectionListener listListener;
-
+private FileAdapter fileAdapter;
 
 
 /**
@@ -131,6 +131,7 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       }
       if(e.getSource()==searchButton)
       {
+         System.out.println(fileAdapter.getAllClassTypes());
         System.out.println(search.getText()+" "+searchOption.getSelectedItem());
       }
       if(e.getSource()==search)
@@ -224,6 +225,7 @@ public mainGUI()
    
    //adding button listener
    myListener = new MyListener();
+   fileAdapter = new FileAdapter();
    
    //Initialising
    main = new JPanel();
@@ -432,9 +434,9 @@ public mainGUI()
    homeNorthCenterAlign.add(searchOption);
    homeNorthCenterAlign.add(searchButton);
    homeNorthCenterAlign.setBorder(new EmptyBorder(40, 0, 40, 0));
-   search.setPreferredSize(new Dimension(400, 45));
-   searchOption.setPreferredSize(new Dimension(125, 44));
-   searchButton.setPreferredSize(new Dimension(80, 44));
+   search.setPreferredSize(new Dimension(400, 30));
+   searchOption.setPreferredSize(new Dimension(125, 30));
+   searchButton.setPreferredSize(new Dimension(80, 29));
    homeNorth.add(homeNorthCenterAlign);
    
    
