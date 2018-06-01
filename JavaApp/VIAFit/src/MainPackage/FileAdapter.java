@@ -344,7 +344,7 @@ public class FileAdapter
 	{
 		try
 		{
-			myFileIO.writeToFile(eventsListBinFileName, eventsList);
+			myFileIO.writeToFile("allEvents.bin", eventsList);
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block

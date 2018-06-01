@@ -118,6 +118,8 @@ public class newEventGUI extends JFrame
    private JLabel logoLabel;
    private MyListener myListener;
    
+   private FileAdapter fileAdapter;
+   
    /**
     * Inner myListener
     * @author sst
@@ -278,6 +280,19 @@ public class newEventGUI extends JFrame
                startTimeMinute.setText("Minute");
             }
          }
+         if(e.getSource()==save)
+         {
+            ClassType tempType = new ClassType(typeCombo.getSelectedItem().toString());
+            String className = nameInput.getText();
+            int maxNumbers = Integer.parseInt(maxMembersInput.getText());
+            MyDate startDate = new MyDate(Integer.parseInt(startDateDay.getText()), Integer.parseInt(startDateMonth.getText()), Integer.parseInt(startDateYear.getText()));
+            MyDate endDate = new MyDate(Integer.parseInt(endDateDay.getText()), Integer.parseInt(endDateMonth.getText()), Integer.parseInt(endDateYear.getText()));
+            MyClock startTime = new MyClock(Integer.parseInt(startTimeHour.getText()), Integer.parseInt(startTimeMinute.getText()), 0);
+            int duration = Integer.parseInt(duraCombo.getSelectedItem().toString());
+            MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText())+duration, 0, 0);
+            
+            Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
+         }
       }
    }
 
@@ -357,6 +372,7 @@ public newEventGUI()
 {
    super("Event - ViaFit Fitness Centre");
  
+   fileAdapter = new FileAdapter();
    myListener = new MyListener();
    main = new JPanel();
    topContainer = new JPanel();
