@@ -1,9 +1,14 @@
 package MainPackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event
+public class Event implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8108565391263087432L;
 	private String className;
 	private int maxMembers;
 	private FileAdapter fileAdapter;
@@ -41,13 +46,15 @@ public class Event
 	{
 		return className;
 	}
+
 	public String getClassType()
 	{
-	   return classType.getClassName();
+		return classType.getClassName();
 	}
+
 	public void setClassType(String classType)
 	{
-	   this.classType.setClassName(classType);
+		this.classType.setClassName(classType);
 	}
 
 	public void setClassName(String className)
@@ -125,7 +132,8 @@ public class Event
 	{
 		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
 		{
-			if(instructor.getQualifiedClassesList().get(i).getClassName().equals(event.getClassType()) && fileAdapter.getInstructorIsAvailable(instructor, event))
+			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(event.getClassType())
+					&& fileAdapter.getInstructorIsAvailable(instructor, event))
 			{
 				event.attendingInstructorsList.add(instructor);
 			}
@@ -151,7 +159,8 @@ public class Event
 	@Override
 	public String toString()
 	{
-		String str = className+"\t"+classType+"\t"+maxMembers+"\t"+startDate+" - "+endDate+"\t"+startTime+" - "+endTime;
+		String str = className + "\t" + classType + "\t" + maxMembers + "\t" + startDate + " - " + endDate + "\t"
+				+ startTime + " - " + endTime;
 		return str;
 	}
 }
