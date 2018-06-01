@@ -11,31 +11,29 @@ public class Instructor implements Serializable
 	private static final long serialVersionUID = 2596626544601247578L;
 	private int instructorID;
 	private String firstName, lastName;
-	private boolean isQualified;
 	private FileAdapter fileAdapter;
 	private ArrayList<ClassType> qualifiedClassesList;
-	private ArrayList<FileAdapter> allTaughtEventsList;
+	private ArrayList<ClassType> allTaughtEventsList;
 
-	public Instructor(String firstName, String lastName, boolean isQualified)
+	public Instructor(String firstName, String lastName)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.instructorID = getNewInstructorID();
-		this.isQualified = isQualified;
-		allTaughtEventsList = new ArrayList<FileAdapter>();
+		allTaughtEventsList = new ArrayList<ClassType>();
 		qualifiedClassesList = new ArrayList<ClassType>();
 	}
 
 	public int getNewInstructorID()
 	{
-		int biggestID = 0;
-		ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
+	   int biggestID = 0;
+      ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
 
-		for (int i = 0; i < tempInstList.size(); i++)
-			if (biggestID < tempInstList.get(i).getInstructorID())
-				biggestID = tempInstList.get(i).getInstructorID();
+      for (int i = 0; i < tempInstList.size(); i++)
+         if (biggestID < tempInstList.get(i).getInstructorID())
+            biggestID = tempInstList.get(i).getInstructorID();
 
-		return biggestID + 1;
+      return biggestID + 1;
 	}
 
 	public String getFirstName()
@@ -63,24 +61,19 @@ public class Instructor implements Serializable
 		return instructorID;
 	}
 
-	public boolean getIsQualified()
-	{
-		return isQualified;
-	}
-
-	public void setIsQualified(boolean isQualified)
-	{
-		this.isQualified = isQualified;
-	}
 
 	public ArrayList<ClassType> getQualifiedClassesList()
 	{
 		return qualifiedClassesList;
 	}
 
-	public ArrayList<FileAdapter> getAllTaughtEvents()
+	public ArrayList<ClassType> getAllTaughtEvents()
 	{
 		return allTaughtEventsList;
+	}
+	
+	public void addQualifedClassToList(ClassType classType){
+		qualifiedClassesList.add(classType);
 	}
 
 	@Override
@@ -99,8 +92,7 @@ public class Instructor implements Serializable
 	@Override
 	public String toString()
 	{
-		return "Instructor [instructorID=" + instructorID + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", isQualified=" + isQualified + ", fileAdapter=" + fileAdapter + "]";
+		String str = instructorID +"\t"+firstName +"\t" + lastName + "\t";
+		return str;
 	}
-
 }

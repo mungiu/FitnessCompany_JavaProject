@@ -45,6 +45,10 @@ public class Event
 	{
 	   return classType.getClassName();
 	}
+	public void setClassType(String classType)
+	{
+	   this.classType.setClassName(classType);
+	}
 
 	public void setClassName(String className)
 	{
@@ -119,8 +123,13 @@ public class Event
 
 	public void assignInstructorToEvent(Instructor instructor, Event event)
 	{
-		if (instructor.getIsQualified() && fileAdapter.getInstructorIsAvailable(instructor, event))
-			attendingInstructorsList.add(instructor);
+		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
+		{
+			if(instructor.getQualifiedClassesList().get(i).getClassName().equals(event.getClassType()) && fileAdapter.getInstructorIsAvailable(instructor, event))
+			{
+				event.attendingInstructorsList.add(instructor);
+			}
+		}
 	}
 
 	public void removeInstructorFromEvent(Instructor instructor)
@@ -142,8 +151,7 @@ public class Event
 	@Override
 	public String toString()
 	{
-		return "Event [className=" + className + ", maxMembers=" + maxMembers + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", classType="
-				+ classType + "]";
+		String str = className+"\t"+classType+"\t"+maxMembers+"\t"+startDate+" - "+endDate+"\t"+startTime+" - "+endTime;
+		return str;
 	}
 }
