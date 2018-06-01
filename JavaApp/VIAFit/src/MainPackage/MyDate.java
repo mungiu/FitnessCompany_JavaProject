@@ -3,16 +3,25 @@ package MainPackage;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
+/**
+ * A class representing Date with day, month and year.
+ * @author Group 1
+ *
+ */
 public class MyDate implements Serializable
 {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 3253011395351701364L;
 	private int day;
 	private int month;
 	private int year;
 
+	/**
+	 * Three-argument constructor.
+	 * @param day the MyDate day
+	 * @param month the MyDate month
+	 * @param year the MyDate year
+	 */
 	public MyDate(int day, int month, int year)
 	{
 		this.day = day;
@@ -28,43 +37,75 @@ public class MyDate implements Serializable
 		}
 	}
 
+	/**
+	 * No-argument constructor initializing MyDate.
+	 */
 	public MyDate()
 	{
 		this.day = 1;
 		this.month = 1;
 		this.year = 1700;
 	}
+	
 
+	/**
+	 * Sets the MyDate day
+	 * @param day will be set as day in MyDate
+	 */
 	public void setDay(int day)
 	{
 		this.day = day;
 	}
 
+	/**
+	 * Sets the MyDate month
+	 * @param month will be set as month in MyDate
+	 */
 	public void setMonth(int month)
 	{
 		this.month = month;
 	}
 
+	/**
+	 * Sets the MyDate year
+	 * @param year will be set as year in MyDate
+	 */
 	public void setYear(int year)
 	{
 		this.year = year;
 	}
 
+	/**
+	 * Gets the MyDate day.
+	 * @return the MyDate day.
+	 */
 	public int getDay()
 	{
 		return day;
 	}
 
+	/**
+	 * Gets the MyDate month.
+	 * @return the MyDate month.
+	 */
 	public int getMonth()
 	{
 		return month;
 	}
 
+	/**
+	 * Gets the MyDate year.
+	 * @return the MyDate year.
+	 */
 	public int getYear()
 	{
 		return year;
 	}
 
+	/**
+	 * Gets the MyDate months name
+	 * @return the MyDate months name according to number.
+	 */
 	public String getMonthName()
 	{
 		switch (month)
@@ -98,6 +139,10 @@ public class MyDate implements Serializable
 		}
 	}
 
+	/**
+	 * How the date will be displayed in MyDate.
+	 * @return the date in given order.
+	 */
 	public String displayDate()
 	{
 		String disP = "";
@@ -106,6 +151,10 @@ public class MyDate implements Serializable
 		return disP;
 	}
 
+	/**
+	 * Compares the years if it is leap year.
+	 * @return true if the year is leap year.
+	 */
 	public boolean isLeapYear()
 	{
 		if (year % 4 == 0)
@@ -123,6 +172,10 @@ public class MyDate implements Serializable
 		return false;
 	}
 
+	/**
+	 * Counts how many days are in a specific month
+	 * @return the amount of days are in a month.
+	 */
 	public int daysInMonth()
 	{
 		switch (month)
@@ -160,6 +213,10 @@ public class MyDate implements Serializable
 		}
 	}
 
+	/**
+	 * Gets the astro Sign according to the date.
+	 * @return the astro sign in given date.
+	 */
 	public String getAstroSign()
 	{
 		if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
@@ -202,6 +259,10 @@ public class MyDate implements Serializable
 			return "Error in input";
 	}
 
+	/**
+	 * Gets the day of the week.
+	 * @return the day of the week.
+	 */
 	public String dayOfWeek()
 	{
 		int day1;
@@ -259,6 +320,11 @@ public class MyDate implements Serializable
 			day++;
 	}
 
+	/**
+	 * Compares the day, month and year of MyDate
+	 * @param obj the object to compare with
+	 * @return true if the given object is equal to this MyDate.
+	 */
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof MyDate))
@@ -269,6 +335,10 @@ public class MyDate implements Serializable
 		return (other.day == day && other.month == day && other.year == year);
 	}
 
+	/**
+	 * Make a copy of MyDate class
+	 * @return the MyDate variables.
+	 */
 	public MyDate copy()
 	{
 		return new MyDate(day, month, year);
