@@ -41,6 +41,10 @@ public class Event
 	{
 		return className;
 	}
+	public String getClassType()
+	{
+	   return classType.getClassName();
+	}
 
 	public void setClassName(String className)
 	{

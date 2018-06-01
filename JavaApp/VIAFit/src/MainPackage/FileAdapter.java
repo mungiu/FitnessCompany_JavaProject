@@ -70,7 +70,8 @@ public class FileAdapter
 		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 
-
+	if(allEventsList!=null)
+	{
 		for (int i = 0; i < allEventsList.size(); i++)
 		{
 			thisEventStartTime = allEventsList.get(i).getStarTime();
@@ -89,7 +90,7 @@ public class FileAdapter
 			else if (containsEvent && eventFinished)
 				onGoingEventsList.remove(i);
 		}
-
+	}
 	}
 
 	public void updateUpComingEventsList()
@@ -105,7 +106,8 @@ public class FileAdapter
 		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
-
+	if(allEventsList!=null)
+	{
 		for (int i = 0; i < allEventsList.size(); i++)
 		{
 			currentEvent = allEventsList.get(i);
@@ -115,6 +117,7 @@ public class FileAdapter
 			thisEventStartDate = currentEvent.getStartDate();
 			thisEventEndDate = currentEvent.getEndDate();
 
+			
 			boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
 			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
 			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
@@ -152,6 +155,7 @@ public class FileAdapter
 			}
 		}
 	}
+	}
 
 	public void updateInstructorsList()
 	{
@@ -169,18 +173,19 @@ public class FileAdapter
 	 */
 	public String[] getAllClassTypes()
 	{
-//	   String[] temp = new String[allClassTypeList.size()+1];
-//	   temp[0] = "All events";
-//	   for(int i = 0;i<allClassTypeList.size();i++)
-//	   {
-//	      temp[i+1] = allClassTypeList.get(i).getClassName();
-//	   }
-//	   return temp;
-	   String[] temptemp = new String[3];
-	   temptemp[0] = "All events";
-	   temptemp[1] = "Change this";
-	   temptemp[2] = "In FileAdapter";
-	   return temptemp;
+	   String[] temp = new String[1]; 
+	   temp[0] = "All events";
+	   if(allClassTypeList!=null)
+      {
+	   temp = new String[allClassTypeList.size()+1];
+	   temp[0] = "All events";
+	   for(int i = 0;i<allClassTypeList.size();i++)
+	   {
+	      temp[i+1] = allClassTypeList.get(i).getClassName();
+	   }
+	   }
+	   return temp;
+	   
 	}
 	
 	/**
@@ -210,10 +215,22 @@ public class FileAdapter
 	   return temp;
 	}
 	
-//	public ArrayList<Event> getAllEventsOfType(String input)
-//	{
-//	   ArrayList<Event> allEventOfType = new ArrayList<Event>();
-//	   
-//	   Work in progress
-//	}
+	/**
+	 * Method that finds all events with a given classType of type String
+	 * @param input A String to compare class type
+	 * @return allEventOfType an ArrayList<Event> 
+	 */
+	public ArrayList<Event> getAllEventsOfType(String input)
+	{
+	   ArrayList<Event> allEventOfType = new ArrayList<Event>();
+	   
+	   for(int i = 0;i<upComingEventsList.size();i++)
+	   {
+	      if(upComingEventsList.get(i).getClassType().equals(input))
+	      {
+	         allEventOfType.add(upComingEventsList.get(i));
+	      }
+	   }
+	   return allEventOfType;
+	}
 }

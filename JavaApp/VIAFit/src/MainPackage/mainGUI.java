@@ -131,7 +131,6 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       }
       if(e.getSource()==searchButton)
       {
-         System.out.println(fileAdapter.getAllClassTypes());
         System.out.println(search.getText()+" "+searchOption.getSelectedItem());
       }
       if(e.getSource()==search)
@@ -185,18 +184,6 @@ private class MyListSelectionListener implements ListSelectionListener
 }
 
 
-
-   /*public void windowClosing(WindowEvent e)
-   {
-      System.out.println("sdfv");
-      //Dosent work, help me, Allan.
-      int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Confirm closing application", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-      if(yesno == JOptionPane.YES_OPTION)
-      {
-         System.exit(0);
-      }
-   }
-*/
 
 
 
