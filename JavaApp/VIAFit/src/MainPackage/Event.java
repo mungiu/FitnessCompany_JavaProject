@@ -45,6 +45,10 @@ public class Event
 	{
 	   return classType.getClassName();
 	}
+	public void setClassType(String classType)
+	{
+	   this.classType.setClassName(classType);
+	}
 
 	public void setClassName(String className)
 	{
@@ -147,8 +151,7 @@ public class Event
 	@Override
 	public String toString()
 	{
-		return "Event [className=" + className + ", maxMembers=" + maxMembers + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", classType="
-				+ classType + "]";
+		String str = className+"\t"+classType+"\t"+maxMembers+"\t"+startDate+" - "+endDate+"\t"+startTime+" - "+endTime;
+		return str;
 	}
 }

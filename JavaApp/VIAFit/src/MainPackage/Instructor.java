@@ -26,14 +26,14 @@ public class Instructor implements Serializable
 
 	public int getNewInstructorID()
 	{
-		int biggestID = 0;
-		ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
+	   int biggestID = 0;
+      ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
 
-		for (int i = 0; i < tempInstList.size(); i++)
-			if (biggestID < tempInstList.get(i).getInstructorID())
-				biggestID = tempInstList.get(i).getInstructorID();
+      for (int i = 0; i < tempInstList.size(); i++)
+         if (biggestID < tempInstList.get(i).getInstructorID())
+            biggestID = tempInstList.get(i).getInstructorID();
 
-		return biggestID + 1;
+      return biggestID + 1;
 	}
 
 	public String getFirstName()
@@ -95,5 +95,4 @@ public class Instructor implements Serializable
 		String str = instructorID +"\t"+firstName +"\t" + lastName + "\t";
 		return str;
 	}
-
 }
