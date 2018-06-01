@@ -11,18 +11,16 @@ public class Instructor implements Serializable
 	private static final long serialVersionUID = 2596626544601247578L;
 	private int instructorID;
 	private String firstName, lastName;
-	private boolean isQualified;
-	private ArrayList<ClassType> qualifiedClassesList;
-	private ArrayList<FileAdapter> allTaughtEventsList;
 	private FileAdapter fileAdapter;
+	private ArrayList<ClassType> qualifiedClassesList;
+	private ArrayList<ClassType> allTaughtEventsList;
 
-	public Instructor(String firstName, String lastName, boolean isQualified)
+	public Instructor(String firstName, String lastName)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.instructorID = getNewInstructorID();
-		this.isQualified = isQualified;
-		allTaughtEventsList = new ArrayList<FileAdapter>();
+		allTaughtEventsList = new ArrayList<ClassType>();
 		qualifiedClassesList = new ArrayList<ClassType>();
 	}
 
@@ -63,42 +61,38 @@ public class Instructor implements Serializable
 		return instructorID;
 	}
 
-	public boolean getIsQualified()
-	{
-		return isQualified;
-	}
-
-	public void setIsQualified(boolean isQualified)
-	{
-		this.isQualified = isQualified;
-	}
 
 	public ArrayList<ClassType> getQualifiedClassesList()
 	{
 		return qualifiedClassesList;
 	}
 
-	public ArrayList<FileAdapter> getAllTaughtEvents()
+	public ArrayList<ClassType> getAllTaughtEvents()
 	{
 		return allTaughtEventsList;
 	}
+	
+	public void addQualifedClassToList(ClassType classType){
+		qualifiedClassesList.add(classType);
+	}
+
 	@Override
-   public boolean equals(Object obj)
-   {
-      if (!(obj instanceof Instructor))
-         return false;
-      else
-      {
-         Instructor temp = (Instructor) obj;
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof Instructor))
+			return false;
+		else
+		{
+			Instructor temp = (Instructor) obj;
 
-         return instructorID == temp.instructorID;
-      }
-   }
+			return instructorID == temp.instructorID;
+		}
+	}
 
-   @Override
-   public String toString()
-   {
-      return "Instructor [instructorID=" + instructorID + ", firstName=" + firstName + ", lastName=" + lastName
-            + ", isQualified=" + isQualified + ", fileAdapter=" + fileAdapter + "]";
-   }
+	@Override
+	public String toString()
+	{
+		String str = instructorID +"\t"+firstName +"\t" + lastName + "\t";
+		return str;
+	}
 }
