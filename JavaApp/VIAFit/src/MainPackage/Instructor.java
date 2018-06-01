@@ -92,8 +92,8 @@ public class Instructor implements Serializable
 	@Override
 	public String toString()
 	{
-		return "Instructor [instructorID=" + instructorID + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", isQualified=" + isQualified + ", fileAdapter=" + fileAdapter + "]";
+		String str = instructorID +"\t"+firstName +"\t" + lastName + "\t";
+		return str;
 	}
 
 }

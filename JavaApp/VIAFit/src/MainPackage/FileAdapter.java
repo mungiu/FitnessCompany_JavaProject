@@ -157,6 +157,17 @@ public class FileAdapter
 		}
 	}
 	}
+	
+	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor){
+		   
+		return instructor.getQualifiedClassesList();
+		}
+	
+	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor){
+		return instructor.getAllTaughtEvents();
+	}
+	
+
 
 	public void updateInstructorsList()
 	{
