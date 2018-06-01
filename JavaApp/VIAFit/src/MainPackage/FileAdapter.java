@@ -166,8 +166,6 @@ public class FileAdapter
 	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor){
 		return instructor.getAllTaughtEvents();
 	}
-	
-
 
 	public void updateInstructorsList()
 	{
