@@ -1,7 +1,13 @@
 package MainPackage;
 
-public class MyClock
+import java.io.Serializable;
+
+public class MyClock implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8060363652216244441L;
 	private int hour;
 	private int minute;
 	private int second;

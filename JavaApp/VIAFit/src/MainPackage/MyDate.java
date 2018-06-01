@@ -1,9 +1,14 @@
 package MainPackage;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class MyDate
+public class MyDate implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3253011395351701364L;
 	private int day;
 	private int month;
 	private int year;

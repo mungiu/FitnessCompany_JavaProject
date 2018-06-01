@@ -1,7 +1,13 @@
 package MainPackage;
 
-public class ClassType
+import java.io.Serializable;
+
+public class ClassType implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7574607274053354338L;
 	private String className;
 
 	public ClassType(String className)
