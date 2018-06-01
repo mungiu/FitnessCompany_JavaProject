@@ -34,7 +34,7 @@ public class FileAdapter
 		return upComingEventsList;
 	}
 
-	public ArrayList<ClassType> getClassTypeList()
+	public ArrayList<ClassType> getAllClassTypeList()
 	{
 		return allClassTypeList;
 	}
