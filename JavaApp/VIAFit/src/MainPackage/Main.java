@@ -10,7 +10,6 @@ public class Main
 		//This will run every 5 min.
 		try {
 	        while (true) {
-	           System.out.println("lol");
 	           fileAdapter.updateOnGoingEventsList();
 	           fileAdapter.updateUpComingEventsList();
 	           test.updateUpcomingEventsArea();

@@ -161,7 +161,6 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == save)
 			{
-				System.out.println("lol");
 				ClassType tempType = new ClassType(typeCombo.getSelectedItem().toString());
 				String className = nameInput.getText();
 				int maxNumbers = Integer.parseInt(maxMembersInput.getText());
@@ -179,6 +178,7 @@ public class newEventGUI extends JFrame
 				fileAdapter.getEventsList().add(temp);
 				fileAdapter.saveEventsListToBin();
 				System.out.println(temp.getClassName());
+				fileAdapter.readEventsListFromBin();
 			}
 		}
 
