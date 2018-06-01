@@ -22,7 +22,7 @@ public class FileAdapter
 		eventsListBinFileName = "allEvents.bin";
 		instructorsListBinFileName = "allInstructors.bin";
 		membersListBinFileName = "allMembers.bin";
-		///CHECK OR COPY
+		/// CHECK OR COPY
 		eventsList = new ArrayList<Event>();
 
 		myFileIO = new MyFileIO();
@@ -35,6 +35,7 @@ public class FileAdapter
 		updateUpComingEventsList();
 		updateInstructorsList();
 		updateMembersList();
+		updateEventsList();
 	}
 
 	public ArrayList<Event> getOnGoingEventsList()
@@ -81,6 +82,8 @@ public class FileAdapter
 
 	public void updateOnGoingEventsList()
 	{
+		updateEventsList();
+
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
 		MyClock thisEventStartTime;
@@ -111,6 +114,8 @@ public class FileAdapter
 
 	public void updateUpComingEventsList()
 	{
+		updateEventsList();
+
 		int maxUpcomingEvents = 30;
 		GregorianCalendar calendar = new GregorianCalendar();
 		Event currentEvent;
@@ -184,12 +189,17 @@ public class FileAdapter
 
 	public void updateInstructorsList()
 	{
-		// TODO finalize
+		instructorsList = readInstructorsListFromBin();
 	}
 
 	public void updateMembersList()
 	{
-		// TODO finalize
+		membersList = readMembersListFromBin();
+	}
+
+	public void updateEventsList()
+	{
+		eventsList = readEventsListFromBin();
 	}
 
 	/**
@@ -230,20 +240,13 @@ public class FileAdapter
 		ArrayList<Event> temp = new ArrayList<Event>();
 
 		for (int i = 0; i < onGoingEventsList.size(); i++)
-		{
 			if (onGoingEventsList.get(i).getMembersList().contains(member))
-			{
 				temp.add(onGoingEventsList.get(i));
-			}
-		}
 
 		for (int i = 0; i < upComingEventsList.size(); i++)
-		{
 			if (upComingEventsList.get(i).getMembersList().contains(member))
-			{
 				temp.add(upComingEventsList.get(i));
-			}
-		}
+
 		return temp;
 	}
 
@@ -259,12 +262,9 @@ public class FileAdapter
 		ArrayList<Event> allEventOfType = new ArrayList<Event>();
 
 		for (int i = 0; i < upComingEventsList.size(); i++)
-		{
 			if (upComingEventsList.get(i).getClassType().equals(input))
-			{
 				allEventOfType.add(upComingEventsList.get(i));
-			}
-		}
+
 		return allEventOfType;
 	}
 
