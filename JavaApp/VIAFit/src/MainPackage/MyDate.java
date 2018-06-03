@@ -375,7 +375,7 @@ public class MyDate implements Serializable
    /**
     * Make a copy of MyDate class
     * 
-    * @return the MyDate variables.
+    * @return the new MyDate variables.
     */
    public MyDate copy()
    {

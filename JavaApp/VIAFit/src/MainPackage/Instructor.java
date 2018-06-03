@@ -15,6 +15,11 @@ public class Instructor implements Serializable
 	private ArrayList<ClassType> qualifiedClassesList;
 	private ArrayList<ClassType> allTaughtEventsList;
 
+	/**
+	 * Two-argument constructor.
+	 * @param firstName the instructors first name. 
+	 * @param lastName
+	 */
 	public Instructor(String firstName, String lastName)
 	{
 		this.firstName = firstName;
