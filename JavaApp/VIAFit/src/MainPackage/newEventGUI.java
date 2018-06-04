@@ -207,7 +207,10 @@ public class newEventGUI extends JFrame
 				   fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
 				   fileAdapter.updateEventsList();
 				}
-				else fileAdapter.saveEventToAvailableBinList(temp);
+				else if(editInfo.isSelected()==false && id.getText().equals(""))
+				{
+				   fileAdapter.saveEventToAvailableBinList(temp);
+				}    
 				dispose();
 			}
 			if(e.getSource()==addInstructor)

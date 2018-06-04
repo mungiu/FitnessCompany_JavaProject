@@ -134,10 +134,7 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
-            if(!memberIDInput.getText().equals(""))
-            {
                allEvents.getSelectedValue().assignMemberToEvent(temp);
-            }
          }
          if(e.getSource()==removeFrom)
          {
@@ -176,7 +173,7 @@ public class newMemberGUI extends JFrame
               fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
               fileAdapter.updateMembersList();
             }
-            else
+            else if(editInfo.isSelected()==false && memberIDInput.getText().equals(""))
             {
             
             String name = nameInput.getText();
@@ -283,7 +280,7 @@ public class newMemberGUI extends JFrame
       membershipSinceInputYear.setText(member.getMemberSince().getYear()+"");
       memberIDInput.setText(member.getMemberID()+"");
       emailInput.setText(member.getEMail());
-      phone.setText(member.getPhoneNumber());
+      phoneInput.setText(member.getPhoneNumber());
       
       for(int i = 0;i<fileAdapter.getEventsList().size();i++)
       {
@@ -295,6 +292,10 @@ public class newMemberGUI extends JFrame
       
       for(int i = 0;i<fileAdapter.getEventsList().size();i++)
       {
+         if(classTypeInput.getSelectedItem().toString().equals("All events"))
+         {
+            listModel.addElement(fileAdapter.getEventsList().get(i));;
+         }
          if(fileAdapter.getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
          {
             listModel.addElement(fileAdapter.getEventsList().get(i));

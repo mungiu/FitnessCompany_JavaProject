@@ -213,7 +213,7 @@ public class Member implements Serializable
    @Override
    public String toString()
    {
-      String str = memberID + "\t" + name;
+      String str = "<html><pre style='font-size:11px'>"+name+"\t\t"+email+"\t\t"+phoneNumber+"\t\t"+memberSince+"\t\t"+memberID+"</pre></html>";
       return str;
    }
 
