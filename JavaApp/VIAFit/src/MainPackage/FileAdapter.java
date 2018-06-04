@@ -55,9 +55,33 @@ public class FileAdapter
 		return upComingEventsList;
 	}
 
-	public ArrayList<ClassType> getAllClassTypeList()
+	public ArrayList<ClassType> getClassTypesList()
 	{
 		return allClassTypeList;
+	}
+
+	/**
+	 * Method that converts the ArrayList<String> into a String array for use in
+	 * ComboBox
+	 * 
+	 * @return temp an array of strings
+	 */
+	public String[] getClassTypesArr()
+	{
+		updateClassTypesList();
+		String[] temp = new String[1];
+		temp[0] = "All events";
+		if (allClassTypeList != null)
+		{
+			temp = new String[allClassTypeList.size() + 1];
+			temp[0] = "All events";
+			for (int i = 0; i < allClassTypeList.size(); i++)
+			{
+				temp[i + 1] = allClassTypeList.get(i).getClassName();
+			}
+		}
+		return temp;
+
 	}
 
 	public ArrayList<Member> getMembersList()
@@ -93,33 +117,9 @@ public class FileAdapter
 		return instructor.getQualifiedClassesList();
 	}
 
-	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor)
+	public ArrayList<ClassType> getToughtEventsList(Instructor instructor)
 	{
 		return instructor.getAllTaughtEvents();
-	}
-
-	/**
-	 * Method that converts the ArrayList<String> into a String array for use in
-	 * ComboBox
-	 * 
-	 * @return temp an array of strings
-	 */
-	public String[] getAllClassTypes()
-	{
-		updateClassTypesList();
-		String[] temp = new String[1];
-		temp[0] = "All events";
-		if (allClassTypeList != null)
-		{
-			temp = new String[allClassTypeList.size() + 1];
-			temp[0] = "All events";
-			for (int i = 0; i < allClassTypeList.size(); i++)
-			{
-				temp[i + 1] = allClassTypeList.get(i).getClassName();
-			}
-		}
-		return temp;
-
 	}
 
 	/**
