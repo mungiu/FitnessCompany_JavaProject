@@ -31,6 +31,7 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
+		this.fileAdapter = new FileAdapter();
 		eventID = getNewEventID();
 	}
 
@@ -47,7 +48,8 @@ public class Event implements Serializable
 		} catch (NullPointerException e)
 		{
 			e.printStackTrace();
-			System.out.println("tempEventList.get(i).getEventID() is NULL >>>>> biggestID set to 1");
+			System.out.println(
+					"tempEventList.get(i).getEventID() or fileAdapter.getEventsList() is NULL >>>>> biggestID set to 1");
 		}
 
 		return biggestID + 1;
@@ -184,18 +186,18 @@ public class Event implements Serializable
 
 	public void removeMemberFromEvent(Member member)
 	{
-	   fileAdapter = new FileAdapter();
-	   
-	   System.out.println("lol");
-		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+		fileAdapter = new FileAdapter();
+
+		System.out.println("lol");
+		for (int i = 0; i < fileAdapter.getEventsList().size(); i++)
 		{
-		   System.out.println("test");
-		   if(fileAdapter.getEventsList().get(i).getEventID()==(this.getEventID()))
-		   {
-		      System.out.println(fileAdapter.getEventsList().get(i).getMembersList());
-		      fileAdapter.getEventsList().get(i).getMembersList().remove(member);
-		      fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
-		   }
+			System.out.println("test");
+			if (fileAdapter.getEventsList().get(i).getEventID() == (this.getEventID()))
+			{
+				System.out.println(fileAdapter.getEventsList().get(i).getMembersList());
+				fileAdapter.getEventsList().get(i).getMembersList().remove(member);
+				fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+			}
 		}
 	}
 
