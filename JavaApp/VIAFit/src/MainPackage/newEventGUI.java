@@ -166,8 +166,8 @@ public class newEventGUI extends JFrame
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeCheck.isSelected()==true)
 			   {
-			      fileAdapter.getAllClassTypeList().add(new ClassType(typeInput.getText()));
-			      fileAdapter.saveClassTypesListToBin(fileAdapter.getAllClassTypeList());
+			      fileAdapter.getClassTypesList().add(new ClassType(typeInput.getText()));
+			      fileAdapter.saveClassTypesListToBin(fileAdapter.getClassTypesList());
 			      tempType.setClassName(typeInput.getText());
 			   }
 			   if(newTypeCheck.isSelected()==false)
@@ -598,7 +598,7 @@ public class newEventGUI extends JFrame
 		id = new JTextField();
 
 		instructorCombo = new JComboBox<String>(tempIns);
-		tempType = fileAdapter.getAllClassTypes();
+		tempType = fileAdapter.getClassTypesArr();
 		typeCombo = new JComboBox<String>(tempType);
 		duraCombo = new JComboBox<String>(tempDura);
 		instructorComboBottom = new JComboBox<String>(tempInsBottom);
