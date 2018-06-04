@@ -49,7 +49,7 @@ public class Instructor implements Serializable
 					biggestID = tempInstList.get(i).getInstructorID();
 		} catch (NullPointerException e)
 		{
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("tempInstList.get(i).getInstructorID() is NULL >>>>> biggestID set to 1");
 		}
 

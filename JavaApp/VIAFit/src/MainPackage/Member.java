@@ -73,7 +73,7 @@ public class Member implements Serializable
 					biggestID = tempMembList.get(i).getMemberID();
 		} catch (NullPointerException e)
 		{
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("tempMembList.get(i).getMemberID() is NULL >>>>> biggestID set to 1");
 		}
 		return biggestID + 1;
@@ -220,7 +220,8 @@ public class Member implements Serializable
 	@Override
 	public String toString()
 	{
-	   String str = "<html><pre style='font-size:11px'>"+name+"\t\t"+email+"\t\t"+phoneNumber+"\t\t"+memberSince+"\t\t"+memberID+"</pre></html>";
+		String str = "<html><pre style='font-size:11px'>" + name + "\t\t" + email + "\t\t" + phoneNumber + "\t\t"
+				+ memberSince + "\t\t" + memberID + "</pre></html>";
 		return str;
 	}
 }
