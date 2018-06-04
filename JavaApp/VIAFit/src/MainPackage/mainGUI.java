@@ -59,7 +59,7 @@ private JLabel homeLabel;
 
 private JTextField search;
 
-private JList<Event> bigInfoBox;
+private JList<Object> bigInfoBox;
 private JScrollPane bigInfoScroll;
 private JList<Event> ongoingEvents;
 private JList<Event> upcomingEvents;
@@ -67,7 +67,7 @@ private JScrollPane ongoingEventsScroll;
 private JScrollPane upcomingEventsScroll;
 private DefaultListModel<Event> listOngoing;
 private DefaultListModel<Event> listUpcoming;
-private DefaultListModel<Event> listBigInfoBox;
+private DefaultListModel<Object> listBigInfoBox;
 
 
 private JButton memberNew;
@@ -214,7 +214,7 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          }
          if(searchOption.getSelectedItem().toString().equals("Event"))
          {
-            Event temp = bigInfoBox.getSelectedValue();
+            Event temp = (Event)bigInfoBox.getSelectedValue();
             newEventGUI tempWindow = new newEventGUI();
             tempWindow.fillWithEvent(temp);
          }
@@ -365,8 +365,8 @@ public mainGUI()
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
    upcomingEvents.addListSelectionListener(listListener);
    
-   listBigInfoBox = new DefaultListModel<Event>();
-   bigInfoBox = new JList<Event>(listBigInfoBox);
+   listBigInfoBox = new DefaultListModel<Object>();
+   bigInfoBox = new JList<Object>(listBigInfoBox);
    bigInfoBox.addListSelectionListener(listListener);
    bigInfoScroll = new JScrollPane(bigInfoBox);
    search = new JTextField("Search");
