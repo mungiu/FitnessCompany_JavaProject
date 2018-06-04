@@ -6,6 +6,7 @@ public class Main
 	{
 		mainGUI test = new mainGUI();
 		FileAdapter fileAdapter = new FileAdapter();
+		
 		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
 		{
 		   System.out.println(fileAdapter.getEventsList().get(i).getEventID());

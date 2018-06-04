@@ -232,13 +232,25 @@ public class FileAdapter
 				{
 				   
 					if (eventIsUpcomingYears)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"lol");
+					}
 					else if (eventIsUpcomingMonths)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"jj");
+					}
 					else if (eventIsUpcomingDays)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"hej");
+					}
 					else if (eventIsUpcomingHours)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"pp");
+					}	
 				}
 
 				boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
@@ -259,9 +271,6 @@ public class FileAdapter
 						upComingEventsList.remove(currentEvent);
 				}
 			}
-			System.out.println(upComingEventsList.get(0));
-			System.out.println(upComingEventsList.get(1));
-			System.out.println(upComingEventsList.size());
 		
 	}
 
