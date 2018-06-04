@@ -31,28 +31,38 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
-//		eventID = getNewEventID();
+		// eventID = getNewEventID();
 	}
 
 	public int getNewEventID()
-   {
-      int biggestID = 0;
-      ArrayList<Event> tempEventList = fileAdapter.getEventsList();
+	{
+		int biggestID = 0;
+		try
+		{
+			ArrayList<Event> tempEventList = fileAdapter.getEventsList();
 
-      for (int i = 0; i < tempEventList.size(); i++)
-         if (biggestID < tempEventList.get(i).getEventID())
-            biggestID = tempEventList.get(i).getEventID();
+			for (int i = 0; i < tempEventList.size(); i++)
+				if (biggestID < tempEventList.get(i).getEventID())
+					biggestID = tempEventList.get(i).getEventID();
+		} catch (NullPointerException e)
+		{
+			e.printStackTrace();
+			System.out.println("tempEventList.get(i).getEventID() is NULL >>>>> biggestID set to 1");
+		}
 
-      return biggestID + 1;
-   }
+		return biggestID + 1;
+	}
+
 	public void setEventID(int id)
 	{
-	   eventID = id;
+		eventID = id;
 	}
+
 	public int getEventID()
 	{
-	   return eventID;
+		return eventID;
 	}
+
 	public int getMaxMembers()
 	{
 		return maxMembers;
@@ -180,8 +190,8 @@ public class Event implements Serializable
 	@Override
 	public String toString()
 	{
-		String str = "<html><pre style='font-size:11px'>"+className + "\t\t" + classType + "\t" + maxMembers + "\t" + startDate + " - " + endDate + "\t"
-				+ startTime + " - " + endTime+"</pre></html>";
+		String str = "<html><pre style='font-size:11px'>" + className + "\t\t" + classType + "\t" + maxMembers + "\t"
+				+ startDate + " - " + endDate + "\t" + startTime + " - " + endTime + "</pre></html>";
 		return str;
 	}
 }
