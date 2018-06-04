@@ -46,7 +46,7 @@ public class Event implements Serializable
 					biggestID = tempEventList.get(i).getEventID();
 		} catch (NullPointerException e)
 		{
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("tempEventList.get(i).getEventID() is NULL >>>>> biggestID set to 1");
 		}
 
