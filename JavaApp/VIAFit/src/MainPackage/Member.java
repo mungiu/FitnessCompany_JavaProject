@@ -21,9 +21,9 @@ public class Member implements Serializable
 	private int memberID;
 	private String phoneNumber;
 	private boolean isPremium;
-	private FileAdapter fileAdapter;
 	private MyDate memberSince;
 	private ArrayList<Event> allAttendedEventsList;
+	private MembersList membersList;
 
 	/**
 	 * Six-argument constructor.
@@ -51,6 +51,7 @@ public class Member implements Serializable
 		this.phoneNumber = phoneNumber;
 		this.isPremium = isPremium;
 		this.memberSince = MyDate.today();
+		membersList = new MembersList();
 
 		allAttendedEventsList = new ArrayList<Event>();
 
@@ -66,7 +67,8 @@ public class Member implements Serializable
 		int biggestID = 0;
 		try
 		{
-			ArrayList<Member> tempMembList = fileAdapter.getMembersList();
+			// with new UML pull this from MembersList class
+			ArrayList<Member> tempMembList = membersList.getMembersList();
 
 			for (int i = 0; i < tempMembList.size(); i++)
 				if (biggestID < tempMembList.get(i).getMemberID())
