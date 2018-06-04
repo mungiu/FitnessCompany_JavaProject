@@ -12,20 +12,20 @@ public class Member implements Serializable
 	private static final long serialVersionUID = 4437337227753008510L;
 
 	private String firstName, lastName, email;
-	private int memberID = getNewMemberID();
+	private int memberID;
 	private int phoneNumber;
 	private boolean isPremium;
 	private FileAdapter fileAdapter;
 	private MyDate memberSince;
 	private ArrayList<Event> allAttendedEventsList;
 
-	public Member(String firstName, String lastName, String email, int memberID, int phoneNumber, boolean isPremium)
+	public Member(String firstName, String lastName, String email, int phoneNumber, boolean isPremium)
 	{
 		// TODO: pull new memberID from binary file by checking biggest member ID
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.memberID = memberID;
+		this.memberID = getNewMemberID();
 		this.phoneNumber = phoneNumber;
 		this.isPremium = isPremium;
 		this.memberSince = MyDate.today();
