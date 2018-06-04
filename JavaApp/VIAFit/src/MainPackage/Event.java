@@ -31,7 +31,7 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
-		// eventID = getNewEventID();
+//		eventID = getNewEventID();
 	}
 
 	public int getNewEventID()
@@ -184,7 +184,19 @@ public class Event implements Serializable
 
 	public void removeMemberFromEvent(Member member)
 	{
-		attendingMembersList.remove(member);
+	   fileAdapter = new FileAdapter();
+	   
+	   System.out.println("lol");
+		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+		{
+		   System.out.println("test");
+		   if(fileAdapter.getEventsList().get(i).getEventID()==(this.getEventID()))
+		   {
+		      System.out.println(fileAdapter.getEventsList().get(i).getMembersList());
+		      fileAdapter.getEventsList().get(i).getMembersList().remove(member);
+		      fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+		   }
+		}
 	}
 
 	@Override
