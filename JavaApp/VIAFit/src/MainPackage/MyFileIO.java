@@ -1,5 +1,6 @@
 package MainPackage;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,7 +38,8 @@ public class MyFileIO
 		write.close();
 	}
 
-	public Object readObjectFromFile(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException
+	public Object readObjectFromFile(String fileName)
+			throws FileNotFoundException, IOException, ClassNotFoundException, EOFException
 	{
 		fileIn = new FileInputStream(fileName);
 		read = new ObjectInputStream(fileIn);
