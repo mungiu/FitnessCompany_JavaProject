@@ -6,10 +6,10 @@ public class Main
 	{
 		mainGUI test = new mainGUI();
 		FileAdapter fileAdapter = new FileAdapter();
-		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
-		{
-		   System.out.println(fileAdapter.getEventsList().get(i).getEventID());
-		}
+		// for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+		// {
+		// System.out.println(fileAdapter.getEventsList().get(i).getEventID());
+		// }
 		// This will run every 5 min.
 		try
 		{
@@ -18,9 +18,10 @@ public class Main
 				System.out.println("Update");
 				fileAdapter.updateOnGoingEventsList();
 				fileAdapter.updateUpComingEventsList();
+
 				test.updateUpcomingEventsArea();
 				test.updateOnGoingEventsArea();
-				Thread.sleep(5 * 60 * 10000);
+				Thread.sleep(20000);
 			}
 		} catch (InterruptedException e)
 		{

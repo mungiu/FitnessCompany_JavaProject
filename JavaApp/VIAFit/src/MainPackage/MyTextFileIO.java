@@ -4,12 +4,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /// Creates, reads and writes the text files
-public class MyTextFileIO
+public class MyTextFileIO implements Serializable
 {
+	private static final long serialVersionUID = 2470124024350312528L;
 	// used for writing to file
 	FileOutputStream fileOut = null;
 	PrintWriter write = null;
