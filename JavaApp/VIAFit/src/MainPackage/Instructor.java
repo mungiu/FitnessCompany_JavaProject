@@ -5,28 +5,41 @@ import java.util.ArrayList;
 
 public class Instructor implements Serializable
 {
-	/**
-	 * Generated serial version UID
-	 */
-	private static final long serialVersionUID = 2596626544601247578L;
-	private int instructorID;
-	private String firstName, lastName;
-	private FileAdapter fileAdapter;
-	private ArrayList<ClassType> qualifiedClassesList;
-	private ArrayList<ClassType> allTaughtEventsList;
+   /**
+    * Generated serial version UID
+    */
+   private static final long serialVersionUID = 2596626544601247578L;
+   private int instructorID;
+   private String firstName, lastName;
+   private FileAdapter fileAdapter;
+   private ArrayList<ClassType> qualifiedClassesList;
+   private ArrayList<ClassType> allTaughtEventsList;
 
-	public Instructor(String firstName, String lastName)
-	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.instructorID = getNewInstructorID();
-		allTaughtEventsList = new ArrayList<ClassType>();
-		qualifiedClassesList = new ArrayList<ClassType>();
-	}
+   /**
+    * Two-argument constructor.
+    * 
+    * @param firstName
+    *           the instructors first name.
+    * @param lastName
+    *           the instructors last name.
+    */
+   public Instructor(String firstName, String lastName)
+   {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.instructorID = getNewInstructorID();
+      allTaughtEventsList = new ArrayList<ClassType>();
+      qualifiedClassesList = new ArrayList<ClassType>();
+   }
 
-	public int getNewInstructorID()
-	{
-	   int biggestID = 0;
+   /**
+    * Gets the instructors new ID number.
+    * 
+    * @return the instructors new ID number.
+    */
+   public int getNewInstructorID()
+   {
+      int biggestID = 0;
       ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
 
       for (int i = 0; i < tempInstList.size(); i++)
@@ -34,65 +47,109 @@ public class Instructor implements Serializable
             biggestID = tempInstList.get(i).getInstructorID();
 
       return biggestID + 1;
-	}
+   }
 
-	public String getFirstName()
-	{
-		return firstName;
-	}
+   /**
+    * Gets the instructors first name.
+    * 
+    * @return the instructors first name.
+    */
+   public String getFirstName()
+   {
+      return firstName;
+   }
 
-	public void setFirstName(String firstName)
-	{
-		this.firstName = firstName;
-	}
+   /**
+    * Sets the instructors first name
+    * 
+    * @param firstName
+    *           is what the instructors first name will be set to.
+    */
+   public void setFirstName(String firstName)
+   {
+      this.firstName = firstName;
+   }
 
-	public String getLastName()
-	{
-		return lastName;
-	}
+   /**
+    * Gets the instructors last name.
+    * 
+    * @return the instructors last name.
+    */
+   public String getLastName()
+   {
+      return lastName;
+   }
 
-	public void setLastName(String lastName)
-	{
-		this.lastName = lastName;
-	}
+   /**
+    * Sets the instructors last name.
+    * 
+    * @param lastName
+    *           is what the instructors last name will be set to.
+    */
+   public void setLastName(String lastName)
+   {
+      this.lastName = lastName;
+   }
 
-	public int getInstructorID()
-	{
-		return instructorID;
-	}
+   /**
+    * Get the instructors ID number.
+    * 
+    * @return the instructors ID number.
+    */
+   public int getInstructorID()
+   {
+      return instructorID;
+   }
 
+   /**
+    * Gets the instructors qualified classes list.
+    * 
+    * @return the instructors qualified classes list.
+    */
+   public ArrayList<ClassType> getQualifiedClassesList()
+   {
+      return qualifiedClassesList;
+   }
 
-	public ArrayList<ClassType> getQualifiedClassesList()
-	{
-		return qualifiedClassesList;
-	}
+   /**
+    * Gets the instructors all taught events list.
+    * 
+    * @return the instructors all taught events list.
+    */
 
-	public ArrayList<ClassType> getAllTaughtEvents()
-	{
-		return allTaughtEventsList;
-	}
-	
-	public void addQualifedClassToList(ClassType classType){
-		qualifiedClassesList.add(classType);
-	}
+   public ArrayList<ClassType> getAllTaughtEvents()
+   {
+      return allTaughtEventsList;
+   }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof Instructor))
-			return false;
-		else
-		{
-			Instructor temp = (Instructor) obj;
+   /**
+    * Adds the instructors qualified class to the list.
+    * 
+    * @param classType
+    *           adds the qualified class to the list.
+    */
+   public void addQualifedClassToList(ClassType classType)
+   {
+      qualifiedClassesList.add(classType);
+   }
 
-			return instructorID == temp.instructorID;
-		}
-	}
+   @Override
+   public boolean equals(Object obj)
+   {
+      if (!(obj instanceof Instructor))
+         return false;
+      else
+      {
+         Instructor temp = (Instructor) obj;
 
-	@Override
-	public String toString()
-	{
-		String str = instructorID +"\t"+firstName +"\t" + lastName + "\t";
-		return str;
-	}
+         return instructorID == temp.instructorID;
+      }
+   }
+
+   @Override
+   public String toString()
+   {
+      String str = instructorID + "\t" + firstName + "\t" + lastName + "\t";
+      return str;
+   }
 }
