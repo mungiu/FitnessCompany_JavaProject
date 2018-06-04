@@ -161,11 +161,7 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             ArrayList<Event> tempFound = new ArrayList<Event>();
             for(int i = 0;i<fileAdapter.getEventsList().size();i++)
             {
-               if(fileAdapter.getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()))
-               {
-                  tempFound.add(fileAdapter.getEventsList().get(i));
-               }
-               if(fileAdapter.getEventsList().get(i).getClassType().contains(search.getText()))
+               if(fileAdapter.getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) || fileAdapter.getEventsList().get(i).getClassType().toLowerCase().contains(search.getText()))
                {
                   tempFound.add(fileAdapter.getEventsList().get(i));
                }

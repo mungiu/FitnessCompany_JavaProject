@@ -134,7 +134,19 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
-               allEvents.getSelectedValue().assignMemberToEvent(temp);
+               allEvents.getSelectedValue().getMembersList().add(temp);
+               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+               fileAdapter.updateEventsList();
+               
+               //update box to show the added
+               listSignedUp.clear();
+               for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+               {
+                  if(fileAdapter.getEventsList().get(i).getMembersList().contains(temp))
+                  {
+                     listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+                  }
+               }
          }
          if(e.getSource()==removeFrom)
          {
@@ -146,6 +158,7 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
+            System.out.println(allSignedUpForArea.getSelectedValue());
            allSignedUpForArea.getSelectedValue().removeMemberFromEvent(temp);
          }
          if(e.getSource()==save)
@@ -170,6 +183,7 @@ public class newMemberGUI extends JFrame
               tempMember.setPhoneNumber(phoneInput.getText());
               tempMember.setMemberSince(new MyDate(Integer.parseInt(membershipSinceInputDay.getText()), Integer.parseInt(membershipSinceInputMonth.getText()), Integer.parseInt(membershipSinceInputYear.getText())));
               
+              
               fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
               fileAdapter.updateMembersList();
             }
@@ -192,6 +206,23 @@ public class newMemberGUI extends JFrame
             fileAdapter.updateMembersList();
             }
             dispose();
+         }
+         if(e.getSource()==remove)
+         {
+            int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this member?", "Confirm before deleting member", JOptionPane.YES_NO_OPTION);
+            if(yesno==JOptionPane.YES_OPTION)
+               {
+                  for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+                  {
+                        if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+                        {
+                        fileAdapter.getMembersList().remove(i);
+                        fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
+                        fileAdapter.updateMembersList();
+                        dispose();
+                        }
+                  }
+               }
          }
       }
 
@@ -416,7 +447,7 @@ public class newMemberGUI extends JFrame
    String[] temp = {"Premium", "Standard"};
    membershipTypeInput = new JComboBox<String>(temp);
    
-   classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesArr());
+   classTypeInput = new JComboBox<String>(fileAdapter.getAllClassTypes());
    
    save = new JButton("Save");
    save.addActionListener(myListener);
