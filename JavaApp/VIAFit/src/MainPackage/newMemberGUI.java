@@ -124,7 +124,78 @@ public class newMemberGUI extends JFrame
                editMemberGUI(false);
             }
          }
-  
+         if(e.getSource()==signUp)
+         {
+            Member temp = null;
+            for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+            {
+               if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+               {
+                  temp = fileAdapter.getMembersList().get(i);
+               }
+            }
+            if(!memberIDInput.getText().equals(""))
+            {
+               allEvents.getSelectedValue().assignMemberToEvent(temp);
+            }
+         }
+         if(e.getSource()==removeFrom)
+         {
+            Member temp = null;
+            for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+            {
+               if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+               {
+                  temp = fileAdapter.getMembersList().get(i);
+               }
+            }
+           allSignedUpForArea.getSelectedValue().removeMemberFromEvent(temp);
+         }
+         if(e.getSource()==save)
+         {
+            Member tempMember = null;
+            
+            if(editInfo.isSelected()==true && !memberIDInput.getText().equals(""))
+            {
+               for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+               {
+                  if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+                  {
+                     tempMember = fileAdapter.getMembersList().get(i);
+                  }
+               }
+              tempMember.setName(nameInput.getText());
+              if(membershipTypeInput.getSelectedIndex()==0)
+              {
+                 tempMember.setIsPremium(true);
+              }
+              tempMember.setEMail(emailInput.getText());
+              tempMember.setPhoneNumber(phoneInput.getText());
+              tempMember.setMemberSince(new MyDate(Integer.parseInt(membershipSinceInputDay.getText()), Integer.parseInt(membershipSinceInputMonth.getText()), Integer.parseInt(membershipSinceInputYear.getText())));
+              
+              fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
+              fileAdapter.updateMembersList();
+            }
+            else
+            {
+            
+            String name = nameInput.getText();
+            boolean type = false;
+            if(membershipTypeInput.getSelectedIndex()==0)
+            {
+               type = true;
+            }
+            MyDate memberSince = new MyDate(Integer.parseInt(membershipSinceInputDay.getText()), Integer.parseInt(membershipSinceInputMonth.getText()), Integer.parseInt(membershipSinceInputYear.getText()));
+            String email = emailInput.getText();
+            String phone = phoneInput.getText();
+            
+            tempMember = new Member(name, email, phone, type);
+            tempMember.setMemberSince(memberSince);
+            fileAdapter.saveMemberToAvailableBinList(tempMember);
+            fileAdapter.updateMembersList();
+            }
+            dispose();
+         }
       }
 
       //Focus listener
@@ -198,7 +269,39 @@ public class newMemberGUI extends JFrame
    
    
    
-   
+   public void fillWithMember(Member member)
+   {
+      editMemberGUI(false);
+      nameInput.setText(member.getName());
+      if(member.getIsPremium())
+      {
+        membershipTypeInput.setSelectedIndex(0);
+      }
+      else membershipTypeInput.setSelectedIndex(1);
+      membershipSinceInputDay.setText(member.getMemberSince().getDay()+"");
+      membershipSinceInputMonth.setText(member.getMemberSince().getMonth()+"");
+      membershipSinceInputYear.setText(member.getMemberSince().getYear()+"");
+      memberIDInput.setText(member.getMemberID()+"");
+      emailInput.setText(member.getEMail());
+      phone.setText(member.getPhoneNumber());
+      
+      for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+      {
+         if(fileAdapter.getEventsList().get(i).getMembersList().contains(member))
+         {
+            listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+         }
+      }
+      
+      for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+      {
+         if(fileAdapter.getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+         {
+            listModel.addElement(fileAdapter.getEventsList().get(i));
+         }
+      }
+      
+   }
    
    
    
@@ -222,7 +325,6 @@ public class newMemberGUI extends JFrame
             editInfo.setSelected(false);
             nameInput.setEnabled(false);
             membershipTypeInput.setEnabled(false);
-            memberIDInput.setEnabled(false);
             emailInput.setEnabled(false);
             phoneInput.setEnabled(false);
             membershipSinceInputDay.setEnabled(false);
@@ -234,7 +336,6 @@ public class newMemberGUI extends JFrame
             editInfo.setSelected(true);
             nameInput.setEnabled(true);
             membershipTypeInput.setEnabled(true);
-            memberIDInput.setEnabled(false);
             emailInput.setEnabled(true);
             phoneInput.setEnabled(true);
             membershipSinceInputDay.setEnabled(true);
@@ -289,14 +390,18 @@ public class newMemberGUI extends JFrame
    allSignedupForLabel = new JLabel("Signed up for:");
    
    nameInput = new JTextField();
-   memberIDInput = new JTextField();
+   memberIDInput = new JTextField("");
    memberIDInput.setEditable(false);
    emailInput = new JTextField();
-   membershipSinceInputDay = new JTextField("Day");
+   new MyDate();
+   membershipSinceInputDay = new JTextField(MyDate.today().getDay()+"");
+   membershipSinceInputDay.setEditable(false);
    membershipSinceInputDay.addFocusListener(myListener);
-   membershipSinceInputMonth = new JTextField("Month");
+   membershipSinceInputMonth = new JTextField(MyDate.today().getMonth()+"");
+   membershipSinceInputMonth.setEditable(false);
    membershipSinceInputMonth.addFocusListener(myListener);
-   membershipSinceInputYear = new JTextField("Year");
+   membershipSinceInputYear = new JTextField(MyDate.today().getYear()+"");
+   membershipSinceInputYear.setEditable(false);
    membershipSinceInputYear.addFocusListener(myListener);
    phoneInput = new JTextField();
    

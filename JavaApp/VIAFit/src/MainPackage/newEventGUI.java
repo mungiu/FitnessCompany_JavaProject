@@ -188,7 +188,7 @@ public class newEventGUI extends JFrame
 				
 				Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
 				
-				if(editInfo.isSelected()==true)
+				if(editInfo.isSelected()==true && !id.getText().equals(""))
 				{
 				   for(int i = 0;i<fileAdapter.getEventsList().size();i++)
 				   {

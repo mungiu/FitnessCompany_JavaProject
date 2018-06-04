@@ -17,9 +17,9 @@ public class Member implements Serializable
     */
    private static final long serialVersionUID = 4437337227753008510L;
 
-   private String firstName, lastName, email;
+   private String name, email;
    private int memberID;
-   private int phoneNumber;
+   private String phoneNumber;
    private boolean isPremium;
    private FileAdapter fileAdapter;
    private MyDate memberSince;
@@ -41,12 +41,12 @@ public class Member implements Serializable
     * @param isPremium
     *           is the member premium.
     */
-   public Member(String firstName, String lastName, String email,
-         int phoneNumber, boolean isPremium)
+   public Member(String name, String email,
+         String phoneNumber, boolean isPremium)
    {
       // TODO: pull new memberID from binary file by checking biggest member ID
-      this.firstName = firstName;
-      this.lastName = lastName;
+      this.name = name;
+
       this.email = email;
       this.memberID = getNewMemberID();
       this.phoneNumber = phoneNumber;
@@ -66,14 +66,17 @@ public class Member implements Serializable
    {
       int biggestID = 0;
       ArrayList<Member> tempMembList = fileAdapter.getMembersList();
-
+   
       for (int i = 0; i < tempMembList.size(); i++)
          if (biggestID < tempMembList.get(i).getMemberID())
             biggestID = tempMembList.get(i).getMemberID();
-
       return biggestID + 1;
    }
 
+   public void setMemberID(int id)
+   {
+      memberID = id;
+   }
    /**
     * Gets the members ID number.
     * 
@@ -89,9 +92,9 @@ public class Member implements Serializable
     * 
     * @return the members first name.
     */
-   public String getFirstName()
+   public String getName()
    {
-      return firstName;
+      return name;
    }
 
    /**
@@ -100,30 +103,9 @@ public class Member implements Serializable
     * @param firstName
     *           is what the members first name will be set to.
     */
-   public void setFirstName(String firstName)
+   public void setName(String firstName)
    {
-      this.firstName = firstName;
-   }
-
-   /**
-    * Gets the members last name.
-    * 
-    * @return the members last name.
-    */
-   public String getLastName()
-   {
-      return lastName;
-   }
-
-   /**
-    * Sets the members last name.
-    * 
-    * @param lastName
-    *           is what the members last name will be set to.
-    */
-   public void setLastName(String lastName)
-   {
-      this.lastName = lastName;
+      this.name = firstName;
    }
 
    /**
@@ -131,7 +113,7 @@ public class Member implements Serializable
     * 
     * @return the ,members phone number.
     */
-   public int getPhoneNumber()
+   public String getPhoneNumber()
    {
       return phoneNumber;
    }
@@ -142,7 +124,7 @@ public class Member implements Serializable
     * @param phoneNumber
     *           is what the members phone number will be set to.
     */
-   public void setPhoneNumber(int phoneNumber)
+   public void setPhoneNumber(String phoneNumber)
    {
       this.phoneNumber = phoneNumber;
    }
@@ -199,6 +181,11 @@ public class Member implements Serializable
    {
       return memberSince;
    }
+   
+   public void setMemberSince(MyDate memberSince)
+   {
+      this.memberSince = memberSince;
+   }
 
    /**
     * Gets the members event list.
@@ -226,7 +213,7 @@ public class Member implements Serializable
    @Override
    public String toString()
    {
-      String str = memberID + "\t" + firstName + "\t" + lastName;
+      String str = memberID + "\t" + name;
       return str;
    }
 

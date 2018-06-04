@@ -30,6 +30,7 @@ public class FileAdapter
 		onGoingEventsList = new ArrayList<Event>();
 		upComingEventsList = new ArrayList<Event>();
 		eventsList = new ArrayList<Event>();
+		membersList = new ArrayList<Member>();
 
 		eventsList = new ArrayList<Event>();
 		myFileIO = new MyFileIO();
@@ -327,7 +328,7 @@ public class FileAdapter
 			e.printStackTrace();
 		} catch (EOFException e)
 		{
-			e.printStackTrace();
+		//	e.printStackTrace();
 			System.out.println("Members List Bin File Is Empty");
 		}
 
@@ -387,7 +388,7 @@ public class FileAdapter
 			e.printStackTrace();
 		} catch (EOFException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println("Instructor List Binary File Is Empty");
 			// TODO
 		} catch (IOException e)
