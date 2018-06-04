@@ -173,7 +173,7 @@ public class newMemberGUI extends JFrame
               fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
               fileAdapter.updateMembersList();
             }
-            else if(editInfo.isSelected()==false && memberIDInput.getText().equals(""))
+            else if(editInfo.isSelected()==true && memberIDInput.getText().equals(""))
             {
             
             String name = nameInput.getText();
