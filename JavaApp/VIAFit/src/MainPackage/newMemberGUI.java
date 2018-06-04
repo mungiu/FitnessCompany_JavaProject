@@ -158,8 +158,18 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
-            System.out.println(allSignedUpForArea.getSelectedValue());
            allSignedUpForArea.getSelectedValue().removeMemberFromEvent(temp);
+           fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+           fileAdapter.updateEventsList();
+           //update box to remove the event
+           listSignedUp.clear();
+           for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+           {
+              if(fileAdapter.getEventsList().get(i).getMembersList().contains(temp))
+              {
+                 listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+              }
+           }
          }
          if(e.getSource()==save)
          {

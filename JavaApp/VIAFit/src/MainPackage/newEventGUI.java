@@ -166,8 +166,8 @@ public class newEventGUI extends JFrame
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeCheck.isSelected()==true)
 			   {
-			      fileAdapter.getAllClassTypeList().add(new ClassType(typeInput.getText()));
-			      fileAdapter.saveClassTypesListToBin(fileAdapter.getAllClassTypeList());
+			      fileAdapter.getAllClassTypesList().add(new ClassType(typeInput.getText()));
+			      fileAdapter.saveClassTypesListToBin(fileAdapter.getAllClassTypesList());
 			      tempType.setClassName(typeInput.getText());
 			   }
 			   if(newTypeCheck.isSelected()==false)

@@ -6,11 +6,10 @@ public class Main
 	{
 		mainGUI test = new mainGUI();
 		FileAdapter fileAdapter = new FileAdapter();
-		// Member temp = new Member("test", "test", "test",true);
-		// temp.setMemberID(20);
-		// fileAdapter.getMembersList().add(temp);
-		// fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
-		// fileAdapter.updateMembersList();
+		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+		{
+		   System.out.println(fileAdapter.getEventsList().get(i).getEventID());
+		}
 		// This will run every 5 min.
 		try
 		{
