@@ -180,7 +180,7 @@ public class Event implements Serializable
 	@Override
 	public String toString()
 	{
-		String str = "<html><pre style='font-size:11px'>"+className + "\t" + classType + "\t" + maxMembers + "\t" + startDate + " - " + endDate + "\t"
+		String str = "<html><pre style='font-size:11px'>"+className + "\t\t" + classType + "\t" + maxMembers + "\t" + startDate + " - " + endDate + "\t"
 				+ startTime + " - " + endTime+"</pre></html>";
 		return str;
 	}
