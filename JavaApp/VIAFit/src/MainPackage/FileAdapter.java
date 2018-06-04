@@ -87,6 +87,84 @@ public class FileAdapter
 		return false;
 	}
 
+	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
+	{
+
+		return instructor.getQualifiedClassesList();
+	}
+
+	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor)
+	{
+		return instructor.getAllTaughtEvents();
+	}
+
+	/**
+	 * Method that converts the ArrayList<String> into a String array for use in
+	 * ComboBox
+	 * 
+	 * @return temp an array of strings
+	 */
+	public String[] getAllClassTypes()
+	{
+		updateClassTypesList();
+		String[] temp = new String[1];
+		temp[0] = "All events";
+		if (allClassTypeList != null)
+		{
+			temp = new String[allClassTypeList.size() + 1];
+			temp[0] = "All events";
+			for (int i = 0; i < allClassTypeList.size(); i++)
+			{
+				temp[i + 1] = allClassTypeList.get(i).getClassName();
+			}
+		}
+		return temp;
+
+	}
+
+	/**
+	 * Method for finding all upcoming or ongoing events a specific member is signed
+	 * up for
+	 * 
+	 * @param member
+	 *            The member object that is searched for in the ongoing and upcoming
+	 *            ArrayLists
+	 * @return temp An ArrayList<Event> containing all upcoming and ongoing events
+	 *         the given member attended
+	 */
+	public ArrayList<Event> getAllAttendingEventsForMember(Member member)
+	{
+		ArrayList<Event> temp = new ArrayList<Event>();
+
+		for (int i = 0; i < onGoingEventsList.size(); i++)
+			if (onGoingEventsList.get(i).getMembersList().contains(member))
+				temp.add(onGoingEventsList.get(i));
+
+		for (int i = 0; i < upComingEventsList.size(); i++)
+			if (upComingEventsList.get(i).getMembersList().contains(member))
+				temp.add(upComingEventsList.get(i));
+
+		return temp;
+	}
+
+	/**
+	 * Method that finds all events with a given classType of type String
+	 * 
+	 * @param input
+	 *            A String to compare class type
+	 * @return allEventOfType an ArrayList<Event>
+	 */
+	public ArrayList<Event> getAllEventsOfType(String input)
+	{
+		ArrayList<Event> allEventOfType = new ArrayList<Event>();
+
+		for (int i = 0; i < eventsList.size(); i++)
+			if (eventsList.get(i).getClassType().equals(input))
+				allEventOfType.add(eventsList.get(i));
+
+		return allEventOfType;
+	}
+
 	public void updateOnGoingEventsList()
 	{
 		updateEventsList();
@@ -183,17 +261,6 @@ public class FileAdapter
 			}
 	}
 
-	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
-	{
-
-		return instructor.getQualifiedClassesList();
-	}
-
-	public ArrayList<ClassType> getAllThoughtEventList(Instructor instructor)
-	{
-		return instructor.getAllTaughtEvents();
-	}
-
 	public void updateInstructorsList()
 	{
 		instructorsList = readInstructorsListFromBin();
@@ -212,73 +279,6 @@ public class FileAdapter
 	public void updateClassTypesList()
 	{
 		allClassTypeList = readClassTypesListFromBin();
-	}
-
-	/**
-	 * Method that converts the ArrayList<String> into a String array for use in
-	 * ComboBox
-	 * 
-	 * @return temp an array of strings
-	 */
-	public String[] getAllClassTypes()
-	{
-		updateClassTypesList();
-		String[] temp = new String[1];
-		temp[0] = "All events";
-		if (allClassTypeList != null)
-		{
-			temp = new String[allClassTypeList.size() + 1];
-			temp[0] = "All events";
-			for (int i = 0; i < allClassTypeList.size(); i++)
-			{
-				temp[i + 1] = allClassTypeList.get(i).getClassName();
-			}
-		}
-		return temp;
-
-	}
-
-	/**
-	 * Method for finding all upcoming or ongoing events a specific member is signed
-	 * up for
-	 * 
-	 * @param member
-	 *            The member object that is searched for in the ongoing and upcoming
-	 *            ArrayLists
-	 * @return temp An ArrayList<Event> containing all upcoming and ongoing events
-	 *         the given member attended
-	 */
-	public ArrayList<Event> getAllAttendingEventsForMember(Member member)
-	{
-		ArrayList<Event> temp = new ArrayList<Event>();
-
-		for (int i = 0; i < onGoingEventsList.size(); i++)
-			if (onGoingEventsList.get(i).getMembersList().contains(member))
-				temp.add(onGoingEventsList.get(i));
-
-		for (int i = 0; i < upComingEventsList.size(); i++)
-			if (upComingEventsList.get(i).getMembersList().contains(member))
-				temp.add(upComingEventsList.get(i));
-
-		return temp;
-	}
-
-	/**
-	 * Method that finds all events with a given classType of type String
-	 * 
-	 * @param input
-	 *            A String to compare class type
-	 * @return allEventOfType an ArrayList<Event>
-	 */
-	public ArrayList<Event> getAllEventsOfType(String input)
-	{
-		ArrayList<Event> allEventOfType = new ArrayList<Event>();
-
-		for (int i = 0; i < eventsList.size(); i++)
-			if (eventsList.get(i).getClassType().equals(input))
-				allEventOfType.add(eventsList.get(i));
-
-		return allEventOfType;
 	}
 
 	public void saveMembersListToBin(ArrayList<Member> membersList)
@@ -302,6 +302,75 @@ public class FileAdapter
 		ArrayList<Member> tempList = readMembersListFromBin();
 		tempList.add(member);
 		saveMembersListToBin(tempList);
+	}
+
+	public void saveInstructorsListToBin(ArrayList<Instructor> instructorsList)
+	{
+		try
+		{
+			myFileIO.writeToFile(instructorsListBinFileName, instructorsList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void saveInstructorToAvailableBinList(Instructor instructor)
+	{
+		ArrayList<Instructor> tempList = readInstructorsListFromBin();
+		tempList.add(instructor);
+		saveInstructorsListToBin(tempList);
+	}
+
+	public void saveEventsListToBin(ArrayList<Event> eventsList)
+	{
+		try
+		{
+			myFileIO.writeToFile(eventsListBinFileName, eventsList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void saveEventToAvailableBinList(Event event)
+	{
+		ArrayList<Event> tempList = readEventsListFromBin();
+		tempList.add(event);
+		saveEventsListToBin(tempList);
+	}
+
+	public void saveClassTypesListToBin(ArrayList<ClassType> classTypesList)
+	{
+		try
+		{
+			myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void saveClassTypeToAvailableBinList(ClassType ClassType)
+	{
+		ArrayList<ClassType> tempList = readClassTypesListFromBin();
+		tempList.add(ClassType);
+		saveClassTypesListToBin(tempList);
 	}
 
 	public ArrayList<Member> readMembersListFromBin()
@@ -328,7 +397,7 @@ public class FileAdapter
 			e.printStackTrace();
 		} catch (EOFException e)
 		{
-		//	e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Members List Bin File Is Empty");
 		}
 
@@ -339,29 +408,6 @@ public class FileAdapter
 		}
 
 		return tempList;
-	}
-
-	public void saveInstructorsListToBin(ArrayList<Instructor> instructorsList)
-	{
-		try
-		{
-			myFileIO.writeToFile(instructorsListBinFileName, instructorsList);
-		} catch (FileNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void saveInstructorToAvailableBinList(Instructor instructor)
-	{
-		ArrayList<Instructor> tempList = readInstructorsListFromBin();
-		tempList.add(instructor);
-		saveInstructorsListToBin(tempList);
 	}
 
 	public ArrayList<Instructor> readInstructorsListFromBin()
@@ -388,7 +434,7 @@ public class FileAdapter
 			e.printStackTrace();
 		} catch (EOFException e)
 		{
-			//e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Instructor List Binary File Is Empty");
 			// TODO
 		} catch (IOException e)
@@ -399,29 +445,6 @@ public class FileAdapter
 		}
 
 		return tempList;
-	}
-
-	public void saveEventsListToBin(ArrayList<Event> eventsList)
-	{
-		try
-		{
-			myFileIO.writeToFile(eventsListBinFileName, eventsList);
-		} catch (FileNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void saveEventToAvailableBinList(Event event)
-	{
-		ArrayList<Event> tempList = readEventsListFromBin();
-		tempList.add(event);
-		saveEventsListToBin(tempList);
 	}
 
 	public ArrayList<Event> readEventsListFromBin()
@@ -453,29 +476,6 @@ public class FileAdapter
 		}
 
 		return tempList;
-	}
-
-	public void saveClassTypesListToBin(ArrayList<ClassType> classTypesList)
-	{
-		try
-		{
-			myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
-		} catch (FileNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void saveClassTypeToAvailableBinList(ClassType ClassType)
-	{
-		ArrayList<ClassType> tempList = readClassTypesListFromBin();
-		tempList.add(ClassType);
-		saveClassTypesListToBin(tempList);
 	}
 
 	public ArrayList<ClassType> readClassTypesListFromBin()
