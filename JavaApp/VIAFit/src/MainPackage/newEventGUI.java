@@ -79,6 +79,7 @@ public class newEventGUI extends JFrame
 	private JTextField endDateYear;
 	private JTextField startTimeHour;
 	private JTextField startTimeMinute;
+	private JTextField id;
 
 	private DefaultListModel<Instructor> listInstructors;
 	private DefaultListModel<Member> listMembers;
@@ -184,8 +185,29 @@ public class newEventGUI extends JFrame
 				String tempDura = duraCombo.getSelectedItem().toString().charAt(0) + "";
 				int duration = Integer.parseInt(tempDura);
 				MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText()) + duration, 0, 0);
+				
 				Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
-				fileAdapter.saveEventToAvailableBinList(temp);
+				
+				if(editInfo.isSelected()==true)
+				{
+				   for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+				   {
+				      if(id.getText().equals(fileAdapter.getEventsList().get(i).getEventID()+""))
+				      {
+				         temp = fileAdapter.getEventsList().get(i);
+				      }
+				   }
+				   temp.setClassName(className);
+				   temp.setClassType(tempType.toString());
+				   temp.setMaxMembers(maxNumbers);
+				   temp.setStartTime(startTime);
+				   temp.setEndTime(endTime);
+				   temp.setStartDate(startDate);
+				   temp.setEndDate(endDate);
+				   fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+				   fileAdapter.updateEventsList();
+				}
+				else fileAdapter.saveEventToAvailableBinList(temp);
 				dispose();
 			}
 			if(e.getSource()==addInstructor)
@@ -212,6 +234,23 @@ public class newEventGUI extends JFrame
                typeCombo.setVisible(true);
                typeInput.setVisible(false);
             }
+			}
+			if(e.getSource()==remove)
+			{
+			  int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm before deleting event", JOptionPane.YES_NO_OPTION);
+			   if(yesno==JOptionPane.YES_OPTION)
+			      {
+			         for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+			         {
+			               if(id.getText().equals(fileAdapter.getEventsList().get(i).getEventID()+""))
+			               {
+			               fileAdapter.getEventsList().remove(i);
+			               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+			               fileAdapter.updateEventsList();
+			               dispose();
+			               }
+			         }
+			   }
 			}
 		}
 
@@ -405,7 +444,7 @@ public class newEventGUI extends JFrame
 	   editEventArea(false);
 	   nameInput.setText(event.getClassName());
 	   maxMembersInput.setText(event.getMaxMembers()+"");
-	   
+	   id.setText(event.getEventID()+"");
 	   for(int i = 0;i<tempType.length;i++)
 	   {
 	     if(tempType[i].equals(event.getClassType()))
@@ -553,6 +592,7 @@ public class newEventGUI extends JFrame
 		startTimeHour.addFocusListener(myListener);
 		startTimeMinute = new JTextField("Minute");
 		startTimeMinute.addFocusListener(myListener);
+		id = new JTextField();
 
 		instructorCombo = new JComboBox<String>(tempIns);
 		tempType = fileAdapter.getAllClassTypes();

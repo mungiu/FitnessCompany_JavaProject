@@ -88,7 +88,7 @@ public class Event implements Serializable
 		return startDate;
 	}
 
-	public void getStartDate(MyDate startDate)
+	public void setStartDate(MyDate startDate)
 	{
 		this.startDate = startDate;
 	}
