@@ -291,6 +291,8 @@ public void updateOnGoingEventsArea()
 
 public void updateUpcomingEventsArea()
 {
+   fileAdapter.updateEventsList();
+   fileAdapter.updateUpComingEventsList();
    if(fileAdapter.getUpComingEventsList()!=null)
    {
       listUpcoming.clear();
@@ -346,13 +348,7 @@ public mainGUI()
    eventLabel = new JLabel("Event");
    homeLabel = new JLabel();
    
-   if(fileAdapter.getOnGoingEventsList()!=null)
-   {
-   for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
-   {
-      listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
-   }
-   }
+   
    listOngoing = new DefaultListModel<Event>();
    ongoingEvents = new JList<Event>(listOngoing);
    ongoingEventsScroll = new JScrollPane(ongoingEvents);
@@ -360,6 +356,7 @@ public mainGUI()
    
    listUpcoming = new DefaultListModel<Event>();
    upcomingEvents = new JList<Event>(listUpcoming);
+   updateUpcomingEventsArea();
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
    upcomingEvents.addListSelectionListener(listListener);
    

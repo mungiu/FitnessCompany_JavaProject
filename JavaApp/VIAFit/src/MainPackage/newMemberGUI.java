@@ -158,7 +158,7 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
-           allSignedUpForArea.getSelectedValue().removeMemberFromEvent(temp);
+           allSignedUpForArea.getSelectedValue().getMembersList().remove(temp);
            fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
            fileAdapter.updateEventsList();
            //update box to remove the event

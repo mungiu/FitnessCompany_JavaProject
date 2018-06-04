@@ -15,11 +15,8 @@ public class Main
 		{
 			while (true)
 			{
-				System.out.println("Update");
 				fileAdapter.updateOnGoingEventsList();
 				fileAdapter.updateUpComingEventsList();
-				test.updateUpcomingEventsArea();
-				test.updateOnGoingEventsArea();
 				Thread.sleep(5 * 60 * 10000);
 			}
 		} catch (InterruptedException e)

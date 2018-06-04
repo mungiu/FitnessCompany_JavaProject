@@ -213,11 +213,10 @@ public class FileAdapter
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
 
-		if (eventsList != null)
+
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				currentEvent = eventsList.get(i);
-
 				thisEventStartTime = currentEvent.getStarTime();
 				thisEventEndTime = currentEvent.getEndTime();
 				thisEventStartDate = currentEvent.getStartDate();
@@ -231,6 +230,7 @@ public class FileAdapter
 				// adding future events (30 max)
 				if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
 				{
+				   
 					if (eventIsUpcomingYears)
 						upComingEventsList.add(currentEvent);
 					else if (eventIsUpcomingMonths)
@@ -259,6 +259,10 @@ public class FileAdapter
 						upComingEventsList.remove(currentEvent);
 				}
 			}
+			System.out.println(upComingEventsList.get(0));
+			System.out.println(upComingEventsList.get(1));
+			System.out.println(upComingEventsList.size());
+		
 	}
 
 	public void updateInstructorsList()

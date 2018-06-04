@@ -182,24 +182,17 @@ public class Event implements Serializable
 		attendingInstructorsList.remove(instructor);
 	}
 
-	public void removeMemberFromEvent(Member member)
+	public boolean equals(Object obj)
 	{
-	   fileAdapter = new FileAdapter();
-	   
-	   System.out.println("lol");
-		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
-		{
-		   System.out.println("test");
-		   if(fileAdapter.getEventsList().get(i).getEventID()==(this.getEventID()))
-		   {
-		      System.out.println(fileAdapter.getEventsList().get(i).getMembersList());
-		      fileAdapter.getEventsList().get(i).getMembersList().remove(member);
-		      fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
-		   }
-		}
+	   if(!(obj instanceof Event))
+	   {
+	      return false;
+	   }
+	   Event other = (Event)obj;
+	   return other.className.equals(className) && other.maxMembers==maxMembers && other.startDate.equals(startDate)
+	         && other.endDate.equals(endDate) && other.startTime.equals(startTime) && other.endTime.equals(endTime)
+	         && other.classType.equals(classType) && other.eventID==eventID;
 	}
-
-	@Override
 	public String toString()
 	{
 		String str = "<html><pre style='font-size:11px'>" + className + "\t\t" + classType + "\t" + maxMembers + "\t"
