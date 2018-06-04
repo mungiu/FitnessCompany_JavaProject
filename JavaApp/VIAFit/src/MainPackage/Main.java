@@ -19,6 +19,7 @@ public class Main
 				System.out.println("Update");
 				fileAdapter.updateOnGoingEventsList();
 				fileAdapter.updateUpComingEventsList();
+
 				test.updateUpcomingEventsArea();
 				test.updateOnGoingEventsArea();
 				Thread.sleep(5 * 60 * 10000);

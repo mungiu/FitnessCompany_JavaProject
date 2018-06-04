@@ -31,7 +31,7 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
-		// eventID = getNewEventID();
+		eventID = getNewEventID();
 	}
 
 	public int getNewEventID()
@@ -46,7 +46,7 @@ public class Event implements Serializable
 					biggestID = tempEventList.get(i).getEventID();
 		} catch (NullPointerException e)
 		{
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("tempEventList.get(i).getEventID() is NULL >>>>> biggestID set to 1");
 		}
 
