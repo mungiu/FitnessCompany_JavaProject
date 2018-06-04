@@ -369,7 +369,7 @@ public class MyDate implements Serializable
          return false;
       }
       MyDate other = (MyDate) obj;
-      return (other.day == day && other.month == day && other.year == year);
+      return other.day == day && other.month == day && other.year == year;
    }
 
    /**

@@ -279,6 +279,9 @@ private class MyListSelectionListener implements ListSelectionListener
 
 public void updateOnGoingEventsArea()
 {
+   fileAdapter.updateEventsList();
+   fileAdapter.updateOnGoingEventsList();
+   System.out.println(fileAdapter.getOnGoingEventsList().size());
    if(fileAdapter.getOnGoingEventsList()!=null)
    {
       listOngoing.clear();
@@ -296,6 +299,7 @@ public void updateUpcomingEventsArea()
    if(fileAdapter.getUpComingEventsList()!=null)
    {
       listUpcoming.clear();
+      System.out.println(fileAdapter.getUpComingEventsList().size());
       for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
       {
          listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
@@ -357,6 +361,7 @@ public mainGUI()
    listUpcoming = new DefaultListModel<Event>();
    upcomingEvents = new JList<Event>(listUpcoming);
    updateUpcomingEventsArea();
+   updateOnGoingEventsArea();
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
    upcomingEvents.addListSelectionListener(listListener);
    

@@ -9,8 +9,8 @@ import java.util.GregorianCalendar;
 
 public class FileAdapter implements Serializable
 {
-	private static final long serialVersionUID = -3861630692242500388L;
 
+   private static final long serialVersionUID = -3861630692242500388L;
 	String membersListBinFileName, instructorsListBinFileName, eventsListBinFileName, classTypeListBinFileName;
 
 	MyFileIO myFileIO;
@@ -38,13 +38,13 @@ public class FileAdapter implements Serializable
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
-		// update and save of all lists ?????
-		updateOnGoingEventsList();
-		updateUpComingEventsList();
-		updateInstructorsList();
-		updateMembersList();
-		updateEventsList();
-		updateClassTypesList();
+		// update and save of all lists ????? BROKE THE UPDATE PANEL - SIMON
+//		updateOnGoingEventsList();
+//		updateUpComingEventsList();
+//		updateInstructorsList();
+//		updateMembersList();
+//		updateEventsList();
+//		updateClassTypesList();
 	}
 
 	public ArrayList<Event> getOnGoingEventsList()
@@ -178,22 +178,24 @@ public class FileAdapter implements Serializable
 		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 
-		if (eventsList != null)
+		
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				thisEventStartTime = eventsList.get(i).getStarTime();
 				thisEventEndTime = eventsList.get(i).getEndTime();
 				thisEventStartDate = eventsList.get(i).getStartDate();
 
-				boolean eventIsToday = thisEventStartDate.equals(today);
+				boolean eventIsToday = thisEventStartDate.getDay()==today.getDay() && thisEventStartDate.getMonth()==today.getMonth() && thisEventStartDate.getYear()==today.getYear();
 				boolean eventStarted = thisEventStartTime.getHour() < currentTime.getHour();
 				boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
 				boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
 				boolean containsEvent = onGoingEventsList.contains(eventsList.get(i));
 
-				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
-					onGoingEventsList.add(eventsList.get(i));
 
+				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
+				{
+				   onGoingEventsList.add(eventsList.get(i));
+				}
 				else if (containsEvent && eventFinished)
 					onGoingEventsList.remove(i);
 			}
@@ -236,22 +238,18 @@ public class FileAdapter implements Serializable
 					if (eventIsUpcomingYears)
 					{
 					   upComingEventsList.add(currentEvent);
-					   System.out.println(upComingEventsList.size()+"lol");
 					}
 					else if (eventIsUpcomingMonths)
 					{
 					   upComingEventsList.add(currentEvent);
-					   System.out.println(upComingEventsList.size()+"jj");
 					}
 					else if (eventIsUpcomingDays)
 					{
 					   upComingEventsList.add(currentEvent);
-					   System.out.println(upComingEventsList.size()+"hej");
 					}
 					else if (eventIsUpcomingHours)
 					{
 					   upComingEventsList.add(currentEvent);
-					   System.out.println(upComingEventsList.size()+"pp");
 					}	
 				}
 
@@ -535,5 +533,40 @@ public class FileAdapter implements Serializable
 
 		return tempList;
 	}
+	
+	public int getNewID(Object obj)
+   {
+	   if(obj instanceof Event)
+	   {
+      int biggestID = 0;
+      
+         for (int i = 0; i < eventsList.size(); i++)
+            if (biggestID < eventsList.get(i).getEventID())
+               biggestID = eventsList.get(i).getEventID();
+     
+      return biggestID + 1;
+	   }
+	   if(obj instanceof Member)
+      {
+      int biggestID = 0;
 
+         for (int i = 0; i < membersList.size(); i++)
+            if (biggestID < membersList.get(i).getMemberID())
+               biggestID = membersList.get(i).getMemberID();
+     
+      return biggestID + 1;
+      }
+	   if(obj instanceof Instructor)
+      {
+      int biggestID = 0;
+
+
+         for (int i = 0; i < instructorsList.size(); i++)
+            if (biggestID < instructorsList.get(i).getInstructorID())
+               biggestID = instructorsList.get(i).getInstructorID();
+     
+      return biggestID + 1;
+      }
+	   else return -1;
+   }
 }

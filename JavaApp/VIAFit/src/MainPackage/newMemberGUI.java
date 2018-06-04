@@ -344,22 +344,7 @@ public class newMemberGUI extends JFrame
       }
       
    }
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  
       public void editMemberGUI(boolean s)
       {
          if(s==false)

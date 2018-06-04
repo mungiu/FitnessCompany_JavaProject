@@ -331,6 +331,12 @@ public class newEventGUI extends JFrame
 		{
 			if (e.getSource() == startDateDay)
 			{
+			   if(!checkIfOnlyInts(startDateDay.getText()))
+			   {
+			      JOptionPane.showMessageDialog(null, "Please enter a correct number");
+			      startDateDay.requestFocus();
+			      startDateDay.setText("");
+			   }
 				if (startDateDay.getText().equals(""))
 				{
 					startDateDay.setText("Day");
@@ -338,6 +344,12 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == startDateMonth)
 			{
+			   if(!checkIfOnlyInts(startDateMonth.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               startDateMonth.requestFocus();
+               startDateMonth.setText("");
+            }
 				if (startDateMonth.getText().equals(""))
 				{
 					startDateMonth.setText("Month");
@@ -345,6 +357,12 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == startDateYear)
 			{
+			   if(!checkIfOnlyInts(startDateYear.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               startDateYear.requestFocus();
+               startDateYear.setText("");
+            }
 				if (startDateYear.getText().equals(""))
 				{
 					startDateYear.setText("Year");
@@ -352,6 +370,12 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == endDateDay)
 			{
+			   if(!checkIfOnlyInts(endDateDay.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               endDateDay.requestFocus();
+               endDateDay.setText("");
+            }
 				if (endDateDay.getText().equals(""))
 				{
 					endDateDay.setText("Day");
@@ -359,6 +383,12 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == endDateMonth)
 			{
+			   if(!checkIfOnlyInts(endDateMonth.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               endDateMonth.requestFocus();
+               endDateMonth.setText("");
+            }
 				if (endDateMonth.getText().equals(""))
 				{
 					endDateMonth.setText("Month");
@@ -366,6 +396,12 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == endDateYear)
 			{
+			   if(!checkIfOnlyInts(endDateYear.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               endDateYear.requestFocus();
+               endDateYear.setText("");
+            }
 				if (endDateYear.getText().equals(""))
 				{
 					endDateYear.setText("Year");
@@ -373,6 +409,12 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == startTimeHour)
 			{
+			   if(!checkIfOnlyInts(startTimeHour.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               startTimeHour.requestFocus();
+               startTimeHour.setText("");
+            }
 				if (startTimeHour.getText().equals(""))
 				{
 					startTimeHour.setText("Hour");
@@ -380,16 +422,41 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == startTimeMinute)
 			{
+			   if(!checkIfOnlyInts(startTimeMinute.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               startTimeMinute.requestFocus();
+               startTimeMinute.setText("");
+            }
 				if (startTimeMinute.getText().equals(""))
 				{
 					startTimeMinute.setText("Minute");
 				}
 			}
+			if (e.getSource() == maxMembersInput)
+         {
+            if(!checkIfOnlyInts(maxMembersInput.getText()))
+            {
+               JOptionPane.showMessageDialog(null, "Please enter a correct number");
+               maxMembersInput.requestFocus();
+               maxMembersInput.setText("");
+            }
+         }
 		}
 	}
 
-	
-	
+	public boolean checkIfOnlyInts(String text)
+	{
+	   for(int i = 0;i<text.length();i++)
+	   {
+	      if(!(text.charAt(i)=='1' || text.charAt(i)=='2' || text.charAt(i)=='3' || text.charAt(i)=='4' || text.charAt(i)=='5'
+	            || text.charAt(i)=='6' || text.charAt(i)=='7' || text.charAt(i)=='8' || text.charAt(i)=='9' || text.charAt(i)=='0'))
+	      {
+	         return false;
+	      }
+	   }
+	   return true;
+	}
 	
 	
 	
@@ -415,7 +482,6 @@ public class newEventGUI extends JFrame
 			endDateMonth.setEditable(true);
 			endDateYear.setEditable(true);
 			duraCombo.setEnabled(true);
-			weeklyCheck.setEnabled(true);
 			startTimeHour.setEditable(true);
 			startTimeMinute.setEditable(true);
 			removeInstructor.setEnabled(true);
@@ -434,7 +500,6 @@ public class newEventGUI extends JFrame
 			endDateMonth.setEditable(false);
 			endDateYear.setEditable(false);
 			duraCombo.setEnabled(false);
-			weeklyCheck.setEnabled(false);
 			startTimeHour.setEditable(false);
 			startTimeMinute.setEditable(false);
 		}
@@ -517,7 +582,7 @@ public class newEventGUI extends JFrame
 	public newEventGUI()
 	{
 		super("Event - ViaFit Fitness Centre");
-
+		
 		fileAdapter = new FileAdapter();
 		myListener = new MyListener();
 		main = new JPanel();
@@ -726,7 +791,7 @@ public class newEventGUI extends JFrame
 		endDateInputContainer.add(endDateYear);
 		durationContainer.add(duration);
 		durationContainer.add(duraCombo);
-		durationContainer.add(weeklyContainer);
+//		durationContainer.add(weeklyContainer);
 		weeklyContainer.add(weekly);
 		weekly.setPreferredSize(new Dimension(60, 25));
 		weeklyContainer.add(weeklyCheck);

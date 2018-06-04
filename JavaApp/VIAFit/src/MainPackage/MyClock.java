@@ -252,9 +252,14 @@ public class MyClock implements Serializable
     *           the object to compare with
     * @return true if the given object is equal to this MyClock.
     */
-   public boolean equals(MyClock obj)
+   public boolean equals(Object obj)
    {
-      return (hour == obj.hour && minute == obj.minute && second == obj.second);
+      if(!(obj instanceof MyClock))
+      {
+         return false;
+      }
+      MyClock other = (MyClock)obj;
+      return other.hour==hour && other.minute==minute && other.second==second;
    }
 
    /**

@@ -47,7 +47,7 @@ public class Member implements Serializable
 		this.name = name;
 
 		this.email = email;
-		this.memberID = getNewMemberID();
+//		this.memberID = fileAdapter.getNewID(this);
 		this.phoneNumber = phoneNumber;
 		this.isPremium = isPremium;
 		this.memberSince = MyDate.today();
@@ -61,23 +61,7 @@ public class Member implements Serializable
 	 * 
 	 * @return the members new ID number and counts one up every time.
 	 */
-	public int getNewMemberID()
-	{
-		int biggestID = 0;
-		try
-		{
-			ArrayList<Member> tempMembList = fileAdapter.getMembersList();
-
-			for (int i = 0; i < tempMembList.size(); i++)
-				if (biggestID < tempMembList.get(i).getMemberID())
-					biggestID = tempMembList.get(i).getMemberID();
-		} catch (NullPointerException e)
-		{
-			// e.printStackTrace();
-			System.out.println("tempMembList.get(i).getMemberID() is NULL >>>>> biggestID set to 1");
-		}
-		return biggestID + 1;
-	}
+	
 
 	/**
 	 * Gets the members ID number.
