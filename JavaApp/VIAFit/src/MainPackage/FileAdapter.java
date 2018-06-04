@@ -215,11 +215,10 @@ public class FileAdapter implements Serializable
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
 
-		if (eventsList != null)
+
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				currentEvent = eventsList.get(i);
-
 				thisEventStartTime = currentEvent.getStarTime();
 				thisEventEndTime = currentEvent.getEndTime();
 				thisEventStartDate = currentEvent.getStartDate();
@@ -233,14 +232,27 @@ public class FileAdapter implements Serializable
 				// adding future events (30 max)
 				if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
 				{
+				   
 					if (eventIsUpcomingYears)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"lol");
+					}
 					else if (eventIsUpcomingMonths)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"jj");
+					}
 					else if (eventIsUpcomingDays)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"hej");
+					}
 					else if (eventIsUpcomingHours)
-						upComingEventsList.add(currentEvent);
+					{
+					   upComingEventsList.add(currentEvent);
+					   System.out.println(upComingEventsList.size()+"pp");
+					}	
 				}
 
 				boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
@@ -261,6 +273,7 @@ public class FileAdapter implements Serializable
 						upComingEventsList.remove(currentEvent);
 				}
 			}
+		
 	}
 
 	public void updateInstructorsList()
