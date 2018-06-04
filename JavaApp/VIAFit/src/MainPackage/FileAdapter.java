@@ -7,10 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class FileAdapter implements Serializable
+public class FileAdapter
 {
-
-   private static final long serialVersionUID = -3861630692242500388L;
 	String membersListBinFileName, instructorsListBinFileName, eventsListBinFileName, classTypeListBinFileName;
 
 	MyFileIO myFileIO;

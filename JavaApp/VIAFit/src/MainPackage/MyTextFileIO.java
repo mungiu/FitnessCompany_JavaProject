@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /// Creates, reads and writes the text files
-public class MyTextFileIO implements Serializable
+public class MyTextFileIO
 {
-	private static final long serialVersionUID = 2470124024350312528L;
 	// used for writing to file
 	FileOutputStream fileOut = null;
 	PrintWriter write = null;
