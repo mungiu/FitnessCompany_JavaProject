@@ -253,7 +253,7 @@ public class newEventGUI extends JFrame
 			               dispose();
 			               }
 			         }
-			   }
+			      }
 			}
 		}
 
@@ -425,8 +425,6 @@ public class newEventGUI extends JFrame
 			nameInput.setEditable(false);
 			typeCombo.setEnabled(false);
 			newTypeCheck.setEnabled(false);
-			addInstructor.setEnabled(false);
-			instructorCombo.setEnabled(false);
 			maxMembersInput.setEditable(false);
 			startDateDay.setEditable(false);
 			startDateMonth.setEditable(false);
@@ -438,7 +436,6 @@ public class newEventGUI extends JFrame
 			weeklyCheck.setEnabled(false);
 			startTimeHour.setEditable(false);
 			startTimeMinute.setEditable(false);
-			removeInstructor.setEnabled(false);
 		}
 	}
 	
@@ -462,6 +459,8 @@ public class newEventGUI extends JFrame
 	   }
 	   tempIns = allInstructors;
 	   
+	   listInstructors.clear();
+	   fileAdapter.updateEventsList();
 	   for(int i = 0;i<event.getInstructorsList().size();i++)
 	   {
 	      listInstructors.addElement(event.getInstructorsList().get(i));
@@ -496,6 +495,8 @@ public class newEventGUI extends JFrame
 	   startTimeHour.setText(event.getStarTime().getHour()+"");
 	   startTimeMinute.setText(event.getStarTime().getMinute()+"");
 	   
+	   listMembers.clear();
+	   fileAdapter.updateEventsList();
 	   for(int i = 0;i<event.getMembersList().size();i++)
 	   {
 	      listMembers.addElement(event.getMembersList().get(i));

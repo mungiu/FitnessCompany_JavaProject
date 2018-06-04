@@ -134,7 +134,8 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
-               allEvents.getSelectedValue().assignMemberToEvent(temp);
+               allEvents.getSelectedValue().getMembersList().add(temp);
+               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
          }
          if(e.getSource()==removeFrom)
          {
@@ -192,6 +193,23 @@ public class newMemberGUI extends JFrame
             fileAdapter.updateMembersList();
             }
             dispose();
+         }
+         if(e.getSource()==remove)
+         {
+            int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this member?", "Confirm before deleting member", JOptionPane.YES_NO_OPTION);
+            if(yesno==JOptionPane.YES_OPTION)
+               {
+                  for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+                  {
+                        if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+                        {
+                        fileAdapter.getMembersList().remove(i);
+                        fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
+                        fileAdapter.updateMembersList();
+                        dispose();
+                        }
+                  }
+               }
          }
       }
 
