@@ -130,6 +130,26 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          newInstructorGUI g = new newInstructorGUI();
          g.editInstructorArea(true);
       }
+      if(e.getSource()==eventAll)
+      {
+         fileAdapter.updateEventsList();
+         listBigInfoBox.clear();
+         for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+         {
+            listBigInfoBox.addElement(fileAdapter.getEventsList().get(i));
+         }
+         searchOption.setSelectedIndex(2);
+      }
+      if(e.getSource()==memberAll)
+      {
+         fileAdapter.updateMembersList();
+         listBigInfoBox.clear();
+         for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+         {
+            listBigInfoBox.addElement(fileAdapter.getMembersList().get(i));
+         }
+         searchOption.setSelectedIndex(0);
+      }
       if(e.getSource()==searchButton || e.getSource()==search)
       {
          if(searchOption.getSelectedItem().toString().equals("Member"))

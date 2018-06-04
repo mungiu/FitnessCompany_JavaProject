@@ -31,12 +31,11 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
-		eventID = getNewEventID();
+//		eventID = getNewEventID();
 	}
 
 	public int getNewEventID()
 	{
-	   fileAdapter = new FileAdapter();
 		int biggestID = 0;
 		try
 		{

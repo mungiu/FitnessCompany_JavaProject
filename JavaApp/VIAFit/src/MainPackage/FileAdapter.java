@@ -55,7 +55,7 @@ public class FileAdapter
 		return upComingEventsList;
 	}
 
-	public ArrayList<ClassType> getClassTypesList()
+	public ArrayList<ClassType> getAllClassTypesList()
 	{
 		return allClassTypeList;
 	}
@@ -66,7 +66,7 @@ public class FileAdapter
 	 * 
 	 * @return temp an array of strings
 	 */
-	public String[] getClassTypesArr()
+	public String[] getAllClassTypes()
 	{
 		updateClassTypesList();
 		String[] temp = new String[1];
