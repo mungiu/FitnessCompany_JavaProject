@@ -37,4 +37,8 @@ public class ClassType implements Serializable
 			return className == temp.className;
 		}
 	}
+	public String toString()
+	{
+	   return className;
+	}
 }

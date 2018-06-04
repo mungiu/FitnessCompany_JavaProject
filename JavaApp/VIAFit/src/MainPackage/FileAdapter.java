@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 
 public class FileAdapter
 {
-	String membersListBinFileName, instructorsListBinFileName, eventsListBinFileName;
+	String membersListBinFileName, instructorsListBinFileName, eventsListBinFileName, classTypeListBinFileName;
 
 	MyFileIO myFileIO;
 	MyTextFileIO myTextFileIO;
@@ -22,9 +22,11 @@ public class FileAdapter
 		eventsListBinFileName = "allEvents.bin";
 		instructorsListBinFileName = "allInstructors.bin";
 		membersListBinFileName = "allMembers.bin";
-		/// CHECK OR COPY
-		eventsList = new ArrayList<Event>();
+		classTypeListBinFileName = "allClassTypes.bin";
 
+		/// CHECK OR COPY
+	   allClassTypeList = new ArrayList<ClassType>();
+		eventsList = new ArrayList<Event>();
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
@@ -36,6 +38,7 @@ public class FileAdapter
 		updateInstructorsList();
 		updateMembersList();
 		updateEventsList();
+		updateClassTypesList();
 	}
 
 	public ArrayList<Event> getOnGoingEventsList()
@@ -91,7 +94,7 @@ public class FileAdapter
 		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 
-		if (eventsList != null)
+		if (eventsList != null && onGoingEventsList!=null)
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				thisEventStartTime = eventsList.get(i).getStarTime();
@@ -128,7 +131,7 @@ public class FileAdapter
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
 
-		if (eventsList != null)
+		if (eventsList != null && upComingEventsList!=null)
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				currentEvent = eventsList.get(i);
@@ -201,6 +204,11 @@ public class FileAdapter
 	{
 		eventsList = readEventsListFromBin();
 	}
+	
+	public void updateClassTypesList()
+   {
+    allClassTypeList = readClassTypesListFromBin();
+   }
 
 	/**
 	 * Method that converts the ArrayList<String> into a String array for use in
@@ -210,6 +218,7 @@ public class FileAdapter
 	 */
 	public String[] getAllClassTypes()
 	{
+	   updateClassTypesList();
 		String[] temp = new String[1];
 		temp[0] = "All events";
 		if (allClassTypeList != null)
@@ -261,9 +270,9 @@ public class FileAdapter
 	{
 		ArrayList<Event> allEventOfType = new ArrayList<Event>();
 
-		for (int i = 0; i < upComingEventsList.size(); i++)
-			if (upComingEventsList.get(i).getClassType().equals(input))
-				allEventOfType.add(upComingEventsList.get(i));
+		for (int i = 0; i < eventsList.size(); i++)
+			if (eventsList.get(i).getClassType().equals(input))
+				allEventOfType.add(eventsList.get(i));
 
 		return allEventOfType;
 	}
@@ -429,4 +438,59 @@ public class FileAdapter
 
 		return tempList;
 	}
+	
+	public void saveClassTypesListToBin(ArrayList<ClassType> classTypesList)
+   {
+      try
+      {
+         myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
+      } catch (FileNotFoundException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IOException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+   }
+
+   public void saveClassTypeToAvailableBinList(ClassType ClassType)
+   {
+      ArrayList<ClassType> tempList = readClassTypesListFromBin();
+      tempList.add(ClassType);
+      saveClassTypesListToBin(tempList);
+   }
+
+   public ArrayList<ClassType> readClassTypesListFromBin()
+   {
+      ArrayList<ClassType> tempList = new ArrayList<ClassType>();
+
+      try
+      {
+         Object obj = myFileIO.readObjectFromFile(classTypeListBinFileName);
+         if (obj instanceof ArrayList<?>)
+         {
+            ArrayList<?> all = (ArrayList<?>) obj;
+            for (int i = 0; i < all.size(); i++)
+               tempList.add((ClassType) all.get(i));
+         }
+
+      } catch (FileNotFoundException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (ClassNotFoundException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IOException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+
+      return tempList;
+   }
+
 }

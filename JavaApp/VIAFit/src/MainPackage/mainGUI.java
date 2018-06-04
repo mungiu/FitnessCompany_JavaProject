@@ -14,7 +14,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.peer.WindowPeer;
+import java.util.ArrayList;
 import java.util.EventListener;
 
 import javax.swing.*;
@@ -59,8 +59,7 @@ private JLabel homeLabel;
 
 private JTextField search;
 
-private JList<String> bigInfoBox;
-private DefaultListModel<String> listModel;
+private JList<Event> bigInfoBox;
 private JScrollPane bigInfoScroll;
 private JList<Event> ongoingEvents;
 private JList<Event> upcomingEvents;
@@ -68,6 +67,8 @@ private JScrollPane ongoingEventsScroll;
 private JScrollPane upcomingEventsScroll;
 private DefaultListModel<Event> listOngoing;
 private DefaultListModel<Event> listUpcoming;
+private DefaultListModel<Event> listBigInfoBox;
+
 
 private JButton memberNew;
 private JButton memberAll;
@@ -131,12 +132,92 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       }
       if(e.getSource()==searchButton)
       {
-        System.out.println(search.getText()+" "+searchOption.getSelectedItem());
+         if(searchOption.getSelectedItem().toString().equals("Member"))
+         {
+            
+         }
+         if(searchOption.getSelectedItem().toString().equals("Instructor"))
+         {
+            
+         }
+         if(searchOption.getSelectedItem().toString().equals("Event"))
+         {
+            fileAdapter.updateEventsList();
+            ArrayList<Event> tempFound = new ArrayList<Event>();
+            for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+            {
+               if(fileAdapter.getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()))
+               {
+                  tempFound.add(fileAdapter.getEventsList().get(i));
+               }
+               if(fileAdapter.getEventsList().get(i).getClassType().contains(search.getText()))
+               {
+                  tempFound.add(fileAdapter.getEventsList().get(i));
+               }
+            }
+            
+            listBigInfoBox.clear();
+            for(int j = 0;j<tempFound.size();j++)
+            {
+               listBigInfoBox.addElement(tempFound.get(j));
+            }
+         }
       }
       if(e.getSource()==search)
       {
-         //this should be the same as searchButton (It fires when ENTER is hit)
-         System.out.println(search.getText()+" "+searchOption.getSelectedItem());
+         if(searchOption.getSelectedItem().toString().equals("Member"))
+         {
+            
+         }
+         if(searchOption.getSelectedItem().toString().equals("Instructor"))
+         {
+            
+         }
+         if(searchOption.getSelectedItem().toString().equals("Event"))
+         {
+            fileAdapter.updateEventsList();
+            ArrayList<Event> tempFound = new ArrayList<Event>();
+            for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+            {
+               if(fileAdapter.getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()))
+               {
+                  tempFound.add(fileAdapter.getEventsList().get(i));
+               }
+               if(fileAdapter.getEventsList().get(i).getClassType().contains(search.getText()))
+               {
+                  tempFound.add(fileAdapter.getEventsList().get(i));
+               }
+            }
+            
+            listBigInfoBox.clear();
+            for(int j = 0;j<tempFound.size();j++)
+            {
+               listBigInfoBox.addElement(tempFound.get(j));
+            }
+         }
+      }
+      if(e.getSource()==homeDetails)
+      {
+         if(searchOption.getSelectedItem().toString().equals("Member"))
+         {
+            for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+            {
+               
+            }
+         }
+         if(searchOption.getSelectedItem().toString().equals("Instructor"))
+         {
+            for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+            {
+               
+            }
+         }
+         if(searchOption.getSelectedItem().toString().equals("Event"))
+         {
+            Event temp = bigInfoBox.getSelectedValue();
+            newEventGUI tempWindow = new newEventGUI();
+            tempWindow.fillWithEvent(temp);
+         }
       }
    }
    
@@ -150,12 +231,22 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
    {
       if(e.getSource()==search)
       {
-        search.setText("");  
+         if(search.getText().equals("Search"))
+         {
+            search.setText(""); 
+         }
+         else search.setText(search.getText());
       }
    }
    public void focusLost(FocusEvent e)
    {
-      //if something loses focus and should change add functionality here
+      if(e.getSource()==search)
+      {
+         if(search.getText().equals(""))
+         {
+            search.setText("Search");
+         }
+      }
    }
 }
 
@@ -192,6 +283,7 @@ public void updateOnGoingEventsArea()
 {
    if(fileAdapter.getOnGoingEventsList()!=null)
    {
+      listOngoing.clear();
       for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
       {
          listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
@@ -203,6 +295,7 @@ public void updateUpcomingEventsArea()
 {
    if(fileAdapter.getUpComingEventsList()!=null)
    {
+      listUpcoming.clear();
       for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
       {
          listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
@@ -272,8 +365,8 @@ public mainGUI()
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
    upcomingEvents.addListSelectionListener(listListener);
    
-   listModel = new DefaultListModel<String>();
-   bigInfoBox = new JList<String>(listModel);
+   listBigInfoBox = new DefaultListModel<Event>();
+   bigInfoBox = new JList<Event>(listBigInfoBox);
    bigInfoBox.addListSelectionListener(listListener);
    bigInfoScroll = new JScrollPane(bigInfoBox);
    search = new JTextField("Search");
@@ -320,7 +413,7 @@ public mainGUI()
    
    
    //adding borders
-     Color col1 = new Color(100, 100, 255);
+
      Color grey = new Color(220, 220, 220);
      member.setBorder(new LineBorder(grey, 1));
      instructor.setBorder(new LineBorder(grey, 1));
@@ -349,7 +442,7 @@ public mainGUI()
    search.setFont(new Font(homeLabel.getFont().getFamily(), Font.PLAIN, 17));
    searchOption.setFont(new Font(homeLabel.getFont().getFamily(), Font.PLAIN, 17));
    homeDetails.setFont(new Font(homeLabel.getFont().getFamily(), Font.BOLD, 14));
-   
+   bigInfoBox.setFont(new Font(bigInfoScroll.getFont().getFamily(), Font.BOLD, 17));
    
    //adding stuff to the menuBar
    fileMenu.add(exitButton);

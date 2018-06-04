@@ -18,7 +18,7 @@ public class Member implements Serializable
    private static final long serialVersionUID = 4437337227753008510L;
 
    private String firstName, lastName, email;
-   private int memberID = getNewMemberID();
+   private int memberID;
    private int phoneNumber;
    private boolean isPremium;
    private FileAdapter fileAdapter;
@@ -41,14 +41,14 @@ public class Member implements Serializable
     * @param isPremium
     *           is the member premium.
     */
-   public Member(String firstName, String lastName, String email, int memberID,
+   public Member(String firstName, String lastName, String email,
          int phoneNumber, boolean isPremium)
    {
       // TODO: pull new memberID from binary file by checking biggest member ID
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
-      this.memberID = memberID;
+      this.memberID = getNewMemberID();
       this.phoneNumber = phoneNumber;
       this.isPremium = isPremium;
       this.memberSince = MyDate.today();
@@ -229,5 +229,6 @@ public class Member implements Serializable
       String str = memberID + "\t" + firstName + "\t" + lastName;
       return str;
    }
+
 
 }
