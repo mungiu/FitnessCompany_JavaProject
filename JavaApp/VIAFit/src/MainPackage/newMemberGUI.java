@@ -136,6 +136,17 @@ public class newMemberGUI extends JFrame
             }
                allEvents.getSelectedValue().getMembersList().add(temp);
                fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+               fileAdapter.updateEventsList();
+               
+               //update box to show the added
+               listSignedUp.clear();
+               for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+               {
+                  if(fileAdapter.getEventsList().get(i).getMembersList().contains(temp))
+                  {
+                     listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+                  }
+               }
          }
          if(e.getSource()==removeFrom)
          {
@@ -147,6 +158,7 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().get(i);
                }
             }
+            System.out.println(allSignedUpForArea.getSelectedValue());
            allSignedUpForArea.getSelectedValue().removeMemberFromEvent(temp);
          }
          if(e.getSource()==save)
@@ -170,6 +182,7 @@ public class newMemberGUI extends JFrame
               tempMember.setEMail(emailInput.getText());
               tempMember.setPhoneNumber(phoneInput.getText());
               tempMember.setMemberSince(new MyDate(Integer.parseInt(membershipSinceInputDay.getText()), Integer.parseInt(membershipSinceInputMonth.getText()), Integer.parseInt(membershipSinceInputYear.getText())));
+              
               
               fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
               fileAdapter.updateMembersList();
@@ -434,7 +447,7 @@ public class newMemberGUI extends JFrame
    String[] temp = {"Premium", "Standard"};
    membershipTypeInput = new JComboBox<String>(temp);
    
-   classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesArr());
+   classTypeInput = new JComboBox<String>(fileAdapter.getAllClassTypes());
    
    save = new JButton("Save");
    save.addActionListener(myListener);

@@ -166,8 +166,8 @@ public class newEventGUI extends JFrame
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeCheck.isSelected()==true)
 			   {
-			      fileAdapter.getClassTypesList().add(new ClassType(typeInput.getText()));
-			      fileAdapter.saveClassTypesListToBin(fileAdapter.getClassTypesList());
+			      fileAdapter.getAllClassTypeList().add(new ClassType(typeInput.getText()));
+			      fileAdapter.saveClassTypesListToBin(fileAdapter.getAllClassTypeList());
 			      tempType.setClassName(typeInput.getText());
 			   }
 			   if(newTypeCheck.isSelected()==false)
@@ -184,7 +184,7 @@ public class newEventGUI extends JFrame
 						Integer.parseInt(startTimeMinute.getText()), 0);
 				String tempDura = duraCombo.getSelectedItem().toString().charAt(0) + "";
 				int duration = Integer.parseInt(tempDura);
-				MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText()) + duration, 0, 0);
+				MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText()) + duration, Integer.parseInt(startTimeMinute.getText()), 0);
 				
 				Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
 				
@@ -204,10 +204,11 @@ public class newEventGUI extends JFrame
 				   temp.setEndTime(endTime);
 				   temp.setStartDate(startDate);
 				   temp.setEndDate(endDate);
+				   
 				   fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
 				   fileAdapter.updateEventsList();
 				}
-				else if(editInfo.isSelected()==false && id.getText().equals(""))
+				else if(editInfo.isSelected()==true && id.getText().equals(""))
 				{
 				   fileAdapter.saveEventToAvailableBinList(temp);
 				}    
@@ -596,10 +597,10 @@ public class newEventGUI extends JFrame
 		startTimeHour.addFocusListener(myListener);
 		startTimeMinute = new JTextField("Minute");
 		startTimeMinute.addFocusListener(myListener);
-		id = new JTextField();
+		id = new JTextField("");
 
 		instructorCombo = new JComboBox<String>(tempIns);
-		tempType = fileAdapter.getClassTypesArr();
+		tempType = fileAdapter.getAllClassTypes();
 		typeCombo = new JComboBox<String>(tempType);
 		duraCombo = new JComboBox<String>(tempDura);
 		instructorComboBottom = new JComboBox<String>(tempInsBottom);
