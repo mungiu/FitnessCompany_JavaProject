@@ -10,9 +10,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MyFileIO implements Serializable
+public class MyFileIO
 {
-	private static final long serialVersionUID = 3674014974249785521L;
 	// Writing binary files
 	FileOutputStream fileOut = null;
 	ObjectOutputStream write = null;
