@@ -79,11 +79,6 @@ public class Member implements Serializable
 		return biggestID + 1;
 	}
 
-	public void setMemberID(int id)
-	{
-		memberID = id;
-	}
-
 	/**
 	 * Gets the members ID number.
 	 * 
@@ -105,6 +100,62 @@ public class Member implements Serializable
 	}
 
 	/**
+	 * Gets the members phone number.
+	 * 
+	 * @return the ,members phone number.
+	 */
+	public String getPhoneNumber()
+	{
+		return phoneNumber;
+	}
+
+	/**
+	 * Gets the members email.
+	 * 
+	 * @return the members email.
+	 */
+	public String getEMail()
+	{
+		return email;
+	}
+
+	/**
+	 * Gets if the member is premium
+	 * 
+	 * @return if member is premium return true.
+	 */
+	public boolean getIsPremium()
+	{
+		return isPremium;
+	}
+
+	/**
+	 * Gets the member since date.
+	 * 
+	 * @return the members since date.
+	 */
+
+	public MyDate getMemberSince()
+	{
+		return memberSince;
+	}
+
+	/**
+	 * Gets the members event list.
+	 * 
+	 * @return the members event list.
+	 */
+	public ArrayList<Event> getMemberEvents()
+	{
+		return allAttendedEventsList;
+	}
+
+	public void setMemberID(int id)
+	{
+		memberID = id;
+	}
+
+	/**
 	 * Sets the members first name.
 	 * 
 	 * @param firstName
@@ -113,16 +164,6 @@ public class Member implements Serializable
 	public void setName(String firstName)
 	{
 		this.name = firstName;
-	}
-
-	/**
-	 * Gets the members phone number.
-	 * 
-	 * @return the ,members phone number.
-	 */
-	public String getPhoneNumber()
-	{
-		return phoneNumber;
 	}
 
 	/**
@@ -137,16 +178,6 @@ public class Member implements Serializable
 	}
 
 	/**
-	 * Gets the members email.
-	 * 
-	 * @return the members email.
-	 */
-	public String getEMail()
-	{
-		return email;
-	}
-
-	/**
 	 * Sets the members email.
 	 * 
 	 * @param email
@@ -155,16 +186,6 @@ public class Member implements Serializable
 	public void setEMail(String email)
 	{
 		this.email = email;
-	}
-
-	/**
-	 * Gets if the member is premium
-	 * 
-	 * @return if member is premium return true.
-	 */
-	public boolean getIsPremium()
-	{
-		return isPremium;
 	}
 
 	/**
@@ -178,30 +199,9 @@ public class Member implements Serializable
 		this.isPremium = isPremium;
 	}
 
-	/**
-	 * Gets the member since date.
-	 * 
-	 * @return the members since date.
-	 */
-
-	public MyDate getMemberSince()
-	{
-		return memberSince;
-	}
-
 	public void setMemberSince(MyDate memberSince)
 	{
 		this.memberSince = memberSince;
-	}
-
-	/**
-	 * Gets the members event list.
-	 * 
-	 * @return the members event list.
-	 */
-	public ArrayList<Event> getMemberEvents()
-	{
-		return allAttendedEventsList;
 	}
 
 	@Override

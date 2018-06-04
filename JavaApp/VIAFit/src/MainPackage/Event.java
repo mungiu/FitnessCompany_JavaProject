@@ -53,11 +53,6 @@ public class Event implements Serializable
 		return biggestID + 1;
 	}
 
-	public void setEventID(int id)
-	{
-		eventID = id;
-	}
-
 	public int getEventID()
 	{
 		return eventID;
@@ -66,11 +61,6 @@ public class Event implements Serializable
 	public int getMaxMembers()
 	{
 		return maxMembers;
-	}
-
-	public void setMaxMembers(int maxMembers)
-	{
-		this.maxMembers = maxMembers;
 	}
 
 	public String getClassName()
@@ -83,6 +73,46 @@ public class Event implements Serializable
 		return classType.getClassName();
 	}
 
+	public MyDate getStartDate()
+	{
+		return startDate;
+	}
+
+	public MyDate getEndDate()
+	{
+		return endDate;
+	}
+
+	public MyClock getStarTime()
+	{
+		return startTime;
+	}
+
+	public MyClock getEndTime()
+	{
+		return endTime;
+	}
+
+	public ArrayList<Member> getMembersList()
+	{
+		return attendingMembersList;
+	}
+
+	public ArrayList<Instructor> getInstructorsList()
+	{
+		return attendingInstructorsList;
+	}
+
+	public void setEventID(int id)
+	{
+		eventID = id;
+	}
+
+	public void setMaxMembers(int maxMembers)
+	{
+		this.maxMembers = maxMembers;
+	}
+
 	public void setClassType(String classType)
 	{
 		this.classType.setClassName(classType);
@@ -93,19 +123,9 @@ public class Event implements Serializable
 		this.className = className;
 	}
 
-	public MyDate getStartDate()
-	{
-		return startDate;
-	}
-
 	public void setStartDate(MyDate startDate)
 	{
 		this.startDate = startDate;
-	}
-
-	public MyDate getEndDate()
-	{
-		return endDate;
 	}
 
 	public void setEndDate(MyDate endDate)
@@ -113,29 +133,14 @@ public class Event implements Serializable
 		this.endDate = endDate;
 	}
 
-	public MyClock getStarTime()
-	{
-		return startTime;
-	}
-
 	public void setStartTime(MyClock startTime)
 	{
 		this.startTime = startTime;
 	}
 
-	public MyClock getEndTime()
-	{
-		return endTime;
-	}
-
 	public void setEndTime(MyClock endTime)
 	{
 		this.endTime = endTime;
-	}
-
-	public ArrayList<Member> getMembersList()
-	{
-		return attendingMembersList;
 	}
 
 	public void setMembersList(ArrayList<Member> attendingMembersList)
@@ -144,11 +149,6 @@ public class Event implements Serializable
 
 		for (int i = 0; i < attendingMembersList.size(); i++)
 			this.attendingMembersList.add(attendingMembersList.get(i));
-	}
-
-	public ArrayList<Instructor> getInstructorsList()
-	{
-		return attendingInstructorsList;
 	}
 
 	public void setInstructorsList(ArrayList<Instructor> attendingInstructorsList)
@@ -171,15 +171,15 @@ public class Event implements Serializable
 		}
 	}
 
-	public void removeInstructorFromEvent(Instructor instructor)
-	{
-		attendingInstructorsList.remove(instructor);
-	}
-
 	public void assignMemberToEvent(Member member)
 	{
 		if (member.getIsPremium())
 			attendingMembersList.add(member);
+	}
+
+	public void removeInstructorFromEvent(Instructor instructor)
+	{
+		attendingInstructorsList.remove(instructor);
 	}
 
 	public void removeMemberFromEvent(Member member)
