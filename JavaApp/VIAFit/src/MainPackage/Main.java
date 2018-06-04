@@ -11,6 +11,7 @@ public class Main
 		{
 		   System.out.println(fileAdapter.getEventsList().get(i).getEventID());
 		}
+
 		// This will run every 5 min.
 		try
 		{
@@ -18,7 +19,9 @@ public class Main
 			{
 				fileAdapter.updateOnGoingEventsList();
 				fileAdapter.updateUpComingEventsList();
+
 				Thread.sleep(5 * 60 * 10000);
+
 			}
 		} catch (InterruptedException e)
 		{

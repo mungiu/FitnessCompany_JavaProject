@@ -3,11 +3,14 @@ package MainPackage;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class FileAdapter
+public class FileAdapter implements Serializable
 {
+	private static final long serialVersionUID = -3861630692242500388L;
+
 	String membersListBinFileName, instructorsListBinFileName, eventsListBinFileName, classTypeListBinFileName;
 
 	MyFileIO myFileIO;
@@ -32,7 +35,6 @@ public class FileAdapter
 		eventsList = new ArrayList<Event>();
 		membersList = new ArrayList<Member>();
 
-		eventsList = new ArrayList<Event>();
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
@@ -411,7 +413,7 @@ public class FileAdapter
 		} catch (EOFException e)
 		{
 			// e.printStackTrace();
-			System.out.println("Members List Bin File Is Empty");
+			System.out.println("Members List Binary File reached end of line");
 		}
 
 		catch (IOException e)
@@ -448,7 +450,7 @@ public class FileAdapter
 		} catch (EOFException e)
 		{
 			// e.printStackTrace();
-			System.out.println("Instructor List Binary File Is Empty");
+			System.out.println("Instructor List Binary File reached end of line");
 			// TODO
 		} catch (IOException e)
 
@@ -482,7 +484,13 @@ public class FileAdapter
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e)
+		} catch (EOFException e)
+		{
+			// e.printStackTrace();
+			System.out.println("Events List Binary File reached end of line");
+		}
+
+		catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -513,7 +521,13 @@ public class FileAdapter
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e)
+		} catch (EOFException e)
+		{
+			// e.printStackTrace();
+			System.out.println("EventsType List Binary File reached end of line");
+		}
+
+		catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -31,7 +31,8 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
-//		eventID = getNewEventID();
+		this.fileAdapter = new FileAdapter();
+		eventID = getNewEventID();
 	}
 
 	public int getNewEventID()
@@ -46,8 +47,9 @@ public class Event implements Serializable
 					biggestID = tempEventList.get(i).getEventID();
 		} catch (NullPointerException e)
 		{
-			// e.printStackTrace();
-			System.out.println("tempEventList.get(i).getEventID() is NULL >>>>> biggestID set to 1");
+			e.printStackTrace();
+			System.out.println(
+					"tempEventList.get(i).getEventID() or fileAdapter.getEventsList() is NULL >>>>> biggestID set to 1");
 		}
 
 		return biggestID + 1;
