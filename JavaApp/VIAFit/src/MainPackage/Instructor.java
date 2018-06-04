@@ -49,7 +49,7 @@ public class Instructor implements Serializable
 					biggestID = tempInstList.get(i).getInstructorID();
 		} catch (NullPointerException e)
 		{
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("tempInstList.get(i).getInstructorID() is NULL >>>>> biggestID set to 1");
 		}
 
@@ -67,17 +67,6 @@ public class Instructor implements Serializable
 	}
 
 	/**
-	 * Sets the instructors first name
-	 * 
-	 * @param firstName
-	 *            is what the instructors first name will be set to.
-	 */
-	public void setFirstName(String firstName)
-	{
-		this.firstName = firstName;
-	}
-
-	/**
 	 * Gets the instructors last name.
 	 * 
 	 * @return the instructors last name.
@@ -85,17 +74,6 @@ public class Instructor implements Serializable
 	public String getLastName()
 	{
 		return lastName;
-	}
-
-	/**
-	 * Sets the instructors last name.
-	 * 
-	 * @param lastName
-	 *            is what the instructors last name will be set to.
-	 */
-	public void setLastName(String lastName)
-	{
-		this.lastName = lastName;
 	}
 
 	/**
@@ -127,6 +105,28 @@ public class Instructor implements Serializable
 	public ArrayList<ClassType> getAllTaughtEvents()
 	{
 		return allTaughtEventsList;
+	}
+
+	/**
+	 * Sets the instructors first name
+	 * 
+	 * @param firstName
+	 *            is what the instructors first name will be set to.
+	 */
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+
+	/**
+	 * Sets the instructors last name.
+	 * 
+	 * @param lastName
+	 *            is what the instructors last name will be set to.
+	 */
+	public void setLastName(String lastName)
+	{
+		this.lastName = lastName;
 	}
 
 	/**

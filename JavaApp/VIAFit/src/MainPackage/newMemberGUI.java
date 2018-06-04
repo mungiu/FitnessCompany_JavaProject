@@ -434,7 +434,7 @@ public class newMemberGUI extends JFrame
    String[] temp = {"Premium", "Standard"};
    membershipTypeInput = new JComboBox<String>(temp);
    
-   classTypeInput = new JComboBox<String>(fileAdapter.getAllClassTypes());
+   classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesArr());
    
    save = new JButton("Save");
    save.addActionListener(myListener);
