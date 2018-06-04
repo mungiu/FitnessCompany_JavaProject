@@ -130,11 +130,26 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          newInstructorGUI g = new newInstructorGUI();
          g.editInstructorArea(true);
       }
-      if(e.getSource()==searchButton)
+      if(e.getSource()==searchButton || e.getSource()==search)
       {
          if(searchOption.getSelectedItem().toString().equals("Member"))
          {
+            fileAdapter.updateMembersList();
+            ArrayList<Member> tempFound1 = new ArrayList<Member>();
+            for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+            {
+               if(fileAdapter.getMembersList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase())
+                     || fileAdapter.getMembersList().get(i).getEMail().contains(search.getText()) || fileAdapter.getMembersList().get(i).getPhoneNumber().contains(search.getText()))
+               {
+                  tempFound1.add(fileAdapter.getMembersList().get(i));
+               }               
+            }
             
+            listBigInfoBox.clear();
+            for(int j = 0;j<tempFound1.size();j++)
+            {
+               listBigInfoBox.addElement(tempFound1.get(j));
+            }
          }
          if(searchOption.getSelectedItem().toString().equals("Instructor"))
          {
@@ -163,47 +178,14 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             }
          }
       }
-      if(e.getSource()==search)
-      {
-         if(searchOption.getSelectedItem().toString().equals("Member"))
-         {
-            
-         }
-         if(searchOption.getSelectedItem().toString().equals("Instructor"))
-         {
-            
-         }
-         if(searchOption.getSelectedItem().toString().equals("Event"))
-         {
-            fileAdapter.updateEventsList();
-            ArrayList<Event> tempFound = new ArrayList<Event>();
-            for(int i = 0;i<fileAdapter.getEventsList().size();i++)
-            {
-               if(fileAdapter.getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()))
-               {
-                  tempFound.add(fileAdapter.getEventsList().get(i));
-               }
-               if(fileAdapter.getEventsList().get(i).getClassType().contains(search.getText()))
-               {
-                  tempFound.add(fileAdapter.getEventsList().get(i));
-               }
-            }
-            
-            listBigInfoBox.clear();
-            for(int j = 0;j<tempFound.size();j++)
-            {
-               listBigInfoBox.addElement(tempFound.get(j));
-            }
-         }
-      }
+      
       if(e.getSource()==homeDetails)
       {
          if(searchOption.getSelectedItem().toString().equals("Member"))
          {
-            for(int i = 0;i<fileAdapter.getEventsList().size();i++)
-            {
-               
-            }
+            Member temp = (Member)bigInfoBox.getSelectedValue();
+            newMemberGUI tempWindow = new newMemberGUI();
+            tempWindow.fillWithMember(temp);
          }
          if(searchOption.getSelectedItem().toString().equals("Instructor"))
          {
