@@ -1,5 +1,6 @@
 package MainPackage;
 
+import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,14 +26,16 @@ public class FileAdapter
 		classTypeListBinFileName = "allClassTypes.bin";
 
 		/// CHECK OR COPY
-	   allClassTypeList = new ArrayList<ClassType>();
+		allClassTypeList = new ArrayList<ClassType>();
+		onGoingEventsList = new ArrayList<Event>();
+		upComingEventsList = new ArrayList<Event>();
+		eventsList = new ArrayList<Event>();
+
 		eventsList = new ArrayList<Event>();
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
-		// save first
-
-		// update next
+		// update and save of all lists ?????
 		updateOnGoingEventsList();
 		updateUpComingEventsList();
 		updateInstructorsList();
@@ -94,7 +97,7 @@ public class FileAdapter
 		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 
-		if (eventsList != null && onGoingEventsList!=null)
+		if (eventsList != null)
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				thisEventStartTime = eventsList.get(i).getStarTime();
@@ -131,7 +134,7 @@ public class FileAdapter
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
 
-		if (eventsList != null && upComingEventsList!=null)
+		if (eventsList != null)
 			for (int i = 0; i < eventsList.size(); i++)
 			{
 				currentEvent = eventsList.get(i);
@@ -204,11 +207,11 @@ public class FileAdapter
 	{
 		eventsList = readEventsListFromBin();
 	}
-	
+
 	public void updateClassTypesList()
-   {
-    allClassTypeList = readClassTypesListFromBin();
-   }
+	{
+		allClassTypeList = readClassTypesListFromBin();
+	}
 
 	/**
 	 * Method that converts the ArrayList<String> into a String array for use in
@@ -218,7 +221,7 @@ public class FileAdapter
 	 */
 	public String[] getAllClassTypes()
 	{
-	   updateClassTypesList();
+		updateClassTypesList();
 		String[] temp = new String[1];
 		temp[0] = "All events";
 		if (allClassTypeList != null)
@@ -322,7 +325,13 @@ public class FileAdapter
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e)
+		} catch (EOFException e)
+		{
+			e.printStackTrace();
+			System.out.println("Members List Bin File Is Empty");
+		}
+
+		catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -376,7 +385,13 @@ public class FileAdapter
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (EOFException e)
+		{
+			e.printStackTrace();
+			System.out.println("Instructor List Binary File Is Empty");
+			// TODO
 		} catch (IOException e)
+
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -438,59 +453,59 @@ public class FileAdapter
 
 		return tempList;
 	}
-	
+
 	public void saveClassTypesListToBin(ArrayList<ClassType> classTypesList)
-   {
-      try
-      {
-         myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
-      } catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      } catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
+	{
+		try
+		{
+			myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-   public void saveClassTypeToAvailableBinList(ClassType ClassType)
-   {
-      ArrayList<ClassType> tempList = readClassTypesListFromBin();
-      tempList.add(ClassType);
-      saveClassTypesListToBin(tempList);
-   }
+	public void saveClassTypeToAvailableBinList(ClassType ClassType)
+	{
+		ArrayList<ClassType> tempList = readClassTypesListFromBin();
+		tempList.add(ClassType);
+		saveClassTypesListToBin(tempList);
+	}
 
-   public ArrayList<ClassType> readClassTypesListFromBin()
-   {
-      ArrayList<ClassType> tempList = new ArrayList<ClassType>();
+	public ArrayList<ClassType> readClassTypesListFromBin()
+	{
+		ArrayList<ClassType> tempList = new ArrayList<ClassType>();
 
-      try
-      {
-         Object obj = myFileIO.readObjectFromFile(classTypeListBinFileName);
-         if (obj instanceof ArrayList<?>)
-         {
-            ArrayList<?> all = (ArrayList<?>) obj;
-            for (int i = 0; i < all.size(); i++)
-               tempList.add((ClassType) all.get(i));
-         }
+		try
+		{
+			Object obj = myFileIO.readObjectFromFile(classTypeListBinFileName);
+			if (obj instanceof ArrayList<?>)
+			{
+				ArrayList<?> all = (ArrayList<?>) obj;
+				for (int i = 0; i < all.size(); i++)
+					tempList.add((ClassType) all.get(i));
+			}
 
-      } catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      } catch (ClassNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      } catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-      return tempList;
-   }
+		return tempList;
+	}
 
 }
