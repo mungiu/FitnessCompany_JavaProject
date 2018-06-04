@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -161,8 +162,17 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == save)
 			{
-				System.out.println("lol");
-				ClassType tempType = new ClassType(typeCombo.getSelectedItem().toString());
+			   ClassType tempType = new ClassType("nothing");
+			   if(newTypeCheck.isSelected()==true)
+			   {
+			      fileAdapter.getAllClassTypeList().add(new ClassType(typeInput.getText()));
+			      fileAdapter.saveClassTypesListToBin(fileAdapter.getAllClassTypeList());
+			      tempType.setClassName(typeInput.getText());
+			   }
+			   if(newTypeCheck.isSelected()==false)
+			   {
+			      tempType = new ClassType(typeCombo.getSelectedItem().toString());   
+			   }
 				String className = nameInput.getText();
 				int maxNumbers = Integer.parseInt(maxMembersInput.getText());
 				MyDate startDate = new MyDate(Integer.parseInt(startDateDay.getText()),
@@ -174,11 +184,34 @@ public class newEventGUI extends JFrame
 				String tempDura = duraCombo.getSelectedItem().toString().charAt(0) + "";
 				int duration = Integer.parseInt(tempDura);
 				MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText()) + duration, 0, 0);
-
 				Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
-				fileAdapter.getEventsList().add(temp);
-				fileAdapter.saveEventsListToBin();
-				System.out.println(temp.getClassName());
+				fileAdapter.saveEventToAvailableBinList(temp);
+				dispose();
+			}
+			if(e.getSource()==addInstructor)
+			{
+			   ArrayList<Event> tempAllEvents = fileAdapter.getEventsList();
+			   for(int i = 0;i<tempAllEvents.size();i++)
+			   {
+			      if(tempAllEvents.get(i).getClassName().equals(nameInput.getText()) && tempAllEvents.get(i).getClassType().equals(typeCombo.getSelectedItem().toString()))
+			      {
+			         fileAdapter.getEventsList().get(i).assignInstructorToEvent((Instructor)instructorComboBottom.getSelectedItem());
+			      }
+			   }
+			}
+			
+			if(e.getSource()==newTypeCheck)
+			{
+			   if(newTypeCheck.isSelected()==true)
+			   {
+			      typeCombo.setVisible(false);
+			      typeInput.setVisible(true);
+			   }
+			   if(newTypeCheck.isSelected()==false)
+            {
+               typeCombo.setVisible(true);
+               typeInput.setVisible(false);
+            }
 			}
 		}
 
@@ -312,6 +345,15 @@ public class newEventGUI extends JFrame
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void editEventArea(boolean s)
 	{
 		if (s == true)
@@ -356,6 +398,66 @@ public class newEventGUI extends JFrame
 			startTimeMinute.setEditable(false);
 			removeInstructor.setEnabled(false);
 		}
+	}
+	
+	public void fillWithEvent(Event event)
+	{
+	   editEventArea(false);
+	   nameInput.setText(event.getClassName());
+	   maxMembersInput.setText(event.getMaxMembers()+"");
+	   
+	   for(int i = 0;i<tempType.length;i++)
+	   {
+	     if(tempType[i].equals(event.getClassType()))
+	     {
+	        typeCombo.setSelectedIndex(i);
+	     }
+	   }
+	   String[] allInstructors = new String[fileAdapter.getInstructorsList().size()];
+	   for(int k = 0;k<fileAdapter.getInstructorsList().size();k++)
+	   {
+	      allInstructors[0] = fileAdapter.getInstructorsList().get(k).toString();
+	   }
+	   tempIns = allInstructors;
+	   
+	   for(int i = 0;i<event.getInstructorsList().size();i++)
+	   {
+	      listInstructors.addElement(event.getInstructorsList().get(i));
+	   }
+	   startDateDay.setText(event.getStartDate().getDay()+"");
+	   startDateMonth.setText(event.getStartDate().getMonth()+"");
+	   startDateYear.setText(event.getStartDate().getYear()+"");
+	   endDateDay.setText(event.getEndDate().getDay()+"");
+	   endDateMonth.setText(event.getEndDate().getMonth()+"");
+	   endDateYear.setText(event.getEndDate().getYear()+"");
+	   
+	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==1)
+	   {
+	      duraCombo.setSelectedIndex(0);
+	   }
+	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==2)
+      {
+         duraCombo.setSelectedIndex(1);
+      }
+	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==3)
+      {
+         duraCombo.setSelectedIndex(2);
+      }
+	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==4)
+      {
+         duraCombo.setSelectedIndex(3);
+      }
+	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==5)
+      {
+         duraCombo.setSelectedIndex(4);
+      }
+	   startTimeHour.setText(event.getStarTime().getHour()+"");
+	   startTimeMinute.setText(event.getStarTime().getMinute()+"");
+	   
+	   for(int i = 0;i<event.getMembersList().size();i++)
+	   {
+	      listMembers.addElement(event.getMembersList().get(i));
+	   }
 	}
 
 	public boolean isAnyInfoChanged()
@@ -453,12 +555,15 @@ public class newEventGUI extends JFrame
 		startTimeMinute.addFocusListener(myListener);
 
 		instructorCombo = new JComboBox<String>(tempIns);
+		tempType = fileAdapter.getAllClassTypes();
 		typeCombo = new JComboBox<String>(tempType);
 		duraCombo = new JComboBox<String>(tempDura);
 		instructorComboBottom = new JComboBox<String>(tempInsBottom);
 
 		newTypeCheck = new JCheckBox();
+		newTypeCheck.addActionListener(myListener);
 		weeklyCheck = new JCheckBox();
+		weeklyCheck.addActionListener(myListener);
 
 		save = new JButton("Save");
 		save.addActionListener(myListener);
@@ -547,6 +652,9 @@ public class newEventGUI extends JFrame
 		typeContainer.add(type);
 		type.setPreferredSize(labels);
 		typeContainer.add(typeCombo);
+		typeInput.setPreferredSize(labels);
+		typeInput.setVisible(false);
+		typeContainer.add(typeInput);
 		newTypeContainer.add(newType);
 		newType.setPreferredSize(labels);
 		newTypeContainer.add(newTypeCheck);
@@ -629,7 +737,7 @@ public class newEventGUI extends JFrame
 		setJMenuBar(menuBar);
 		add(main);
 		setSize(800, 600);
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

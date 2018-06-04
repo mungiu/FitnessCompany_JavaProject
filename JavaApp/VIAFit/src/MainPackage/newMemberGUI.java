@@ -123,8 +123,8 @@ public class newMemberGUI extends JFrame
             {
                editMemberGUI(false);
             }
-            
          }
+  
       }
 
       //Focus listener
@@ -234,7 +234,7 @@ public class newMemberGUI extends JFrame
             editInfo.setSelected(true);
             nameInput.setEnabled(true);
             membershipTypeInput.setEnabled(true);
-            memberIDInput.setEnabled(true);
+            memberIDInput.setEnabled(false);
             emailInput.setEnabled(true);
             phoneInput.setEnabled(true);
             membershipSinceInputDay.setEnabled(true);
@@ -290,6 +290,7 @@ public class newMemberGUI extends JFrame
    
    nameInput = new JTextField();
    memberIDInput = new JTextField();
+   memberIDInput.setEditable(false);
    emailInput = new JTextField();
    membershipSinceInputDay = new JTextField("Day");
    membershipSinceInputDay.addFocusListener(myListener);

@@ -17,6 +17,7 @@ public class Event implements Serializable
 	private ClassType classType;
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
+	private int eventID;
 
 	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
 			MyClock startTime, MyClock endTime)
@@ -30,8 +31,28 @@ public class Event implements Serializable
 		this.endTime = endTime;
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
+//		eventID = getNewEventID();
 	}
 
+	public int getNewEventID()
+   {
+      int biggestID = 0;
+      ArrayList<Event> tempEventList = fileAdapter.getEventsList();
+
+      for (int i = 0; i < tempEventList.size(); i++)
+         if (biggestID < tempEventList.get(i).getEventID())
+            biggestID = tempEventList.get(i).getEventID();
+
+      return biggestID + 1;
+   }
+	public void setEventID(int id)
+	{
+	   eventID = id;
+	}
+	public int getEventID()
+	{
+	   return eventID;
+	}
 	public int getMaxMembers()
 	{
 		return maxMembers;
@@ -128,14 +149,14 @@ public class Event implements Serializable
 			this.attendingInstructorsList.add(attendingInstructorsList.get(i));
 	}
 
-	public void assignInstructorToEvent(Instructor instructor, Event event)
+	public void assignInstructorToEvent(Instructor instructor)
 	{
 		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
 		{
-			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(event.getClassType())
-					&& fileAdapter.getInstructorIsAvailable(instructor, event))
+			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassType())
+					&& fileAdapter.getInstructorIsAvailable(instructor, this))
 			{
-				event.attendingInstructorsList.add(instructor);
+				attendingInstructorsList.add(instructor);
 			}
 		}
 	}
@@ -159,8 +180,8 @@ public class Event implements Serializable
 	@Override
 	public String toString()
 	{
-		String str = className + "\t" + classType + "\t" + maxMembers + "\t" + startDate + " - " + endDate + "\t"
-				+ startTime + " - " + endTime;
+		String str = "<html><pre style='font-size:11px'>"+className + "\t" + classType + "\t" + maxMembers + "\t" + startDate + " - " + endDate + "\t"
+				+ startTime + " - " + endTime+"</pre></html>";
 		return str;
 	}
 }
