@@ -125,6 +125,10 @@ public class newEventGUI extends JFrame
 	private MyListener myListener;
 
 	private FileAdapter fileAdapter;
+	private EventsList eventsList;
+	private InstructorsList instructorsList;
+	private ClassTypesList classTypesList;
+	private boolean alreadyEvent;
 
 	/**
 	 * Inner myListener
@@ -166,8 +170,8 @@ public class newEventGUI extends JFrame
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeCheck.isSelected()==true)
 			   {
-			      fileAdapter.getAllClassTypesList().add(new ClassType(typeInput.getText()));
-			      fileAdapter.saveClassTypesListToBin(fileAdapter.getAllClassTypesList());
+			      fileAdapter.getClassTypesList().getClassTypesList().add(new ClassType(typeInput.getText()));
+			      fileAdapter.saveClassTypesListToBin(fileAdapter.getClassTypesList().getClassTypesList());
 			      tempType.setClassName(typeInput.getText());
 			   }
 			   if(newTypeCheck.isSelected()==false)
@@ -185,16 +189,17 @@ public class newEventGUI extends JFrame
 				String tempDura = duraCombo.getSelectedItem().toString().charAt(0) + "";
 				int duration = Integer.parseInt(tempDura);
 				MyClock endTime = new MyClock(Integer.parseInt(startTimeHour.getText()) + duration, Integer.parseInt(startTimeMinute.getText()), 0);
+				int newEventId = Integer.parseInt(id.getText()+"");
 				
-				Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime);
+				Event temp = new Event(tempType, className, maxNumbers, startDate, endDate, startTime, endTime, newEventId);
 				
-				if(editInfo.isSelected()==true && !id.getText().equals(""))
+				if(alreadyEvent)
 				{
-				   for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+				   for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
 				   {
-				      if(id.getText().equals(fileAdapter.getEventsList().get(i).getEventID()+""))
+				      if(id.getText().equals(fileAdapter.getEventsList().getEventsList().get(i).getEventID()+""))
 				      {
-				         temp = fileAdapter.getEventsList().get(i);
+				         temp = fileAdapter.getEventsList().getEventsList().get(i);
 				      }
 				   }
 				   temp.setClassName(className);
@@ -205,23 +210,26 @@ public class newEventGUI extends JFrame
 				   temp.setStartDate(startDate);
 				   temp.setEndDate(endDate);
 				   
-				   fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+				   
+				   fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
 				   fileAdapter.updateEventsList();
 				}
-				else if(editInfo.isSelected()==true && id.getText().equals(""))
+				else if(editInfo.isSelected()==true)
 				{
+				   temp.setEventID(Integer.parseInt(id.getText()+""));
 				   fileAdapter.saveEventToAvailableBinList(temp);
+				   fileAdapter.updateEventsList();
 				}    
 				dispose();
 			}
 			if(e.getSource()==addInstructor)
 			{
-			   ArrayList<Event> tempAllEvents = fileAdapter.getEventsList();
+			   ArrayList<Event> tempAllEvents = fileAdapter.getEventsList().getEventsList();
 			   for(int i = 0;i<tempAllEvents.size();i++)
 			   {
 			      if(tempAllEvents.get(i).getClassName().equals(nameInput.getText()) && tempAllEvents.get(i).getClassType().equals(typeCombo.getSelectedItem().toString()))
 			      {
-			         fileAdapter.getEventsList().get(i).assignInstructorToEvent((Instructor)instructorComboBottom.getSelectedItem());
+			         fileAdapter.getEventsList().getEventsList().get(i).assignInstructorToEvent((Instructor)instructorComboBottom.getSelectedItem());
 			      }
 			   }
 			}
@@ -241,15 +249,16 @@ public class newEventGUI extends JFrame
 			}
 			if(e.getSource()==remove)
 			{
+			   fileAdapter.updateEventsList();
 			  int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm before deleting event", JOptionPane.YES_NO_OPTION);
 			   if(yesno==JOptionPane.YES_OPTION)
 			      {
-			         for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+			         for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
 			         {
-			               if(id.getText().equals(fileAdapter.getEventsList().get(i).getEventID()+""))
+			               if(id.getText().equals(fileAdapter.getEventsList().getEventsList().get(i).getEventID()+""))
 			               {
-			               fileAdapter.getEventsList().remove(i);
-			               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+			               fileAdapter.getEventsList().getEventsList().remove(i);
+			               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
 			               fileAdapter.updateEventsList();
 			               dispose();
 			               }
@@ -458,7 +467,10 @@ public class newEventGUI extends JFrame
 	   return true;
 	}
 	
-	
+	public JTextField getEventIDInput()
+	{
+	   return id;
+	}
 	
 	
 	
@@ -507,6 +519,7 @@ public class newEventGUI extends JFrame
 	
 	public void fillWithEvent(Event event)
 	{
+	   alreadyEvent = true;
 	   editEventArea(false);
 	   nameInput.setText(event.getClassName());
 	   maxMembersInput.setText(event.getMaxMembers()+"");
@@ -518,10 +531,10 @@ public class newEventGUI extends JFrame
 	        typeCombo.setSelectedIndex(i);
 	     }
 	   }
-	   String[] allInstructors = new String[fileAdapter.getInstructorsList().size()];
-	   for(int k = 0;k<fileAdapter.getInstructorsList().size();k++)
+	   String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
+	   for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
 	   {
-	      allInstructors[0] = fileAdapter.getInstructorsList().get(k).toString();
+	      allInstructors[0] = fileAdapter.getInstructorsList().getInstructorsList().get(k).toString();
 	   }
 	   tempIns = allInstructors;
 	   
@@ -583,6 +596,7 @@ public class newEventGUI extends JFrame
 	{
 		super("Event - ViaFit Fitness Centre");
 		
+		classTypesList = new ClassTypesList();
 		fileAdapter = new FileAdapter();
 		myListener = new MyListener();
 		main = new JPanel();
@@ -646,6 +660,7 @@ public class newEventGUI extends JFrame
 		nameInput = new JTextField();
 		typeInput = new JTextField();
 		maxMembersInput = new JTextField();
+		maxMembersInput.addFocusListener(myListener);
 		startDateDay = new JTextField("Day");
 		startDateDay.addFocusListener(myListener);
 		startDateMonth = new JTextField("Month");
@@ -665,7 +680,8 @@ public class newEventGUI extends JFrame
 		id = new JTextField("");
 
 		instructorCombo = new JComboBox<String>(tempIns);
-		tempType = fileAdapter.getAllClassTypes();
+		fileAdapter.updateClassTypesList();
+		tempType = fileAdapter.getClassTypesList().getClassTypesArr();
 		typeCombo = new JComboBox<String>(tempType);
 		duraCombo = new JComboBox<String>(tempDura);
 		instructorComboBottom = new JComboBox<String>(tempInsBottom);

@@ -92,7 +92,10 @@ public class newMemberGUI extends JFrame
    
    private MyListener myListener;
    private FileAdapter fileAdapter;
-
+   private EventsList eventsList;
+   private MembersList membersList;
+   private ClassTypesList classTypesList;
+   private boolean alreadyMember;
    
    
    
@@ -126,62 +129,90 @@ public class newMemberGUI extends JFrame
          }
          if(e.getSource()==signUp)
          {
+            fileAdapter.getEventsList();
             Member temp = null;
-            for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+            for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
-               if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+               if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
                {
-                  temp = fileAdapter.getMembersList().get(i);
+                  temp = fileAdapter.getMembersList().getMembersList().get(i);
                }
             }
-               allEvents.getSelectedValue().getMembersList().add(temp);
-               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+            if(!allEvents.getSelectedValue().getMembersList().contains(temp))
+                  {
+                     allEvents.getSelectedValue().getMembersList().add(temp);
+                  }
+               fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
                fileAdapter.updateEventsList();
                
                //update box to show the added
                listSignedUp.clear();
-               for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+               for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
                {
-                  if(fileAdapter.getEventsList().get(i).getMembersList().contains(temp))
+                  if(fileAdapter.getEventsList().getEventsList().get(i).getMembersList().contains(temp))
                   {
-                     listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+                     listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                  }
+               }
+               listModel.clear();
+               for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+               {
+                  if(classTypeInput.getSelectedItem().toString().equals("All events"))
+                  {
+                     listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                  }
+                  if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+                  {
+                     listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                   }
                }
          }
          if(e.getSource()==removeFrom)
          {
             Member temp = null;
-            for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+            for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
-               if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+               if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
                {
-                  temp = fileAdapter.getMembersList().get(i);
+                  temp = fileAdapter.getMembersList().getMembersList().get(i);
                }
             }
            allSignedUpForArea.getSelectedValue().getMembersList().remove(temp);
-           fileAdapter.saveEventsListToBin(fileAdapter.getEventsList());
+           fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
            fileAdapter.updateEventsList();
            //update box to remove the event
            listSignedUp.clear();
-           for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+           for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
            {
-              if(fileAdapter.getEventsList().get(i).getMembersList().contains(temp))
+              if(fileAdapter.getEventsList().getEventsList().get(i).getMembersList().contains(temp))
               {
-                 listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+                 listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+              }
+           }
+           listModel.clear();
+           for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+           {
+              if(classTypeInput.getSelectedItem().toString().equals("All events"))
+              {
+                 listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+              }
+              if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+              {
+                 listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
               }
            }
          }
          if(e.getSource()==save)
          {
             Member tempMember = null;
-            
-            if(editInfo.isSelected()==true && !memberIDInput.getText().equals(""))
+            fileAdapter.updateMembersList();
+            if(alreadyMember==true)
             {
-               for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+               for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
                {
-                  if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+                  if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
                   {
-                     tempMember = fileAdapter.getMembersList().get(i);
+                     tempMember = fileAdapter.getMembersList().getMembersList().get(i);
                   }
                }
               tempMember.setName(nameInput.getText());
@@ -193,11 +224,10 @@ public class newMemberGUI extends JFrame
               tempMember.setPhoneNumber(phoneInput.getText());
               tempMember.setMemberSince(new MyDate(Integer.parseInt(membershipSinceInputDay.getText()), Integer.parseInt(membershipSinceInputMonth.getText()), Integer.parseInt(membershipSinceInputYear.getText())));
               
-              
-              fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
+              fileAdapter.saveMembersListToBin(fileAdapter.getMembersList().getMembersList());
               fileAdapter.updateMembersList();
             }
-            else if(editInfo.isSelected()==true && memberIDInput.getText().equals(""))
+            else if(editInfo.isSelected()==true)
             {
             
             String name = nameInput.getText();
@@ -209,8 +239,9 @@ public class newMemberGUI extends JFrame
             MyDate memberSince = new MyDate(Integer.parseInt(membershipSinceInputDay.getText()), Integer.parseInt(membershipSinceInputMonth.getText()), Integer.parseInt(membershipSinceInputYear.getText()));
             String email = emailInput.getText();
             String phone = phoneInput.getText();
-            
-            tempMember = new Member(name, email, phone, type);
+            int newMemberId = Integer.parseInt(memberIDInput.getText()+"");
+            System.out.println(newMemberId);
+            tempMember = new Member(name, email, phone, type, newMemberId);
             tempMember.setMemberSince(memberSince);
             fileAdapter.saveMemberToAvailableBinList(tempMember);
             fileAdapter.updateMembersList();
@@ -219,20 +250,36 @@ public class newMemberGUI extends JFrame
          }
          if(e.getSource()==remove)
          {
+            fileAdapter.updateMembersList();
             int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this member?", "Confirm before deleting member", JOptionPane.YES_NO_OPTION);
             if(yesno==JOptionPane.YES_OPTION)
                {
-                  for(int i = 0;i<fileAdapter.getMembersList().size();i++)
+                  for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
                   {
-                        if(fileAdapter.getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
+                        if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
                         {
-                        fileAdapter.getMembersList().remove(i);
-                        fileAdapter.saveMembersListToBin(fileAdapter.getMembersList());
+                        fileAdapter.getMembersList().getMembersList().remove(i);
+                        fileAdapter.saveMembersListToBin(fileAdapter.getMembersList().getMembersList());
                         fileAdapter.updateMembersList();
                         dispose();
                         }
                   }
                }
+         }
+         if(e.getSource()==classTypeInput)
+         {
+            listModel.clear();
+            for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+            {
+               if(classTypeInput.getSelectedItem().toString().equals("All events"))
+               {
+                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+               }
+               if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+               {
+                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+               }
+            }
          }
       }
 
@@ -290,7 +337,10 @@ public class newMemberGUI extends JFrame
       }
    }
    
-   
+   public JTextField getMemberIDInput()
+   {
+      return memberIDInput;
+   }
    
    
    
@@ -309,6 +359,10 @@ public class newMemberGUI extends JFrame
    
    public void fillWithMember(Member member)
    {
+      fileAdapter.updateEventsList();
+      fileAdapter.updateClassTypesList();
+      fileAdapter.updateMembersList();
+      alreadyMember = true;
       editMemberGUI(false);
       nameInput.setText(member.getName());
       if(member.getIsPremium())
@@ -323,26 +377,25 @@ public class newMemberGUI extends JFrame
       emailInput.setText(member.getEMail());
       phoneInput.setText(member.getPhoneNumber());
       
-      for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+      
+      for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
       {
-         if(fileAdapter.getEventsList().get(i).getMembersList().contains(member))
+         if(fileAdapter.getEventsList().getEventsList().get(i).getMembersList().contains(member))
          {
-            listSignedUp.addElement(fileAdapter.getEventsList().get(i));
+            listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i));
          }
       }
-      
-      for(int i = 0;i<fileAdapter.getEventsList().size();i++)
+      for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
       {
          if(classTypeInput.getSelectedItem().toString().equals("All events"))
          {
-            listModel.addElement(fileAdapter.getEventsList().get(i));;
+            listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
          }
-         if(fileAdapter.getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+         if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
          {
-            listModel.addElement(fileAdapter.getEventsList().get(i));
+            listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
          }
       }
-      
    }
   
       public void editMemberGUI(boolean s)
@@ -377,8 +430,11 @@ public class newMemberGUI extends JFrame
    {   
    super("Member - ViaFit Fitness centre");
    
+   classTypesList = new ClassTypesList();
    myListener = new MyListener();
    fileAdapter = new FileAdapter();
+   eventsList = new EventsList();
+   membersList = new MembersList();
    
    main = new JPanel();
    inputContainer = new JPanel();
@@ -441,8 +497,9 @@ public class newMemberGUI extends JFrame
    
    String[] temp = {"Premium", "Standard"};
    membershipTypeInput = new JComboBox<String>(temp);
-   
-   classTypeInput = new JComboBox<String>(fileAdapter.getAllClassTypes());
+   fileAdapter.updateClassTypesList();
+   classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesList().getClassTypesArr());
+   classTypeInput.addActionListener(myListener);
    
    save = new JButton("Save");
    save.addActionListener(myListener);

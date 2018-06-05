@@ -7,6 +7,7 @@ public class MembersList implements Serializable
 {
 	private static final long serialVersionUID = 546950501307470288L;
 	ArrayList<Member> membersList = new ArrayList<Member>();
+	private int lastMemberID = 1;
 
 	public ArrayList<Member> getMembersList()
 	{
@@ -16,5 +17,13 @@ public class MembersList implements Serializable
 	public void setMembersList(ArrayList<Member> membersList)
 	{
 		this.membersList = membersList;
+	}
+	public int getLastMemberID()
+	{
+	   return lastMemberID;
+	}
+	public void setLastMemberID(int biggest)
+	{
+	   lastMemberID = biggest;
 	}
 }

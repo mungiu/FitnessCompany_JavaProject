@@ -1,4 +1,4 @@
-package MainPackage;
+ package MainPackage;
 
 import java.io.Serializable;
 
@@ -259,7 +259,8 @@ public class MyClock implements Serializable
          return false;
       }
       MyClock other = (MyClock)obj;
-      return other.hour==hour && other.minute==minute && other.second==second;
+      
+      return (other.hour==hour && other.minute==minute && other.second==second);
    }
 
    /**
