@@ -11,9 +11,9 @@ public class Instructor implements Serializable
 	private static final long serialVersionUID = 2596626544601247578L;
 	private int instructorID;
 	private String firstName, lastName;
-	private FileAdapter fileAdapter;
 	private ArrayList<ClassType> qualifiedClassesList;
 	private ArrayList<ClassType> allTaughtEventsList;
+	private InstructorsList instructorsList;
 
 	/**
 	 * Two-argument constructor.
@@ -30,6 +30,7 @@ public class Instructor implements Serializable
 		this.instructorID = getNewInstructorID();
 		allTaughtEventsList = new ArrayList<ClassType>();
 		qualifiedClassesList = new ArrayList<ClassType>();
+		instructorsList = new InstructorsList();
 	}
 
 	/**
@@ -42,7 +43,8 @@ public class Instructor implements Serializable
 		int biggestID = 0;
 		try
 		{
-			ArrayList<Instructor> tempInstList = fileAdapter.getInstructorsList();
+			// with new UML pull this from InstructorsList class
+			ArrayList<Instructor> tempInstList = instructorsList.getInstructorsList();
 
 			for (int i = 0; i < tempInstList.size(); i++)
 				if (biggestID < tempInstList.get(i).getInstructorID())

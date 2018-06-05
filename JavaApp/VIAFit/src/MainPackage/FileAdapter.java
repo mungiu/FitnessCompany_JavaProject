@@ -13,11 +13,12 @@ public class FileAdapter
 
 	MyFileIO myFileIO;
 	MyTextFileIO myTextFileIO;
+	private EventsList eventsList;
+	private MembersList membersList;
+	private InstructorsList instructorsList;
 
-	private ArrayList<Event> onGoingEventsList, upComingEventsList, eventsList;
+	private ArrayList<Event> onGoingEventsList, upComingEventsList;
 	private ArrayList<ClassType> allClassTypeList;
-	private ArrayList<Member> membersList;
-	private ArrayList<Instructor> instructorsList;
 
 	public FileAdapter()
 	{
@@ -30,9 +31,9 @@ public class FileAdapter
 		allClassTypeList = new ArrayList<ClassType>();
 		onGoingEventsList = new ArrayList<Event>();
 		upComingEventsList = new ArrayList<Event>();
-		eventsList = new ArrayList<Event>();
-		membersList = new ArrayList<Member>();
-
+		eventsList = new EventsList();
+		membersList = new MembersList();
+		instructorsList = new InstructorsList();
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
@@ -84,85 +85,17 @@ public class FileAdapter
 
 	}
 
-	public ArrayList<Member> getMembersList()
-	{
-		return membersList;
-	}
-
-	public ArrayList<Instructor> getInstructorsList()
-	{
-		return instructorsList;
-	}
-
-	public ArrayList<Event> getEventsList()
-	{
-		return eventsList;
-	}
-
-	public boolean getInstructorIsAvailable(Instructor instructor, Event event)
-	{
-		for (int i = 0; i < eventsList.size(); i++)
-			if (eventsList.get(i).getInstructorsList().contains(instructor))
-				for (int j = 0; j < eventsList.size(); j++)
-					if (eventsList.get(i).getStarTime().isBefore(event.getStarTime())
-							&& (!event.getStarTime().isBefore(eventsList.get(i).getEndTime())))
-						return true;
-
-		return false;
-	}
-
+	// move this to instructor and remove parameter
 	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
 	{
 
 		return instructor.getQualifiedClassesList();
 	}
 
+	// move this to instructor and remove parameter
 	public ArrayList<ClassType> getToughtEventsList(Instructor instructor)
 	{
 		return instructor.getAllTaughtEvents();
-	}
-
-	/**
-	 * Method for finding all upcoming or ongoing events a specific member is signed
-	 * up for
-	 * 
-	 * @param member
-	 *            The member object that is searched for in the ongoing and upcoming
-	 *            ArrayLists
-	 * @return temp An ArrayList<Event> containing all upcoming and ongoing events
-	 *         the given member attended
-	 */
-	public ArrayList<Event> getAllAttendingEventsForMember(Member member)
-	{
-		ArrayList<Event> temp = new ArrayList<Event>();
-
-		for (int i = 0; i < onGoingEventsList.size(); i++)
-			if (onGoingEventsList.get(i).getMembersList().contains(member))
-				temp.add(onGoingEventsList.get(i));
-
-		for (int i = 0; i < upComingEventsList.size(); i++)
-			if (upComingEventsList.get(i).getMembersList().contains(member))
-				temp.add(upComingEventsList.get(i));
-
-		return temp;
-	}
-
-	/**
-	 * Method that finds all events with a given classType of type String
-	 * 
-	 * @param input
-	 *            A String to compare class type
-	 * @return allEventOfType an ArrayList<Event>
-	 */
-	public ArrayList<Event> getAllEventsOfType(String input)
-	{
-		ArrayList<Event> allEventOfType = new ArrayList<Event>();
-
-		for (int i = 0; i < eventsList.size(); i++)
-			if (eventsList.get(i).getClassType().equals(input))
-				allEventOfType.add(eventsList.get(i));
-
-		return allEventOfType;
 	}
 
 	public void updateOnGoingEventsList()
@@ -171,23 +104,30 @@ public class FileAdapter
 
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
+		ArrayList<Event> temp = eventsList.getEventsList();
+		MyDate today = MyDate.today();
 		MyClock thisEventStartTime;
 		MyClock thisEventEndTime;
-		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 
-		
-			for (int i = 0; i < eventsList.size(); i++)
+
+
+			for (int i = 0; i < temp.size(); i++)
+
 			{
-				thisEventStartTime = eventsList.get(i).getStarTime();
-				thisEventEndTime = eventsList.get(i).getEndTime();
-				thisEventStartDate = eventsList.get(i).getStartDate();
+				thisEventStartTime = temp.get(i).getStarTime();
+				thisEventEndTime = temp.get(i).getEndTime();
+				thisEventStartDate = temp.get(i).getStartDate();
 
 				boolean eventIsToday = thisEventStartDate.getDay()==today.getDay() && thisEventStartDate.getMonth()==today.getMonth() && thisEventStartDate.getYear()==today.getYear();
 				boolean eventStarted = thisEventStartTime.getHour() < currentTime.getHour();
 				boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
 				boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
-				boolean containsEvent = onGoingEventsList.contains(eventsList.get(i));
+				boolean containsEvent = onGoingEventsList.contains(temp.get(i));
+
+
+				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
+					onGoingEventsList.add(temp.get(i));
 
 
 				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
@@ -205,33 +145,49 @@ public class FileAdapter
 
 		int maxUpcomingEvents = 30;
 		GregorianCalendar calendar = new GregorianCalendar();
+		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
+		ArrayList<Event> temp = eventsList.getEventsList();
+		MyDate today = MyDate.today();
 		Event currentEvent;
 
-		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
 		MyClock thisEventStartTime;
 		MyClock thisEventEndTime;
 
-		MyDate today = MyDate.today();
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
 
+		for (int i = 0; i < temp.size(); i++)
+		{
+			currentEvent = temp.get(i);
+			thisEventStartTime = currentEvent.getStarTime();
+			thisEventEndTime = currentEvent.getEndTime();
+			thisEventStartDate = currentEvent.getStartDate();
+			thisEventEndDate = currentEvent.getEndDate();
 
-			for (int i = 0; i < eventsList.size(); i++)
+			boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
+			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
+			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
+			boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
+
+			// adding future events (30 max)
+			if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
 			{
-				currentEvent = eventsList.get(i);
-				thisEventStartTime = currentEvent.getStarTime();
-				thisEventEndTime = currentEvent.getEndTime();
-				thisEventStartDate = currentEvent.getStartDate();
-				thisEventEndDate = currentEvent.getEndDate();
 
-				boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
-				boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
-				boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
-				boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
-
-				// adding future events (30 max)
-				if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
+				if (eventIsUpcomingYears)
 				{
+					upComingEventsList.add(currentEvent);
+					System.out.println(upComingEventsList.size() + "lol");
+				} else if (eventIsUpcomingMonths)
+				{
+					upComingEventsList.add(currentEvent);
+					System.out.println(upComingEventsList.size() + "jj");
+				} else if (eventIsUpcomingDays)
+				{
+					upComingEventsList.add(currentEvent);
+					System.out.println(upComingEventsList.size() + "hej");
+				} else if (eventIsUpcomingHours)
+				{
+
 				   
 					if (eventIsUpcomingYears)
 					{
@@ -249,42 +205,47 @@ public class FileAdapter
 					{
 					   upComingEventsList.add(currentEvent);
 					}	
-				}
 
-				boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
-				boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
-				boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
-				boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
+					upComingEventsList.add(currentEvent);
+					System.out.println(upComingEventsList.size() + "pp");
 
-				// removing old events
-				if (upComingEventsList.contains(currentEvent))
-				{
-					if (eventWasBeforeThisYear)
-						upComingEventsList.remove(currentEvent);
-					else if (eventWasBeforeThisMonth)
-						upComingEventsList.remove(currentEvent);
-					else if (eventWasBeforeThisDay)
-						upComingEventsList.remove(currentEvent);
-					else if (eventWasBeforeThisHour)
-						upComingEventsList.remove(currentEvent);
 				}
 			}
-		
+
+			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
+			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
+			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
+			boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
+
+			// removing old events
+			if (upComingEventsList.contains(currentEvent))
+			{
+				if (eventWasBeforeThisYear)
+					upComingEventsList.remove(currentEvent);
+				else if (eventWasBeforeThisMonth)
+					upComingEventsList.remove(currentEvent);
+				else if (eventWasBeforeThisDay)
+					upComingEventsList.remove(currentEvent);
+				else if (eventWasBeforeThisHour)
+					upComingEventsList.remove(currentEvent);
+			}
+		}
+
 	}
 
 	public void updateInstructorsList()
 	{
-		instructorsList = readInstructorsListFromBin();
+		instructorsList.setInstructorsList(readInstructorsListFromBin());
 	}
 
 	public void updateMembersList()
 	{
-		membersList = readMembersListFromBin();
+		membersList.setMembersList(readMembersListFromBin());
 	}
 
 	public void updateEventsList()
 	{
-		eventsList = readEventsListFromBin();
+		eventsList.setEventsList(readEventsListFromBin());
 	}
 
 	public void updateClassTypesList()
@@ -531,40 +492,4 @@ public class FileAdapter
 
 		return tempList;
 	}
-	
-	public int getNewID(Object obj)
-   {
-	   if(obj instanceof Event)
-	   {
-      int biggestID = 0;
-      
-         for (int i = 0; i < eventsList.size(); i++)
-            if (biggestID < eventsList.get(i).getEventID())
-               biggestID = eventsList.get(i).getEventID();
-     
-      return biggestID + 1;
-	   }
-	   if(obj instanceof Member)
-      {
-      int biggestID = 0;
-
-         for (int i = 0; i < membersList.size(); i++)
-            if (biggestID < membersList.get(i).getMemberID())
-               biggestID = membersList.get(i).getMemberID();
-     
-      return biggestID + 1;
-      }
-	   if(obj instanceof Instructor)
-      {
-      int biggestID = 0;
-
-
-         for (int i = 0; i < instructorsList.size(); i++)
-            if (biggestID < instructorsList.get(i).getInstructorID())
-               biggestID = instructorsList.get(i).getInstructorID();
-     
-      return biggestID + 1;
-      }
-	   else return -1;
-   }
 }

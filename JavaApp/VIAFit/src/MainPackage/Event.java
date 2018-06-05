@@ -5,18 +5,15 @@ import java.util.ArrayList;
 
 public class Event implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8108565391263087432L;
 	private String className;
 	private int maxMembers;
-	private FileAdapter fileAdapter;
 	private MyDate startDate, endDate;
 	private MyClock startTime, endTime;
 	private ClassType classType;
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
+	private EventsList eventsList;
 	private int eventID;
 
 	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
@@ -29,9 +26,54 @@ public class Event implements Serializable
 		this.endDate = endDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
+
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
 //		eventID = fileAdapter.getNewID(this);
+	
+
+
+
+		attendingInstructorsList = new ArrayList<Instructor>();
+		attendingMembersList = new ArrayList<Member>();
+		eventsList = new EventsList();
+		eventID = getNewEventID();
+	}
+
+	// move this to instructor and remove parameter
+	public boolean getInstructorIsAvailable(Instructor instructor)
+	{
+		ArrayList<Event> temp = eventsList.getEventsList();
+
+		for (int i = 0; i < temp.size(); i++)
+			if (temp.get(i).getInstructorsList().contains(instructor))
+				for (int j = 0; j < temp.size(); j++)
+					if (temp.get(i).getStarTime().isBefore(getStarTime())
+							&& (!getStarTime().isBefore(temp.get(i).getEndTime())))
+						return true;
+
+		return false;
+	}
+
+	public int getNewEventID()
+	{
+		int biggestID = 0;
+		try
+		{
+			// with new UML pull this from EventsList class
+			ArrayList<Event> tempEventList = eventsList.getEventsList();
+
+			for (int i = 0; i < tempEventList.size(); i++)
+				if (biggestID < tempEventList.get(i).getEventID())
+					biggestID = tempEventList.get(i).getEventID();
+		} catch (NullPointerException e)
+		{
+			e.printStackTrace();
+			System.out.println(
+					"tempEventList.get(i).getEventID() or fileAdapter.getEventsList() is NULL >>>>> biggestID set to 1");
+		}
+
+		return biggestID + 1;
 	}
 
 
@@ -146,10 +188,8 @@ public class Event implements Serializable
 		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
 		{
 			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassType())
-					&& fileAdapter.getInstructorIsAvailable(instructor, this))
-			{
+					&& getInstructorIsAvailable(instructor))
 				attendingInstructorsList.add(instructor);
-			}
 		}
 	}
 
@@ -166,15 +206,15 @@ public class Event implements Serializable
 
 	public boolean equals(Object obj)
 	{
-	   if(!(obj instanceof Event))
-	   {
-	      return false;
-	   }
-	   Event other = (Event)obj;
-	   return other.className.equals(className) && other.maxMembers==maxMembers && other.startDate.equals(startDate)
-	         && other.endDate.equals(endDate) && other.startTime.equals(startTime) && other.endTime.equals(endTime)
-	         && other.classType.equals(classType) && other.eventID==eventID;
+		if (!(obj instanceof Event))
+			return false;
+
+		Event other = (Event) obj;
+		return other.className.equals(className) && other.maxMembers == maxMembers && other.startDate.equals(startDate)
+				&& other.endDate.equals(endDate) && other.startTime.equals(startTime) && other.endTime.equals(endTime)
+				&& other.classType.equals(classType) && other.eventID == eventID;
 	}
+
 	public String toString()
 	{
 		String str = "<html><pre style='font-size:11px'>" + className + "\t\t" + classType + "\t" + maxMembers + "\t"
