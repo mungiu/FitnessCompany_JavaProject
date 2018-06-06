@@ -3,7 +3,7 @@ package MainPackage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event implements Serializable
+public class Event implements Serializable, Comparable
 {
 	private static final long serialVersionUID = 8108565391263087432L;
 	private String className;
@@ -231,6 +231,7 @@ public class Event implements Serializable
 	}
 	public String toString()
 	{
+
 	   String nameTab = "";
 	   String classTypeTab = "";
 	   String dateTab = "\t\t";
@@ -262,5 +263,29 @@ public class Event implements Serializable
 		String str = "<html><pre style='font-size:11px'>" + className +nameTab + classType + classTypeTab +"     "+ maxMembers + "\t\t     "
 				+ startDate + dateTab + startTime + " - " + endTime + "</pre></html>";
 		return str;
+	}
+
+	@Override
+	public int compareTo(Object obj)
+	{
+		if (!(obj instanceof Event))
+			return 0;
+		else
+		{
+			Event temp = (Event) obj;
+
+			boolean thisEventIsEarlierDate = (this.getStartDate().compareTo(temp.getStartDate()) == -1);
+			boolean thisEventIsSameDate = (this.getStartDate().compareTo(temp.getStartDate()) == 0);
+
+			boolean thisEventIsEarlierHour = (this.getStarTime().compareTo(temp.getStarTime()) == -1);
+			boolean thisEventIsSameHour = (this.getStarTime().compareTo(temp.getStarTime()) == 0);
+
+			if (thisEventIsEarlierDate || (thisEventIsSameDate && thisEventIsEarlierHour))
+				return -1;
+			if (thisEventIsSameDate && thisEventIsSameHour)
+				return 0;
+			else
+				return 1;
+		}
 	}
 }
