@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 
 public class FileAdapter
@@ -95,9 +97,8 @@ public class FileAdapter
 			boolean containsEvent = onGoingEventsList.contains(temp.get(i));
 
 			if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
-			{
 				onGoingEventsList.add(temp.get(i));
-			} else if (containsEvent && eventFinished)
+			else if (containsEvent && eventFinished)
 				onGoingEventsList.remove(i);
 		}
 	}
@@ -136,19 +137,15 @@ public class FileAdapter
 			if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
 			{
 				if (eventIsUpcomingYears)
-				{
 					upComingEventsList.add(currentEvent);
-				} else if (eventIsUpcomingMonths)
-				{
+				else if (eventIsUpcomingMonths)
 					upComingEventsList.add(currentEvent);
-				} else if (eventIsUpcomingDays)
-				{
+				else if (eventIsUpcomingDays)
 					upComingEventsList.add(currentEvent);
-				} else if (eventIsUpcomingHours)
-				{
+				else if (eventIsUpcomingHours)
 					upComingEventsList.add(currentEvent);
-				}
 			}
+
 			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
 			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
 			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
@@ -168,6 +165,15 @@ public class FileAdapter
 			}
 		}
 
+		// sorting events
+		Collections.sort(upComingEventsList, new Comparator<Event>()
+		{
+			@Override
+			public int compare(Event eventUpperIndex, Event eventLowerIndex)
+			{
+				return eventLowerIndex.compareTo(eventUpperIndex);
+			}
+		});
 	}
 
 	public void updateInstructorsList()
