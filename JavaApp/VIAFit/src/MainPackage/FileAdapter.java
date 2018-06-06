@@ -182,7 +182,7 @@ public class FileAdapter
 		Collections.sort(upComingEventsList, new Comparator<Event>()
 		{
 			@Override
-			public int compare(Event eventUpperIndex, Event eventLowerIndex)
+			public int compare(Event eventLowerIndex, Event eventUpperIndex)
 			{
 				return eventLowerIndex.compareTo(eventUpperIndex);
 			}
