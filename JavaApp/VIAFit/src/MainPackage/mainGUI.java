@@ -464,7 +464,10 @@ private class MyListSelectionListener implements ListSelectionListener
 
 
 
-
+public void showAllofType(String type)
+{
+   
+}
 
 
 public void updateOnGoingEventsArea()
@@ -582,9 +585,9 @@ public mainGUI()
    eventNew.addActionListener(myListener);
    eventAll = new JButton("Show all");
    eventAll.addActionListener(myListener);
-   upcomingDetails = new JButton("Details");
+   upcomingDetails = new JButton("Show event information");
    upcomingDetails.addActionListener(myListener);
-   ongoingDetails = new JButton("Details");
+   ongoingDetails = new JButton("Show event information");
    ongoingDetails.addActionListener(myListener);
    homeDetails = new JButton("Details");
    homeDetails.addActionListener(myListener);

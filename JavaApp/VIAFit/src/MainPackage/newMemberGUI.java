@@ -436,6 +436,7 @@ public class newMemberGUI extends JFrame
             membershipSinceInputDay.setEnabled(false);
             membershipSinceInputMonth.setEnabled(false);
             membershipSinceInputYear.setEnabled(false);
+            classTypeInput.setEnabled(true);
          }
          if(s==true)
          {
@@ -447,6 +448,7 @@ public class newMemberGUI extends JFrame
             membershipSinceInputDay.setEnabled(true);
             membershipSinceInputMonth.setEnabled(true);
             membershipSinceInputYear.setEnabled(true);
+            classTypeInput.setEnabled(true);
             signUp.setEnabled(true);
             removeFrom.setEnabled(true);
          }
@@ -528,6 +530,7 @@ public class newMemberGUI extends JFrame
    fileAdapter.updateClassTypesList();
    classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesList().getClassTypesArr());
    classTypeInput.addActionListener(myListener);
+   classTypeInput.setEnabled(false);
    
    save = new JButton("Save");
    save.addActionListener(myListener);
@@ -650,6 +653,7 @@ public class newMemberGUI extends JFrame
    
    outputRight.add(allSignedUpForbox);
    allSignedUpForbox.add(allSignedupForLabel);
+   allSignedupForLabel.setBorder(new EmptyBorder(8, 0, 0, 0));
    outputRight.add(rightAreaFrame);
    rightAreaFrame.add(allSignedUpForScroll);
    outputRight.add(removeFromBox);
