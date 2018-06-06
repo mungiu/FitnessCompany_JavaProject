@@ -12,8 +12,6 @@ public class Instructor implements Serializable
 	private int instructorID;
 	private String name;
 	private ArrayList<ClassType> qualifiedForList;
-	private ArrayList<ClassType> allTaughtEventsList;
-	private InstructorsList instructorsList;
 
 	/**
 	 * Two-argument constructor.
@@ -27,19 +25,7 @@ public class Instructor implements Serializable
 	{
 		this.name = name;
 		this.instructorID = id;
-		allTaughtEventsList = new ArrayList<ClassType>();
 		this.qualifiedForList = qualifiedForList;
-		instructorsList = new InstructorsList();
-	}
-
-	/**
-	 * Gets the instructors first name.
-	 * 
-	 * @return the instructors first name.
-	 */
-	public String getName()
-	{
-		return name;
 	}
 
 	/**
@@ -53,6 +39,16 @@ public class Instructor implements Serializable
 	}
 
 	/**
+	 * Gets the instructors first name.
+	 * 
+	 * @return the instructors first name.
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
 	 * Gets the instructors qualified classes list.
 	 * 
 	 * @return the instructors qualified classes list.
@@ -60,17 +56,6 @@ public class Instructor implements Serializable
 	public ArrayList<ClassType> getQualifiedClassesList()
 	{
 		return qualifiedForList;
-	}
-
-	/**
-	 * Gets the instructors all taught events list.
-	 * 
-	 * @return the instructors all taught events list.
-	 */
-
-	public ArrayList<ClassType> getAllTaughtEvents()
-	{
-		return allTaughtEventsList;
 	}
 
 	/**
@@ -92,11 +77,11 @@ public class Instructor implements Serializable
 	 */
 	public void setQualifiedList(ArrayList<ClassType> list)
 	{
-	   qualifiedForList.clear();
-	   for(int i = 0;i<list.size();i++)
-	   {
-	      qualifiedForList.add(list.get(i));
-	   }
+		qualifiedForList.clear();
+		for (int i = 0; i < list.size(); i++)
+		{
+			qualifiedForList.add(list.get(i));
+		}
 	}
 
 	public boolean equals(Object obj)
@@ -113,19 +98,21 @@ public class Instructor implements Serializable
 
 	public String toString()
 	{
-	   String list = "";
-	   if(qualifiedForList.size()!=0)
-	   {
-	      for(int i = 0;i<qualifiedForList.size();i++)
-	      {
-	         list+=qualifiedForList.get(i).getClassName()+", ";
-	      }
-	   }
-	   String str = "<html><pre style='font-size:11px'>" + name + "\t\t"+instructorID+"\t\t"+list+"</pre></html>";
-      return str;
+		String list = "";
+		if (qualifiedForList.size() != 0)
+		{
+			for (int i = 0; i < qualifiedForList.size(); i++)
+			{
+				list += qualifiedForList.get(i).getClassName() + ", ";
+			}
+		}
+		String str = "<html><pre style='font-size:11px'>" + name + "\t\t" + instructorID + "\t\t" + list
+				+ "</pre></html>";
+		return str;
 	}
+
 	public String toSmallString()
 	{
-	   return name+"  ID: "+instructorID;
+		return name + "  ID: " + instructorID;
 	}
 }

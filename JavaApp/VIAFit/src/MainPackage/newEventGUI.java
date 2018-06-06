@@ -235,18 +235,22 @@ public class newEventGUI extends JFrame
 			}
 			if(e.getSource()==addInstructor)
 			{
-			   Instructor temp = null;
-			   for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+			   if(alreadyEvent)
 			   {
-			      if(fileAdapter.getInstructorsList().getInstructorsList().get(i).toSmallString().equals(instructorCombo.getSelectedItem()))
+			      Instructor temp = null;
+			      for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
 			      {
-			         temp = fileAdapter.getInstructorsList().getInstructorsList().get(i);
+			         if(fileAdapter.getInstructorsList().getInstructorsList().get(i).toSmallString().equals(instructorCombo.getSelectedItem()))
+			         {
+			            temp = fileAdapter.getInstructorsList().getInstructorsList().get(i);
+			         }
+			      }
+			      if(!listInstructors.contains(temp))
+			      {
+			         listInstructors.addElement(temp);
 			      }
 			   }
-			   if(!listInstructors.contains(temp))
-			   {
-			      listInstructors.addElement(temp);
-			   }
+			   else JOptionPane.showMessageDialog(null, "Please save the event before adding and removing instructors");
 			}
 			
 			if(e.getSource()==newTypeMenu)
@@ -296,7 +300,11 @@ public class newEventGUI extends JFrame
 			}
 			if(e.getSource()==removeInstructor)
 			{
-			   listInstructors.removeElement(attendingInstructorsArea.getSelectedValue());
+			   if(alreadyEvent)
+			   {
+			      listInstructors.removeElement(attendingInstructorsArea.getSelectedValue());
+			   }
+			   else JOptionPane.showMessageDialog(null, "Please save the event before adding and removing instructors");
 			}
 		}
 
@@ -763,7 +771,7 @@ public class newEventGUI extends JFrame
 		about.addActionListener(myListener);
 		editInfo = new JCheckBoxMenuItem("Edit event");
 		editInfo.addActionListener(myListener);
-		logo = new ImageIcon("img/logoTransBigger.png");
+		logo = new ImageIcon(Main.class.getResource("/imgPackage/logoTransBigger.png"));
 		logoLabel = new JLabel();
 		deleteClassType = new JMenuItem("Delete current class type");
 		deleteClassType.addActionListener(myListener);
@@ -921,7 +929,7 @@ public class newEventGUI extends JFrame
 		setJMenuBar(menuBar);
 		add(main);
 		setSize(800, 600);
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

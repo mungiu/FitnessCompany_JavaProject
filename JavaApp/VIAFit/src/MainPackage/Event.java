@@ -190,7 +190,29 @@ public class Event implements Serializable
 
 	public String toString()
 	{
-		String str = "<html><pre style='font-size:11px'>" + className + "\t\t" + classType + "\t" + maxMembers + "\t"
+	   String nameTab = "";
+	   String classTypeTab = "";
+	   if(className.length()>=8 && className.length()<16)
+	   {
+	      nameTab = "\t\t"; 
+	   }
+	   else if(className.length()>=16)
+	   {
+	      nameTab = "\t";
+	   }
+	   else nameTab = "\t\t\t"; 
+	   
+	   if(classType.getClassName().length()>=8 && classType.getClassName().length()<16)
+	   {
+	      classTypeTab = "\t";
+	   }
+	   else if(classType.getClassName().length()>=16)
+	   {
+	      classTypeTab = "\t\t";
+	   }
+	   else classTypeTab = "\t\t";
+	   
+		String str = "<html><pre style='font-size:11px'>" + className +nameTab + classType + classTypeTab + maxMembers + "\t"
 				+ startDate + " - " + endDate + "\t" + startTime + " - " + endTime + "</pre></html>";
 		return str;
 	}

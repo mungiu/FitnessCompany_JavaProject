@@ -19,7 +19,6 @@ public class FileAdapter
 	private ClassTypesList classTypesList;
 
 	private ArrayList<Event> onGoingEventsList, upComingEventsList;
-	
 
 	public FileAdapter()
 	{
@@ -49,42 +48,30 @@ public class FileAdapter
 	{
 		return upComingEventsList;
 	}
+
 	public EventsList getEventsList()
-   {
-      return eventsList;
-   }
+	{
+		return eventsList;
+	}
+
 	public InstructorsList getInstructorsList()
-   {
-      return instructorsList;
-   }
+	{
+		return instructorsList;
+	}
+
 	public MembersList getMembersList()
-   {
-      return membersList;
-   }
+	{
+		return membersList;
+	}
+
 	public ClassTypesList getClassTypesList()
 	{
-	   return classTypesList;
-	}
-	
-
-	
-
-	// move this to instructor and remove parameter
-	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
-	{
-
-		return instructor.getQualifiedClassesList();
-	}
-
-	// move this to instructor and remove parameter
-	public ArrayList<ClassType> getToughtEventsList(Instructor instructor)
-	{
-		return instructor.getAllTaughtEvents();
+		return classTypesList;
 	}
 
 	public void updateOnGoingEventsList()
 	{
-	   updateEventsList();
+		updateEventsList();
 		onGoingEventsList.clear();
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
@@ -94,34 +81,33 @@ public class FileAdapter
 		MyClock thisEventEndTime;
 		MyDate thisEventStartDate;
 
+		for (int i = 0; i < temp.size(); i++)
 
+		{
+			thisEventStartTime = temp.get(i).getStarTime();
+			thisEventEndTime = temp.get(i).getEndTime();
+			thisEventStartDate = temp.get(i).getStartDate();
 
-			for (int i = 0; i < temp.size(); i++)
+			boolean eventIsToday = thisEventStartDate.getDay() == today.getDay()
+					&& thisEventStartDate.getMonth() == today.getMonth()
+					&& thisEventStartDate.getYear() == today.getYear();
+			boolean eventStarted = thisEventStartTime.getHour() <= currentTime.getHour();
+			boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
+			boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
+			boolean containsEvent = onGoingEventsList.contains(temp.get(i));
 
+			if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
 			{
-				thisEventStartTime = temp.get(i).getStarTime();
-				thisEventEndTime = temp.get(i).getEndTime();
-				thisEventStartDate = temp.get(i).getStartDate();
-
-				boolean eventIsToday = thisEventStartDate.getDay()==today.getDay() && thisEventStartDate.getMonth()==today.getMonth() && thisEventStartDate.getYear()==today.getYear();
-				boolean eventStarted = thisEventStartTime.getHour() <= currentTime.getHour();
-				boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
-				boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
-				boolean containsEvent = onGoingEventsList.contains(temp.get(i));
-
-				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
-				{
-				   onGoingEventsList.add(temp.get(i));
-				}
-				else if (containsEvent && eventFinished)
-					onGoingEventsList.remove(i);
-			}
+				onGoingEventsList.add(temp.get(i));
+			} else if (containsEvent && eventFinished)
+				onGoingEventsList.remove(i);
+		}
 	}
 
 	public void updateUpComingEventsList()
 	{
-	   updateEventsList();
-	   upComingEventsList.clear();
+		updateEventsList();
+		upComingEventsList.clear();
 		int maxUpcomingEvents = 30;
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
@@ -152,21 +138,18 @@ public class FileAdapter
 			if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
 			{
 				if (eventIsUpcomingYears)
-				   {
+				{
 					upComingEventsList.add(currentEvent);
-				   } 
-				else if (eventIsUpcomingMonths)
-				   {
+				} else if (eventIsUpcomingMonths)
+				{
 					upComingEventsList.add(currentEvent);
-				   } 
-				else if (eventIsUpcomingDays)
-				   {
+				} else if (eventIsUpcomingDays)
+				{
 					upComingEventsList.add(currentEvent);
-				   } 
-				else if (eventIsUpcomingHours)
-				   {
+				} else if (eventIsUpcomingHours)
+				{
 					upComingEventsList.add(currentEvent);
-					}	
+				}
 			}
 			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
 			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
@@ -387,7 +370,7 @@ public class FileAdapter
 				ArrayList<?> all = (ArrayList<?>) obj;
 				for (int i = 0; i < all.size(); i++)
 				{
-				   tempList.add((Event) all.get(i));
+					tempList.add((Event) all.get(i));
 				}
 			}
 
@@ -411,7 +394,6 @@ public class FileAdapter
 			e.printStackTrace();
 		}
 
-		
 		return tempList;
 	}
 
