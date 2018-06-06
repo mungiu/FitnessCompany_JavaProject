@@ -114,7 +114,7 @@ public class Instructor implements Serializable
 	public String toString()
 	{
 	   String list = "";
-	   String nameTab = "";
+	   String nameTab = "\t";
 	   if(qualifiedForList.size()!=0)
 	   {
 	      for(int i = 0;i<qualifiedForList.size();i++)
@@ -122,9 +122,9 @@ public class Instructor implements Serializable
 	         list+=qualifiedForList.get(i).getClassName()+", ";
 	      }
 	   }
-	   if(name.length()>=16)
+	   if(name.length()>=16 && name.length()<25)
       {
-         nameTab = "\t";
+         nameTab = "\t\t";
       }
       else if(name.length()>=8 && name.length()<16)
       {
