@@ -423,7 +423,7 @@ public void setTopLabel(String type)
 {
    if(type.equals("Member"))
    {
-      String eventString = "<html><pre style='font-size:11px'>"+"Member name\t       Email\t          Phone number\t          Sign up date\t            ID"+"</pre></html>";
+      String eventString = "<html><pre style='font-size:11px'>"+"Member name\t        Email\t                 Phone number\t         Sign up date\t           ID"+"</pre></html>";
       aboveBigInfo.setText(eventString);
    }
    if(type.equals("Instructor"))

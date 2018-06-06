@@ -222,6 +222,7 @@ public class Member implements Serializable
 	{
 	   String nameTab = "";
 	   String emailTab = "\t";
+	   String phoneTab = "\t\t";
 	   if(name.length()>=16)
 	   {
 	      nameTab = "\t";
@@ -244,8 +245,12 @@ public class Member implements Serializable
       {
          emailTab = "\t\t\t\t";
       }
+	   if(phoneNumber.length()<8)
+	   {
+	      phoneTab = "\t\t\t";
+	   }
       
-		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + "\t\t"
+		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + phoneTab
 				+ memberSince + "\t\t" + memberID + "</pre></html>";
 		return str;
 	}
