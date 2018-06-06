@@ -349,7 +349,7 @@ public newInstructorGUI()
    editInstructor = new JCheckBoxMenuItem("Edit instructor");
    editInstructor.addActionListener(myListener);
    
-   logo = new ImageIcon("img/logoTransBigger.png");
+   logo = new ImageIcon(Main.class.getResource("/imgPackage/logoTransBigger.png"));
    logoLabel = new JLabel();
    headLine = new JLabel("Instructor information");
    

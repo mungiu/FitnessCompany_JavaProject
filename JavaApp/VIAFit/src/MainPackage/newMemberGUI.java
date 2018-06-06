@@ -498,6 +498,7 @@ public class newMemberGUI extends JFrame
    membershipTypeInput = new JComboBox<String>(temp);
    fileAdapter.updateClassTypesList();
    classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesList().getClassTypesArr());
+   classTypeInput.setEnabled(false);
    classTypeInput.addActionListener(myListener);
    
    save = new JButton("Save");
@@ -505,8 +506,10 @@ public class newMemberGUI extends JFrame
    close = new JButton("Close");
    close.addActionListener(myListener);
    signUp = new JButton("Sign up for event");
+   signUp.setEnabled(false);
    signUp.addActionListener(myListener);
    removeFrom = new JButton("Remove from event");
+   removeFrom.setEnabled(false);
    removeFrom.addActionListener(myListener);
    
    menuBar = new JMenuBar();
@@ -524,7 +527,7 @@ public class newMemberGUI extends JFrame
    editInfo = new JCheckBoxMenuItem("Edit member");
    editInfo.addActionListener(myListener);
    
-   logo = new ImageIcon("img/logoTransBigger.png");
+   logo = new ImageIcon(Main.class.getResource("/imgPackage/logoTransBigger.png"));
    
    
    //styling the text and labels
