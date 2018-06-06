@@ -11,14 +11,13 @@ public class FileAdapter
 {
 	String membersListBinFileName, instructorsListBinFileName, eventsListBinFileName, classTypeListBinFileName;
 
+	private ArrayList<Event> onGoingEventsList, upComingEventsList;
+
 	MyFileIO myFileIO;
-	MyTextFileIO myTextFileIO;
 	private EventsList eventsList;
 	private MembersList membersList;
 	private InstructorsList instructorsList;
 	private ClassTypesList classTypesList;
-
-	private ArrayList<Event> onGoingEventsList, upComingEventsList;
 
 	public FileAdapter()
 	{
@@ -35,7 +34,6 @@ public class FileAdapter
 		instructorsList = new InstructorsList();
 		classTypesList = new ClassTypesList();
 		myFileIO = new MyFileIO();
-		myTextFileIO = new MyTextFileIO();
 
 	}
 
@@ -277,10 +275,10 @@ public class FileAdapter
 		}
 	}
 
-	public void saveClassTypeToAvailableBinList(ClassType ClassType)
+	public void saveClassTypeToAvailableBinList(ClassType classType)
 	{
 		ArrayList<ClassType> tempList = readClassTypesListFromBin();
-		tempList.add(ClassType);
+		tempList.add(classType);
 		saveClassTypesListToBin(tempList);
 	}
 

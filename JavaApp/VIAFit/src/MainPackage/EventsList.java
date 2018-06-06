@@ -13,15 +13,6 @@ public class EventsList implements Serializable
 		return eventsList;
 	}
 
-	public void setEventsList(ArrayList<Event> eventsList)
-	{
-	   this.eventsList.clear();
-		for(int i = 0;i<eventsList.size();i++)
-		{
-		      this.eventsList.add(eventsList.get(i));
-		}
-	}
-
 	/**
 	 * Method that finds all events with a given classType of type String
 	 * 
@@ -32,11 +23,11 @@ public class EventsList implements Serializable
 	public ArrayList<Event> getAllEventsOfType(String input)
 	{
 		ArrayList<Event> allEventOfType = new ArrayList<Event>();
-
+	
 		for (int i = 0; i < eventsList.size(); i++)
 			if (eventsList.get(i).getClassType().equals(input))
 				allEventOfType.add(eventsList.get(i));
-
+	
 		return allEventOfType;
 	}
 
@@ -60,6 +51,15 @@ public class EventsList implements Serializable
 				temp.add(eventsList.get(i));
 
 		return temp;
+	}
+
+	public void setEventsList(ArrayList<Event> eventsList)
+	{
+	   this.eventsList.clear();
+		for(int i = 0;i<eventsList.size();i++)
+		{
+		      this.eventsList.add(eventsList.get(i));
+		}
 	}
 
 }
