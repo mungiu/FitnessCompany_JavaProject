@@ -499,7 +499,7 @@ public mainGUI()
    about = new JMenuItem("About");
    about.addActionListener(myListener);
    
-   vialogo = new ImageIcon("img/logoTransBigger.png");
+   vialogo = new ImageIcon(Main.class.getResource("/imgPackage/logoTransBigger.png"));
    
    
    //adding borders
