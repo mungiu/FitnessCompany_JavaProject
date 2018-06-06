@@ -3,7 +3,7 @@ package MainPackage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event implements Serializable, Comparable
+public class Event implements Serializable, Comparable<Event>
 {
 	private static final long serialVersionUID = 8108565391263087432L;
 	private String className;
@@ -69,10 +69,10 @@ public class Event implements Serializable, Comparable
 	{
 		return classType.getClassName();
 	}
-	
+
 	public ClassType getClassType()
 	{
-	   return classType;
+		return classType;
 	}
 
 	public MyDate getStartDate()
@@ -195,97 +195,88 @@ public class Event implements Serializable, Comparable
 
 	public int getCurrentSignedUp()
 	{
-	   return attendingMembersList.size();
+		return attendingMembersList.size();
 	}
+
 	public String toSmallString()
 	{
-	   String nameTab = "";
-	   String dateTab = "";
-	   if(className.length()>=8 && className.length()<16)
-      {
-         nameTab = "\t\t"; 
-      }
-      else if(className.length()>=16)
-      {
-         nameTab = "\t";
-      }
-      else nameTab = "\t\t\t";
-	   if(startDate.toString().length()==5)
-      {
-         dateTab = "    ";
-      }
-	   else if(startDate.toString().length()==6)
-	   {
-	      dateTab = "   ";
-	   }
-	   else if(startDate.toString().length()==7)
-	   {
-	      dateTab = "  ";
-	   }
-	   else if(startDate.toString().length()==8)
-	   {
-	      dateTab = " ";
-	   }
-	   String str = "<html><pre style='font-size:10px'>"+className+nameTab+getCurrentSignedUp()+"/"+getMaxMembers()+"\t\t\t\t\t\t\t\t\t\t"+eventID+"\n"+startDate+dateTab+"  from  "+startTime+" - "+endTime+"</pre></html>";
-	   return str;
+		String nameTab = "";
+		String dateTab = "";
+		if (className.length() >= 8 && className.length() < 16)
+		{
+			nameTab = "\t\t";
+		} else if (className.length() >= 16)
+		{
+			nameTab = "\t";
+		} else
+			nameTab = "\t\t\t";
+		if (startDate.toString().length() == 5)
+		{
+			dateTab = "    ";
+		} else if (startDate.toString().length() == 6)
+		{
+			dateTab = "   ";
+		} else if (startDate.toString().length() == 7)
+		{
+			dateTab = "  ";
+		} else if (startDate.toString().length() == 8)
+		{
+			dateTab = " ";
+		}
+		String str = "<html><pre style='font-size:10px'>" + className + nameTab + getCurrentSignedUp() + "/"
+				+ getMaxMembers() + "\t\t\t\t\t\t\t\t\t\t" + eventID + "\n" + startDate + dateTab + "  from  "
+				+ startTime + " - " + endTime + "</pre></html>";
+		return str;
 	}
+
 	public String toString()
 	{
 
-	   String nameTab = "";
-	   String classTypeTab = "";
-	   String dateTab = "\t\t";
-	   if(className.length()>=8 && className.length()<16)
-	   {
-	      nameTab = "\t\t"; 
-	   }
-	   else if(className.length()>=16)
-	   {
-	      nameTab = "\t";
-	   }
-	   else nameTab = "\t\t\t"; 
-	   
-	   if(classType.getClassName().length()>=8 && classType.getClassName().length()<16)
-	   {
-	      classTypeTab = "\t";
-	   }
-	   else if(classType.getClassName().length()>=16)
-	   {
-	      classTypeTab = "\t\t";
-	   }
-	   else classTypeTab = "\t\t";
-	   
-	   if(startDate.toString().length()<8)
-	   {
-	      dateTab = "\t\t";
-	   }
-	   
-		String str = "<html><pre style='font-size:11px'>" + className +nameTab + classType + classTypeTab +"     "+ maxMembers + "\t\t     "
-				+ startDate + dateTab + startTime + " - " + endTime + "</pre></html>";
+		String nameTab = "";
+		String classTypeTab = "";
+		String dateTab = "\t\t";
+		if (className.length() >= 8 && className.length() < 16)
+		{
+			nameTab = "\t\t";
+		} else if (className.length() >= 16)
+		{
+			nameTab = "\t";
+		} else
+			nameTab = "\t\t\t";
+
+		if (classType.getClassName().length() >= 8 && classType.getClassName().length() < 16)
+		{
+			classTypeTab = "\t";
+		} else if (classType.getClassName().length() >= 16)
+		{
+			classTypeTab = "\t\t";
+		} else
+			classTypeTab = "\t\t";
+
+		if (startDate.toString().length() < 8)
+		{
+			dateTab = "\t\t";
+		}
+
+		String str = "<html><pre style='font-size:11px'>" + className + nameTab + classType + classTypeTab + "     "
+				+ maxMembers + "\t\t     " + startDate + dateTab + startTime + " - " + endTime + "</pre></html>";
 		return str;
 	}
 
 	@Override
-	public int compareTo(Object obj)
+	public int compareTo(Event event)
 	{
-		if (!(obj instanceof Event))
+		boolean thisEventIsEarlierDate = (this.getStartDate().compareTo(event.getStartDate()) == -1);
+		boolean thisEventIsSameDate = (this.getStartDate().compareTo(event.getStartDate()) == 0);
+
+		boolean thisEventIsEarlierHour = (this.getStarTime().compareTo(event.getStarTime()) == -1);
+		boolean thisEventIsSameHour = (this.getStarTime().compareTo(event.getStarTime()) == 0);
+
+		if (thisEventIsEarlierDate || (thisEventIsSameDate && thisEventIsEarlierHour))
+			return -1;
+		else if (thisEventIsSameDate && thisEventIsSameHour)
 			return 0;
 		else
-		{
-			Event temp = (Event) obj;
-
-			boolean thisEventIsEarlierDate = (this.getStartDate().compareTo(temp.getStartDate()) == -1);
-			boolean thisEventIsSameDate = (this.getStartDate().compareTo(temp.getStartDate()) == 0);
-
-			boolean thisEventIsEarlierHour = (this.getStarTime().compareTo(temp.getStarTime()) == -1);
-			boolean thisEventIsSameHour = (this.getStarTime().compareTo(temp.getStarTime()) == 0);
-
-			if (thisEventIsEarlierDate || (thisEventIsSameDate && thisEventIsEarlierHour))
-				return -1;
-			if (thisEventIsSameDate && thisEventIsSameHour)
-				return 0;
-			else
-				return 1;
-		}
+			return 1;
 	}
 }

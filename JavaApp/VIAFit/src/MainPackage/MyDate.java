@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  * 
  * @author Group 1
  */
-public class MyDate implements Serializable, Comparable
+public class MyDate implements Serializable, Comparable<MyDate>
 {
 
 	/**
@@ -424,28 +424,21 @@ public class MyDate implements Serializable, Comparable
 	}
 
 	@Override
-	public int compareTo(Object obj)
+	public int compareTo(MyDate date)
 	{
-		if (!(obj instanceof MyDate))
+		boolean thisDateIsSameYear = this.getYear() == date.getYear();
+		boolean thisDateIsSameMonth = this.getMonth() == date.getMonth();
+		boolean thisDateIsSameDay = this.getDay() == date.getDay();
+
+		boolean thisDateIsLaterYear = this.getYear() > date.getYear();
+		boolean thisDateIsLaterMonth = thisDateIsSameYear && this.getMonth() > date.getMonth();
+		boolean thisDateIsLaterDay = thisDateIsSameYear && thisDateIsSameMonth && this.getDay() > date.getDay();
+
+		if (thisDateIsLaterYear || thisDateIsLaterMonth || thisDateIsLaterDay)
+			return 1;
+		else if (thisDateIsSameYear && thisDateIsSameMonth && thisDateIsSameDay)
 			return 0;
 		else
-		{
-			MyDate temp = (MyDate) obj;
-			boolean thisDateIsSameYear = this.getYear() == temp.getYear();
-			boolean thisDateIsSameMonth = this.getMonth() == temp.getMonth();
-			boolean thisDateIsSameDay = this.getDay() == temp.getDay();
-
-			boolean thisDateIsLaterYear = this.getYear() > temp.getYear();
-			boolean thisDateIsLaterMonth = thisDateIsSameYear && this.getMonth() > temp.getMonth();
-			boolean thisDateIsLaterDay = thisDateIsSameYear && thisDateIsSameMonth
-					&& this.getDay() > temp.getDay();
-
-			if (thisDateIsSameYear && thisDateIsSameMonth && thisDateIsSameDay)
-				return 0;
-			else if (thisDateIsLaterYear || thisDateIsLaterMonth || thisDateIsLaterDay)
-				return 1;
-			else
-				return -1;
-		}
+			return -1;
 	}
 }
