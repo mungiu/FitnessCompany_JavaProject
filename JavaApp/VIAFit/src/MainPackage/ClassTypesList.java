@@ -9,10 +9,32 @@ public class ClassTypesList implements Serializable
 	private ArrayList<ClassType> classTypesList = new ArrayList<ClassType>();
 	
 	
+	/**
+	    * Method that converts the ArrayList<String> into a String array for use in
+	    * ComboBox
+	    * 
+	    * @return temp an array of strings
+	    */
+	   public String[] getClassTypesArr()
+	   {
+	      String[] temp = new String[1];
+	      temp[0] = "Choose Event Type";
+	      if (classTypesList != null)
+	      {
+	         temp = new String[classTypesList.size() + 1];
+	         temp[0] = "Choose Event Type";
+	         for (int i = 0; i < classTypesList.size(); i++)
+	         {
+	            temp[i + 1] = classTypesList.get(i).getClassName();
+	         }
+	      }
+	      return temp;
+	
+	   }
 	public ArrayList<ClassType> getClassTypesList()
-   {
-      return classTypesList;
-   }
+	   {
+	      return classTypesList;
+	   }
 	public void setClassTypesList(ArrayList<ClassType> classTypesList)
 	{
 	   this.classTypesList.clear();
@@ -21,29 +43,6 @@ public class ClassTypesList implements Serializable
 	      this.classTypesList.add(classTypesList.get(i));
 	   }
 	}
-	
-	/**
-    * Method that converts the ArrayList<String> into a String array for use in
-    * ComboBox
-    * 
-    * @return temp an array of strings
-    */
-   public String[] getClassTypesArr()
-   {
-      String[] temp = new String[1];
-      temp[0] = "Choose Event Type";
-      if (classTypesList != null)
-      {
-         temp = new String[classTypesList.size() + 1];
-         temp[0] = "Choose Event Type";
-         for (int i = 0; i < classTypesList.size(); i++)
-         {
-            temp[i + 1] = classTypesList.get(i).getClassName();
-         }
-      }
-      return temp;
-
-   }
 
 }
  
