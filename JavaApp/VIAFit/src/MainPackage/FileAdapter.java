@@ -3,7 +3,6 @@ package MainPackage;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -69,6 +68,19 @@ public class FileAdapter
 		return classTypesList;
 	}
 
+	// move this to instructor and remove parameter
+	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
+	{
+
+		return instructor.getQualifiedClassesList();
+	}
+
+	// move this to instructor and remove parameter
+	public ArrayList<ClassType> getToughtEventsList(Instructor instructor)
+	{
+		return instructor.getAllTaughtEvents();
+	}
+
 	public void updateOnGoingEventsList()
 	{
 		updateEventsList();
@@ -97,8 +109,9 @@ public class FileAdapter
 			boolean containsEvent = onGoingEventsList.contains(temp.get(i));
 
 			if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
+			{
 				onGoingEventsList.add(temp.get(i));
-			else if (containsEvent && eventFinished)
+			} else if (containsEvent && eventFinished)
 				onGoingEventsList.remove(i);
 		}
 	}

@@ -205,7 +205,7 @@ public class Member implements Serializable
 		this.memberSince = memberSince;
 	}
 
-	@Override
+
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof Member))
@@ -218,10 +218,30 @@ public class Member implements Serializable
 		}
 	}
 
-	@Override
 	public String toString()
 	{
-		String str = "<html><pre style='font-size:11px'>" + name + "\t\t" + email + "\t\t" + phoneNumber + "\t\t"
+	   String nameTab = "";
+	   String emailTab = "";
+	   if(name.length()>=16)
+	   {
+	      nameTab = "\t";
+	   }
+	   else if(name.length()>=8 && name.length()<16)
+	   {
+	      nameTab = "\t\t";
+	   }
+	   else nameTab = "\t\t\t";
+	   
+	   if(email.length()>=16)
+      {
+         emailTab = "\t";
+      }
+      else if(email.length()>=8 && email.length()<16)
+      {
+         emailTab = "\t\t";
+      }
+      else emailTab = "\t\t\t";
+		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + "\t\t"
 				+ memberSince + "\t\t" + memberID + "</pre></html>";
 		return str;
 	}

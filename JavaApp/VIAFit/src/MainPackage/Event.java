@@ -65,9 +65,14 @@ public class Event implements Serializable, Comparable
 		return className;
 	}
 
-	public String getClassType()
+	public String getClassTypeString()
 	{
 		return classType.getClassName();
+	}
+	
+	public ClassType getClassType()
+	{
+	   return classType;
 	}
 
 	public MyDate getStartDate()
@@ -160,7 +165,7 @@ public class Event implements Serializable, Comparable
 	{
 		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
 		{
-			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassType())
+			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassTypeString())
 					&& getInstructorIsAvailable(instructor))
 				attendingInstructorsList.add(instructor);
 		}
@@ -188,30 +193,75 @@ public class Event implements Serializable, Comparable
 				&& other.classType.equals(classType) && other.eventID == eventID);
 	}
 
+	public int getCurrentSignedUp()
+	{
+	   return attendingMembersList.size();
+	}
+	public String toSmallString()
+	{
+	   String nameTab = "";
+	   String dateTab = "";
+	   if(className.length()>=8 && className.length()<16)
+      {
+         nameTab = "\t\t"; 
+      }
+      else if(className.length()>=16)
+      {
+         nameTab = "\t";
+      }
+      else nameTab = "\t\t\t";
+	   if(startDate.toString().length()==5)
+      {
+         dateTab = "    ";
+      }
+	   else if(startDate.toString().length()==6)
+	   {
+	      dateTab = "   ";
+	   }
+	   else if(startDate.toString().length()==7)
+	   {
+	      dateTab = "  ";
+	   }
+	   else if(startDate.toString().length()==8)
+	   {
+	      dateTab = " ";
+	   }
+	   String str = "<html><pre style='font-size:10px'>"+className+nameTab+getCurrentSignedUp()+"/"+getMaxMembers()+"\t\t\t\t\t\t\t\t\t\t"+eventID+"\n"+startDate+dateTab+"  from  "+startTime+" - "+endTime+"</pre></html>";
+	   return str;
+	}
 	public String toString()
 	{
-		String nameTab = "";
-		String classTypeTab = "";
-		if (className.length() >= 8 && className.length() < 16)
-		{
-			nameTab = "\t\t";
-		} else if (className.length() >= 16)
-		{
-			nameTab = "\t";
-		} else
-			nameTab = "\t\t\t";
 
-		if (classType.getClassName().length() >= 8 && classType.getClassName().length() < 16)
-		{
-			classTypeTab = "\t";
-		} else if (classType.getClassName().length() >= 16)
-		{
-			classTypeTab = "\t\t";
-		} else
-			classTypeTab = "\t\t";
-
-		String str = "<html><pre style='font-size:11px'>" + className + nameTab + classType + classTypeTab + maxMembers
-				+ "\t" + startDate + " - " + endDate + "\t" + startTime + " - " + endTime + "</pre></html>";
+	   String nameTab = "";
+	   String classTypeTab = "";
+	   String dateTab = "\t\t";
+	   if(className.length()>=8 && className.length()<16)
+	   {
+	      nameTab = "\t\t"; 
+	   }
+	   else if(className.length()>=16)
+	   {
+	      nameTab = "\t";
+	   }
+	   else nameTab = "\t\t\t"; 
+	   
+	   if(classType.getClassName().length()>=8 && classType.getClassName().length()<16)
+	   {
+	      classTypeTab = "\t";
+	   }
+	   else if(classType.getClassName().length()>=16)
+	   {
+	      classTypeTab = "\t\t";
+	   }
+	   else classTypeTab = "\t\t";
+	   
+	   if(startDate.toString().length()<8)
+	   {
+	      dateTab = "\t\t";
+	   }
+	   
+		String str = "<html><pre style='font-size:11px'>" + className +nameTab + classType + classTypeTab +"     "+ maxMembers + "\t\t     "
+				+ startDate + dateTab + startTime + " - " + endTime + "</pre></html>";
 		return str;
 	}
 
