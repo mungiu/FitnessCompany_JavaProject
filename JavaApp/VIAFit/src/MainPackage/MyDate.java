@@ -11,6 +11,9 @@ import java.util.GregorianCalendar;
 public class MyDate implements Serializable
 {
 
+   /**
+    * Generated serial version UID
+    */
    private static final long serialVersionUID = 3253011395351701364L;
    private int day;
    private int month;

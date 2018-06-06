@@ -1,65 +1,84 @@
- package MainPackage;
+package MainPackage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * A class containing a list of events list
+ * 
+ * @author Group 1
+ */
 public class EventsList implements Serializable
 {
-	private static final long serialVersionUID = -51289747856164745L;
-	private ArrayList<Event> eventsList = new ArrayList<Event>();
-	
-	public ArrayList<Event> getEventsList()
-	{
-		return eventsList;
-	}
+   /**
+    * Generated serial version UID.
+    */
+   private static final long serialVersionUID = -51289747856164745L;
+   private ArrayList<Event> eventsList = new ArrayList<Event>();
 
-	public void setEventsList(ArrayList<Event> eventsList)
-	{
-	   this.eventsList.clear();
-		for(int i = 0;i<eventsList.size();i++)
-		{
-		      this.eventsList.add(eventsList.get(i));
-		}
-	}
+   /**
+    * Gets the events list from EventsList.
+    * 
+    * @return the event list from EventsList.
+    */
+   public ArrayList<Event> getEventsList()
+   {
+      return eventsList;
+   }
 
-	/**
-	 * Method that finds all events with a given classType of type String
-	 * 
-	 * @param input
-	 *            A String to compare class type
-	 * @return allEventOfType an ArrayList<Event>
-	 */
-	public ArrayList<Event> getAllEventsOfType(String input)
-	{
-		ArrayList<Event> allEventOfType = new ArrayList<Event>();
+   /**
+    * Sets the event list from EvetsList
+    * 
+    * @param eventsList
+    *           is what the EventsList event list will be set to.
+    */
+   public void setEventsList(ArrayList<Event> eventsList)
+   {
+      this.eventsList.clear();
+      for (int i = 0; i < eventsList.size(); i++)
+      {
+         this.eventsList.add(eventsList.get(i));
+      }
+   }
 
-		for (int i = 0; i < eventsList.size(); i++)
-			if (eventsList.get(i).getClassType().equals(input))
-				allEventOfType.add(eventsList.get(i));
+   /**
+    * Method that finds all events with a given classType of type String
+    * 
+    * @param input
+    *           A String to compare class type
+    * @return allEventOfType an ArrayList<Event>
+    */
+   public ArrayList<Event> getAllEventsOfType(String input)
+   {
+      ArrayList<Event> allEventOfType = new ArrayList<Event>();
 
-		return allEventOfType;
-	}
+      for (int i = 0; i < eventsList.size(); i++)
+         if (eventsList.get(i).getClassType().equals(input))
+            allEventOfType.add(eventsList.get(i));
 
-	/**
-	 * Method for finding all upcoming or ongoing events a specific member is signed
-	 * up for
-	 * 
-	 * @param member
-	 *            The member object that is searched for in the ongoing and upcoming
-	 *            ArrayLists
-	 * @return temp An ArrayList<Event> containing all upcoming and ongoing events
-	 *         the given member attended
-	 */
-	public ArrayList<Event> getAllAttendingEventsForMember(Member member)
-	{
-		ArrayList<Event> temp = new ArrayList<Event>();
+      return allEventOfType;
+   }
 
-		// adding ongoing events
-		for (int i = 0; i < eventsList.size(); i++)
-			if (eventsList.get(i).getMembersList().contains(member))
-				temp.add(eventsList.get(i));
+   /**
+    * Method for finding all upcoming or ongoing events a specific member is
+    * signed up for
+    * 
+    * @param member
+    *           The member object that is searched for in the ongoing and
+    *           upcoming ArrayLists
+    * @return temp An ArrayList<Event> containing all upcoming and ongoing
+    *         events the given member attended
+    */
+   public ArrayList<Event> getAllAttendingEventsForMember(Member member)
+   {
+      ArrayList<Event> temp = new ArrayList<Event>();
 
-		return temp;
-	}
+      // adding ongoing events
+      for (int i = 0; i < eventsList.size(); i++)
+         if (eventsList.get(i).getMembersList().contains(member))
+            temp.add(eventsList.get(i));
+
+      return temp;
+   }
 
 }

@@ -10,6 +10,9 @@ import java.io.Serializable;
  */
 public class MyClock implements Serializable
 {
+   /**
+    * Generated serial version UID.
+    */
    private static final long serialVersionUID = -8060363652216244441L;
    private int hour;
    private int minute;
