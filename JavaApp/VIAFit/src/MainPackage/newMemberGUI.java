@@ -129,6 +129,12 @@ public class newMemberGUI extends JFrame
          }
          if(e.getSource()==signUp)
          {
+            if(alreadyMember==false)
+            {
+               JOptionPane.showMessageDialog(null, "Please save the member before sign up or removal");
+            }
+            else
+            {
             fileAdapter.getEventsList();
             Member temp = null;
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
@@ -167,8 +173,15 @@ public class newMemberGUI extends JFrame
                   }
                }
          }
+         }
          if(e.getSource()==removeFrom)
          {
+            if(alreadyMember==false)
+            {
+               JOptionPane.showMessageDialog(null, "Please save the member before sign up or removal");
+            }
+            else
+            {
             Member temp = null;
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
@@ -201,6 +214,7 @@ public class newMemberGUI extends JFrame
                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
               }
            }
+         }
          }
          if(e.getSource()==save)
          {
@@ -253,16 +267,27 @@ public class newMemberGUI extends JFrame
             int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this member?", "Confirm before deleting member", JOptionPane.YES_NO_OPTION);
             if(yesno==JOptionPane.YES_OPTION)
                {
+               Member temp = null;
                   for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
                   {
                         if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
                         {
-                        fileAdapter.getMembersList().getMembersList().remove(i);
-                        fileAdapter.saveMembersListToBin(fileAdapter.getMembersList().getMembersList());
-                        fileAdapter.updateMembersList();
-                        dispose();
+                           temp = fileAdapter.getMembersList().getMembersList().get(i);
+                           fileAdapter.getMembersList().getMembersList().remove(i);
+                           fileAdapter.saveMembersListToBin(fileAdapter.getMembersList().getMembersList());
+                           fileAdapter.updateMembersList();
+                           for(int k = 0;k<fileAdapter.getEventsList().getEventsList().size();k++)
+                           {
+                              if(fileAdapter.getEventsList().getEventsList().get(k).getMembersList().contains(temp))
+                              {
+                                 fileAdapter.getEventsList().getEventsList().get(k).getMembersList().remove(temp);
+                              }
+                           }
+                        fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
+                        fileAdapter.updateEventsList();
                         }
                   }
+                  dispose();
                }
          }
          if(e.getSource()==classTypeInput)
@@ -420,6 +445,8 @@ public class newMemberGUI extends JFrame
             membershipSinceInputDay.setEnabled(true);
             membershipSinceInputMonth.setEnabled(true);
             membershipSinceInputYear.setEnabled(true);
+            signUp.setEnabled(true);
+            removeFrom.setEnabled(true);
          }
       }
    
@@ -506,10 +533,8 @@ public class newMemberGUI extends JFrame
    close = new JButton("Close");
    close.addActionListener(myListener);
    signUp = new JButton("Sign up for event");
-   signUp.setEnabled(false);
    signUp.addActionListener(myListener);
    removeFrom = new JButton("Remove from event");
-   removeFrom.setEnabled(false);
    removeFrom.addActionListener(myListener);
    
    menuBar = new JMenuBar();

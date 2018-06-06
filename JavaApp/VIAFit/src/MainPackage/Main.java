@@ -18,9 +18,8 @@ public class Main
 
            public void run() 
            {
-            //test.updateOnGoingEventsArea();
+            test.updateOnGoingEventsArea();
             test.updateUpcomingEventsArea();
-            System.out.println("No problem - Update");
            }
       }, 0, 10000);
 	}

@@ -3,7 +3,6 @@ package MainPackage;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -136,58 +135,59 @@ public class FileAdapter
 		MyDate thisEventEndDate;
 
 		for (int i = 0; i < temp.size(); i++)
-		{
-			currentEvent = temp.get(i);
-			thisEventStartTime = currentEvent.getStarTime();
-			thisEventEndTime = currentEvent.getEndTime();
-			thisEventStartDate = currentEvent.getStartDate();
-			thisEventEndDate = currentEvent.getEndDate();
+      {
+         currentEvent = temp.get(i);
+         thisEventStartTime = currentEvent.getStarTime();
+         thisEventEndTime = currentEvent.getEndTime();
+         thisEventStartDate = currentEvent.getStartDate();
+         thisEventEndDate = currentEvent.getEndDate();
 
-			boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
-			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
-			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
-			boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
-			boolean containsEvent = upComingEventsList.contains(currentEvent);
-			// adding future events (30 max)
-			if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
-			{
-				if (eventIsUpcomingYears)
-				   {
-					upComingEventsList.add(currentEvent);
-				   } 
-				else if (eventIsUpcomingMonths)
-				   {
-					upComingEventsList.add(currentEvent);
-				   } 
-				else if (eventIsUpcomingDays)
-				   {
-					upComingEventsList.add(currentEvent);
-				   } 
-				else if (eventIsUpcomingHours)
-				   {
-					upComingEventsList.add(currentEvent);
-					}	
-			}
-			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
-			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
-			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
-			boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
+         boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
+         boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
+         boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
+         boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
+         boolean containsEvent = upComingEventsList.contains(currentEvent);
+         
+         // adding future events (30 max)
+         if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
+         {
+            if (eventIsUpcomingYears)
+               {
+               upComingEventsList.add(currentEvent);
+               } 
+            else if (eventIsUpcomingMonths)
+               {
+               upComingEventsList.add(currentEvent);
+               } 
+            else if (eventIsUpcomingDays)
+               {
+               upComingEventsList.add(currentEvent);
+               } 
+            else if (eventIsUpcomingHours)
+               {
+               upComingEventsList.add(currentEvent);
+               }  
+         }
+         boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
+         boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
+         boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
+         boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
 
-			// removing old events
-			if (upComingEventsList.contains(currentEvent))
-			{
-				if (eventWasBeforeThisYear)
-					upComingEventsList.remove(currentEvent);
-				else if (eventWasBeforeThisMonth)
-					upComingEventsList.remove(currentEvent);
-				else if (eventWasBeforeThisDay)
-					upComingEventsList.remove(currentEvent);
-				else if (eventWasBeforeThisHour)
-					upComingEventsList.remove(currentEvent);
-			}
-		}
+         // removing old events
+         if (upComingEventsList.contains(currentEvent))
+         {
+            if (eventWasBeforeThisYear)
+               upComingEventsList.remove(currentEvent);
+            else if (eventWasBeforeThisMonth)
+               upComingEventsList.remove(currentEvent);
+            else if (eventWasBeforeThisDay)
+               upComingEventsList.remove(currentEvent);
+            else if (eventWasBeforeThisHour)
+               upComingEventsList.remove(currentEvent);
+         }
+      }
 
-	}
+   }
 
 	public void updateInstructorsList()
 	{

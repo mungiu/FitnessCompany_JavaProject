@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -86,7 +88,7 @@ public class newInstructorGUI extends JFrame
     * @author sst
     * @version 1.0
     */
-   private class MyListener implements ActionListener
+   private class MyListener implements ActionListener, FocusListener
    {
       public void actionPerformed(ActionEvent e)
       {
@@ -115,17 +117,32 @@ public class newInstructorGUI extends JFrame
          }
          if(e.getSource()==removeIns)
          {
+            int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this instructor?", "Confirm before deleting instructor", JOptionPane.YES_NO_OPTION);
+            if(yesno == JOptionPane.YES_OPTION)
+            {
+            Instructor temp = null;
             fileAdapter.updateInstructorsList();
             for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
             {
                if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()==Integer.parseInt(instructorInput.getText()))
                {
+                  temp = fileAdapter.getInstructorsList().getInstructorsList().get(i);
                   fileAdapter.getInstructorsList().getInstructorsList().remove(i);
+                  fileAdapter.saveInstructorsListToBin(fileAdapter.getInstructorsList().getInstructorsList());
+                  fileAdapter.updateInstructorsList();
+                  for(int k = 0;k<fileAdapter.getEventsList().getEventsList().size();k++)
+                  {
+                     if(fileAdapter.getEventsList().getEventsList().get(k).getInstructorsList().contains(temp))
+                     {
+                        fileAdapter.getEventsList().getEventsList().get(k).getInstructorsList().remove(temp);
+                        fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
+                        fileAdapter.updateEventsList();
+                     }
+                  }
                }
             }
-            fileAdapter.saveInstructorsListToBin(fileAdapter.getInstructorsList().getInstructorsList());
-            fileAdapter.updateInstructorsList();
             dispose();
+            }
          }
          if(e.getSource()==save)
          {
@@ -191,6 +208,19 @@ public class newInstructorGUI extends JFrame
             }
          }
       }
+      public void focusGained(FocusEvent e)
+      {
+         
+      }
+      public void focusLost(FocusEvent e)
+      {
+         if(nameInput.getText().length()>25)
+         {
+            JOptionPane.showMessageDialog(null, "Class type can not be longer than 25 characters");
+            nameInput.requestFocus();
+         }
+      }
+      
    }
    /**
     * Changing the Instructor JFrame to editable or uneditable
@@ -211,8 +241,6 @@ public class newInstructorGUI extends JFrame
       {
          editInstructor.setSelected(false);
          nameInput.setEnabled(false);
-         remove.setEnabled(false);
-         add.setEnabled(false);
       }
    }
    
@@ -312,6 +340,7 @@ public newInstructorGUI()
    close.addActionListener(myListener);
    
    nameInput = new JTextField();
+   nameInput.addFocusListener(myListener);
    instructorInput = new JTextField();
    instructorInput.setEnabled(false);
    
