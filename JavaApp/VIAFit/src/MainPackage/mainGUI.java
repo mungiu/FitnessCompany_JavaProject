@@ -57,17 +57,19 @@ private JLabel instructorLabel;
 private JLabel eventLabel;
 private JLabel homeLabel;
 private JLabel aboveBigInfo;
+private JLabel aboveUpcoming;
+private JLabel aboveOngoing;
 
 private JTextField search;
 
 private JList<Object> bigInfoBox;
 private JScrollPane bigInfoScroll;
-private JList<Event> ongoingEvents;
-private JList<Event> upcomingEvents;
+private JList<String> ongoingEvents;
+private JList<String> upcomingEvents;
 private JScrollPane ongoingEventsScroll;
 private JScrollPane upcomingEventsScroll;
-private DefaultListModel<Event> listOngoing;
-private DefaultListModel<Event> listUpcoming;
+private DefaultListModel<String> listOngoing;
+private DefaultListModel<String> listUpcoming;
 private DefaultListModel<Object> listBigInfoBox;
 
 
@@ -304,7 +306,7 @@ private class MyListener implements ActionListener, FocusListener
             {
             for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
             {
-               if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) || fileAdapter.getEventsList().getEventsList().get(i).getClassType().toLowerCase().contains(search.getText().toLowerCase()))
+               if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) || fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().toLowerCase().contains(search.getText().toLowerCase()))
                {
                   
                   tempFound.add(fileAdapter.getEventsList().getEventsList().get(i));
@@ -349,7 +351,14 @@ private class MyListener implements ActionListener, FocusListener
       {
          if(!upcomingEvents.isSelectionEmpty())
          {
-         Event temp = upcomingEvents.getSelectedValue();
+         Event temp = null;
+         for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+         {
+            if(fileAdapter.getEventsList().getEventsList().get(i).toSmallString().equals(upcomingEvents.getSelectedValue()))
+            {
+               temp = fileAdapter.getEventsList().getEventsList().get(i);
+            }
+         }
          newEventGUI tempWindow = new newEventGUI();
          tempWindow.fillWithEvent(temp);
          }
@@ -358,7 +367,14 @@ private class MyListener implements ActionListener, FocusListener
       {
          if(!ongoingEvents.isSelectionEmpty())
          {
-         Event temp = ongoingEvents.getSelectedValue();
+         Event temp = null;
+         for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+         {
+            if(fileAdapter.getEventsList().getEventsList().get(i).toSmallString().equals(ongoingEvents.getSelectedValue()))
+            {
+               temp = fileAdapter.getEventsList().getEventsList().get(i);
+            }
+         }
          newEventGUI tempWindow = new newEventGUI();
          tempWindow.fillWithEvent(temp);
          }
@@ -456,10 +472,10 @@ public void updateOnGoingEventsArea()
    fileAdapter.updateOnGoingEventsList();
    if(fileAdapter.getOnGoingEventsList()!=null)
    {
-      listOngoing = new DefaultListModel<Event>();
+      listOngoing = new DefaultListModel<String>();
       for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
       {
-         listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
+         listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i).toSmallString());
       }
       ongoingEvents.setModel(listOngoing);
    }
@@ -470,10 +486,10 @@ public void updateUpcomingEventsArea()
    fileAdapter.updateUpComingEventsList();
    if(fileAdapter.getUpComingEventsList()!=null)
    {
-      listUpcoming = new DefaultListModel<Event>();
+      listUpcoming = new DefaultListModel<String>();
       for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
       {
-         listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
+         listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i).toSmallString());
       }
       upcomingEvents.setModel(listUpcoming);
    }
@@ -525,18 +541,22 @@ public mainGUI()
    instructorLabel = new JLabel("Instructor");
    eventLabel = new JLabel("Event");
    homeLabel = new JLabel();
+   aboveOngoing = new JLabel("<html><pre style='font-size:11px'>"+"Event name\tAttending members"+"</pre></html>");
+   aboveOngoing.setPreferredSize(new Dimension(330,17));
+   aboveUpcoming = new JLabel("<html><pre style='font-size:11px'>"+"Event name\tAttending members"+"</pre></html>");
+   aboveUpcoming.setPreferredSize(new Dimension(330,17));
    aboveBigInfo = new JLabel("<html><pre style='font-size:11px'>"+"</pre></html>");
    aboveBigInfo.setHorizontalAlignment(SwingConstants.LEFT);
    aboveBigInfo.setMinimumSize(new Dimension(900, 25));
    aboveBigInfo.setMaximumSize(new Dimension(900, 25));
    
-   listOngoing = new DefaultListModel<Event>();
-   ongoingEvents = new JList<Event>(listOngoing);
+   listOngoing = new DefaultListModel<String>();
+   ongoingEvents = new JList<String>(listOngoing);
    ongoingEventsScroll = new JScrollPane(ongoingEvents);
    ongoingEvents.addListSelectionListener(listListener);
    
-   listUpcoming = new DefaultListModel<Event>();
-   upcomingEvents = new JList<Event>(listUpcoming);
+   listUpcoming = new DefaultListModel<String>();
+   upcomingEvents = new JList<String>(listUpcoming);
    updateUpcomingEventsArea();
    updateOnGoingEventsArea();
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
@@ -634,8 +654,10 @@ public mainGUI()
    ongoingPanel.setLayout(new BoxLayout(ongoingPanel, BoxLayout.Y_AXIS));
    upcomingPanel.setLayout(new BoxLayout(upcomingPanel, BoxLayout.Y_AXIS));
    ongoingPanel.add(ongoingEventsLabel);
+   ongoingPanel.add(aboveOngoing);
    ongoingPanel.add(ongoingEventsScroll);
    upcomingPanel.add(upcomingEventsLabel);
+   upcomingPanel.add(aboveUpcoming);
    upcomingPanel.add(upcomingEventsScroll);
    ongoingPanel.add(ongoingDetails);
    upcomingPanel.add(upcomingDetails);
@@ -650,10 +672,10 @@ public mainGUI()
    ongoingEventsLabel.setPreferredSize(new Dimension(330, 70));
    upcomingEventsLabel.setPreferredSize(new Dimension(330, 70));
    ongoingEventsScroll.setPreferredSize(new Dimension(330, 160));
-//   ongoingEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+   ongoingEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
    ongoingEvents.setVisibleRowCount(-1);
    upcomingEventsScroll.setPreferredSize(new Dimension(330, 155));
-//   upcomingEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+   upcomingEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
    upcomingEvents.setVisibleRowCount(-1);
    
    //adding buttons to home panel

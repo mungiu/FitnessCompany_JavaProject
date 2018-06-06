@@ -101,6 +101,7 @@ public class newEventGUI extends JFrame
 	{ "Change this later", "Remember to change this" };
 	private JComboBox<String> instructorComboBottom;
 	private DefaultComboBoxModel<String> comboModel;
+	private DefaultComboBoxModel<String> instructorModel;
 
 	private JCheckBox newTypeCheck;
 	private JCheckBox weeklyCheck;
@@ -592,18 +593,29 @@ public class newEventGUI extends JFrame
 	   id.setText(event.getEventID()+"");
 	   for(int i = 0;i<tempType.length;i++)
 	   {
-	     if(tempType[i].equals(event.getClassType()))
+	     if(tempType[i].equals(event.getClassTypeString()))
 	     {
 	        typeCombo.setSelectedIndex(i);
 	     }
 	   }
-	   String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
+	   ArrayList<String> tempQualified= new ArrayList<String>();
 	   for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
 	   {
-	      allInstructors[0] = fileAdapter.getInstructorsList().getInstructorsList().get(k).toString();
+	      if(fileAdapter.getInstructorsList().getInstructorsList().get(k).getQualifiedClassesList().contains(event.getClassType()))
+	      {
+	         System.out.println("im here");
+	         tempQualified.add(fileAdapter.getInstructorsList().getInstructorsList().get(k).toSmallString());
+	      }
 	   }
-	   tempIns = allInstructors;
 	   
+	   tempIns = tempQualified.toArray(new String[0]);
+	   
+	   instructorModel.removeAllElements();
+	   for(int i = 0;i<tempIns.length;i++)
+	   {
+	      instructorModel.addElement(tempIns[i]);
+	   }
+	   instructorCombo.setModel(instructorModel);
 	   listInstructors.clear();
 	   fileAdapter.updateEventsList();
 	   for(int i = 0;i<event.getInstructorsList().size();i++)
@@ -753,6 +765,7 @@ public class newEventGUI extends JFrame
 		startTimeMinute = new JTextField("Minute");
 		startTimeMinute.addFocusListener(myListener);
 		id = new JTextField("");
+		
 		fileAdapter.updateInstructorsList();
 		String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
 		for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
@@ -764,6 +777,7 @@ public class newEventGUI extends JFrame
 		fileAdapter.updateClassTypesList();
 		tempType = fileAdapter.getClassTypesList().getClassTypesArr();
 		comboModel = new DefaultComboBoxModel<String>(tempType);
+		instructorModel = new DefaultComboBoxModel<String>(tempIns);
 		typeCombo = new JComboBox<String>();
 		typeCombo.setModel(comboModel);
 		duraCombo = new JComboBox<String>(tempDura);
@@ -955,7 +969,7 @@ public class newEventGUI extends JFrame
 		setJMenuBar(menuBar);
 		add(main);
 		setSize(800, 600);
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
