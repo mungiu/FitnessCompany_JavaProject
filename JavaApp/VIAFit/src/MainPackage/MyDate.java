@@ -430,15 +430,15 @@ public class MyDate implements Serializable, Comparable<MyDate>
 		boolean thisDateIsSameMonth = this.getMonth() == date.getMonth();
 		boolean thisDateIsSameDay = this.getDay() == date.getDay();
 
-		boolean thisDateIsLaterYear = this.getYear() > date.getYear();
-		boolean thisDateIsLaterMonth = thisDateIsSameYear && this.getMonth() > date.getMonth();
-		boolean thisDateIsLaterDay = thisDateIsSameYear && thisDateIsSameMonth && this.getDay() > date.getDay();
+		boolean thisDateIsEarlierYear = this.getYear() < date.getYear();
+		boolean thisDateIsEarlierMonth = thisDateIsSameYear && this.getMonth() < date.getMonth();
+		boolean thisDateIsEarlierDay = thisDateIsSameYear && thisDateIsSameMonth && this.getDay() < date.getDay();
 
-		if (thisDateIsLaterYear || thisDateIsLaterMonth || thisDateIsLaterDay)
-			return 1;
+		if (thisDateIsEarlierYear | thisDateIsEarlierMonth | thisDateIsEarlierDay)
+			return -1;
 		else if (thisDateIsSameYear && thisDateIsSameMonth && thisDateIsSameDay)
 			return 0;
 		else
-			return -1;
+			return 1;
 	}
 }

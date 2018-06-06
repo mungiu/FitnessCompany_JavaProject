@@ -272,7 +272,9 @@ public class Event implements Serializable, Comparable<Event>
 		boolean thisEventIsEarlierHour = (this.getStarTime().compareTo(event.getStarTime()) == -1);
 		boolean thisEventIsSameHour = (this.getStarTime().compareTo(event.getStarTime()) == 0);
 
-		if (thisEventIsEarlierDate || (thisEventIsSameDate && thisEventIsEarlierHour))
+		if (thisEventIsEarlierDate)
+			return -1;
+		else if (thisEventIsSameDate && thisEventIsEarlierHour)
 			return -1;
 		else if (thisEventIsSameDate && thisEventIsSameHour)
 			return 0;

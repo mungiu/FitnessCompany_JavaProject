@@ -277,11 +277,11 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	@Override
 	public int compareTo(MyClock clock)
 	{
-		if (this.getHour() > clock.getHour())
-			return 1;
+		if (this.getHour() < clock.getHour())
+			return -1;
 		if (this.getHour() == clock.getHour())
 			return 0;
 		else
-			return -1;
+			return 1;
 	}
 }
