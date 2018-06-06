@@ -9,6 +9,9 @@ import java.io.Serializable;
  */
 public class ClassType implements Serializable
 {
+   /**
+    * Generated serial version UID
+    */
    private static final long serialVersionUID = -7574607274053354338L;
    private String className;
 

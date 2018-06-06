@@ -3,26 +3,45 @@ package MainPackage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * A class representing ClassTypeList with an Array of class type list.
+ * 
+ * @author Group 1
+ */
 public class ClassTypesList implements Serializable
 {
-	private static final long serialVersionUID = 4292784401879126523L;
-	private ArrayList<ClassType> classTypesList = new ArrayList<ClassType>();
-	
-	
-	public ArrayList<ClassType> getClassTypesList()
+   /**
+    * Generated serial version UID
+    */
+   private static final long serialVersionUID = 4292784401879126523L;
+
+   private ArrayList<ClassType> classTypesList = new ArrayList<ClassType>();
+
+   /**
+    * Gets the ClassTypesList.
+    * 
+    * @return the ClassTypesList.
+    */
+   public ArrayList<ClassType> getClassTypesList()
    {
       return classTypesList;
    }
-	public void setClassTypesList(ArrayList<ClassType> classTypesList)
-	{
-	   this.classTypesList.clear();
-	   for(int i = 0;i<classTypesList.size();i++)
-	   {
-	      this.classTypesList.add(classTypesList.get(i));
-	   }
-	}
-	
-	/**
+
+   /**
+    * Sets the ClassTypesLists class type list
+    * 
+    * @param classTypesList
+    */
+   public void setClassTypesList(ArrayList<ClassType> classTypesList)
+   {
+      this.classTypesList.clear();
+      for (int i = 0; i < classTypesList.size(); i++)
+      {
+         this.classTypesList.add(classTypesList.get(i));
+      }
+   }
+
+   /**
     * Method that converts the ArrayList<String> into a String array for use in
     * ComboBox
     * 
@@ -46,4 +65,3 @@ public class ClassTypesList implements Serializable
    }
 
 }
- 
