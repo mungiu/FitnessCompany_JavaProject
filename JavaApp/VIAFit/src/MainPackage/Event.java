@@ -65,9 +65,14 @@ public class Event implements Serializable
 		return className;
 	}
 
-	public String getClassType()
+	public String getClassTypeString()
 	{
 		return classType.getClassName();
+	}
+	
+	public ClassType getClassType()
+	{
+	   return classType;
 	}
 
 	public MyDate getStartDate()
@@ -160,7 +165,7 @@ public class Event implements Serializable
 	{
 		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
 		{
-			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassType())
+			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassTypeString())
 					&& getInstructorIsAvailable(instructor))
 				attendingInstructorsList.add(instructor);
 		}
@@ -188,10 +193,47 @@ public class Event implements Serializable
 				&& other.classType.equals(classType) && other.eventID == eventID);
 	}
 
+	public int getCurrentSignedUp()
+	{
+	   return attendingMembersList.size();
+	}
+	public String toSmallString()
+	{
+	   String nameTab = "";
+	   String dateTab = "";
+	   if(className.length()>=8 && className.length()<16)
+      {
+         nameTab = "\t\t"; 
+      }
+      else if(className.length()>=16)
+      {
+         nameTab = "\t";
+      }
+      else nameTab = "\t\t\t";
+	   if(startDate.toString().length()==5)
+      {
+         dateTab = "    ";
+      }
+	   else if(startDate.toString().length()==6)
+	   {
+	      dateTab = "   ";
+	   }
+	   else if(startDate.toString().length()==7)
+	   {
+	      dateTab = "  ";
+	   }
+	   else if(startDate.toString().length()==8)
+	   {
+	      dateTab = " ";
+	   }
+	   String str = "<html><pre style='font-size:10px'>"+className+nameTab+getCurrentSignedUp()+"/"+getMaxMembers()+"\t\t\t\t\t\t\t\t\t\t"+eventID+"\n"+startDate+dateTab+"  from  "+startTime+" - "+endTime+"</pre></html>";
+	   return str;
+	}
 	public String toString()
 	{
 	   String nameTab = "";
 	   String classTypeTab = "";
+	   String dateTab = "\t\t";
 	   if(className.length()>=8 && className.length()<16)
 	   {
 	      nameTab = "\t\t"; 
@@ -212,8 +254,13 @@ public class Event implements Serializable
 	   }
 	   else classTypeTab = "\t\t";
 	   
-		String str = "<html><pre style='font-size:11px'>" + className +nameTab + classType + classTypeTab + maxMembers + "\t"
-				+ startDate + " - " + endDate + "\t" + startTime + " - " + endTime + "</pre></html>";
+	   if(startDate.toString().length()<8)
+	   {
+	      dateTab = "\t\t";
+	   }
+	   
+		String str = "<html><pre style='font-size:11px'>" + className +nameTab + classType + classTypeTab +"     "+ maxMembers + "\t\t     "
+				+ startDate + dateTab + startTime + " - " + endTime + "</pre></html>";
 		return str;
 	}
 }

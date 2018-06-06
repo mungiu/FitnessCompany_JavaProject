@@ -101,6 +101,7 @@ public class newEventGUI extends JFrame
 	{ "Change this later", "Remember to change this" };
 	private JComboBox<String> instructorComboBottom;
 	private DefaultComboBoxModel<String> comboModel;
+	private DefaultComboBoxModel<String> instructorModel;
 
 	private JCheckBox newTypeCheck;
 	private JCheckBox weeklyCheck;
@@ -170,6 +171,15 @@ public class newEventGUI extends JFrame
 			}
 			if (e.getSource() == save)
 			{
+			   if(checkIfOnlyInts(maxMembersInput.getText()) 
+			         && checkIfOnlyInts(startDateDay.getText()) 
+			         && checkIfOnlyInts(startDateMonth.getText()) 
+			         && checkIfOnlyInts(startDateYear.getText()) 
+			         && checkIfOnlyInts(startTimeHour.getText()) 
+			         && checkIfOnlyInts(startTimeMinute.getText()) 
+			         && !nameInput.getText().equals("") 
+			         && (typeCombo.getSelectedIndex()!=0) || !typeInput.getText().equals(""))
+			   {
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeMenu.isSelected()==true)
 			   {
@@ -230,8 +240,10 @@ public class newEventGUI extends JFrame
 				   temp.setEventID(Integer.parseInt(id.getText()+""));
 				   fileAdapter.saveEventToAvailableBinList(temp);
 				   fileAdapter.updateEventsList();
-				}    
+				}
 				dispose();
+			   }
+			   else JOptionPane.showMessageDialog(null, "Please fill all the fields before saving", "Information missing", JOptionPane.OK_OPTION);
 			}
 			if(e.getSource()==addInstructor)
 			{
@@ -495,6 +507,23 @@ public class newEventGUI extends JFrame
                maxMembersInput.setText("");
             }
          }
+			if(e.getSource()==typeInput)
+			{
+			   if(typeInput.getText().length()>16)
+			   {
+			      JOptionPane.showMessageDialog(null, "Class type can not be longer than 16 characters");
+			      typeInput.setText("");
+			      typeInput.requestFocus();
+			   }
+			}
+			if(e.getSource()==nameInput)
+         {
+            if(nameInput.getText().length()>20)
+            {
+               JOptionPane.showMessageDialog(null, "Class type can not be longer than 20 characters");
+               nameInput.requestFocus();
+            }
+         }
 		}
 	}
 
@@ -515,10 +544,6 @@ public class newEventGUI extends JFrame
 	{
 	   return id;
 	}
-	
-	
-	
-	
 	
 	public void editEventArea(boolean s)
 	{
@@ -568,18 +593,29 @@ public class newEventGUI extends JFrame
 	   id.setText(event.getEventID()+"");
 	   for(int i = 0;i<tempType.length;i++)
 	   {
-	     if(tempType[i].equals(event.getClassType()))
+	     if(tempType[i].equals(event.getClassTypeString()))
 	     {
 	        typeCombo.setSelectedIndex(i);
 	     }
 	   }
-	   String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
+	   ArrayList<String> tempQualified= new ArrayList<String>();
 	   for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
 	   {
-	      allInstructors[0] = fileAdapter.getInstructorsList().getInstructorsList().get(k).toString();
+	      if(fileAdapter.getInstructorsList().getInstructorsList().get(k).getQualifiedClassesList().contains(event.getClassType()))
+	      {
+	         System.out.println("im here");
+	         tempQualified.add(fileAdapter.getInstructorsList().getInstructorsList().get(k).toSmallString());
+	      }
 	   }
-	   tempIns = allInstructors;
 	   
+	   tempIns = tempQualified.toArray(new String[0]);
+	   
+	   instructorModel.removeAllElements();
+	   for(int i = 0;i<tempIns.length;i++)
+	   {
+	      instructorModel.addElement(tempIns[i]);
+	   }
+	   instructorCombo.setModel(instructorModel);
 	   listInstructors.clear();
 	   fileAdapter.updateEventsList();
 	   for(int i = 0;i<event.getInstructorsList().size();i++)
@@ -704,7 +740,9 @@ public class newEventGUI extends JFrame
 		attendingMembersAreaScroll = new JScrollPane(attendingMembersArea);
 
 		nameInput = new JTextField();
+		nameInput.addFocusListener(myListener);
 		typeInput = new JTextField();
+		typeInput.addFocusListener(myListener);
 		maxMembersInput = new JTextField();
 		maxMembersInput.addFocusListener(myListener);
 		startDateDay = new JTextField("Day");
@@ -727,6 +765,7 @@ public class newEventGUI extends JFrame
 		startTimeMinute = new JTextField("Minute");
 		startTimeMinute.addFocusListener(myListener);
 		id = new JTextField("");
+		
 		fileAdapter.updateInstructorsList();
 		String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
 		for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
@@ -738,6 +777,7 @@ public class newEventGUI extends JFrame
 		fileAdapter.updateClassTypesList();
 		tempType = fileAdapter.getClassTypesList().getClassTypesArr();
 		comboModel = new DefaultComboBoxModel<String>(tempType);
+		instructorModel = new DefaultComboBoxModel<String>(tempIns);
 		typeCombo = new JComboBox<String>();
 		typeCombo.setModel(comboModel);
 		duraCombo = new JComboBox<String>(tempDura);
