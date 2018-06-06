@@ -38,13 +38,6 @@ public class FileAdapter
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
-		// update and save of all lists ????? BROKE THE UPDATE PANEL - SIMON
-//		updateOnGoingEventsList();
-//		updateUpComingEventsList();
-//		updateInstructorsList();
-//		updateMembersList();
-//		updateEventsList();
-//		updateClassTypesList();
 	}
 
 	public ArrayList<Event> getOnGoingEventsList()
@@ -91,8 +84,8 @@ public class FileAdapter
 
 	public void updateOnGoingEventsList()
 	{
-		updateEventsList();
-
+	   updateEventsList();
+		onGoingEventsList.clear();
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
 		ArrayList<Event> temp = eventsList.getEventsList();
@@ -116,11 +109,6 @@ public class FileAdapter
 				boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
 				boolean containsEvent = onGoingEventsList.contains(temp.get(i));
 
-
-				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
-					onGoingEventsList.add(temp.get(i));
-
-
 				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
 				{
 				   onGoingEventsList.add(temp.get(i));
@@ -132,7 +120,8 @@ public class FileAdapter
 
 	public void updateUpComingEventsList()
 	{
-		updateEventsList();
+	   updateEventsList();
+	   upComingEventsList.clear();
 		int maxUpcomingEvents = 30;
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
@@ -158,42 +147,27 @@ public class FileAdapter
 			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
 			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
 			boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
-
+			boolean containsEvent = upComingEventsList.contains(currentEvent);
 			// adding future events (30 max)
-			if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
+			if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
 			{
 				if (eventIsUpcomingYears)
-				{
+				   {
 					upComingEventsList.add(currentEvent);
-				} else if (eventIsUpcomingMonths)
-				{
+				   } 
+				else if (eventIsUpcomingMonths)
+				   {
 					upComingEventsList.add(currentEvent);
-				} else if (eventIsUpcomingDays)
-				{
+				   } 
+				else if (eventIsUpcomingDays)
+				   {
 					upComingEventsList.add(currentEvent);
-				} else if (eventIsUpcomingHours)
-				{
-
-				   
-					if (eventIsUpcomingYears)
-					{
-					   upComingEventsList.add(currentEvent);
-					}
-					else if (eventIsUpcomingMonths)
-					{
-					   upComingEventsList.add(currentEvent);
-					}
-					else if (eventIsUpcomingDays)
-					{
-					   upComingEventsList.add(currentEvent);
-					}
-					else if (eventIsUpcomingHours)
-					{
-					   upComingEventsList.add(currentEvent);
+				   } 
+				else if (eventIsUpcomingHours)
+				   {
+					upComingEventsList.add(currentEvent);
 					}	
-				}
 			}
-
 			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
 			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
 			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();

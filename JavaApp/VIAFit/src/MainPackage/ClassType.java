@@ -30,7 +30,7 @@ public class ClassType implements Serializable
 		   }
 			ClassType temp = (ClassType) obj;
 
-			return className.equals(className);
+			return className.equals(temp.className);
 	}
 
 	public String toString()

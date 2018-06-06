@@ -148,7 +148,6 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          fileAdapter.updateMembersList();
          if(fileAdapter.getMembersList().getMembersList().size()!=0)
          {
-            System.out.println("not null");
             int biggest = 0;
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
@@ -161,7 +160,6 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          }
          else
          {
-            System.out.println("is null");
             g.getMemberIDInput().setText(1+"");
          }
       }
@@ -169,6 +167,23 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       {
          newInstructorGUI g = new newInstructorGUI();
          g.editInstructorArea(true);
+         fileAdapter.updateInstructorsList();
+         if(fileAdapter.getInstructorsList().getInstructorsList().size()!=0)
+         {
+            int biggest = 0;
+            for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+            {
+               if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()>=biggest)
+               {
+                  biggest = fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID();
+               }
+            }
+            g.getInstructorIDInput().setText(biggest+1+"");
+         }
+         else
+         {
+            g.getInstructorIDInput().setText(1+"");
+         }
       }
       if(e.getSource()==eventAll)
       {
@@ -189,6 +204,16 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
          }
          searchOption.setSelectedIndex(0);
+      }
+      if(e.getSource()==instructorAll)
+      {
+         fileAdapter.updateInstructorsList();
+         listBigInfoBox.clear();
+         for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+         {
+            listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
+         }
+         searchOption.setSelectedIndex(1);
       }
       if(e.getSource()==searchButton || e.getSource()==search)
       {
@@ -213,12 +238,25 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          }
          if(searchOption.getSelectedItem().toString().equals("Instructor"))
          {
+            fileAdapter.updateInstructorsList();
+            ArrayList<Instructor> tempFound1 = new ArrayList<Instructor>();
+            for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+            {
+               if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase()))
+               {
+                  tempFound1.add(fileAdapter.getInstructorsList().getInstructorsList().get(i));
+               }               
+            }
             
+            listBigInfoBox.clear();
+            for(int j = 0;j<tempFound1.size();j++)
+            {
+               listBigInfoBox.addElement(tempFound1.get(j));
+            }
          }
          if(searchOption.getSelectedItem().toString().equals("Event"))
          {
             fileAdapter.updateEventsList();
-            System.out.println(fileAdapter.getEventsList().getEventsList().size()+"size in gui");
             ArrayList<Event> tempFound = new ArrayList<Event>();
             for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
             {
@@ -247,10 +285,9 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
          }
          if(searchOption.getSelectedItem().toString().equals("Instructor"))
          {
-            for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
-            {
-               
-            }
+            Instructor temp = (Instructor)bigInfoBox.getSelectedValue();
+            newInstructorGUI tempWindow = new newInstructorGUI();
+            tempWindow.fillWithInstructor(temp);
          }
          if(searchOption.getSelectedItem().toString().equals("Event"))
          {
@@ -258,6 +295,18 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             newEventGUI tempWindow = new newEventGUI();
             tempWindow.fillWithEvent(temp);
          }
+      }
+      if(e.getSource()==upcomingDetails)
+      {
+         Event temp = upcomingEvents.getSelectedValue();
+         newEventGUI tempWindow = new newEventGUI();
+         tempWindow.fillWithEvent(temp);
+      }
+      if(e.getSource()==ongoingDetails)
+      {
+         Event temp = ongoingEvents.getSelectedValue();
+         newEventGUI tempWindow = new newEventGUI();
+         tempWindow.fillWithEvent(temp);
       }
    }
    
@@ -321,11 +370,10 @@ private class MyListSelectionListener implements ListSelectionListener
 
 public void updateOnGoingEventsArea()
 {
-   listOngoing.clear();
-   fileAdapter.updateEventsList();
    fileAdapter.updateOnGoingEventsList();
    if(fileAdapter.getOnGoingEventsList()!=null)
    {
+      listOngoing.clear();
       for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
       {
          listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
@@ -338,11 +386,12 @@ public void updateUpcomingEventsArea()
    fileAdapter.updateUpComingEventsList();
    if(fileAdapter.getUpComingEventsList()!=null)
    {
-      listUpcoming.clear();
+      listUpcoming = new DefaultListModel<Event>();
       for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
       {
          listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
       }
+      upcomingEvents.setModel(listUpcoming);
    }
 }
 
@@ -582,7 +631,7 @@ public mainGUI()
    homeCenter.setLayout(new BoxLayout(homeCenter, BoxLayout.Y_AXIS));
    homeCenterAlign2.add(bigInfoScroll);
    homeCenter.add(homeCenterAlign2);
-   bigInfoScroll.setPreferredSize(new Dimension(900, 700));
+   bigInfoScroll.setPreferredSize(new Dimension(900, 400));
    bigInfoScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
    bigInfoBox.setVisibleRowCount(-1);
    homeDetails.setPreferredSize(new Dimension(125, 35));
@@ -623,69 +672,6 @@ public mainGUI()
        }
    });
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    
    
    setJMenuBar(menubar);

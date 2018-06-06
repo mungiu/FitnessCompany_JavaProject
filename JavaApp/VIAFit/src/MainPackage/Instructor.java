@@ -10,8 +10,8 @@ public class Instructor implements Serializable
 	 */
 	private static final long serialVersionUID = 2596626544601247578L;
 	private int instructorID;
-	private String firstName, lastName;
-	private ArrayList<ClassType> qualifiedClassesList;
+	private String name;
+	private ArrayList<ClassType> qualifiedForList;
 	private ArrayList<ClassType> allTaughtEventsList;
 	private InstructorsList instructorsList;
 
@@ -23,39 +23,13 @@ public class Instructor implements Serializable
 	 * @param lastName
 	 *            the instructors last name.
 	 */
-	public Instructor(String firstName, String lastName)
+	public Instructor(String name, int id, ArrayList<ClassType> qualifiedForList)
 	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.instructorID = getNewInstructorID();
+		this.name = name;
+		this.instructorID = id;
 		allTaughtEventsList = new ArrayList<ClassType>();
-		qualifiedClassesList = new ArrayList<ClassType>();
+		this.qualifiedForList = qualifiedForList;
 		instructorsList = new InstructorsList();
-	}
-
-	/**
-	 * Gets the instructors new ID number.
-	 * 
-	 * @return the instructors new ID number.
-	 */
-	public int getNewInstructorID()
-	{
-		int biggestID = 0;
-		try
-		{
-			// with new UML pull this from InstructorsList class
-			ArrayList<Instructor> tempInstList = instructorsList.getInstructorsList();
-
-			for (int i = 0; i < tempInstList.size(); i++)
-				if (biggestID < tempInstList.get(i).getInstructorID())
-					biggestID = tempInstList.get(i).getInstructorID();
-		} catch (NullPointerException e)
-		{
-			// e.printStackTrace();
-			System.out.println("tempInstList.get(i).getInstructorID() is NULL >>>>> biggestID set to 1");
-		}
-
-		return biggestID + 1;
 	}
 
 	/**
@@ -63,19 +37,9 @@ public class Instructor implements Serializable
 	 * 
 	 * @return the instructors first name.
 	 */
-	public String getFirstName()
+	public String getName()
 	{
-		return firstName;
-	}
-
-	/**
-	 * Gets the instructors last name.
-	 * 
-	 * @return the instructors last name.
-	 */
-	public String getLastName()
-	{
-		return lastName;
+		return name;
 	}
 
 	/**
@@ -95,7 +59,7 @@ public class Instructor implements Serializable
 	 */
 	public ArrayList<ClassType> getQualifiedClassesList()
 	{
-		return qualifiedClassesList;
+		return qualifiedForList;
 	}
 
 	/**
@@ -110,25 +74,14 @@ public class Instructor implements Serializable
 	}
 
 	/**
-	 * Sets the instructors first name
+	 * Sets the instructors name
 	 * 
-	 * @param firstName
+	 * @param name
 	 *            is what the instructors first name will be set to.
 	 */
-	public void setFirstName(String firstName)
+	public void setName(String name)
 	{
-		this.firstName = firstName;
-	}
-
-	/**
-	 * Sets the instructors last name.
-	 * 
-	 * @param lastName
-	 *            is what the instructors last name will be set to.
-	 */
-	public void setLastName(String lastName)
-	{
-		this.lastName = lastName;
+		this.name = name;
 	}
 
 	/**
@@ -137,12 +90,15 @@ public class Instructor implements Serializable
 	 * @param classType
 	 *            adds the qualified class to the list.
 	 */
-	public void addQualifedClassToList(ClassType classType)
+	public void setQualifiedList(ArrayList<ClassType> list)
 	{
-		qualifiedClassesList.add(classType);
+	   qualifiedForList.clear();
+	   for(int i = 0;i<list.size();i++)
+	   {
+	      qualifiedForList.add(list.get(i));
+	   }
 	}
 
-	@Override
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof Instructor))
@@ -155,10 +111,21 @@ public class Instructor implements Serializable
 		}
 	}
 
-	@Override
 	public String toString()
 	{
-		String str = instructorID + "\t" + firstName + "\t" + lastName + "\t";
-		return str;
+	   String list = "";
+	   if(qualifiedForList.size()!=0)
+	   {
+	      for(int i = 0;i<qualifiedForList.size();i++)
+	      {
+	         list+=qualifiedForList.get(i).getClassName()+", ";
+	      }
+	   }
+	   String str = "<html><pre style='font-size:11px'>" + name + "\t\t"+instructorID+"\t\t"+list+"</pre></html>";
+      return str;
+	}
+	public String toSmallString()
+	{
+	   return name+"  ID: "+instructorID;
 	}
 }

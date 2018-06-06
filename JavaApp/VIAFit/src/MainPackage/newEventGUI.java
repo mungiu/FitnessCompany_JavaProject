@@ -100,6 +100,7 @@ public class newEventGUI extends JFrame
 	private String[] tempInsBottom =
 	{ "Change this later", "Remember to change this" };
 	private JComboBox<String> instructorComboBottom;
+	private DefaultComboBoxModel<String> comboModel;
 
 	private JCheckBox newTypeCheck;
 	private JCheckBox weeklyCheck;
@@ -119,6 +120,8 @@ public class newEventGUI extends JFrame
 	private JMenuItem exit;
 	private JMenuItem about;
 	private JCheckBoxMenuItem editInfo;
+	private JCheckBoxMenuItem newTypeMenu; 
+	private JMenuItem deleteClassType;
 
 	private ImageIcon logo;
 	private JLabel logoLabel;
@@ -168,13 +171,13 @@ public class newEventGUI extends JFrame
 			if (e.getSource() == save)
 			{
 			   ClassType tempType = new ClassType("nothing");
-			   if(newTypeCheck.isSelected()==true)
+			   if(newTypeMenu.isSelected()==true)
 			   {
 			      fileAdapter.getClassTypesList().getClassTypesList().add(new ClassType(typeInput.getText()));
 			      fileAdapter.saveClassTypesListToBin(fileAdapter.getClassTypesList().getClassTypesList());
 			      tempType.setClassName(typeInput.getText());
 			   }
-			   if(newTypeCheck.isSelected()==false)
+			   if(newTypeMenu.isSelected()==false)
 			   {
 			      tempType = new ClassType(typeCombo.getSelectedItem().toString());   
 			   }
@@ -210,7 +213,15 @@ public class newEventGUI extends JFrame
 				   temp.setStartDate(startDate);
 				   temp.setEndDate(endDate);
 				   
-				   
+				   ArrayList<Instructor> tempInstructorsList = new ArrayList<Instructor>();
+				   for(int i = 0;i<listInstructors.getSize();i++)
+				   {
+				      if(!tempInstructorsList.contains(listInstructors.get(i)))
+				      {
+				         tempInstructorsList.add(listInstructors.getElementAt(i));
+				      }
+				   }
+				   temp.setInstructorsList(tempInstructorsList);
 				   fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
 				   fileAdapter.updateEventsList();
 				}
@@ -224,24 +235,28 @@ public class newEventGUI extends JFrame
 			}
 			if(e.getSource()==addInstructor)
 			{
-			   ArrayList<Event> tempAllEvents = fileAdapter.getEventsList().getEventsList();
-			   for(int i = 0;i<tempAllEvents.size();i++)
+			   Instructor temp = null;
+			   for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
 			   {
-			      if(tempAllEvents.get(i).getClassName().equals(nameInput.getText()) && tempAllEvents.get(i).getClassType().equals(typeCombo.getSelectedItem().toString()))
+			      if(fileAdapter.getInstructorsList().getInstructorsList().get(i).toSmallString().equals(instructorCombo.getSelectedItem()))
 			      {
-			         fileAdapter.getEventsList().getEventsList().get(i).assignInstructorToEvent((Instructor)instructorComboBottom.getSelectedItem());
+			         temp = fileAdapter.getInstructorsList().getInstructorsList().get(i);
 			      }
+			   }
+			   if(!listInstructors.contains(temp))
+			   {
+			      listInstructors.addElement(temp);
 			   }
 			}
 			
-			if(e.getSource()==newTypeCheck)
+			if(e.getSource()==newTypeMenu)
 			{
-			   if(newTypeCheck.isSelected()==true)
+			   if(newTypeMenu.isSelected()==true)
 			   {
 			      typeCombo.setVisible(false);
 			      typeInput.setVisible(true);
 			   }
-			   if(newTypeCheck.isSelected()==false)
+			   if(newTypeMenu.isSelected()==false)
             {
                typeCombo.setVisible(true);
                typeInput.setVisible(false);
@@ -264,6 +279,24 @@ public class newEventGUI extends JFrame
 			               }
 			         }
 			      }
+			}
+			if(e.getSource()==deleteClassType)
+			{
+			   
+			   for(int i = 0;i<fileAdapter.getClassTypesList().getClassTypesList().size();i++)
+			   {
+			      if(fileAdapter.getClassTypesList().getClassTypesList().get(i).getClassName().equals(typeCombo.getSelectedItem().toString()))
+			      {
+			         fileAdapter.getClassTypesList().getClassTypesList().remove(i);
+			      }
+			   }
+			   fileAdapter.saveClassTypesListToBin(fileAdapter.getClassTypesList().getClassTypesList());
+			   fileAdapter.updateClassTypesList();
+			   updateClassTypeComboBox();
+			}
+			if(e.getSource()==removeInstructor)
+			{
+			   listInstructors.removeElement(attendingInstructorsArea.getSelectedValue());
 			}
 		}
 
@@ -350,6 +383,7 @@ public class newEventGUI extends JFrame
 				{
 					startDateDay.setText("Day");
 				}
+				endDateDay.setText(startDateDay.getText());
 			}
 			if (e.getSource() == startDateMonth)
 			{
@@ -363,6 +397,7 @@ public class newEventGUI extends JFrame
 				{
 					startDateMonth.setText("Month");
 				}
+				endDateMonth.setText(startDateMonth.getText());
 			}
 			if (e.getSource() == startDateYear)
 			{
@@ -376,6 +411,7 @@ public class newEventGUI extends JFrame
 				{
 					startDateYear.setText("Year");
 				}
+				endDateYear.setText(startDateYear.getText());
 			}
 			if (e.getSource() == endDateDay)
 			{
@@ -483,16 +519,15 @@ public class newEventGUI extends JFrame
 			editInfo.setSelected(true);
 			nameInput.setEditable(true);
 			typeCombo.setEnabled(true);
-			newTypeCheck.setEnabled(true);
 			addInstructor.setEnabled(true);
 			instructorCombo.setEnabled(true);
 			maxMembersInput.setEditable(true);
 			startDateDay.setEditable(true);
 			startDateMonth.setEditable(true);
 			startDateYear.setEditable(true);
-			endDateDay.setEditable(true);
-			endDateMonth.setEditable(true);
-			endDateYear.setEditable(true);
+//			endDateDay.setEditable(true);
+//			endDateMonth.setEditable(true);
+//			endDateYear.setEditable(true);
 			duraCombo.setEnabled(true);
 			startTimeHour.setEditable(true);
 			startTimeMinute.setEditable(true);
@@ -503,7 +538,6 @@ public class newEventGUI extends JFrame
 			editInfo.setSelected(false);
 			nameInput.setEditable(false);
 			typeCombo.setEnabled(false);
-			newTypeCheck.setEnabled(false);
 			maxMembersInput.setEditable(false);
 			startDateDay.setEditable(false);
 			startDateMonth.setEditable(false);
@@ -582,11 +616,14 @@ public class newEventGUI extends JFrame
 	   }
 	}
 
-	public boolean isAnyInfoChanged()
+	public void updateClassTypeComboBox()
 	{
-		// adapter file needed to check whether something is changed from adapter file
-		// to current fields
-		return true; // delete this
+		comboModel.removeAllElements();
+		for(int i = 0;i<fileAdapter.getClassTypesList().getClassTypesArr().length;i++)
+		{
+		   comboModel.addElement(fileAdapter.getClassTypesList().getClassTypesArr()[i]);
+		}
+		typeCombo.setModel(comboModel);
 	}
 
 	///////////////////////////////////// GUI
@@ -649,6 +686,7 @@ public class newEventGUI extends JFrame
 		attendingInstructors = new JLabel("Attending instructors:");
 		timeHour = new JLabel("H:");
 		timeMinute = new JLabel("M:");
+		
 
 		listInstructors = new DefaultListModel<Instructor>();
 		listMembers = new DefaultListModel<Member>();
@@ -668,21 +706,32 @@ public class newEventGUI extends JFrame
 		startDateYear = new JTextField("Year");
 		startDateYear.addFocusListener(myListener);
 		endDateDay = new JTextField("Day");
+		endDateDay.setEnabled(false);  //Made uneditable cause no support for events over 1 day
 		endDateDay.addFocusListener(myListener);
 		endDateMonth = new JTextField("Month");
+		endDateMonth.setEnabled(false); //Made uneditable cause no support for events over 1 day
 		endDateMonth.addFocusListener(myListener);
 		endDateYear = new JTextField("Year");
+		endDateYear.setEnabled(false);  //Made uneditable cause no support for events over 1 day
 		endDateYear.addFocusListener(myListener);
 		startTimeHour = new JTextField("Hour");
 		startTimeHour.addFocusListener(myListener);
 		startTimeMinute = new JTextField("Minute");
 		startTimeMinute.addFocusListener(myListener);
 		id = new JTextField("");
-
+		fileAdapter.updateInstructorsList();
+		String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
+		for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
+      {
+         allInstructors[k] = fileAdapter.getInstructorsList().getInstructorsList().get(k).toSmallString();
+      }
+      tempIns = allInstructors;
 		instructorCombo = new JComboBox<String>(tempIns);
 		fileAdapter.updateClassTypesList();
 		tempType = fileAdapter.getClassTypesList().getClassTypesArr();
-		typeCombo = new JComboBox<String>(tempType);
+		comboModel = new DefaultComboBoxModel<String>(tempType);
+		typeCombo = new JComboBox<String>();
+		typeCombo.setModel(comboModel);
 		duraCombo = new JComboBox<String>(tempDura);
 		instructorComboBottom = new JComboBox<String>(tempInsBottom);
 
@@ -716,6 +765,10 @@ public class newEventGUI extends JFrame
 		editInfo.addActionListener(myListener);
 		logo = new ImageIcon("img/logoTransBigger.png");
 		logoLabel = new JLabel();
+		deleteClassType = new JMenuItem("Delete current class type");
+		deleteClassType.addActionListener(myListener);
+		newTypeMenu = new JCheckBoxMenuItem("Make new class type");
+		newTypeMenu.addActionListener(myListener);
 
 		// styling textfields and text
 		headLine.setFont(new Font(headLine.getFont().getFamily(), Font.BOLD, 30));
@@ -727,6 +780,10 @@ public class newEventGUI extends JFrame
 		menuBar.add(aboutMenu);
 		fileMenu.add(exit);
 		editMenu.add(editInfo);
+		editMenu.addSeparator();
+		editMenu.add(newTypeMenu);
+		editMenu.add(deleteClassType);
+		editMenu.addSeparator();
 		editMenu.add(remove);
 		aboutMenu.add(about);
 
@@ -749,6 +806,7 @@ public class newEventGUI extends JFrame
 		inputContainer.add(typeContainer);
 		inputContainer.add(startDateContainer);
 		inputContainer.add(newTypeContainer);
+		newTypeContainer.setVisible(false);
 		inputContainer.add(endDateContainer);
 		inputContainer.add(instructorContainer);
 		inputContainer.add(durationContainer);

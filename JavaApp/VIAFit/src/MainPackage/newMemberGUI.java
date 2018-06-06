@@ -157,7 +157,7 @@ public class newMemberGUI extends JFrame
                listModel.clear();
                for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
                {
-                  if(classTypeInput.getSelectedItem().toString().equals("All events"))
+                  if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
                   {
                      listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                   }
@@ -192,7 +192,7 @@ public class newMemberGUI extends JFrame
            listModel.clear();
            for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
            {
-              if(classTypeInput.getSelectedItem().toString().equals("All events"))
+              if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
               {
                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
               }
@@ -227,7 +227,7 @@ public class newMemberGUI extends JFrame
               fileAdapter.saveMembersListToBin(fileAdapter.getMembersList().getMembersList());
               fileAdapter.updateMembersList();
             }
-            else if(editInfo.isSelected()==true)
+            else 
             {
             
             String name = nameInput.getText();
@@ -240,7 +240,6 @@ public class newMemberGUI extends JFrame
             String email = emailInput.getText();
             String phone = phoneInput.getText();
             int newMemberId = Integer.parseInt(memberIDInput.getText()+"");
-            System.out.println(newMemberId);
             tempMember = new Member(name, email, phone, type, newMemberId);
             tempMember.setMemberSince(memberSince);
             fileAdapter.saveMemberToAvailableBinList(tempMember);
@@ -271,7 +270,7 @@ public class newMemberGUI extends JFrame
             listModel.clear();
             for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
             {
-               if(classTypeInput.getSelectedItem().toString().equals("All events"))
+               if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
                {
                   listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                }
@@ -387,7 +386,7 @@ public class newMemberGUI extends JFrame
       }
       for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
       {
-         if(classTypeInput.getSelectedItem().toString().equals("All events"))
+         if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
          {
             listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
          }
