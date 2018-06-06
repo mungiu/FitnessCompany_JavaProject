@@ -167,7 +167,7 @@ public class newMemberGUI extends JFrame
                   {
                      listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                   }
-                  if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+                  if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem()))
                   {
                      listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                   }
@@ -209,7 +209,7 @@ public class newMemberGUI extends JFrame
               {
                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
               }
-              if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+              if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem()))
               {
                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
               }
@@ -297,13 +297,15 @@ public class newMemberGUI extends JFrame
             {
                if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
                {
+                  System.out.println("here");
                   listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                }
-               if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+               if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem().toString()))
                {
                   listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
                }
             }
+            allEvents.setModel(listModel);
          }
       }
 
@@ -415,7 +417,7 @@ public class newMemberGUI extends JFrame
          {
             listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
          }
-         if(fileAdapter.getEventsList().getEventsList().get(i).getClassType().equals(classTypeInput.getSelectedItem().toString()))
+         if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem()))
          {
             listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
          }
@@ -525,7 +527,6 @@ public class newMemberGUI extends JFrame
    membershipTypeInput = new JComboBox<String>(temp);
    fileAdapter.updateClassTypesList();
    classTypeInput = new JComboBox<String>(fileAdapter.getClassTypesList().getClassTypesArr());
-   classTypeInput.setEnabled(false);
    classTypeInput.addActionListener(myListener);
    
    save = new JButton("Save");
