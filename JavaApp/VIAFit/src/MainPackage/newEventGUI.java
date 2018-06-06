@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -178,7 +180,8 @@ public class newEventGUI extends JFrame
 			         && checkIfOnlyInts(startTimeHour.getText()) 
 			         && checkIfOnlyInts(startTimeMinute.getText()) 
 			         && !nameInput.getText().equals("") 
-			         && (typeCombo.getSelectedIndex()!=0) || !typeInput.getText().equals(""))
+			         && ((typeCombo.getSelectedIndex()!=0) || !typeInput.getText().equals(""))
+			         && nameInput.getText().length()<20)
 			   {
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeMenu.isSelected()==true)
@@ -524,6 +527,10 @@ public class newEventGUI extends JFrame
                nameInput.requestFocus();
             }
          }
+			if(e.getSource()==this)
+			{
+			   requestFocus();
+			}
 		}
 	}
 
@@ -603,7 +610,6 @@ public class newEventGUI extends JFrame
 	   {
 	      if(fileAdapter.getInstructorsList().getInstructorsList().get(k).getQualifiedClassesList().contains(event.getClassType()))
 	      {
-	         System.out.println("im here");
 	         tempQualified.add(fileAdapter.getInstructorsList().getInstructorsList().get(k).toSmallString());
 	      }
 	   }
@@ -966,6 +972,8 @@ public class newEventGUI extends JFrame
 		main.add(removeInstructorPanel);
 		main.add(bottomContainer);
 
+		
+		
 		setJMenuBar(menuBar);
 		add(main);
 		setSize(800, 600);
