@@ -56,17 +56,20 @@ private JLabel memberLabel;
 private JLabel instructorLabel;
 private JLabel eventLabel;
 private JLabel homeLabel;
+private JLabel aboveBigInfo;
+private JLabel aboveUpcoming;
+private JLabel aboveOngoing;
 
 private JTextField search;
 
 private JList<Object> bigInfoBox;
 private JScrollPane bigInfoScroll;
-private JList<Event> ongoingEvents;
-private JList<Event> upcomingEvents;
+private JList<String> ongoingEvents;
+private JList<String> upcomingEvents;
 private JScrollPane ongoingEventsScroll;
 private JScrollPane upcomingEventsScroll;
-private DefaultListModel<Event> listOngoing;
-private DefaultListModel<Event> listUpcoming;
+private DefaultListModel<String> listOngoing;
+private DefaultListModel<String> listUpcoming;
 private DefaultListModel<Object> listBigInfoBox;
 
 
@@ -80,6 +83,8 @@ private JButton upcomingDetails;
 private JButton ongoingDetails;
 private JButton homeDetails;
 private JButton searchButton;
+
+private String eventString;
 
 private JComboBox<String> searchOption;
 
@@ -106,7 +111,7 @@ private InstructorsList instructorsList;
  * @author sst
  * @version 1.0
  */
-private class MyListener implements ActionListener, ItemListener, FocusListener
+private class MyListener implements ActionListener, FocusListener
 {
    public void actionPerformed(ActionEvent e)
    {
@@ -219,8 +224,21 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
       {
          if(searchOption.getSelectedItem().toString().equals("Member"))
          {
+            setTopLabel(searchOption.getSelectedItem().toString());
             fileAdapter.updateMembersList();
             ArrayList<Member> tempFound1 = new ArrayList<Member>();
+            if(search.getText().equals("Search"))
+            {
+               fileAdapter.updateMembersList();
+               listBigInfoBox.clear();
+               for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
+               {
+                  listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
+               }
+               searchOption.setSelectedIndex(0);
+            }
+            else
+            {
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
                if(fileAdapter.getMembersList().getMembersList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase())
@@ -235,11 +253,25 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             {
                listBigInfoBox.addElement(tempFound1.get(j));
             }
+            }
          }
          if(searchOption.getSelectedItem().toString().equals("Instructor"))
          {
+            setTopLabel(searchOption.getSelectedItem().toString());
             fileAdapter.updateInstructorsList();
             ArrayList<Instructor> tempFound1 = new ArrayList<Instructor>();
+            if(search.getText().equals("Search"))
+            {
+               fileAdapter.updateInstructorsList();
+               listBigInfoBox.clear();
+               for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+               {
+                  listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
+               }
+               searchOption.setSelectedIndex(1);
+            }
+            else
+            {
             for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
             {
                if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase()))
@@ -253,19 +285,34 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             {
                listBigInfoBox.addElement(tempFound1.get(j));
             }
+            }
          }
          if(searchOption.getSelectedItem().toString().equals("Event"))
          {
+            setTopLabel(searchOption.getSelectedItem().toString());
             fileAdapter.updateEventsList();
             ArrayList<Event> tempFound = new ArrayList<Event>();
+            if(search.getText().equals("Search"))
+            {
+               fileAdapter.updateEventsList();
+               listBigInfoBox.clear();
+               for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+               {
+                  listBigInfoBox.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+               }
+               searchOption.setSelectedIndex(2);
+            }
+            else
+            {
             for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
             {
-               if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) || fileAdapter.getEventsList().getEventsList().get(i).getClassType().toLowerCase().contains(search.getText().toLowerCase()))
+               if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) || fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().toLowerCase().contains(search.getText().toLowerCase()))
                {
                   
                   tempFound.add(fileAdapter.getEventsList().getEventsList().get(i));
                }
             }
+            
             
             listBigInfoBox.clear();
             for(int j = 0;j<tempFound.size();j++)
@@ -273,10 +320,13 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
                listBigInfoBox.addElement(tempFound.get(j));
             }
          }
+         }
       }
       
       if(e.getSource()==homeDetails)
       {
+         if(!bigInfoBox.isSelectionEmpty())
+         {
          if(searchOption.getSelectedItem().toString().equals("Member"))
          {
             Member temp = (Member)bigInfoBox.getSelectedValue();
@@ -295,24 +345,73 @@ private class MyListener implements ActionListener, ItemListener, FocusListener
             newEventGUI tempWindow = new newEventGUI();
             tempWindow.fillWithEvent(temp);
          }
+         }
       }
       if(e.getSource()==upcomingDetails)
       {
-         Event temp = upcomingEvents.getSelectedValue();
+         if(!upcomingEvents.isSelectionEmpty())
+         {
+         Event temp = null;
+         for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+         {
+            if(fileAdapter.getEventsList().getEventsList().get(i).toSmallString().equals(upcomingEvents.getSelectedValue()))
+            {
+               temp = fileAdapter.getEventsList().getEventsList().get(i);
+            }
+         }
          newEventGUI tempWindow = new newEventGUI();
          tempWindow.fillWithEvent(temp);
+         }
       }
       if(e.getSource()==ongoingDetails)
       {
-         Event temp = ongoingEvents.getSelectedValue();
+         if(!ongoingEvents.isSelectionEmpty())
+         {
+         Event temp = null;
+         for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+         {
+            if(fileAdapter.getEventsList().getEventsList().get(i).toSmallString().equals(ongoingEvents.getSelectedValue()))
+            {
+               temp = fileAdapter.getEventsList().getEventsList().get(i);
+            }
+         }
          newEventGUI tempWindow = new newEventGUI();
          tempWindow.fillWithEvent(temp);
+         }
+      }
+      if(e.getSource()==searchOption)
+      {
+         if(searchOption.getSelectedIndex()==0 && listBigInfoBox.getElementAt(0) instanceof Member)
+         {
+            setTopLabel(searchOption.getSelectedItem().toString());
+         }
+         if(searchOption.getSelectedIndex()==1 && listBigInfoBox.getElementAt(0) instanceof Instructor)
+         {
+            setTopLabel(searchOption.getSelectedItem().toString());
+         }
+         if(searchOption.getSelectedIndex()==2 && listBigInfoBox.getElementAt(0) instanceof Event)
+         {
+            setTopLabel(searchOption.getSelectedItem().toString());
+         }
       }
    }
-   
-   public void itemStateChanged(ItemEvent e)
+   public void setTopLabel(String type)
    {
-      //use if a comboBox should fire an action (Else delete this)
+      if(type.equals("Member"))
+      {
+         String eventString = "<html><pre style='font-size:11px'>"+"Member name\t       Email\t          Phone number\t          Sign up date\t            ID"+"</pre></html>";
+         aboveBigInfo.setText(eventString);
+      }
+      if(type.equals("Instructor"))
+      {
+         String eventString = "<html><pre style='font-size:11px'>"+"Instructor name\t\t   ID\t\t  Qualified for:</pre></html>";
+         aboveBigInfo.setText(eventString);
+      }
+      if(type.equals("Event"))
+      {
+         String eventString = "<html><pre style='font-size:11px'>"+"Event name\t     Type\t    Max members\t\t  Date\t\t           Time"+"</pre></html>";
+         aboveBigInfo.setText(eventString);
+      }
    }
    
    //FocusListener uses to fire action upon gaining or losing focus
@@ -365,7 +464,10 @@ private class MyListSelectionListener implements ListSelectionListener
 
 
 
-
+public void showAllofType(String type)
+{
+   
+}
 
 
 public void updateOnGoingEventsArea()
@@ -373,11 +475,12 @@ public void updateOnGoingEventsArea()
    fileAdapter.updateOnGoingEventsList();
    if(fileAdapter.getOnGoingEventsList()!=null)
    {
-      listOngoing.clear();
+      listOngoing = new DefaultListModel<String>();
       for(int i = 0;i<fileAdapter.getOnGoingEventsList().size();i++)
       {
-         listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i));
+         listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i).toSmallString());
       }
+      ongoingEvents.setModel(listOngoing);
    }
 }
 
@@ -386,10 +489,10 @@ public void updateUpcomingEventsArea()
    fileAdapter.updateUpComingEventsList();
    if(fileAdapter.getUpComingEventsList()!=null)
    {
-      listUpcoming = new DefaultListModel<Event>();
+      listUpcoming = new DefaultListModel<String>();
       for(int i = 0;i<fileAdapter.getUpComingEventsList().size();i++)
       {
-         listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i));
+         listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i).toSmallString());
       }
       upcomingEvents.setModel(listUpcoming);
    }
@@ -435,21 +538,28 @@ public mainGUI()
    homeCenterAlign = new JPanel();
    homeCenterAlign2 = new JPanel();
    
-   ongoingEventsLabel = new JLabel("On-going events");
+   ongoingEventsLabel = new JLabel("Ongoing events");
    upcomingEventsLabel = new JLabel("Upcoming events");
    memberLabel = new JLabel("Member");
    instructorLabel = new JLabel("Instructor");
    eventLabel = new JLabel("Event");
    homeLabel = new JLabel();
+   aboveOngoing = new JLabel("<html><pre style='font-size:11px'>"+"Event name\tAttending members"+"</pre></html>");
+   aboveOngoing.setPreferredSize(new Dimension(330,17));
+   aboveUpcoming = new JLabel("<html><pre style='font-size:11px'>"+"Event name\tAttending members"+"</pre></html>");
+   aboveUpcoming.setPreferredSize(new Dimension(330,17));
+   aboveBigInfo = new JLabel("<html><pre style='font-size:11px'>"+"</pre></html>");
+   aboveBigInfo.setHorizontalAlignment(SwingConstants.LEFT);
+   aboveBigInfo.setMinimumSize(new Dimension(900, 25));
+   aboveBigInfo.setMaximumSize(new Dimension(900, 25));
    
-   
-   listOngoing = new DefaultListModel<Event>();
-   ongoingEvents = new JList<Event>(listOngoing);
+   listOngoing = new DefaultListModel<String>();
+   ongoingEvents = new JList<String>(listOngoing);
    ongoingEventsScroll = new JScrollPane(ongoingEvents);
    ongoingEvents.addListSelectionListener(listListener);
    
-   listUpcoming = new DefaultListModel<Event>();
-   upcomingEvents = new JList<Event>(listUpcoming);
+   listUpcoming = new DefaultListModel<String>();
+   upcomingEvents = new JList<String>(listUpcoming);
    updateUpcomingEventsArea();
    updateOnGoingEventsArea();
    upcomingEventsScroll = new JScrollPane(upcomingEvents);
@@ -475,9 +585,9 @@ public mainGUI()
    eventNew.addActionListener(myListener);
    eventAll = new JButton("Show all");
    eventAll.addActionListener(myListener);
-   upcomingDetails = new JButton("Details");
+   upcomingDetails = new JButton("Show event information");
    upcomingDetails.addActionListener(myListener);
-   ongoingDetails = new JButton("Details");
+   ongoingDetails = new JButton("Show event information");
    ongoingDetails.addActionListener(myListener);
    homeDetails = new JButton("Details");
    homeDetails.addActionListener(myListener);
@@ -487,7 +597,7 @@ public mainGUI()
    
    String[] options = {"Member", "Instructor", "Event"}; 
    searchOption = new JComboBox<String>(options); 
-   searchOption.addItemListener(myListener);
+   searchOption.addActionListener(myListener);
    
    menubar = new JMenuBar();
    
@@ -547,8 +657,10 @@ public mainGUI()
    ongoingPanel.setLayout(new BoxLayout(ongoingPanel, BoxLayout.Y_AXIS));
    upcomingPanel.setLayout(new BoxLayout(upcomingPanel, BoxLayout.Y_AXIS));
    ongoingPanel.add(ongoingEventsLabel);
+   ongoingPanel.add(aboveOngoing);
    ongoingPanel.add(ongoingEventsScroll);
    upcomingPanel.add(upcomingEventsLabel);
+   upcomingPanel.add(aboveUpcoming);
    upcomingPanel.add(upcomingEventsScroll);
    ongoingPanel.add(ongoingDetails);
    upcomingPanel.add(upcomingDetails);
@@ -620,11 +732,12 @@ public mainGUI()
    homeNorthCenterAlign.add(search);
    homeNorthCenterAlign.add(searchOption);
    homeNorthCenterAlign.add(searchButton);
-   homeNorthCenterAlign.setBorder(new EmptyBorder(40, 0, 40, 0));
+   homeNorthCenterAlign.setBorder(new EmptyBorder(40, 0, 15, 0));
    search.setPreferredSize(new Dimension(400, 30));
    searchOption.setPreferredSize(new Dimension(125, 30));
    searchButton.setPreferredSize(new Dimension(80, 29));
    homeNorth.add(homeNorthCenterAlign);
+   homeNorth.add(aboveBigInfo);
    
    
    //adding panels to homeCenter frame
