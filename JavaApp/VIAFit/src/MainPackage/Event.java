@@ -17,7 +17,7 @@ public class Event implements Serializable
 	private int eventID;
 
 	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
-			MyClock startTime, MyClock endTime)
+			MyClock startTime, MyClock endTime, int id)
 	{
 		this.classType = classType;
 		this.className = className;
@@ -26,11 +26,13 @@ public class Event implements Serializable
 		this.endDate = endDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.eventID = id;
 
+		this.attendingInstructorsList = new ArrayList<Instructor>();
+		this.attendingMembersList = new ArrayList<Member>();
 		attendingInstructorsList = new ArrayList<Instructor>();
 		attendingMembersList = new ArrayList<Member>();
 		eventsList = new EventsList();
-		eventID = getNewEventID();
 	}
 
 	// move this to instructor and remove parameter
@@ -46,27 +48,6 @@ public class Event implements Serializable
 						return true;
 
 		return false;
-	}
-
-	public int getNewEventID()
-	{
-		int biggestID = 0;
-		try
-		{
-			// with new UML pull this from EventsList class
-			ArrayList<Event> tempEventList = eventsList.getEventsList();
-
-			for (int i = 0; i < tempEventList.size(); i++)
-				if (biggestID < tempEventList.get(i).getEventID())
-					biggestID = tempEventList.get(i).getEventID();
-		} catch (NullPointerException e)
-		{
-			e.printStackTrace();
-			System.out.println(
-					"tempEventList.get(i).getEventID() or fileAdapter.getEventsList() is NULL >>>>> biggestID set to 1");
-		}
-
-		return biggestID + 1;
 	}
 
 	public int getEventID()
@@ -202,9 +183,9 @@ public class Event implements Serializable
 			return false;
 
 		Event other = (Event) obj;
-		return other.className.equals(className) && other.maxMembers == maxMembers && other.startDate.equals(startDate)
+		return (other.className.equals(className) && other.maxMembers == maxMembers && other.startDate.equals(startDate)
 				&& other.endDate.equals(endDate) && other.startTime.equals(startTime) && other.endTime.equals(endTime)
-				&& other.classType.equals(classType) && other.eventID == eventID;
+				&& other.classType.equals(classType) && other.eventID == eventID);
 	}
 
 	public String toString()

@@ -41,13 +41,13 @@ public class Member implements Serializable
 	 * @param isPremium
 	 *            is the member premium.
 	 */
-	public Member(String name, String email, String phoneNumber, boolean isPremium)
+	public Member(String name, String email, String phoneNumber, boolean isPremium, int id)
 	{
 		// TODO: pull new memberID from binary file by checking biggest member ID
 		this.name = name;
 
 		this.email = email;
-		this.memberID = getNewMemberID();
+		this.memberID = id;
 		this.phoneNumber = phoneNumber;
 		this.isPremium = isPremium;
 		this.memberSince = MyDate.today();
@@ -62,24 +62,23 @@ public class Member implements Serializable
 	 * 
 	 * @return the members new ID number and counts one up every time.
 	 */
+
 	public int getNewMemberID()
 	{
-		int biggestID = 0;
-		try
-		{
-			// with new UML pull this from MembersList class
-			ArrayList<Member> tempMembList = membersList.getMembersList();
-
-			for (int i = 0; i < tempMembList.size(); i++)
-				if (biggestID < tempMembList.get(i).getMemberID())
-					biggestID = tempMembList.get(i).getMemberID();
-		} catch (NullPointerException e)
-		{
-			// e.printStackTrace();
-			System.out.println("tempMembList.get(i).getMemberID() is NULL >>>>> biggestID set to 1");
-		}
-		return biggestID + 1;
+	   if(membersList!=null)
+	   {
+	      int biggest = membersList.getLastMemberID()+1;
+	      membersList.setLastMemberID(biggest);
+	      return biggest;
+	   }
+	   else
+	   {
+	      membersList = new MembersList();
+	      membersList.setLastMemberID(1);
+	      return 1;
+	   }
 	}
+
 
 	/**
 	 * Gets the members ID number.

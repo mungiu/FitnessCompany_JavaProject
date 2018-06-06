@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class ClassType implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7574607274053354338L;
 	private String className;
 
@@ -25,17 +22,15 @@ public class ClassType implements Serializable
 		this.className = className;
 	}
 
-	@Override
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof ClassType))
-			return false;
-		else
-		{
+		   {
+		      return false;
+		   }
 			ClassType temp = (ClassType) obj;
 
-			return className == temp.className;
-		}
+			return className.equals(temp.className);
 	}
 
 	public String toString()

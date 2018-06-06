@@ -1,31 +1,27 @@
 package MainPackage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Main
 {
 	public static void main(String[] args)
 	{
-		mainGUI test = new mainGUI();
 		FileAdapter fileAdapter = new FileAdapter();
+		EventsList eventsList = new EventsList();
+		mainGUI test = new mainGUI();
 		
-		for(int i = 0;i<fileAdapter.getEventsList().size();i++)
-		{
-		   System.out.println(fileAdapter.getEventsList().get(i).getEventID());
-		}
+		// This will run every x millisecond.
+		Timer timer = new Timer();
+      timer.schedule(new TimerTask() 
+      {
 
-		// This will run every 5 min.
-		try
-		{
-			while (true)
-			{
-				fileAdapter.updateOnGoingEventsList();
-				fileAdapter.updateUpComingEventsList();
-
-				Thread.sleep(5 * 60 * 10000);
-
-			}
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
+           public void run() 
+           {
+            //test.updateOnGoingEventsArea();
+            test.updateUpcomingEventsArea();
+            System.out.println("No problem - Update");
+           }
+      }, 0, 10000);
 	}
 }

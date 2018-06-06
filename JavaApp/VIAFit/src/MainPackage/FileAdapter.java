@@ -16,9 +16,10 @@ public class FileAdapter
 	private EventsList eventsList;
 	private MembersList membersList;
 	private InstructorsList instructorsList;
+	private ClassTypesList classTypesList;
 
 	private ArrayList<Event> onGoingEventsList, upComingEventsList;
-	private ArrayList<ClassType> allClassTypeList;
+	
 
 	public FileAdapter()
 	{
@@ -28,22 +29,15 @@ public class FileAdapter
 		classTypeListBinFileName = "allClassTypes.bin";
 
 		/// CHECK OR COPY
-		allClassTypeList = new ArrayList<ClassType>();
 		onGoingEventsList = new ArrayList<Event>();
 		upComingEventsList = new ArrayList<Event>();
 		eventsList = new EventsList();
 		membersList = new MembersList();
 		instructorsList = new InstructorsList();
+		classTypesList = new ClassTypesList();
 		myFileIO = new MyFileIO();
 		myTextFileIO = new MyTextFileIO();
 
-		// update and save of all lists ?????
-		updateOnGoingEventsList();
-		updateUpComingEventsList();
-		updateInstructorsList();
-		updateMembersList();
-		updateEventsList();
-		updateClassTypesList();
 	}
 
 	public ArrayList<Event> getOnGoingEventsList()
@@ -55,35 +49,25 @@ public class FileAdapter
 	{
 		return upComingEventsList;
 	}
-
-	public ArrayList<ClassType> getAllClassTypesList()
+	public EventsList getEventsList()
+   {
+      return eventsList;
+   }
+	public InstructorsList getInstructorsList()
+   {
+      return instructorsList;
+   }
+	public MembersList getMembersList()
+   {
+      return membersList;
+   }
+	public ClassTypesList getClassTypesList()
 	{
-		return allClassTypeList;
+	   return classTypesList;
 	}
+	
 
-	/**
-	 * Method that converts the ArrayList<String> into a String array for use in
-	 * ComboBox
-	 * 
-	 * @return temp an array of strings
-	 */
-	public String[] getAllClassTypes()
-	{
-		updateClassTypesList();
-		String[] temp = new String[1];
-		temp[0] = "All events";
-		if (allClassTypeList != null)
-		{
-			temp = new String[allClassTypeList.size() + 1];
-			temp[0] = "All events";
-			for (int i = 0; i < allClassTypeList.size(); i++)
-			{
-				temp[i + 1] = allClassTypeList.get(i).getClassName();
-			}
-		}
-		return temp;
-
-	}
+	
 
 	// move this to instructor and remove parameter
 	public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
@@ -100,8 +84,8 @@ public class FileAdapter
 
 	public void updateOnGoingEventsList()
 	{
-		updateEventsList();
-
+	   updateEventsList();
+		onGoingEventsList.clear();
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
 		ArrayList<Event> temp = eventsList.getEventsList();
@@ -110,22 +94,25 @@ public class FileAdapter
 		MyClock thisEventEndTime;
 		MyDate thisEventStartDate;
 
-		if (eventsList != null)
+
+
 			for (int i = 0; i < temp.size(); i++)
+
 			{
 				thisEventStartTime = temp.get(i).getStarTime();
 				thisEventEndTime = temp.get(i).getEndTime();
 				thisEventStartDate = temp.get(i).getStartDate();
 
-				boolean eventIsToday = thisEventStartDate.equals(today);
-				boolean eventStarted = thisEventStartTime.getHour() < currentTime.getHour();
+				boolean eventIsToday = thisEventStartDate.getDay()==today.getDay() && thisEventStartDate.getMonth()==today.getMonth() && thisEventStartDate.getYear()==today.getYear();
+				boolean eventStarted = thisEventStartTime.getHour() <= currentTime.getHour();
 				boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
 				boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
 				boolean containsEvent = onGoingEventsList.contains(temp.get(i));
 
 				if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
-					onGoingEventsList.add(temp.get(i));
-
+				{
+				   onGoingEventsList.add(temp.get(i));
+				}
 				else if (containsEvent && eventFinished)
 					onGoingEventsList.remove(i);
 			}
@@ -133,8 +120,8 @@ public class FileAdapter
 
 	public void updateUpComingEventsList()
 	{
-		updateEventsList();
-
+	   updateEventsList();
+	   upComingEventsList.clear();
 		int maxUpcomingEvents = 30;
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
@@ -160,30 +147,27 @@ public class FileAdapter
 			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
 			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
 			boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
-
+			boolean containsEvent = upComingEventsList.contains(currentEvent);
 			// adding future events (30 max)
-			if (upComingEventsList.size() < maxUpcomingEvents && !upComingEventsList.contains(currentEvent))
+			if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
 			{
-
 				if (eventIsUpcomingYears)
-				{
+				   {
 					upComingEventsList.add(currentEvent);
-					System.out.println(upComingEventsList.size() + "lol");
-				} else if (eventIsUpcomingMonths)
-				{
+				   } 
+				else if (eventIsUpcomingMonths)
+				   {
 					upComingEventsList.add(currentEvent);
-					System.out.println(upComingEventsList.size() + "jj");
-				} else if (eventIsUpcomingDays)
-				{
+				   } 
+				else if (eventIsUpcomingDays)
+				   {
 					upComingEventsList.add(currentEvent);
-					System.out.println(upComingEventsList.size() + "hej");
-				} else if (eventIsUpcomingHours)
-				{
+				   } 
+				else if (eventIsUpcomingHours)
+				   {
 					upComingEventsList.add(currentEvent);
-					System.out.println(upComingEventsList.size() + "pp");
-				}
+					}	
 			}
-
 			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
 			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
 			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
@@ -222,7 +206,7 @@ public class FileAdapter
 
 	public void updateClassTypesList()
 	{
-		allClassTypeList = readClassTypesListFromBin();
+		classTypesList.setClassTypesList(readClassTypesListFromBin());
 	}
 
 	public void saveMembersListToBin(ArrayList<Member> membersList)
@@ -402,7 +386,9 @@ public class FileAdapter
 			{
 				ArrayList<?> all = (ArrayList<?>) obj;
 				for (int i = 0; i < all.size(); i++)
-					tempList.add((Event) all.get(i));
+				{
+				   tempList.add((Event) all.get(i));
+				}
 			}
 
 		} catch (FileNotFoundException e)
@@ -425,6 +411,7 @@ public class FileAdapter
 			e.printStackTrace();
 		}
 
+		
 		return tempList;
 	}
 
@@ -464,5 +451,4 @@ public class FileAdapter
 
 		return tempList;
 	}
-
 }

@@ -1,4 +1,4 @@
-package MainPackage;
+ package MainPackage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ public class EventsList implements Serializable
 {
 	private static final long serialVersionUID = -51289747856164745L;
 	private ArrayList<Event> eventsList = new ArrayList<Event>();
-
+	
 	public ArrayList<Event> getEventsList()
 	{
 		return eventsList;
@@ -15,7 +15,11 @@ public class EventsList implements Serializable
 
 	public void setEventsList(ArrayList<Event> eventsList)
 	{
-		this.eventsList = eventsList;
+	   this.eventsList.clear();
+		for(int i = 0;i<eventsList.size();i++)
+		{
+		      this.eventsList.add(eventsList.get(i));
+		}
 	}
 
 	/**

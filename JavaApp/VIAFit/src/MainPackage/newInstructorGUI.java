@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -76,6 +77,10 @@ public class newInstructorGUI extends JFrame
    private JLabel headLine;
    private MyListener myListener;
    
+   private FileAdapter fileAdapter;
+   
+   private boolean alreadyInstructor;
+   
    /**
     * Inner buttonListener
     * @author sst
@@ -108,6 +113,83 @@ public class newInstructorGUI extends JFrame
                editInstructorArea(false);
             }
          }
+         if(e.getSource()==removeIns)
+         {
+            fileAdapter.updateInstructorsList();
+            for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+            {
+               if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()==Integer.parseInt(instructorInput.getText()))
+               {
+                  fileAdapter.getInstructorsList().getInstructorsList().remove(i);
+               }
+            }
+            fileAdapter.saveInstructorsListToBin(fileAdapter.getInstructorsList().getInstructorsList());
+            fileAdapter.updateInstructorsList();
+            dispose();
+         }
+         if(e.getSource()==save)
+         {
+            Instructor temp = null;
+            fileAdapter.updateInstructorsList();
+            if(alreadyInstructor==true)
+            {
+               for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+               {
+                  if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()==Integer.parseInt(instructorInput.getText()))
+                  {
+                     temp = fileAdapter.getInstructorsList().getInstructorsList().get(i);
+                  }
+               }
+               temp.setName(nameInput.getText());
+               ArrayList<ClassType> tempList = new ArrayList<ClassType>();
+               for(int i = 0;i<qualifiedArea.getModel().getSize();i++)
+               {
+                  tempList.add(qualifiedArea.getModel().getElementAt(i));
+               }
+               temp.setQualifiedList(tempList);
+               fileAdapter.saveInstructorsListToBin(fileAdapter.getInstructorsList().getInstructorsList());
+               fileAdapter.updateInstructorsList();
+            }
+            else
+            {
+               String name = nameInput.getText();
+               int id = Integer.parseInt(instructorInput.getText()+"");
+               ArrayList<ClassType> tempList = new ArrayList<ClassType>();
+               for(int i = 0;i<qualifiedArea.getModel().getSize();i++)
+               {
+                  tempList.add(qualifiedArea.getModel().getElementAt(i));
+               }
+               temp = new Instructor(name, id, tempList);
+               fileAdapter.saveInstructorToAvailableBinList(temp);
+               fileAdapter.updateInstructorsList();
+            }
+            dispose();
+         }
+         if(e.getSource()==add)
+         {
+            if(alreadyInstructor==true)
+            {
+               if(!listQualifiedModel.contains(classtypesArea.getSelectedValue()))
+               {
+                  listQualifiedModel.addElement(classtypesArea.getSelectedValue());
+               }
+            }
+            else
+            {
+               JOptionPane.showMessageDialog(null, "Please save the instructor before adding and removing classes");
+            }
+         }
+         if(e.getSource()==remove)
+         { 
+            if(alreadyInstructor==true)
+            {
+               listQualifiedModel.removeElement(qualifiedArea.getSelectedValue());
+            }
+            else
+            {
+               JOptionPane.showMessageDialog(null, "Please save the instructor before adding and removing classes");
+            }
+         }
       }
    }
    /**
@@ -121,16 +203,14 @@ public class newInstructorGUI extends JFrame
       if(s==true)
       {
          editInstructor.setSelected(true);
-         nameInput.setEditable(true);
-         instructorInput.setEditable(true);
+         nameInput.setEnabled(true);
          remove.setEnabled(true);
          add.setEnabled(true);
       }
       if(s==false)
       {
          editInstructor.setSelected(false);
-         nameInput.setEditable(false);
-         instructorInput.setEditable(false);
+         nameInput.setEnabled(false);
          remove.setEnabled(false);
          add.setEnabled(false);
       }
@@ -140,13 +220,40 @@ public class newInstructorGUI extends JFrame
    
    
    
+   public void fillWithInstructor(Instructor instructor)
+   {
+      fileAdapter.updateClassTypesList();
+      fileAdapter.updateEventsList();
+      fileAdapter.updateInstructorsList();
+      alreadyInstructor = true;
+      editInstructorArea(false);
+      nameInput.setText(instructor.getName());
+      instructorInput.setText(instructor.getInstructorID()+"");
+      
+      for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+      {
+         if(fileAdapter.getEventsList().getEventsList().get(i).getInstructorsList().contains(instructor))
+         {
+            listTaughtEvents.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+         }
+      } 
+      for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
+      {
+         if(fileAdapter.getInstructorsList().getInstructorsList().get(i).equals(instructor))
+         {
+            for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().get(i).getQualifiedClassesList().size();k++)
+                  {
+                     listQualifiedModel.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i).getQualifiedClassesList().get(k));
+                  }
+         }
+      }
+   }
    
    
-   
-   
-   
-   
-   
+   public JTextField getInstructorIDInput()
+   {
+      return instructorInput;
+   }
    
    
    
@@ -164,7 +271,7 @@ public newInstructorGUI()
    
    super("Instructor - ViaFit Fitness centre");
    
-   
+   fileAdapter = new FileAdapter();
    myListener = new MyListener();
    main = new JPanel();
    line1Left = new JPanel();
@@ -206,13 +313,24 @@ public newInstructorGUI()
    
    nameInput = new JTextField();
    instructorInput = new JTextField();
+   instructorInput.setEnabled(false);
+   
+   listClassTypesModel = new DefaultListModel<ClassType>();
+   fileAdapter.updateClassTypesList();
+   if(fileAdapter.getClassTypesList().getClassTypesList()!=null)
+   {
+      for(int i = 0;i<fileAdapter.getClassTypesList().getClassTypesList().size();i++)
+      {
+         listClassTypesModel.addElement(fileAdapter.getClassTypesList().getClassTypesList().get(i));
+      }
+   }
    
    listQualifiedModel = new DefaultListModel<ClassType>();
    qualifiedArea = new JList<ClassType>(listQualifiedModel);
-   listClassTypesModel = new DefaultListModel<ClassType>();
    classtypesArea = new JList<ClassType>(listClassTypesModel);
    listTaughtEvents = new DefaultListModel<Event>();
    taughteventsArea = new JList<Event>(listTaughtEvents);
+   
    
    qualifiedScroll = new JScrollPane(qualifiedArea);
    classtypesScroll = new JScrollPane(classtypesArea);
