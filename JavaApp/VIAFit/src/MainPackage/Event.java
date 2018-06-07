@@ -643,7 +643,7 @@ public class Event implements Serializable, Comparable<Event>
 		if (member.getIsPremium())
 			attendingMembersList.add(member);
 	}
-
+ 
 	public void removeInstructorFromEvent(Instructor instructor)
 	{
 		attendingInstructorsList.remove(instructor);
