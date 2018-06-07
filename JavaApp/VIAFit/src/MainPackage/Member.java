@@ -217,11 +217,16 @@ public class Member implements Serializable
 			return memberID == temp.memberID;
 		}
 	}
-
+	public String toSmallString()
+	{
+	   String str = "<html><pre style='font-size:9px'>"+name+"\t\t"+"ID: "+memberID+"\nPhone number: "+phoneNumber+"</pre></html>";
+	   return str;
+	}
 	public String toString()
 	{
 	   String nameTab = "";
-	   String emailTab = "";
+	   String emailTab = "\t";
+	   String phoneTab = "\t\t";
 	   if(name.length()>=16)
 	   {
 	      nameTab = "\t";
@@ -232,16 +237,24 @@ public class Member implements Serializable
 	   }
 	   else nameTab = "\t\t\t";
 	   
-	   if(email.length()>=16)
-      {
-         emailTab = "\t";
-      }
-      else if(email.length()>=8 && email.length()<16)
+	   if(email.length()>=16 && email.length()<=22)
       {
          emailTab = "\t\t";
       }
-      else emailTab = "\t\t\t";
-		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + "\t\t"
+      else if(email.length()>=8 && email.length()<16)
+      {
+         emailTab = "\t\t\t";
+      }
+      else if(email.length()<8)
+      {
+         emailTab = "\t\t\t\t";
+      }
+	   if(phoneNumber.length()<8)
+	   {
+	      phoneTab = "\t\t\t";
+	   }
+      
+		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + phoneTab
 				+ memberSince + "\t\t" + memberID + "</pre></html>";
 		return str;
 	}

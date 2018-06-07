@@ -62,11 +62,11 @@ public class newMemberGUI extends JFrame
    private JTextField membershipSinceInputYear;
    private JTextField phoneInput;
    
-   private JList<Event> allEvents;
-   private DefaultListModel<Event> listModel;
+   private JList<String> allEvents;
+   private DefaultListModel<String> listModel;
    private JScrollPane allEventsScroll;
-   private JList<Event> allSignedUpForArea;
-   private DefaultListModel<Event> listSignedUp;
+   private JList<String> allSignedUpForArea;
+   private DefaultListModel<String> listSignedUp;
    private JScrollPane allSignedUpForScroll;
    
    private JComboBox<String> membershipTypeInput;
@@ -137,6 +137,7 @@ public class newMemberGUI extends JFrame
             {
             fileAdapter.getEventsList();
             Member temp = null;
+            Event tempEvent = null;
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
                if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
@@ -144,10 +145,14 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().getMembersList().get(i);
                }
             }
-            if(!allEvents.getSelectedValue().getMembersList().contains(temp))
-                  {
-                     allEvents.getSelectedValue().getMembersList().add(temp);
-                  }
+            for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+            {
+               if(!fileAdapter.getEventsList().getEventsList().get(i).toSmallString().equals(allEvents.getSelectedValue()))
+               {
+                  tempEvent = fileAdapter.getEventsList().getEventsList().get(i);
+                  fileAdapter.getEventsList().getEventsList().get(i).getMembersList().add(temp);
+               }
+            }
                fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
                fileAdapter.updateEventsList();
                
@@ -157,7 +162,7 @@ public class newMemberGUI extends JFrame
                {
                   if(fileAdapter.getEventsList().getEventsList().get(i).getMembersList().contains(temp))
                   {
-                     listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                     listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
                   }
                }
                listModel.clear();
@@ -165,11 +170,11 @@ public class newMemberGUI extends JFrame
                {
                   if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
                   {
-                     listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                     listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
                   }
                   if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem()))
                   {
-                     listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                     listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
                   }
                }
          }
@@ -183,6 +188,7 @@ public class newMemberGUI extends JFrame
             else
             {
             Member temp = null;
+            Event tempEvent = null;
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
                if(fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(memberIDInput.getText()))
@@ -190,7 +196,14 @@ public class newMemberGUI extends JFrame
                   temp = fileAdapter.getMembersList().getMembersList().get(i);
                }
             }
-           allSignedUpForArea.getSelectedValue().getMembersList().remove(temp);
+            for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
+            {
+               if(!fileAdapter.getEventsList().getEventsList().get(i).toSmallString().equals(allEvents.getSelectedValue()))
+               {
+                  tempEvent = fileAdapter.getEventsList().getEventsList().get(i);
+               }
+            }
+           tempEvent.getMembersList().remove(temp);
            fileAdapter.saveEventsListToBin(fileAdapter.getEventsList().getEventsList());
            fileAdapter.updateEventsList();
            //update box to remove the event
@@ -199,7 +212,7 @@ public class newMemberGUI extends JFrame
            {
               if(fileAdapter.getEventsList().getEventsList().get(i).getMembersList().contains(temp))
               {
-                 listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                 listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
               }
            }
            listModel.clear();
@@ -207,11 +220,11 @@ public class newMemberGUI extends JFrame
            {
               if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
               {
-                 listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                 listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
               }
               if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem()))
               {
-                 listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                 listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
               }
            }
          }
@@ -297,12 +310,11 @@ public class newMemberGUI extends JFrame
             {
                if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
                {
-                  System.out.println("here");
-                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
                }
                if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem().toString()))
                {
-                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+                  listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
                }
             }
             allEvents.setModel(listModel);
@@ -408,18 +420,18 @@ public class newMemberGUI extends JFrame
       {
          if(fileAdapter.getEventsList().getEventsList().get(i).getMembersList().contains(member))
          {
-            listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+            listSignedUp.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
          }
       }
       for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
       {
          if(classTypeInput.getSelectedItem().toString().equals("Choose Event Type"))
          {
-            listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+            listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
          }
          if(fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().equals(classTypeInput.getSelectedItem()))
          {
-            listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+            listModel.addElement(fileAdapter.getEventsList().getEventsList().get(i).toSmallString());
          }
       }
    }
@@ -518,11 +530,11 @@ public class newMemberGUI extends JFrame
    membershipSinceInputYear.addFocusListener(myListener);
    phoneInput = new JTextField();
    
-   listModel = new DefaultListModel<Event>();
-   allEvents = new JList<Event>(listModel);
+   listModel = new DefaultListModel<String>();
+   allEvents = new JList<String>(listModel);
    allEventsScroll = new JScrollPane(allEvents);
-   listSignedUp = new DefaultListModel<Event>();
-   allSignedUpForArea = new JList<Event>(listSignedUp);
+   listSignedUp = new DefaultListModel<String>();
+   allSignedUpForArea = new JList<String>(listSignedUp);
    allSignedUpForScroll = new JScrollPane(allSignedUpForArea);
    
    String[] temp = {"Premium", "Standard"};
@@ -631,10 +643,10 @@ public class newMemberGUI extends JFrame
   
    //adding content to the outputContainer
    outputContaner.setBorder(new EmptyBorder(10, 0, 0, 0));
-   allEventsScroll.setPreferredSize(new Dimension(300, 150));
+   allEventsScroll.setPreferredSize(new Dimension(310, 150));
    allEventsScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
    allEvents.setVisibleRowCount(-1);
-   allSignedUpForScroll.setPreferredSize(new Dimension(300, 150));
+   allSignedUpForScroll.setPreferredSize(new Dimension(310, 150));
    allSignedUpForScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
    allSignedUpForArea.setVisibleRowCount(-1);
    outputContaner.setLayout(new GridLayout(1,2));
