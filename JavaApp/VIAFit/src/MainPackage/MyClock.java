@@ -32,28 +32,28 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	{
 		// the class has a set method that does exactly
 		// what I need, so no need to implement everything twice
-	   if(hour==24)
-	   {
-	      hour = 00;
-	   }
-	   if(hour==25)
-	   {
-	      hour = 01;
-	   }
-	   if(hour==26)
-      {
-         hour = 02;
-      }
-	   if(hour==27)
-      {
-         hour = 03;
-      }
-	   if(hour==28)
-      {
-         hour = 04;
-      }
+		if (hour == 24)
+		{
+			hour = 00;
+		}
+		if (hour == 25)
+		{
+			hour = 01;
+		}
+		if (hour == 26)
+		{
+			hour = 02;
+		}
+		if (hour == 27)
+		{
+			hour = 03;
+		}
+		if (hour == 28)
+		{
+			hour = 04;
+		}
 		setTime(hour, min, sec);
-		
+
 	}
 
 	/**
