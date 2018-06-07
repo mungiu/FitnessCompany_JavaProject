@@ -9,17 +9,17 @@ public class Main
 	{
 		FileAdapter fileAdapter = new FileAdapter();
 		mainGUI test = new mainGUI();
-		
+
 		// This will run every x millisecond.
 		Timer timer = new Timer();
-      timer.schedule(new TimerTask() 
-      {
+		timer.schedule(new TimerTask()
+		{
 
-           public void run() 
-           {
-            test.updateOnGoingEventsArea();
-            test.updateUpcomingEventsArea();
-           }
-      }, 0, 10000);
+			public void run()
+			{
+				test.updateOnGoingEventsArea();
+				test.updateUpcomingEventsArea();
+			}
+		}, 0, 10000);
 	}
 }

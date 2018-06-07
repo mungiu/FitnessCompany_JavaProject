@@ -10,52 +10,52 @@ import java.util.ArrayList;
  */
 public class MembersList implements Serializable
 {
-   /**
-    * Generated serial version UID.
-    */
-   private static final long serialVersionUID = 546950501307470288L;
-   ArrayList<Member> membersList = new ArrayList<Member>();
-   private int lastMemberID = 1;
+	/**
+	 * Generated serial version UID.
+	 */
+	private static final long serialVersionUID = 546950501307470288L;
+	ArrayList<Member> membersList = new ArrayList<Member>();
+	private int lastMemberID = 1;
 
-   /**
-    * Gets the members list.
-    * 
-    * @return the members list.
-    */
-   public ArrayList<Member> getMembersList()
-   {
-      return membersList;
-   }
+	/**
+	 * Gets the members list.
+	 * 
+	 * @return the members list.
+	 */
+	public ArrayList<Member> getMembersList()
+	{
+		return membersList;
+	}
 
-   /**
-    * Sets the members list.
-    * 
-    * @param membersList
-    *           is what MemberList, members list will be set to.
-    */
-   public void setMembersList(ArrayList<Member> membersList)
-   {
-      this.membersList = membersList;
-   }
+	/**
+	 * Gets the last members ID number.
+	 * 
+	 * @return the last members ID number.
+	 */
+	public int getLastMemberID()
+	{
+		return lastMemberID;
+	}
 
-   /**
-    * Gets the last members ID number.
-    * 
-    * @return the last members ID number.
-    */
-   public int getLastMemberID()
-   {
-      return lastMemberID;
-   }
+	/**
+	 * Sets the members list.
+	 * 
+	 * @param membersList
+	 *            is what MemberList, members list will be set to.
+	 */
+	public void setMembersList(ArrayList<Member> membersList)
+	{
+		this.membersList = membersList;
+	}
 
-   /**
-    * Sets the last members ID number.
-    * 
-    * @param biggest
-    *           is what the MembersList last member ID number will be set to.
-    */
-   public void setLastMemberID(int biggest)
-   {
-      lastMemberID = biggest;
-   }
+	/**
+	 * Sets the last members ID number.
+	 * 
+	 * @param biggest
+	 *            is what the MembersList last member ID number will be set to.
+	 */
+	public void setLastMemberID(int biggest)
+	{
+		lastMemberID = biggest;
+	}
 }

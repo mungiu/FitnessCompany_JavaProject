@@ -1014,8 +1014,6 @@ public class newEventGUI extends JFrame
 		main.add(removeInstructorPanel);
 		main.add(bottomContainer);
 
-		
-		
 		setJMenuBar(menuBar);
 		add(main);
 		setSize(800, 600);
