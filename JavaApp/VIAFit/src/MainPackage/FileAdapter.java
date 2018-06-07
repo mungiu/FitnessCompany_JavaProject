@@ -135,6 +135,7 @@ public class FileAdapter
 
 		for (int i = 0; i < temp.size(); i++)
 		{
+
 			currentEvent = temp.get(i);
 			thisEventStartTime = currentEvent.getStarTime();
 			thisEventEndTime = currentEvent.getEndTime();
@@ -176,6 +177,7 @@ public class FileAdapter
 				else if (eventWasBeforeThisHour)
 					upComingEventsList.remove(currentEvent);
 			}
+
 		}
 
 		// sorting events
@@ -187,6 +189,7 @@ public class FileAdapter
 				return eventLowerIndex.compareTo(eventUpperIndex);
 			}
 		});
+
 	}
 
 	public void updateInstructorsList()
