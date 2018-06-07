@@ -122,17 +122,17 @@ public class Instructor implements Serializable
 	         list+=qualifiedForList.get(i).getClassName()+", ";
 	      }
 	   }
-	   if(name.length()>=16)
+	   if(name.length()>=16 && name.length()<25)
       {
          nameTab = "\t";
       }
       else if(name.length()>=8 && name.length()<16)
       {
-         nameTab = "\t\t\t";
+         nameTab = "\t\t";
       }
-      else nameTab = "\t\t\t\t";
+      else nameTab = "\t\t\t";
       
-	   String str = "<html><pre style='font-size:11px'>" + name + nameTab+instructorID+"\t\t"+list+"</pre></html>";
+	   String str = "<html><pre style='font-size:11px'>" + name + nameTab+"ID: "+instructorID+"\t\t"+list+"</pre></html>";
       return str;
 	}
 	public String toSmallString()
