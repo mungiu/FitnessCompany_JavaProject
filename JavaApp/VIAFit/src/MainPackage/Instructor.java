@@ -118,20 +118,7 @@ public class Instructor implements Serializable
       }
    }
 
-<<<<<<< HEAD
-   public String toString()
-   {
-      String list = "";
-      String nameTab = "";
-      if (qualifiedForList.size() != 0)
-      {
-         for (int i = 0; i < qualifiedForList.size(); i++)
-         {
-            list += qualifiedForList.get(i).getClassName() + ", ";
-         }
-      }
-      if (name.length() >= 16)
-=======
+
 	public String toString()
 	{
 	   String list = "";
@@ -144,7 +131,6 @@ public class Instructor implements Serializable
 	      }
 	   }
 	   if(name.length()>=16 && name.length()<25)
->>>>>>> master
       {
          nameTab = "\t";
       }
@@ -152,17 +138,10 @@ public class Instructor implements Serializable
       {
          nameTab = "\t\t";
       }
-<<<<<<< HEAD
-      else
-         nameTab = "\t\t\t\t";
 
-      String str = "<html><pre style='font-size:11px'>" + name + nameTab
-            + instructorID + "\t\t" + list + "</pre></html>";
-=======
       else nameTab = "\t\t\t";
       
 	   String str = "<html><pre style='font-size:11px'>" + name + nameTab+"ID: "+instructorID+"\t\t"+list+"</pre></html>";
->>>>>>> master
       return str;
    }
 
