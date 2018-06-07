@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Group 1
  * @version 1.0
  */
-public class MyClock implements Serializable, Comparable
+public class MyClock implements Serializable, Comparable<MyClock>
 {
 	/**
 	 * Generated serial version UID.
@@ -296,19 +296,13 @@ public class MyClock implements Serializable, Comparable
 	}
 
 	@Override
-	public int compareTo(Object obj)
+	public int compareTo(MyClock clock)
 	{
-		if (!(obj instanceof MyClock))
+		if (this.getHour() < clock.getHour())
+			return -1;
+		if (this.getHour() == clock.getHour())
 			return 0;
 		else
-		{
-			MyClock temp = (MyClock) obj;
-			if (this.getHour() > temp.getHour())
-				return 1;
-			if (this.getHour() == temp.getHour())
-				return 0;
-			else
-				return -1;
-		}
+			return 1;
 	}
 }
