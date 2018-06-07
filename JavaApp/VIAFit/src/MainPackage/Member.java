@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Member implements Serializable
 {
 
+
 	/**
 	 * Generated serial version UID
 	 */
@@ -26,21 +27,21 @@ public class Member implements Serializable
 	private MembersList membersList;
 
 	/**
-	 * Six-argument constructor.
-	 * 
-	 * @param firstName
-	 *            the members first name.
-	 * @param lastName
-	 *            the members last name.
-	 * @param email
-	 *            the members email.
-	 * @param memberID
-	 *            the members ID number.
-	 * @param phoneNumber
-	 *            the members phone number.
-	 * @param isPremium
-	 *            is the member premium.
-	 */
+    * Six-argument constructor.
+    * 
+    * @param firstName
+    *           the members first name.
+    * @param lastName
+    *           the members last name.
+    * @param email
+    *           the members email.
+    * @param memberID
+    *           the members ID number.
+    * @param phoneNumber
+    *           the members phone number.
+    * @param isPremium
+    *           is the member premium.
+    */
 	public Member(String name, String email, String phoneNumber, boolean isPremium, int id)
 	{
 		// TODO: pull new memberID from binary file by checking biggest member ID
@@ -57,11 +58,11 @@ public class Member implements Serializable
 
 	}
 
-	/**
-	 * Gets the members new ID number.
-	 * 
-	 * @return the members new ID number and counts one up every time.
-	 */
+	 /**
+    * Gets the members new ID number.
+    * 
+    * @return the members new ID number and counts one up every time.
+    */
 
 	public int getNewMemberID()
 	{
@@ -80,11 +81,11 @@ public class Member implements Serializable
 	}
 
 
-	/**
-	 * Gets the members ID number.
-	 * 
-	 * @return the members ID number.
-	 */
+	 /**
+    * Gets the members ID number.
+    * 
+    * @return the members ID number.
+    */
 	public int getMemberID()
 	{
 		return memberID;
@@ -205,7 +206,13 @@ public class Member implements Serializable
 		this.memberSince = memberSince;
 	}
 
-
+	/**
+    * Compares the memberID of two members.
+    * 
+    * @param obj
+    *           the object to compare with.
+    * @return true if the given object is equal to this member.
+    */
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof Member))
@@ -217,11 +224,25 @@ public class Member implements Serializable
 			return memberID == temp.memberID;
 		}
 	}
+	
+	/**
+    * Returns a shorter string representation of the member.
+    * 
+    * @return a string representation of the member in the format: "name 
+    *         phone number member id"
+    */
 	public String toSmallString()
 	{
 	   String str = "<html><pre style='font-size:9px'>"+name+"\t\t"+"ID: "+memberID+"\nPhone number: "+phoneNumber+"</pre></html>";
 	   return str;
 	}
+	
+	/**
+    * Returns a string representation of the member.
+    * 
+    * @return a string representation of the member in the format: "name email
+    *         phone number member since member id"
+    */
 	public String toString()
 	{
 	   String nameTab = "";
@@ -241,10 +262,11 @@ public class Member implements Serializable
       {
          emailTab = "\t\t";
       }
-      else if(email.length()>=8 && email.length()<16)
+      else if (email.length() >= 8 && email.length() < 16)
       {
          emailTab = "\t\t\t";
       }
+
       else if(email.length()<8)
       {
          emailTab = "\t\t\t\t";
