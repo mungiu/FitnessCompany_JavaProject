@@ -243,7 +243,7 @@ private class MyListener implements ActionListener, FocusListener
             {
                if(fileAdapter.getMembersList().getMembersList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase())
                      || fileAdapter.getMembersList().getMembersList().get(i).getEMail().contains(search.getText()) || fileAdapter.getMembersList().getMembersList().get(i).getPhoneNumber().contains(search.getText()) 
-                     || fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(search.getText()+""))
+                     || (checkIfOnlyInts(search.getText()) && fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(search.getText()+"")))
                {
                   tempFound1.add(fileAdapter.getMembersList().getMembersList().get(i));
                }               
@@ -276,7 +276,7 @@ private class MyListener implements ActionListener, FocusListener
             for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
             {
                if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase()) 
-                     || fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()==Integer.parseInt(search.getText()+"") )
+                     || (checkIfOnlyInts(search.getText()) && fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()==Integer.parseInt(search.getText()+"") ))
                {
                   tempFound1.add(fileAdapter.getInstructorsList().getInstructorsList().get(i));
                }               
@@ -310,7 +310,7 @@ private class MyListener implements ActionListener, FocusListener
             {
                if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) 
                      || fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().toLowerCase().contains(search.getText().toLowerCase())
-                     || fileAdapter.getEventsList().getEventsList().get(i).getEventID()==Integer.parseInt(search.getText()+""))
+                     || (checkIfOnlyInts(search.getText()) && fileAdapter.getEventsList().getEventsList().get(i).getEventID()==Integer.parseInt(search.getText()+"")))
                {
                   
                   tempFound.add(fileAdapter.getEventsList().getEventsList().get(i));
@@ -538,6 +538,18 @@ public void updateUpcomingEventsArea()
       }
       upcomingEvents.setModel(listUpcoming);
    }
+}
+public boolean checkIfOnlyInts(String text)
+{
+   for(int i = 0;i<text.length();i++)
+   {
+      if(!(text.charAt(i)=='1' || text.charAt(i)=='2' || text.charAt(i)=='3' || text.charAt(i)=='4' || text.charAt(i)=='5'
+            || text.charAt(i)=='6' || text.charAt(i)=='7' || text.charAt(i)=='8' || text.charAt(i)=='9' || text.charAt(i)=='0'))
+      {
+         return false;
+      }
+   }
+   return true;
 }
 
 
@@ -835,7 +847,7 @@ public mainGUI()
       {
          try
          {
-            Thread.sleep(100);
+            Thread.sleep(1000);
          }
          catch (InterruptedException e1)
          {

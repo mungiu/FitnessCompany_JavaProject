@@ -68,8 +68,7 @@ public class ClassType implements Serializable
    /**
     * Returns a string representation of the ClassType.
     * 
-    * @return a string representation of the ClassType in the format of
-    *         "className".
+    * @return a string representation of the ClassType in the format: className.
     */
    public String toString()
    {

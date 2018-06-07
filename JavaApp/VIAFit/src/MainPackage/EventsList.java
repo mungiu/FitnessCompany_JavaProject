@@ -27,7 +27,7 @@ public class EventsList implements Serializable
    }
 
    /**
-    * Sets the event list from EvetsList
+    * Sets the event list from EventsList
     * 
     * @param eventsList
     *           is what the EventsList event list will be set to.
