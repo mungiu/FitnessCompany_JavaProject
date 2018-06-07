@@ -45,82 +45,69 @@ public class FileAdapter
 
 	}
 
-   /**
-    * Gets the list of on going events list.
-    * 
-    * @return the list of onGoingEventsList.
-    */
-   public ArrayList<Event> getOnGoingEventsList()
-   {
-      return onGoingEventsList;
-   }
+	/**
+	 * Gets the list of on going events list.
+	 * 
+	 * @return the list of onGoingEventsList.
+	 */
+	public ArrayList<Event> getOnGoingEventsList()
+	{
+		return onGoingEventsList;
+	}
 
-   /**
-    * Gets the list of up coming events list.
-    * 
-    * @return the list of upComingEventsList.
-    */
-   public ArrayList<Event> getUpComingEventsList()
-   {
-      return upComingEventsList;
-   }
+	/**
+	 * Gets the list of up coming events list.
+	 * 
+	 * @return the list of upComingEventsList.
+	 */
+	public ArrayList<Event> getUpComingEventsList()
+	{
+		return upComingEventsList;
+	}
 
-   /**
-    * Gets the EventsList from FileAdapter.
-    * 
-    * @return the eventsList.
-    */
-   public EventsList getEventsList()
-   {
-      return eventsList;
-   }
+	/**
+	 * Gets the EventsList from FileAdapter.
+	 * 
+	 * @return the eventsList.
+	 */
+	public EventsList getEventsList()
+	{
+		return eventsList;
+	}
 
-   /**
-    * Gets the InstructorList from FileAdapter.
-    * 
-    * @return the instructorList.
-    */
-   public InstructorsList getInstructorsList()
-   {
-      return instructorsList;
-   }
+	/**
+	 * Gets the InstructorList from FileAdapter.
+	 * 
+	 * @return the instructorList.
+	 */
+	public InstructorsList getInstructorsList()
+	{
+		return instructorsList;
+	}
 
-   /**
-    * Gets the MembersList from FileAdapter.
-    * 
-    * @return the membersList.
-    */
-   public MembersList getMembersList()
-   {
-      return membersList;
-   }
+	/**
+	 * Gets the MembersList from FileAdapter.
+	 * 
+	 * @return the membersList.
+	 */
+	public MembersList getMembersList()
+	{
+		return membersList;
+	}
 
-   /**
-    * Gets the ClassTypesList from FileAdapter.
-    * 
-    * @return the classTypesList.
-    */
-   public ClassTypesList getClassTypesList()
-   {
-      return classTypesList;
-   }
+	/**
+	 * Gets the ClassTypesList from FileAdapter.
+	 * 
+	 * @return the classTypesList.
+	 */
+	public ClassTypesList getClassTypesList()
+	{
+		return classTypesList;
+	}
 
-   // move this to instructor and remove parameter
-   public ArrayList<ClassType> getInstructorQualifiedFor(Instructor instructor)
-   {
-
-      return instructor.getQualifiedClassesList();
-   }
-
-   // move this to instructor and remove parameter
-   public ArrayList<ClassType> getToughtEventsList(Instructor instructor)
-   {
-      return instructor.getAllTaughtEvents();
-   }
-
-   /**
-    * Updates the OnGoingEventsList table.
-    */
+	/**
+	 * Updates the OnGoingEventsList table.
+	 */
 	public void updateOnGoingEventsList()
 	{
 		updateEventsList();
@@ -157,8 +144,8 @@ public class FileAdapter
 	}
 
 	/**
-    * Updates the upComingEventsList and sorts it.
-    */
+	 * Updates the upComingEventsList and sorts it.
+	 */
 	public void updateUpComingEventsList()
 	{
 		updateEventsList();
@@ -178,6 +165,7 @@ public class FileAdapter
 
 		for (int i = 0; i < temp.size(); i++)
 		{
+
 			currentEvent = temp.get(i);
 			thisEventStartTime = currentEvent.getStarTime();
 			thisEventEndTime = currentEvent.getEndTime();
@@ -219,6 +207,7 @@ public class FileAdapter
 				else if (eventWasBeforeThisHour)
 					upComingEventsList.remove(currentEvent);
 			}
+
 		}
 
 		// sorting events
@@ -230,367 +219,347 @@ public class FileAdapter
 				return eventLowerIndex.compareTo(eventUpperIndex);
 			}
 		});
+
 	}
 
-	 /**
-    * Updates the instructorsList.
-    */
-   public void updateInstructorsList()
-   {
-      instructorsList.setInstructorsList(readInstructorsListFromBin());
-   }
+	/**
+	 * Updates the instructorsList.
+	 */
+	public void updateInstructorsList()
+	{
+		instructorsList.setInstructorsList(readInstructorsListFromBin());
+	}
 
-   /**
-    * Updates the membersList.
-    */
-   public void updateMembersList()
-   {
-      membersList.setMembersList(readMembersListFromBin());
-   }
+	/**
+	 * Updates the membersList.
+	 */
+	public void updateMembersList()
+	{
+		membersList.setMembersList(readMembersListFromBin());
+	}
 
-   /**
-    * Updates the eventsList.
-    */
-   public void updateEventsList()
-   {
-      eventsList.setEventsList(readEventsListFromBin());
-   }
+	/**
+	 * Updates the eventsList.
+	 */
+	public void updateEventsList()
+	{
+		eventsList.setEventsList(readEventsListFromBin());
+	}
 
-   /**
-    * Updates the classTypesList.
-    */
-   public void updateClassTypesList()
-   {
-      classTypesList.setClassTypesList(readClassTypesListFromBin());
-   }
+	/**
+	 * Updates the classTypesList.
+	 */
+	public void updateClassTypesList()
+	{
+		classTypesList.setClassTypesList(readClassTypesListFromBin());
+	}
 
-   /**
-    * Saves the members list to binary file
-    * 
-    * @param membersList
-    *           is what will be stored into binary file.
-    */
-   public void saveMembersListToBin(ArrayList<Member> membersList)
-   {
-      try
-      {
-         myFileIO.writeToFile(membersListBinFileName, membersList);
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
+	/**
+	 * Saves the members list to binary file
+	 * 
+	 * @param membersList
+	 *            is what will be stored into binary file.
+	 */
+	public void saveMembersListToBin(ArrayList<Member> membersList)
+	{
+		try
+		{
+			myFileIO.writeToFile(membersListBinFileName, membersList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-   /**
-    * Saves member to a available binary list.
-    * 
-    * @param member
-    *           is what will be stored into binary file.
-    */
-   public void saveMemberToAvailableBinList(Member member)
-   {
-      ArrayList<Member> tempList = readMembersListFromBin();
-      tempList.add(member);
-      saveMembersListToBin(tempList);
-   }
+	/**
+	 * Saves member to a available binary list.
+	 * 
+	 * @param member
+	 *            is what will be stored into binary file.
+	 */
+	public void saveMemberToAvailableBinList(Member member)
+	{
+		ArrayList<Member> tempList = readMembersListFromBin();
+		tempList.add(member);
+		saveMembersListToBin(tempList);
+	}
 
-   /**
-    * Saves the instructors list to binary file.
-    * 
-    * @param instructorsList
-    *           is what will be stored into binary file.
-    */
-   public void saveInstructorsListToBin(ArrayList<Instructor> instructorsList)
-   {
-      try
-      {
-         myFileIO.writeToFile(instructorsListBinFileName, instructorsList);
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
+	/**
+	 * Saves the instructors list to binary file.
+	 * 
+	 * @param instructorsList
+	 *            is what will be stored into binary file.
+	 */
+	public void saveInstructorsListToBin(ArrayList<Instructor> instructorsList)
+	{
+		try
+		{
+			myFileIO.writeToFile(instructorsListBinFileName, instructorsList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-   /**
-    * Saves the instructor to an available binary list.
-    * 
-    * @param instructor
-    *           is what will be stored into binary file.
-    */
-   public void saveInstructorToAvailableBinList(Instructor instructor)
-   {
-      ArrayList<Instructor> tempList = readInstructorsListFromBin();
-      tempList.add(instructor);
-      saveInstructorsListToBin(tempList);
-   }
+	/**
+	 * Saves the instructor to an available binary list.
+	 * 
+	 * @param instructor
+	 *            is what will be stored into binary file.
+	 */
+	public void saveInstructorToAvailableBinList(Instructor instructor)
+	{
+		ArrayList<Instructor> tempList = readInstructorsListFromBin();
+		tempList.add(instructor);
+		saveInstructorsListToBin(tempList);
+	}
 
-   /**
-    * Saves the events list to binary file.
-    * 
-    * @param eventsList
-    *           is what will be stored into binary file.
-    */
-   public void saveEventsListToBin(ArrayList<Event> eventsList)
-   {
-      try
-      {
-         myFileIO.writeToFile(eventsListBinFileName, eventsList);
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
+	/**
+	 * Saves the events list to binary file.
+	 * 
+	 * @param eventsList
+	 *            is what will be stored into binary file.
+	 */
+	public void saveEventsListToBin(ArrayList<Event> eventsList)
+	{
+		try
+		{
+			myFileIO.writeToFile(eventsListBinFileName, eventsList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-   /**
-    * Saves event to an available binary list.
-    * 
-    * @param event
-    *           is what will be stored into binary file.
-    */
-   public void saveEventToAvailableBinList(Event event)
-   {
-      ArrayList<Event> tempList = readEventsListFromBin();
-      tempList.add(event);
-      saveEventsListToBin(tempList);
-   }
+	/**
+	 * Saves event to an available binary list.
+	 * 
+	 * @param event
+	 *            is what will be stored into binary file.
+	 */
+	public void saveEventToAvailableBinList(Event event)
+	{
+		ArrayList<Event> tempList = readEventsListFromBin();
+		tempList.add(event);
+		saveEventsListToBin(tempList);
+	}
 
-   /**
-    * Saves the class types list into binary.
-    * 
-    * @param classTypesList
-    *           will be stored into binary file.
-    */
-   public void saveClassTypesListToBin(ArrayList<ClassType> classTypesList)
-   {
-      try
-      {
-         myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
+	/**
+	 * Saves the class types list into binary.
+	 * 
+	 * @param classTypesList
+	 *            will be stored into binary file.
+	 */
+	public void saveClassTypesListToBin(ArrayList<ClassType> classTypesList)
+	{
+		try
+		{
+			myFileIO.writeToFile(classTypeListBinFileName, classTypesList);
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-   /**
-    * Saves class type to an available binary list.
-    * 
-    * @param classType
-    */
-   public void saveClassTypeToAvailableBinList(ClassType classType)
-   {
-      ArrayList<ClassType> tempList = readClassTypesListFromBin();
-      tempList.add(classType);
-      saveClassTypesListToBin(tempList);
-   }
+	/**
+	 * Saves class type to an available binary list.
+	 * 
+	 * @param classType
+	 */
+	public void saveClassTypeToAvailableBinList(ClassType classType)
+	{
+		ArrayList<ClassType> tempList = readClassTypesListFromBin();
+		tempList.add(classType);
+		saveClassTypesListToBin(tempList);
+	}
 
-   /**
-    * Reads the members list from the binary file.
-    * 
-    * @return the list of members from the binary file.
-    */
-   public ArrayList<Member> readMembersListFromBin()
-   {
-      ArrayList<Member> tempList = new ArrayList<Member>();
+	/**
+	 * Reads the members list from the binary file.
+	 * 
+	 * @return the list of members from the binary file.
+	 */
+	public ArrayList<Member> readMembersListFromBin()
+	{
+		ArrayList<Member> tempList = new ArrayList<Member>();
 
-      try
-      {
-         Object obj = myFileIO.readObjectFromFile(membersListBinFileName);
-         if (obj instanceof ArrayList<?>)
-         {
-            ArrayList<?> all = (ArrayList<?>) obj;
-            for (int i = 0; i < all.size(); i++)
-               tempList.add((Member) all.get(i));
-         }
+		try
+		{
+			Object obj = myFileIO.readObjectFromFile(membersListBinFileName);
+			if (obj instanceof ArrayList<?>)
+			{
+				ArrayList<?> all = (ArrayList<?>) obj;
+				for (int i = 0; i < all.size(); i++)
+					tempList.add((Member) all.get(i));
+			}
 
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (ClassNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (EOFException e)
-      {
-         // e.printStackTrace();
-         System.out.println("Members List Binary File reached end of line");
-      }
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EOFException e)
+		{
+			// e.printStackTrace();
+			System.out.println("Members List Binary File reached end of line");
+		}
 
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-      return tempList;
-   }
+		return tempList;
+	}
 
-   /**
-    * Reads the instructor list from the binary file.
-    * 
-    * @return the list of instructors from binary file.
-    */
-   public ArrayList<Instructor> readInstructorsListFromBin()
-   {
-      ArrayList<Instructor> tempList = new ArrayList<Instructor>();
+	/**
+	 * Reads the instructor list from the binary file.
+	 * 
+	 * @return the list of instructors from binary file.
+	 */
+	public ArrayList<Instructor> readInstructorsListFromBin()
+	{
+		ArrayList<Instructor> tempList = new ArrayList<Instructor>();
 
-      try
-      {
-         Object obj = myFileIO.readObjectFromFile(instructorsListBinFileName);
-         if (obj instanceof ArrayList<?>)
-         {
-            ArrayList<?> all = (ArrayList<?>) obj;
-            for (int i = 0; i < all.size(); i++)
-               tempList.add((Instructor) all.get(i));
-         }
+		try
+		{
+			Object obj = myFileIO.readObjectFromFile(instructorsListBinFileName);
+			if (obj instanceof ArrayList<?>)
+			{
+				ArrayList<?> all = (ArrayList<?>) obj;
+				for (int i = 0; i < all.size(); i++)
+					tempList.add((Instructor) all.get(i));
+			}
 
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (ClassNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (EOFException e)
-      {
-         // e.printStackTrace();
-         System.out.println("Instructor List Binary File reached end of line");
-         // TODO
-      }
-      catch (IOException e)
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EOFException e)
+		{
+			// e.printStackTrace();
+			System.out.println("Instructor List Binary File reached end of line");
+			// TODO
+		} catch (IOException e)
 
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-      return tempList;
-   }
+		return tempList;
+	}
 
-   /**
-    * Reads the Events list from the binary file.
-    * 
-    * @return the list of events from the binary file.
-    */
-   public ArrayList<Event> readEventsListFromBin()
-   {
-      ArrayList<Event> tempList = new ArrayList<Event>();
+	/**
+	 * Reads the Events list from the binary file.
+	 * 
+	 * @return the list of events from the binary file.
+	 */
+	public ArrayList<Event> readEventsListFromBin()
+	{
+		ArrayList<Event> tempList = new ArrayList<Event>();
 
-      try
-      {
-         Object obj = myFileIO.readObjectFromFile(eventsListBinFileName);
-         if (obj instanceof ArrayList<?>)
-         {
-            ArrayList<?> all = (ArrayList<?>) obj;
-            for (int i = 0; i < all.size(); i++)
-            {
-               tempList.add((Event) all.get(i));
-            }
-         }
+		try
+		{
+			Object obj = myFileIO.readObjectFromFile(eventsListBinFileName);
+			if (obj instanceof ArrayList<?>)
+			{
+				ArrayList<?> all = (ArrayList<?>) obj;
+				for (int i = 0; i < all.size(); i++)
+				{
+					tempList.add((Event) all.get(i));
+				}
+			}
 
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (ClassNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (EOFException e)
-      {
-         // e.printStackTrace();
-         System.out.println("Events List Binary File reached end of line");
-      }
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EOFException e)
+		{
+			// e.printStackTrace();
+			System.out.println("Events List Binary File reached end of line");
+		}
 
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-      return tempList;
-   }
+		return tempList;
+	}
 
-   /**
-    * Reads the class type list from binary file.
-    * 
-    * @return the list of class types from the binary file.
-    */
-   public ArrayList<ClassType> readClassTypesListFromBin()
-   {
-      ArrayList<ClassType> tempList = new ArrayList<ClassType>();
+	/**
+	 * Reads the class type list from binary file.
+	 * 
+	 * @return the list of class types from the binary file.
+	 */
+	public ArrayList<ClassType> readClassTypesListFromBin()
+	{
+		ArrayList<ClassType> tempList = new ArrayList<ClassType>();
 
-      try
-      {
-         Object obj = myFileIO.readObjectFromFile(classTypeListBinFileName);
-         if (obj instanceof ArrayList<?>)
-         {
-            ArrayList<?> all = (ArrayList<?>) obj;
-            for (int i = 0; i < all.size(); i++)
-               tempList.add((ClassType) all.get(i));
-         }
+		try
+		{
+			Object obj = myFileIO.readObjectFromFile(classTypeListBinFileName);
+			if (obj instanceof ArrayList<?>)
+			{
+				ArrayList<?> all = (ArrayList<?>) obj;
+				for (int i = 0; i < all.size(); i++)
+					tempList.add((ClassType) all.get(i));
+			}
 
-      }
-      catch (FileNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (ClassNotFoundException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      catch (EOFException e)
-      {
-         // e.printStackTrace();
-         System.out.println("EventsType List Binary File reached end of line");
-      }
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EOFException e)
+		{
+			// e.printStackTrace();
+			System.out.println("EventsType List Binary File reached end of line");
+		}
 
-      catch (IOException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-      return tempList;
-   }
+		return tempList;
+	}
 }

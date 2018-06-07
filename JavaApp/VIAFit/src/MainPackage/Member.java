@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Member implements Serializable
 {
 
-
 	/**
 	 * Generated serial version UID
 	 */
@@ -24,68 +23,43 @@ public class Member implements Serializable
 	private boolean isPremium;
 	private MyDate memberSince;
 	private ArrayList<Event> allAttendedEventsList;
-	private MembersList membersList;
 
 	/**
-    * Six-argument constructor.
-    * 
-    * @param firstName
-    *           the members first name.
-    * @param lastName
-    *           the members last name.
-    * @param email
-    *           the members email.
-    * @param memberID
-    *           the members ID number.
-    * @param phoneNumber
-    *           the members phone number.
-    * @param isPremium
-    *           is the member premium.
-    */
-	public Member(String name, String email, String phoneNumber, boolean isPremium, int id)
+	 * Six-argument constructor.
+	 * 
+	 * @param firstName
+	 *            the members first name.
+	 * @param lastName
+	 *            the members last name.
+	 * @param email
+	 *            the members email.
+	 * @param memberID
+	 *            the members ID number.
+	 * @param phoneNumber
+	 *            the members phone number.
+	 * @param isPremium
+	 *            is the member premium.
+	 */
+	public Member(String name, String email, String phoneNumber, int memberID, boolean isPremium)
 	{
 		// TODO: pull new memberID from binary file by checking biggest member ID
 		this.name = name;
 
 		this.email = email;
-		this.memberID = id;
+		this.memberID = memberID;
 		this.phoneNumber = phoneNumber;
 		this.isPremium = isPremium;
 		this.memberSince = MyDate.today();
-		membersList = new MembersList();
 
 		allAttendedEventsList = new ArrayList<Event>();
 
 	}
 
-	 /**
-    * Gets the members new ID number.
-    * 
-    * @return the members new ID number and counts one up every time.
-    */
-
-	public int getNewMemberID()
-	{
-	   if(membersList!=null)
-	   {
-	      int biggest = membersList.getLastMemberID()+1;
-	      membersList.setLastMemberID(biggest);
-	      return biggest;
-	   }
-	   else
-	   {
-	      membersList = new MembersList();
-	      membersList.setLastMemberID(1);
-	      return 1;
-	   }
-	}
-
-
-	 /**
-    * Gets the members ID number.
-    * 
-    * @return the members ID number.
-    */
+	/**
+	 * Gets the members ID number.
+	 * 
+	 * @return the members ID number.
+	 */
 	public int getMemberID()
 	{
 		return memberID;
@@ -207,12 +181,12 @@ public class Member implements Serializable
 	}
 
 	/**
-    * Compares the memberID of two members.
-    * 
-    * @param obj
-    *           the object to compare with.
-    * @return true if the given object is equal to this member.
-    */
+	 * Compares the memberID of two members.
+	 * 
+	 * @param obj
+	 *            the object to compare with.
+	 * @return true if the given object is equal to this member.
+	 */
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof Member))
@@ -224,58 +198,57 @@ public class Member implements Serializable
 			return memberID == temp.memberID;
 		}
 	}
-	
+
 	/**
-    * Returns a shorter string representation of the member.
-    * 
-    * @return a string representation of the member in the format: "name 
-    *         phone number member id"
-    */
+	 * Returns a shorter string representation of the member.
+	 * 
+	 * @return a string representation of the member in the format: "name phone
+	 *         number member id"
+	 */
 	public String toSmallString()
 	{
-	   String str = "<html><pre style='font-size:9px'>"+name+"\t\t"+"ID: "+memberID+"\nPhone number: "+phoneNumber+"</pre></html>";
-	   return str;
+		String str = "<html><pre style='font-size:9px'>" + name + "\t\t" + "ID: " + memberID + "\nPhone number: "
+				+ phoneNumber + "</pre></html>";
+		return str;
 	}
-	
+
 	/**
-    * Returns a string representation of the member.
-    * 
-    * @return a string representation of the member in the format: "name email
-    *         phone number member since member id"
-    */
+	 * Returns a string representation of the member.
+	 * 
+	 * @return a string representation of the member in the format: "name email
+	 *         phone number member since member id"
+	 */
 	public String toString()
 	{
-	   String nameTab = "";
-	   String emailTab = "\t";
-	   String phoneTab = "\t\t";
-	   if(name.length()>=16)
-	   {
-	      nameTab = "\t";
-	   }
-	   else if(name.length()>=8 && name.length()<16)
-	   {
-	      nameTab = "\t\t";
-	   }
-	   else nameTab = "\t\t\t";
-	   
-	   if(email.length()>=16 && email.length()<=22)
-      {
-         emailTab = "\t\t";
-      }
-      else if (email.length() >= 8 && email.length() < 16)
-      {
-         emailTab = "\t\t\t";
-      }
+		String nameTab = "";
+		String emailTab = "\t";
+		String phoneTab = "\t\t";
+		if (name.length() >= 16)
+		{
+			nameTab = "\t";
+		} else if (name.length() >= 8 && name.length() < 16)
+		{
+			nameTab = "\t\t";
+		} else
+			nameTab = "\t\t\t";
 
-      else if(email.length()<8)
-      {
-         emailTab = "\t\t\t\t";
-      }
-	   if(phoneNumber.length()<8)
-	   {
-	      phoneTab = "\t\t\t";
-	   }
-      
+		if (email.length() >= 16 && email.length() <= 22)
+		{
+			emailTab = "\t\t";
+		} else if (email.length() >= 8 && email.length() < 16)
+		{
+			emailTab = "\t\t\t";
+		}
+
+		else if (email.length() < 8)
+		{
+			emailTab = "\t\t\t\t";
+		}
+		if (phoneNumber.length() < 8)
+		{
+			phoneTab = "\t\t\t";
+		}
+
 		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + phoneTab
 				+ memberSince + "\t\t" + memberID + "</pre></html>";
 		return str;
