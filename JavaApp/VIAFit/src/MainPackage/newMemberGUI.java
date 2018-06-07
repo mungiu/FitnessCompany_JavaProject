@@ -198,7 +198,7 @@ public class newMemberGUI extends JFrame
 					}
 					for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
 					{
-						if (!fileAdapter.getEventsList().getEventsList().get(i).toSmallString()
+						if (fileAdapter.getEventsList().getEventsList().get(i).toSmallString()
 								.equals(allSignedUpForArea.getSelectedValue()))
 						{
 							fileAdapter.getEventsList().getEventsList().get(i).getMembersList().remove(temp);

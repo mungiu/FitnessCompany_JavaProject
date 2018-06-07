@@ -864,7 +864,7 @@ public class mainGUI extends JFrame
 			{
 				try
 				{
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e1)
 				{
 					// TODO Auto-generated catch block
