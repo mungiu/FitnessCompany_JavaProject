@@ -242,7 +242,8 @@ private class MyListener implements ActionListener, FocusListener
             for(int i = 0;i<fileAdapter.getMembersList().getMembersList().size();i++)
             {
                if(fileAdapter.getMembersList().getMembersList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase())
-                     || fileAdapter.getMembersList().getMembersList().get(i).getEMail().contains(search.getText()) || fileAdapter.getMembersList().getMembersList().get(i).getPhoneNumber().contains(search.getText()))
+                     || fileAdapter.getMembersList().getMembersList().get(i).getEMail().contains(search.getText()) || fileAdapter.getMembersList().getMembersList().get(i).getPhoneNumber().contains(search.getText()) 
+                     || fileAdapter.getMembersList().getMembersList().get(i).getMemberID()==Integer.parseInt(search.getText()+""))
                {
                   tempFound1.add(fileAdapter.getMembersList().getMembersList().get(i));
                }               
@@ -274,7 +275,8 @@ private class MyListener implements ActionListener, FocusListener
             {
             for(int i = 0;i<fileAdapter.getInstructorsList().getInstructorsList().size();i++)
             {
-               if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase()))
+               if(fileAdapter.getInstructorsList().getInstructorsList().get(i).getName().toLowerCase().contains(search.getText().toLowerCase()) 
+                     || fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID()==Integer.parseInt(search.getText()+"") )
                {
                   tempFound1.add(fileAdapter.getInstructorsList().getInstructorsList().get(i));
                }               
@@ -306,7 +308,9 @@ private class MyListener implements ActionListener, FocusListener
             {
             for(int i = 0;i<fileAdapter.getEventsList().getEventsList().size();i++)
             {
-               if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) || fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().toLowerCase().contains(search.getText().toLowerCase()))
+               if(fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase().contains(search.getText().toLowerCase()) 
+                     || fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().toLowerCase().contains(search.getText().toLowerCase())
+                     || fileAdapter.getEventsList().getEventsList().get(i).getEventID()==Integer.parseInt(search.getText()+""))
                {
                   
                   tempFound.add(fileAdapter.getEventsList().getEventsList().get(i));
@@ -381,6 +385,8 @@ private class MyListener implements ActionListener, FocusListener
       }
       if(e.getSource()==searchOption)
       {
+         if(listBigInfoBox.isEmpty()==false)
+         {
          if(searchOption.getSelectedIndex()==0 && listBigInfoBox.getElementAt(0) instanceof Member)
          {
             setTopLabel(searchOption.getSelectedItem().toString());
@@ -393,6 +399,7 @@ private class MyListener implements ActionListener, FocusListener
          {
             setTopLabel(searchOption.getSelectedItem().toString());
          }
+      }
       }
    }
    
@@ -423,7 +430,7 @@ public void setTopLabel(String type)
 {
    if(type.equals("Member"))
    {
-      String eventString = "<html><pre style='font-size:11px'>"+"Member name\t        Email\t                 Phone number\t         Sign up date\t           ID"+"</pre></html>";
+      String eventString = "<html><pre style='font-size:11px'>"+"Member name\t        Email\t                  Phone number\t          Sign up date\t           ID"+"</pre></html>";
       aboveBigInfo.setText(eventString);
    }
    if(type.equals("Instructor"))
@@ -826,7 +833,18 @@ public mainGUI()
    {
       public void windowGainedFocus(WindowEvent e)
       {
+         try
+         {
+            Thread.sleep(100);
+         }
+         catch (InterruptedException e1)
+         {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+         }
          updateBigInfoBox(searchOption.getSelectedItem().toString());
+         updateOnGoingEventsArea();
+         updateUpcomingEventsArea();
       }
    });
    setJMenuBar(menubar);

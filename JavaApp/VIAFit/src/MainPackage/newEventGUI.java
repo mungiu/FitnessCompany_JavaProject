@@ -84,9 +84,9 @@ public class newEventGUI extends JFrame
 	private JTextField id;
 
 	private DefaultListModel<Instructor> listInstructors;
-	private DefaultListModel<Member> listMembers;
+	private DefaultListModel<String> listMembers;
 	private JList<Instructor> attendingInstructorsArea;
-	private JList<Member> attendingMembersArea;
+	private JList<String> attendingMembersArea;
 	private JScrollPane attendingInstructorsAreaScroll;
 	private JScrollPane attendingMembersAreaScroll;
 
@@ -181,7 +181,9 @@ public class newEventGUI extends JFrame
 			         && checkIfOnlyInts(startTimeMinute.getText()) 
 			         && !nameInput.getText().equals("") 
 			         && ((typeCombo.getSelectedIndex()!=0) || !typeInput.getText().equals(""))
-			         && nameInput.getText().length()<20)
+			         && nameInput.getText().length()<20
+			         && Integer.parseInt(startTimeHour.getText())<24
+			         && Integer.parseInt(startTimeMinute.getText())<60)
 			   {
 			   ClassType tempType = new ClassType("nothing");
 			   if(newTypeMenu.isSelected()==true)
@@ -246,7 +248,7 @@ public class newEventGUI extends JFrame
 				}
 				dispose();
 			   }
-			   else JOptionPane.showMessageDialog(null, "Please fill all the fields before saving", "Information missing", JOptionPane.OK_OPTION);
+			   else JOptionPane.showMessageDialog(null, "Please make sure all fields are filled correctly", "Information missing or wrong", JOptionPane.OK_OPTION);
 			}
 			if(e.getSource()==addInstructor)
 			{
@@ -274,11 +276,15 @@ public class newEventGUI extends JFrame
 			   {
 			      typeCombo.setVisible(false);
 			      typeInput.setVisible(true);
+			      addInstructor.setEnabled(false);
+			      instructorCombo.setEnabled(false);
 			   }
 			   if(newTypeMenu.isSelected()==false)
             {
                typeCombo.setVisible(true);
                typeInput.setVisible(false);
+               addInstructor.setEnabled(true);
+               instructorCombo.setEnabled(true);
             }
 			}
 			if(e.getSource()==remove)
@@ -320,6 +326,40 @@ public class newEventGUI extends JFrame
 			      listInstructors.removeElement(attendingInstructorsArea.getSelectedValue());
 			   }
 			   else JOptionPane.showMessageDialog(null, "Please save the event before adding and removing instructors");
+			}
+			if(e.getSource()==typeCombo)
+			{
+			   ClassType temp = null;
+			   for(int i = 0;i<fileAdapter.getClassTypesList().getClassTypesList().size();i++)
+			   {
+			      if(fileAdapter.getClassTypesList().getClassTypesList().get(i).getClassName().equals(typeCombo.getSelectedItem().toString()))
+			      {
+			         temp = fileAdapter.getClassTypesList().getClassTypesList().get(i);
+			      }
+			   }
+			   ArrayList<String> tempQualified= new ArrayList<String>();
+		      for(int k = 0;k<fileAdapter.getInstructorsList().getInstructorsList().size();k++)
+		      {
+		         if(fileAdapter.getInstructorsList().getInstructorsList().get(k).getQualifiedClassesList().contains(temp))
+		         {
+		            tempQualified.add(fileAdapter.getInstructorsList().getInstructorsList().get(k).toSmallString());
+		         }
+		      }
+		      if(tempQualified.size()!=0)
+		      {
+		         tempIns = tempQualified.toArray(new String[0]);
+		      }
+		      else 
+		      {
+		         tempIns = new String[1];
+		         tempIns[0] = "No instructors qualified";
+		      }
+		      instructorModel.removeAllElements();
+		      for(int i = 0;i<tempIns.length;i++)
+		      {
+		         instructorModel.addElement(tempIns[i]);
+		      }
+		      instructorCombo.setModel(instructorModel);
 			}
 		}
 
@@ -662,7 +702,7 @@ public class newEventGUI extends JFrame
 	   fileAdapter.updateEventsList();
 	   for(int i = 0;i<event.getMembersList().size();i++)
 	   {
-	      listMembers.addElement(event.getMembersList().get(i));
+	      listMembers.addElement(event.getMembersList().get(i).toSmallString());
 	   }
 	}
 
@@ -739,9 +779,9 @@ public class newEventGUI extends JFrame
 		
 
 		listInstructors = new DefaultListModel<Instructor>();
-		listMembers = new DefaultListModel<Member>();
+		listMembers = new DefaultListModel<String>();
 		attendingInstructorsArea = new JList<Instructor>(listInstructors);
-		attendingMembersArea = new JList<Member>(listMembers);
+		attendingMembersArea = new JList<String>(listMembers);
 		attendingInstructorsAreaScroll = new JScrollPane(attendingInstructorsArea);
 		attendingMembersAreaScroll = new JScrollPane(attendingMembersArea);
 
@@ -780,12 +820,14 @@ public class newEventGUI extends JFrame
       }
       tempIns = allInstructors;
 		instructorCombo = new JComboBox<String>(tempIns);
+		instructorCombo.addActionListener(myListener);
 		fileAdapter.updateClassTypesList();
 		tempType = fileAdapter.getClassTypesList().getClassTypesArr();
 		comboModel = new DefaultComboBoxModel<String>(tempType);
 		instructorModel = new DefaultComboBoxModel<String>(tempIns);
 		typeCombo = new JComboBox<String>();
 		typeCombo.setModel(comboModel);
+		typeCombo.addActionListener(myListener);
 		duraCombo = new JComboBox<String>(tempDura);
 		instructorComboBottom = new JComboBox<String>(tempInsBottom);
 

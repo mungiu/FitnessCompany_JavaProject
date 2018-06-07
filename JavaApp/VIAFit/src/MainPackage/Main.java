@@ -8,7 +8,6 @@ public class Main
 	public static void main(String[] args)
 	{
 		FileAdapter fileAdapter = new FileAdapter();
-		EventsList eventsList = new EventsList();
 		mainGUI test = new mainGUI();
 		
 		// This will run every x millisecond.

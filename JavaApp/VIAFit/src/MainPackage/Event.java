@@ -176,7 +176,7 @@ public class Event implements Serializable, Comparable
 		if (member.getIsPremium())
 			attendingMembersList.add(member);
 	}
-
+ 
 	public void removeInstructorFromEvent(Instructor instructor)
 	{
 		attendingInstructorsList.remove(instructor);

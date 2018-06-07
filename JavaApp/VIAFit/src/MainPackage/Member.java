@@ -217,7 +217,11 @@ public class Member implements Serializable
 			return memberID == temp.memberID;
 		}
 	}
-
+	public String toSmallString()
+	{
+	   String str = "<html><pre style='font-size:9px'>"+name+"\t\t"+"ID: "+memberID+"\nPhone number: "+phoneNumber+"</pre></html>";
+	   return str;
+	}
 	public String toString()
 	{
 	   String nameTab = "";
