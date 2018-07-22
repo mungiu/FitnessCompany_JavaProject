@@ -868,7 +868,6 @@ public class newEventGUI extends JFrame
 
 		// styling textfields and text
 		headLine.setFont(new Font(headLine.getFont().getFamily(), Font.BOLD, 30));
-		Color col1 = new Color(1, 1, 255);
 
 		// adding content to menuBar
 		menuBar.add(fileMenu);

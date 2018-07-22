@@ -245,14 +245,14 @@ public class newInstructorGUI extends JFrame
 		if (s == true)
 		{
 			editInstructor.setSelected(true);
-			nameInput.setEnabled(true);
+			nameInput.setEditable(true);
 			remove.setEnabled(true);
 			add.setEnabled(true);
 		}
 		if (s == false)
 		{
 			editInstructor.setSelected(false);
-			nameInput.setEnabled(false);
+			nameInput.setEditable(false);
 		}
 	}
 

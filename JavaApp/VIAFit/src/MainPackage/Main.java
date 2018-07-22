@@ -20,6 +20,6 @@ public class Main
 				test.updateOnGoingEventsArea();
 				test.updateUpcomingEventsArea();
 			}
-		}, 0, 10000);
+		}, 0, 60 * 1000);
 	}
 }

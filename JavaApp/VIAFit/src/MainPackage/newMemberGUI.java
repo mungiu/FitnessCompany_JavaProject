@@ -198,7 +198,7 @@ public class newMemberGUI extends JFrame
 					}
 					for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
 					{
-						if (!fileAdapter.getEventsList().getEventsList().get(i).toSmallString()
+						if (fileAdapter.getEventsList().getEventsList().get(i).toSmallString()
 								.equals(allSignedUpForArea.getSelectedValue()))
 						{
 							fileAdapter.getEventsList().getEventsList().get(i).getMembersList().remove(temp);
@@ -435,25 +435,25 @@ public class newMemberGUI extends JFrame
 		if (s == false)
 		{
 			editInfo.setSelected(false);
-			nameInput.setEnabled(false);
+			nameInput.setEditable(false);
 			membershipTypeInput.setEnabled(false);
-			emailInput.setEnabled(false);
-			phoneInput.setEnabled(false);
-			membershipSinceInputDay.setEnabled(false);
-			membershipSinceInputMonth.setEnabled(false);
-			membershipSinceInputYear.setEnabled(false);
-			classTypeInput.setEnabled(true);
+			emailInput.setEditable(false);
+			phoneInput.setEditable(false);
+			membershipSinceInputDay.setEditable(false);
+			membershipSinceInputMonth.setEditable(false);
+			membershipSinceInputYear.setEditable(false);
+			classTypeInput.setEnabled(false);
 		}
 		if (s == true)
 		{
 			editInfo.setSelected(true);
-			nameInput.setEnabled(true);
+			nameInput.setEditable(true);
 			membershipTypeInput.setEnabled(true);
-			emailInput.setEnabled(true);
-			phoneInput.setEnabled(true);
-			membershipSinceInputDay.setEnabled(true);
-			membershipSinceInputMonth.setEnabled(true);
-			membershipSinceInputYear.setEnabled(true);
+			emailInput.setEditable(true);
+			phoneInput.setEditable(true);
+			membershipSinceInputDay.setEditable(true);
+			membershipSinceInputMonth.setEditable(true);
+			membershipSinceInputYear.setEditable(true);
 			classTypeInput.setEnabled(true);
 			signUp.setEnabled(true);
 			removeFrom.setEnabled(true);
