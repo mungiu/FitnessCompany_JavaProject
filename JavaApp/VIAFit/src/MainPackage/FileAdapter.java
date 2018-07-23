@@ -124,7 +124,7 @@ public class FileAdapter
 		for (int i = 0; i < temp.size(); i++)
 
 		{
-			thisEventStartTime = temp.get(i).getStarTime();
+			thisEventStartTime = temp.get(i).getStartTime();
 			thisEventEndTime = temp.get(i).getEndTime();
 			thisEventStartDate = temp.get(i).getStartDate();
 
@@ -168,7 +168,7 @@ public class FileAdapter
 		{
 
 			currentEvent = temp.get(i);
-			thisEventStartTime = currentEvent.getStarTime();
+			thisEventStartTime = currentEvent.getStartTime();
 			thisEventEndTime = currentEvent.getEndTime();
 			thisEventStartDate = currentEvent.getStartDate();
 			thisEventEndDate = currentEvent.getEndDate();

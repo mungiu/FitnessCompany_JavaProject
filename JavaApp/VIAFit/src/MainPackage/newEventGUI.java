@@ -675,28 +675,28 @@ public class newEventGUI extends JFrame
 	   endDateMonth.setText(event.getEndDate().getMonth()+"");
 	   endDateYear.setText(event.getEndDate().getYear()+"");
 	   
-	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==1)
+	   if(event.getEndTime().getHour()-event.getStartTime().getHour()==1)
 	   {
 	      duraCombo.setSelectedIndex(0);
 	   }
-	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==2)
+	   if(event.getEndTime().getHour()-event.getStartTime().getHour()==2)
       {
          duraCombo.setSelectedIndex(1);
       }
-	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==3)
+	   if(event.getEndTime().getHour()-event.getStartTime().getHour()==3)
       {
          duraCombo.setSelectedIndex(2);
       }
-	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==4)
+	   if(event.getEndTime().getHour()-event.getStartTime().getHour()==4)
       {
          duraCombo.setSelectedIndex(3);
       }
-	   if(event.getEndTime().getHour()-event.getStarTime().getHour()==5)
+	   if(event.getEndTime().getHour()-event.getStartTime().getHour()==5)
       {
          duraCombo.setSelectedIndex(4);
       }
-	   startTimeHour.setText(event.getStarTime().getHour()+"");
-	   startTimeMinute.setText(event.getStarTime().getMinute()+"");
+	   startTimeHour.setText(event.getStartTime().getHour()+"");
+	   startTimeMinute.setText(event.getStartTime().getMinute()+"");
 	   
 	   listMembers.clear();
 	   fileAdapter.updateEventsList();

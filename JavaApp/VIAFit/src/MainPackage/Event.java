@@ -59,26 +59,43 @@ public class Event implements Serializable, Comparable<Event>
 		this.eventsList = new EventsList();
 	}
 
-	// TODO: move this to instructor and remove parameter
+	// TODO: move this to instructor and remove parameter ??????
 	/**
-	 * Gets if the Instructor is available.
+	 * Gets if the Instructor is available for the current event.
 	 * 
 	 * @param instructor
-	 *            is what the Instructor availability will be set to.
+	 *            is the instructor which availability for this. event will be
+	 *            checked.
 	 * @return if the Instructor is available.
 	 */
 	public boolean getInstructorIsAvailable(Instructor instructor)
 	{
 		ArrayList<Event> temp = eventsList.getEventsList();
 
+		// for each event in eventsList check if instructor is busy
 		for (int i = 0; i < temp.size(); i++)
-			if (temp.get(i).getInstructorsList().contains(instructor))
-				for (int j = 0; j < temp.size(); j++)
-					if (temp.get(i).getStarTime().isBefore(getStarTime())
-							&& (!getStarTime().isBefore(temp.get(i).getEndTime())))
-						return true;
+		{
+			boolean i_EventContainsParamInstructor = temp.get(i).getInstructorsList().contains(instructor);
 
-		return false;
+			// date comparison
+			boolean i_EventStartsAfterThisEndDate = temp.get(i).getStartDate().compareTo(endDate) > 0;
+			boolean i_EventStartsOnThisEndDate = temp.get(i).getStartDate().compareTo(endDate) == 0;
+
+			boolean i_EventEndsBeforeThisStartDate = temp.get(i).getEndDate().compareTo(startDate) < 0;
+			boolean i_EventEndsOnThisStartDate = temp.get(i).getEndDate().compareTo(startDate) == 0;
+
+			// date and time comparison
+			boolean i_EventEndsBeforeThisStartTime = i_EventEndsBeforeThisStartDate
+					| (i_EventEndsOnThisStartDate && temp.get(i).getEndTime().compareTo(startTime) < 0);
+			boolean i_EventStartsAfterThisEndTime = i_EventStartsAfterThisEndDate
+					| (i_EventStartsOnThisEndDate && temp.get(i).getStartTime().compareTo(endTime) > 0);
+
+			if (i_EventEndsBeforeThisStartTime || i_EventStartsAfterThisEndTime)
+				continue;
+			else if (i_EventContainsParamInstructor)
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -156,7 +173,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * 
 	 * @return the Events starting time.
 	 */
-	public MyClock getStarTime()
+	public MyClock getStartTime()
 	{
 		return startTime;
 	}
@@ -454,8 +471,8 @@ public class Event implements Serializable, Comparable<Event>
 		boolean thisEventIsEarlierDate = (this.getStartDate().compareTo(event.getStartDate()) == -1);
 		boolean thisEventIsSameDate = (this.getStartDate().compareTo(event.getStartDate()) == 0);
 
-		boolean thisEventIsEarlierHour = (this.getStarTime().compareTo(event.getStarTime()) == -1);
-		boolean thisEventIsSameHour = (this.getStarTime().compareTo(event.getStarTime()) == 0);
+		boolean thisEventIsEarlierHour = (this.getStartTime().compareTo(event.getStartTime()) == -1);
+		boolean thisEventIsSameHour = (this.getStartTime().compareTo(event.getStartTime()) == 0);
 
 		if (thisEventIsEarlierDate)
 			return -1;
