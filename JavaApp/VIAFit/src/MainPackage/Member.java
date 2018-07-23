@@ -126,6 +126,12 @@ public class Member implements Serializable
 		return allAttendedEventsList;
 	}
 
+	/**
+	 * Sets the member ID
+	 * 
+	 * @param id
+	 *            passed in Member id
+	 */
 	public void setMemberID(int id)
 	{
 		memberID = id;
@@ -209,6 +215,7 @@ public class Member implements Serializable
 	{
 		String str = "<html><pre style='font-size:9px'>" + name + "\t\t" + "ID: " + memberID + "\nPhone number: "
 				+ phoneNumber + "</pre></html>";
+
 		return str;
 	}
 

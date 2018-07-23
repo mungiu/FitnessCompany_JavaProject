@@ -75,13 +75,12 @@ public class Instructor implements Serializable
 	 * @param classType
 	 *            adds the qualified class to the list.
 	 */
-	public void setQualifiedList(ArrayList<ClassType> list)
+	public void setQualifiedList(ArrayList<ClassType> list) throws NullPointerException
 	{
 		qualifiedForList.clear();
+
 		for (int i = 0; i < list.size(); i++)
-		{
 			qualifiedForList.add(list.get(i));
-		}
 	}
 
 	/**
@@ -91,7 +90,7 @@ public class Instructor implements Serializable
 	 *            the object to compare with
 	 * @return true if the given object is equal to this Instructor.
 	 */
-	public boolean equals(Object obj)
+	public boolean equals(Object obj) throws NullPointerException
 	{
 		if (!(obj instanceof Instructor))
 			return false;
@@ -103,25 +102,25 @@ public class Instructor implements Serializable
 		}
 	}
 
+	/**
+	 * Returns a long string representation of the instructor.
+	 * 
+	 * @return a string representation of the Instructor in the format: name
+	 *         ID:instructorID.
+	 */
 	public String toString()
 	{
 		String list = "";
 		String nameTab = "";
-		if (qualifiedForList.size() != 0)
-		{
-			for (int i = 0; i < qualifiedForList.size(); i++)
-			{
-				list += qualifiedForList.get(i).getClassName() + ", ";
-			}
-		}
-		if (name.length() >= 16 && name.length() < 25)
-		{
-			nameTab = "\t";
-		} else if (name.length() >= 8 && name.length() < 16)
-		{
-			nameTab = "\t\t";
-		}
 
+		if (qualifiedForList.size() != 0)
+			for (int i = 0; i < qualifiedForList.size(); i++)
+				list += qualifiedForList.get(i).getClassName() + ", ";
+
+		if (name.length() >= 16 && name.length() < 25)
+			nameTab = "\t";
+		else if (name.length() >= 8 && name.length() < 16)
+			nameTab = "\t\t";
 		else
 			nameTab = "\t\t\t";
 
@@ -131,7 +130,7 @@ public class Instructor implements Serializable
 	}
 
 	/**
-	 * Returns a string representation of the Instructor.
+	 * Returns a short string representation of the Instructor.
 	 * 
 	 * @return a string representation of the Instructor in the format: name
 	 *         ID:instructorID.

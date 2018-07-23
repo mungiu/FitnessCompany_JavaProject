@@ -14,13 +14,13 @@ public class Event implements Serializable, Comparable<Event>
 	private static final long serialVersionUID = 8108565391263087432L;
 	private String className;
 	private int maxMembers;
+	private int eventID;
 	private MyDate startDate, endDate;
 	private MyClock startTime, endTime;
 	private ClassType classType;
 	private ArrayList<Instructor> attendingInstructorsList;
 	private ArrayList<Member> attendingMembersList;
 	private EventsList eventsList;
-	private int eventID;
 
 	/**
 	 * Eight-argument constructor.
@@ -56,12 +56,10 @@ public class Event implements Serializable, Comparable<Event>
 
 		this.attendingInstructorsList = new ArrayList<Instructor>();
 		this.attendingMembersList = new ArrayList<Member>();
-		attendingInstructorsList = new ArrayList<Instructor>();
-		attendingMembersList = new ArrayList<Member>();
-		eventsList = new EventsList();
+		this.eventsList = new EventsList();
 	}
 
-	// move this to instructor and remove parameter
+	// TODO: move this to instructor and remove parameter
 	/**
 	 * Gets if the Instructor is available.
 	 * 

@@ -34,6 +34,7 @@ public class FileAdapter
 		membersListBinFileName = "allMembers.bin";
 		classTypeListBinFileName = "allClassTypes.bin";
 
+		//TODO Should i create a new events list or read it from file adapter?????
 		/// CHECK OR COPY
 		onGoingEventsList = new ArrayList<Event>();
 		upComingEventsList = new ArrayList<Event>();
