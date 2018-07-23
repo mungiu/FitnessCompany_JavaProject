@@ -175,7 +175,7 @@ public class Member implements Serializable
 		this.isPremium = isPremium;
 	}
 
-	public void setMemberSince(MyDate memberSince)
+	public void setMemberSince(MyDate memberSince) throws NullPointerException
 	{
 		this.memberSince = memberSince;
 	}
@@ -187,7 +187,7 @@ public class Member implements Serializable
 	 *            the object to compare with.
 	 * @return true if the given object is equal to this member.
 	 */
-	public boolean equals(Object obj)
+	public boolean equals(Object obj) throws NullPointerException
 	{
 		if (!(obj instanceof Member))
 			return false;
@@ -224,30 +224,21 @@ public class Member implements Serializable
 		String emailTab = "\t";
 		String phoneTab = "\t\t";
 		if (name.length() >= 16)
-		{
 			nameTab = "\t";
-		} else if (name.length() >= 8 && name.length() < 16)
-		{
+		else if (name.length() >= 8 && name.length() < 16)
 			nameTab = "\t\t";
-		} else
+		else
 			nameTab = "\t\t\t";
 
 		if (email.length() >= 16 && email.length() <= 22)
-		{
 			emailTab = "\t\t";
-		} else if (email.length() >= 8 && email.length() < 16)
-		{
+		else if (email.length() >= 8 && email.length() < 16)
 			emailTab = "\t\t\t";
-		}
-
 		else if (email.length() < 8)
-		{
 			emailTab = "\t\t\t\t";
-		}
+
 		if (phoneNumber.length() < 8)
-		{
 			phoneTab = "\t\t\t";
-		}
 
 		String str = "<html><pre style='font-size:11px'>" + name + nameTab + email + emailTab + phoneNumber + phoneTab
 				+ memberSince + "\t\t" + memberID + "</pre></html>";

@@ -30,34 +30,13 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	 */
 	public MyClock(int hour, int min, int sec)
 	{
-		// the class has a set method that does exactly
-		// what I need, so no need to implement everything twice
-		if (hour == 24)
-		{
-			hour = 00;
-		}
-		if (hour == 25)
-		{
-			hour = 01;
-		}
-		if (hour == 26)
-		{
-			hour = 02;
-		}
-		if (hour == 27)
-		{
-			hour = 03;
-		}
-		if (hour == 28)
-		{
-			hour = 04;
-		}
-		setTime(hour, min, sec);
+		// setTime() method used instead of setting each variable separately
 
+		setTime(hour, min, sec);
 	}
 
 	/**
-	 * One-argument constructor
+	 * One-argument constructor, using seconds only.
 	 * 
 	 * @param timeInSeconds
 	 *            is MyClock time in seconds.
@@ -69,7 +48,7 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	}
 
 	/**
-	 * One-argument constructor.
+	 * One-argument constructor, using an existing MyClock object.
 	 * 
 	 * @param obj
 	 */
@@ -81,7 +60,7 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	}
 
 	/**
-	 * No-argument constructor.
+	 * No-argument constructor, setting time to 00:00:00.
 	 */
 	public MyClock()
 	{
@@ -132,9 +111,12 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	 */
 	public void setTime(int hour, int min, int sec)
 	{
-		this.hour = hour;
-		minute = min;
-		second = sec;
+		if ((hour >= 0 && hour <= 24) && (min >= 0 && min <= 60) && (sec >= 0 && sec <= 60))
+		{
+			this.hour = hour;
+			minute = min;
+			second = sec;
+		}
 	}
 
 	/**
@@ -155,7 +137,7 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	}
 
 	/**
-	 * Converts the MyClock time to seconds.
+	 * Converts and return the current MyClock time in seconds.
 	 * 
 	 * @return the time converted to the total seconds
 	 */
@@ -164,10 +146,9 @@ public class MyClock implements Serializable, Comparable<MyClock>
 		return hour * 3600 + minute * 60 + second;
 	}
 
-	// static method that converts an hour, minute, and second to the total
-	// seconds
 	/**
-	 * Converts the MyClock time to seconds.
+	 * Static method that converts the inputed hours, minutes and seconds to total
+	 * seconds and returns the results.
 	 * 
 	 * @param hour
 	 *            is what the MyClock hour will be converted into seconds.
@@ -205,34 +186,36 @@ public class MyClock implements Serializable, Comparable<MyClock>
 		}
 	}
 
-	// returns whether or not the time is before the time in the Clock object
-	// given as argument
 	/**
-	 * Compares the MyClock time if it is before the time in the Clock object
+	 * Compares whether or not the time is before the time in the Clock object given
+	 * as argument
 	 * 
-	 * @return TODO
+	 * @return true of false of the description.
 	 */
-	public boolean isBefore(MyClock time)
+	public boolean isBefore(MyClock time) throws NullPointerException
 	{
 		return convertToSeconds() < time.convertToSeconds();
 	}
 
-	// returns the number of seconds between the time and the time in the Clock
-	// object given as argument
-	public int timeInSecondsTo(MyClock time)
+	/**
+	 * Compares the number of seconds between current time and passed in time
+	 * 
+	 * @param time
+	 *            a MyClock object to compare against
+	 * @return the number of seconds between current time and passed in time
+	 * @throws NullPointerException
+	 */
+	public int timeInSecondsTo(MyClock time) throws NullPointerException
 	{
 		if (isBefore(time))
-		{
 			return time.convertToSeconds() - convertToSeconds();
-		} else
-		{
+		else
 			return 24 * 3600 - (convertToSeconds() - time.convertToSeconds());
-		}
 	}
 
 	// returns the time difference between the time and the time in the Clock
 	// object given as argument as a Clock object
-	public MyClock timeTo(MyClock time)
+	public MyClock timeTo(MyClock time) throws NullPointerException
 	{
 		return new MyClock(timeInSecondsTo(time));
 	}
@@ -247,21 +230,15 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	{
 		String time = "";
 		if (hour < 10)
-		{
 			time += "0";
-		}
 		time += hour + ":";
 
 		if (minute < 10)
-		{
 			time += "0";
-		}
 		time += minute + ":";
 
 		if (second < 10)
-		{
 			time += "0";
-		}
 		time += second;
 
 		return time;
@@ -274,15 +251,16 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	 *            the object to compare with
 	 * @return true if the given object is equal to this MyClock.
 	 */
-	public boolean equals(Object obj)
+	public boolean equals(Object obj) throws NullPointerException
 	{
 		if (!(obj instanceof MyClock))
-		{
 			return false;
-		}
-		MyClock other = (MyClock) obj;
+		else
+		{
+			MyClock temp = (MyClock) obj;
 
-		return (other.hour == hour && other.minute == minute && other.second == second);
+			return (temp.hour == hour && temp.minute == minute && temp.second == second);
+		}
 	}
 
 	/**

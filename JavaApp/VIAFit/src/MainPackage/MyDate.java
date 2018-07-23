@@ -36,12 +36,21 @@ public class MyDate implements Serializable, Comparable<MyDate>
 		this.year = year;
 
 		if (day > daysInMonth())
-		{
 			for (int i = 0; i <= (Math.abs(day - daysInMonth())); i++)
-			{
 				nextDay();
-			}
-		}
+	}
+
+	/**
+	 * One argument constructor taking another date as parameter
+	 * 
+	 * @param obj
+	 *            is another MyDate object
+	 */
+	public MyDate(MyDate obj) throws NullPointerException
+	{
+		day = obj.day;
+		month = obj.month;
+		year = obj.year;
 	}
 
 	/**
@@ -151,7 +160,7 @@ public class MyDate implements Serializable, Comparable<MyDate>
 		case 12:
 			return "December";
 		default:
-			return "Error";
+			return "Error in month number";
 		}
 	}
 
@@ -203,9 +212,8 @@ public class MyDate implements Serializable, Comparable<MyDate>
 			return 31;
 		case 2:
 			if (isLeapYear())
-			{
 				return 29;
-			} else
+			else
 				return 28;
 		case 3:
 			return 31;
@@ -228,7 +236,7 @@ public class MyDate implements Serializable, Comparable<MyDate>
 		case 12:
 			return 31;
 		default:
-			return 0;
+			return -1;
 		}
 	}
 
@@ -240,43 +248,31 @@ public class MyDate implements Serializable, Comparable<MyDate>
 	public String getAstroSign()
 	{
 		if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
-		{
 			return "Aries";
-		} else if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
-		{
+		else if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
 			return "Taurus";
-		} else if ((month == 5 && day >= 21) || (month == 6 && day <= 20))
-		{
+		else if ((month == 5 && day >= 21) || (month == 6 && day <= 20))
 			return "Gemini";
-		} else if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
-		{
+		else if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
 			return "Cancer";
-		} else if ((month == 7 && day >= 23) || (month == 8 && day <= 22))
-		{
+		else if ((month == 7 && day >= 23) || (month == 8 && day <= 22))
 			return "Leo";
-		} else if ((month == 8 && day >= 23) || (month == 9 && day <= 22))
-		{
+		else if ((month == 8 && day >= 23) || (month == 9 && day <= 22))
 			return "Virgo";
-		} else if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
-		{
+		else if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
 			return "Libra";
-		} else if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
-		{
+		else if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
 			return "Scorpio";
-		} else if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
-		{
+		else if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
 			return "Saggittarius";
-		} else if ((month == 12 && day >= 22) || (month == 1 && day <= 19))
-		{
+		else if ((month == 12 && day >= 22) || (month == 1 && day <= 19))
 			return "Capricorn";
-		} else if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
-		{
+		else if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
 			return "Aquarius";
-		} else if ((month == 2 && day >= 19) || (month == 3 && day <= 20))
-		{
+		else if ((month == 2 && day >= 19) || (month == 3 && day <= 20))
 			return "Pisces";
-		} else
-			return "Error in input";
+		else
+			return "Error is astro sign";
 	}
 
 	/**
@@ -348,14 +344,15 @@ public class MyDate implements Serializable, Comparable<MyDate>
 	 *            the object to compare with
 	 * @return true if the given object is equal to this MyDate.
 	 */
-	public boolean equals(Object obj)
+	public boolean equals(Object obj) throws NullPointerException
 	{
 		if (!(obj instanceof MyDate))
-		{
 			return false;
+		else
+		{
+			MyDate temp = (MyDate) obj;
+			return (temp.day == day && temp.month == month && temp.year == year);
 		}
-		MyDate other = (MyDate) obj;
-		return (other.day == day && other.month == day && other.year == year);
 	}
 
 	/**
@@ -368,47 +365,40 @@ public class MyDate implements Serializable, Comparable<MyDate>
 		return new MyDate(day, month, year);
 	}
 
-	public MyDate(MyDate obj)
-	{
-		day = obj.day;
-		month = obj.month;
-		year = obj.year;
-	}
-
 	public void nextDays(int days)
-
 	{
 		for (int i = 1; i <= days; i++)
-		{
 			nextDay();
-		}
 	}
 
 	/**
-	 * Returns the current date.
+	 * Returns the current date as a MyDate object created using GregorianCalendar.
 	 * 
 	 * @return the current being date.
 	 */
 	public static MyDate today()
 	{
 		GregorianCalendar cal = new GregorianCalendar();
+
 		return new MyDate(cal.get(GregorianCalendar.DATE), cal.get(GregorianCalendar.MONTH) + 1,
 				cal.get(GregorianCalendar.YEAR));
 	}
 
 	/**
-	 * Compares if the year, month, day have the same value
+	 * Compares if the current year is before the passed in year.
 	 * 
 	 * @param obj
 	 * @return true if the given argument is equal to itself.
 	 */
-	public boolean isBefore(MyDate obj)
+	public boolean isBefore(MyDate obj) throws NullPointerException
 	{
-		if ((obj.year > year) || (obj.year >= year && obj.month > month)
-				|| (obj.year >= year && obj.month >= month && obj.day >= day))
-		{
+		boolean thisYearIsBefore = this.year < obj.year;
+		boolean thisMonthIsBefore = this.year == obj.year && this.month < obj.month;
+		boolean thisDayIsBefore = this.year == obj.year && this.month == obj.month && this.day < obj.day;
+
+		if (thisYearIsBefore | thisMonthIsBefore | thisDayIsBefore)
 			return true;
-		} else
+		else
 			return false;
 	}
 
