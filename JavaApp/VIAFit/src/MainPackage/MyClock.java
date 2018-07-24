@@ -276,9 +276,18 @@ public class MyClock implements Serializable, Comparable<MyClock>
 	@Override
 	public int compareTo(MyClock clock)
 	{
-		if (this.getHour() < clock.getHour())
+		boolean thisClockIsSameHour = this.getHour() == clock.getHour();
+		boolean thisClockIsSameMinute = (thisClockIsSameHour && this.getMinute() == clock.getMinute());
+		boolean thisClockIsSameSecond = (thisClockIsSameMinute && this.getSecond() == clock.getSecond());
+
+		boolean thisClockIsEarlierHour = this.getHour() < clock.getHour();
+		boolean thisClockIsEarlierMinute = thisClockIsSameHour && this.getMinute() < clock.getMinute();
+		boolean thisClockIsEarlierSecond = thisClockIsSameHour && thisClockIsSameMinute
+				&& this.getSecond() < clock.getSecond();
+
+		if (thisClockIsEarlierHour | thisClockIsEarlierMinute | thisClockIsEarlierSecond)
 			return -1;
-		if (this.getHour() == clock.getHour())
+		else if (thisClockIsSameSecond)
 			return 0;
 		else
 			return 1;

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Event implements Serializable, Comparable<Event>
 {
 	private static final long serialVersionUID = 8108565391263087432L;
-	private String className;
 	private int maxMembers;
 	private int eventID;
 	private MyDate startDate, endDate;
@@ -27,8 +26,6 @@ public class Event implements Serializable, Comparable<Event>
 	 * 
 	 * @param classType
 	 *            the Events class type.
-	 * @param className
-	 *            the Events class name.
 	 * @param maxMembers
 	 *            the Events max members allowed.
 	 * @param startDate
@@ -42,11 +39,10 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param id
 	 *            the Events ID number.
 	 */
-	public Event(ClassType classType, String className, int maxMembers, MyDate startDate, MyDate endDate,
-			MyClock startTime, MyClock endTime, int id)
+	public Event(ClassType classType, int maxMembers, MyDate startDate, MyDate endDate, MyClock startTime,
+			MyClock endTime, int id)
 	{
 		this.classType = classType;
-		this.className = className;
 		this.maxMembers = maxMembers;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -68,7 +64,7 @@ public class Event implements Serializable, Comparable<Event>
 	 *            checked.
 	 * @return if the Instructor is available.
 	 */
-	public boolean getInstructorIsAvailable(Instructor instructor)
+	public boolean getInstructorIsAvailable(Instructor instructor) throws NullPointerException
 	{
 		ArrayList<Event> temp = eventsList.getEventsList();
 
@@ -119,16 +115,6 @@ public class Event implements Serializable, Comparable<Event>
 	}
 
 	/**
-	 * Gets the Events class name.
-	 * 
-	 * @return the Events class name.
-	 */
-	public String getClassName()
-	{
-		return className;
-	}
-
-	/**
 	 * Gets the Events class type.
 	 * 
 	 * @return the Events class type.
@@ -145,7 +131,7 @@ public class Event implements Serializable, Comparable<Event>
 	 */
 	public String getClassTypeString()
 	{
-		return classType.getClassName();
+		return classType.getClassType();
 	}
 
 	/**
@@ -244,22 +230,11 @@ public class Event implements Serializable, Comparable<Event>
 	 * Sets the Events class type.
 	 * 
 	 * @param classType
-	 *            is what the Events class type will be set to.
-	 */
-	public void setClassType(String classType)
-	{
-		this.classType.setClassName(classType);
-	}
-
-	/**
-	 * Sets the Events class name.
-	 * 
-	 * @param className
 	 *            is what the Events class name will be set to.
 	 */
-	public void setClassName(String className)
+	public void setClassType(String classType) throws NullPointerException
 	{
-		this.className = className;
+		this.classType.setClassType(classType);
 	}
 
 	/**
@@ -268,7 +243,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param startDate
 	 *            is what the Events start date will be set to.
 	 */
-	public void setStartDate(MyDate startDate)
+	public void setStartDate(MyDate startDate) throws NullPointerException
 	{
 		this.startDate = startDate;
 	}
@@ -279,7 +254,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param endDate
 	 *            is what the Events end date will be set to.
 	 */
-	public void setEndDate(MyDate endDate)
+	public void setEndDate(MyDate endDate) throws NullPointerException
 	{
 		this.endDate = endDate;
 	}
@@ -290,7 +265,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param startTime
 	 *            is what the Events starting time will be set to.
 	 */
-	public void setStartTime(MyClock startTime)
+	public void setStartTime(MyClock startTime) throws NullPointerException
 	{
 		this.startTime = startTime;
 	}
@@ -301,7 +276,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param endTime
 	 *            is what the Events ending time will be set to.
 	 */
-	public void setEndTime(MyClock endTime)
+	public void setEndTime(MyClock endTime) throws NullPointerException
 	{
 		this.endTime = endTime;
 	}
@@ -313,7 +288,7 @@ public class Event implements Serializable, Comparable<Event>
 	 *            is where the members will be placed into the attending members
 	 *            list by counting up one time.
 	 */
-	public void setMembersList(ArrayList<Member> attendingMembersList)
+	public void setMembersList(ArrayList<Member> attendingMembersList) throws NullPointerException
 	{
 		this.attendingMembersList = new ArrayList<Member>(attendingMembersList.size());
 
@@ -328,7 +303,7 @@ public class Event implements Serializable, Comparable<Event>
 	 *            is where the instructors will be placed into the attending
 	 *            instructors list to by counting up one time.
 	 */
-	public void setInstructorsList(ArrayList<Instructor> attendingInstructorsList)
+	public void setInstructorsList(ArrayList<Instructor> attendingInstructorsList) throws NullPointerException
 	{
 		this.attendingInstructorsList = new ArrayList<Instructor>(attendingInstructorsList.size());
 
@@ -343,14 +318,12 @@ public class Event implements Serializable, Comparable<Event>
 	 *            is assigned to the Event if he/she is qualified for that given
 	 *            Event.
 	 */
-	public void assignInstructorToEvent(Instructor instructor)
+	public void assignInstructorToEvent(Instructor instructor) throws NullPointerException
 	{
 		for (int i = 0; i < instructor.getQualifiedClassesList().size(); i++)
-		{
-			if (instructor.getQualifiedClassesList().get(i).getClassName().equals(getClassTypeString())
+			if (instructor.getQualifiedClassesList().get(i).getClassType().equals(getClassTypeString())
 					&& getInstructorIsAvailable(instructor))
 				attendingInstructorsList.add(instructor);
-		}
 	}
 
 	/**
@@ -359,7 +332,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param member
 	 *            is assigned to the Event if he/she is a premium member.
 	 */
-	public void assignMemberToEvent(Member member)
+	public void assignMemberToEvent(Member member) throws NullPointerException
 	{
 		if (member.getIsPremium())
 			attendingMembersList.add(member);
@@ -371,7 +344,7 @@ public class Event implements Serializable, Comparable<Event>
 	 * @param instructor
 	 *            is being removed from the attending instructor list.
 	 */
-	public void removeInstructorFromEvent(Instructor instructor)
+	public void removeInstructorFromEvent(Instructor instructor) throws NullPointerException
 	{
 		attendingInstructorsList.remove(instructor);
 	}
@@ -390,7 +363,7 @@ public class Event implements Serializable, Comparable<Event>
 			return false;
 
 		Event other = (Event) obj;
-		return (other.className.equals(className) && other.maxMembers == maxMembers && other.startDate.equals(startDate)
+		return (other.classType.equals(classType) && other.maxMembers == maxMembers && other.startDate.equals(startDate)
 				&& other.endDate.equals(endDate) && other.startTime.equals(startTime) && other.endTime.equals(endTime)
 				&& other.classType.equals(classType) && other.eventID == eventID);
 	}
@@ -401,30 +374,24 @@ public class Event implements Serializable, Comparable<Event>
 		String nameTab = "";
 		String classTypeTab = "";
 		String dateTab = "\t\t";
-		if (className.length() >= 8 && className.length() < 16)
-		{
+		if (classType.getClassType().length() >= 8 && classType.getClassType().length() < 16)
 			nameTab = "\t\t";
-		} else if (className.length() >= 16)
-		{
+		else if (classType.getClassType().length() >= 16)
 			nameTab = "\t";
-		} else
+		else
 			nameTab = "\t\t\t";
 
-		if (classType.getClassName().length() >= 8 && classType.getClassName().length() < 16)
-		{
+		if (classType.getClassType().length() >= 8 && classType.getClassType().length() < 16)
 			classTypeTab = "\t";
-		} else if (classType.getClassName().length() >= 16)
-		{
+		else if (classType.getClassType().length() >= 16)
 			classTypeTab = "\t\t";
-		} else
+		else
 			classTypeTab = "\t\t";
 
 		if (startDate.toString().length() < 8)
-		{
 			dateTab = "\t\t";
-		}
 
-		String str = "<html><pre style='font-size:11px'>" + className + nameTab + classType + classTypeTab + "     "
+		String str = "<html><pre style='font-size:11px'>" + classType + nameTab + classType + classTypeTab + "     "
 				+ maxMembers + "\t\t     " + startDate + dateTab + startTime + " - " + endTime + "</pre></html>";
 		return str;
 	}
@@ -438,28 +405,22 @@ public class Event implements Serializable, Comparable<Event>
 	{
 		String nameTab = "";
 		String dateTab = "";
-		if (className.length() >= 8 && className.length() < 16)
-		{
+		if (classType.getClassType().length() >= 8 && classType.getClassType().length() < 16)
 			nameTab = "\t\t";
-		} else if (className.length() >= 16)
-		{
+		else if (classType.getClassType().length() >= 16)
 			nameTab = "\t";
-		} else
+		else
 			nameTab = "\t\t\t";
 		if (startDate.toString().length() == 5)
-		{
 			dateTab = "    ";
-		} else if (startDate.toString().length() == 6)
-		{
+		else if (startDate.toString().length() == 6)
 			dateTab = "   ";
-		} else if (startDate.toString().length() == 7)
-		{
+		else if (startDate.toString().length() == 7)
 			dateTab = "  ";
-		} else if (startDate.toString().length() == 8)
-		{
+		else if (startDate.toString().length() == 8)
 			dateTab = " ";
-		}
-		String str = "<html><pre style='font-size:10px'>" + className + nameTab + getCurrentSignedUp() + "/"
+
+		String str = "<html><pre style='font-size:10px'>" + classType + nameTab + getCurrentSignedUp() + "/"
 				+ getMaxMembers() + "\t\t\t\t\t\t\t\t\t\t" + eventID + "\n" + startDate + dateTab + "  from  "
 				+ startTime + " - " + endTime + "</pre></html>";
 		return str;

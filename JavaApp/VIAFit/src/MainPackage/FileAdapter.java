@@ -27,23 +27,38 @@ public class FileAdapter
 	private InstructorsList instructorsList;
 	private ClassTypesList classTypesList;
 
-	public FileAdapter()
+	public FileAdapter() throws FileNotFoundException, ClassNotFoundException, EOFException, IOException
 	{
 		eventsListBinFileName = "allEvents.bin";
 		instructorsListBinFileName = "allInstructors.bin";
 		membersListBinFileName = "allMembers.bin";
 		classTypeListBinFileName = "allClassTypes.bin";
 
-		//TODO Should i create a new events list or read it from file adapter?????
-		/// CHECK OR COPY
-		onGoingEventsList = new ArrayList<Event>();
-		upComingEventsList = new ArrayList<Event>();
-		eventsList = new EventsList();
-		membersList = new MembersList();
-		instructorsList = new InstructorsList();
-		classTypesList = new ClassTypesList();
 		myFileIO = new MyFileIO();
 
+		/// CHECK if lists already exists and copy OR create new lists
+		if (myFileIO.readObjectFromFile(eventsListBinFileName) == null)
+			eventsList = new EventsList();
+		else
+			updateEventsList();
+
+		if (myFileIO.readObjectFromFile(membersListBinFileName) == null)
+			membersList = new MembersList();
+		else
+			updateMembersList();
+
+		if (myFileIO.readObjectFromFile(instructorsListBinFileName) == null)
+			instructorsList = new InstructorsList();
+		else
+			updateInstructorsList();
+
+		if (myFileIO.readObjectFromFile(classTypeListBinFileName) == null)
+			classTypesList = new ClassTypesList();
+		else
+			updateInstructorsList();
+
+		onGoingEventsList = new ArrayList<Event>();
+		upComingEventsList = new ArrayList<Event>();
 	}
 
 	/**
@@ -115,31 +130,47 @@ public class FileAdapter
 		onGoingEventsList.clear();
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
-		ArrayList<Event> temp = eventsList.getEventsList();
 		MyDate today = MyDate.today();
+
+		ArrayList<Event> temp = new ArrayList<Event>();
+		for (int i = 0; i < eventsList.getEventsList().size(); i++)
+			temp.add(eventsList.getEventsList().get(i));
+
+		Event currentEvent;
+
 		MyClock thisEventStartTime;
 		MyClock thisEventEndTime;
 		MyDate thisEventStartDate;
+		MyDate thisEventEndDate;
 
 		for (int i = 0; i < temp.size(); i++)
-
 		{
-			thisEventStartTime = temp.get(i).getStartTime();
-			thisEventEndTime = temp.get(i).getEndTime();
-			thisEventStartDate = temp.get(i).getStartDate();
+			currentEvent = temp.get(i);
 
-			boolean eventIsToday = thisEventStartDate.getDay() == today.getDay()
-					&& thisEventStartDate.getMonth() == today.getMonth()
-					&& thisEventStartDate.getYear() == today.getYear();
-			boolean eventStarted = thisEventStartTime.getHour() <= currentTime.getHour();
-			boolean eventDidNotFinish = thisEventEndTime.getHour() > currentTime.getHour();
-			boolean eventFinished = thisEventEndTime.getHour() < currentTime.getHour();
-			boolean containsEvent = onGoingEventsList.contains(temp.get(i));
+			thisEventStartTime = currentEvent.getStartTime();
+			thisEventEndTime = currentEvent.getEndTime();
+			thisEventStartDate = currentEvent.getStartDate();
+			thisEventEndDate = currentEvent.getEndDate();
 
-			if (eventIsToday && eventStarted && eventDidNotFinish && !containsEvent)
-			{
-				onGoingEventsList.add(temp.get(i));
-			} else if (containsEvent && eventFinished)
+			boolean eventIsToday = thisEventStartDate.compareTo(today) == 0;
+
+			boolean eventStartedPastDate = thisEventStartDate.compareTo(today) < 0;
+			boolean eventStarted = (eventStartedPastDate
+					| (eventIsToday && thisEventStartTime.compareTo(currentTime) <= 0));
+
+			boolean eventFinishedFutureDate = thisEventEndDate.compareTo(today) > 0;
+			boolean eventDidNotFinish = (eventFinishedFutureDate
+					| (eventIsToday && thisEventEndTime.compareTo(currentTime) > 0));
+
+			boolean eventFinishedPastDate = thisEventEndDate.compareTo(today) < 0;
+			boolean eventFinished = (eventFinishedPastDate
+					| (eventIsToday && thisEventEndTime.compareTo(currentTime) <= 0));
+
+			boolean containsEvent = onGoingEventsList.contains(currentEvent);
+
+			if (eventStarted && eventDidNotFinish && !containsEvent)
+				onGoingEventsList.add(currentEvent);
+			else if (containsEvent && eventFinished)
 				onGoingEventsList.remove(i);
 		}
 	}
@@ -154,61 +185,41 @@ public class FileAdapter
 		int maxUpcomingEvents = 30;
 		GregorianCalendar calendar = new GregorianCalendar();
 		MyClock currentTime = new MyClock(calendar.get(GregorianCalendar.HOUR_OF_DAY), 0, 0);
-		ArrayList<Event> temp = eventsList.getEventsList();
 		MyDate today = MyDate.today();
-		Event currentEvent;
 
-		MyClock thisEventStartTime;
-		MyClock thisEventEndTime;
+		ArrayList<Event> temp = new ArrayList<Event>();
+		for (int i = 0; i < eventsList.getEventsList().size(); i++)
+			temp.add(eventsList.getEventsList().get(i));
+
+		Event currentEvent;
 
 		MyDate thisEventStartDate;
 		MyDate thisEventEndDate;
+		MyClock thisEventStartTime;
 
 		for (int i = 0; i < temp.size(); i++)
 		{
-
 			currentEvent = temp.get(i);
-			thisEventStartTime = currentEvent.getStartTime();
-			thisEventEndTime = currentEvent.getEndTime();
 			thisEventStartDate = currentEvent.getStartDate();
 			thisEventEndDate = currentEvent.getEndDate();
+			thisEventStartTime = currentEvent.getStartTime();
 
-			boolean eventIsUpcomingYears = thisEventStartDate.getYear() > today.getYear();
-			boolean eventIsUpcomingMonths = thisEventStartDate.getMonth() > today.getMonth();
-			boolean eventIsUpcomingDays = thisEventStartDate.getDay() > today.getDay();
-			boolean eventIsUpcomingHours = thisEventStartTime.getHour() > currentTime.getHour();
+			boolean eventIsUpcomingDate = thisEventStartDate.compareTo(today) > 0;
+			boolean eventIsToday = thisEventStartDate.compareTo(today) == 0;
+			boolean eventIsUpcomingTime = thisEventStartTime.compareTo(currentTime) > 0;
+			boolean eventStartedPastDate = thisEventEndDate.compareTo(today) < 0;
+			boolean eventStarted = (eventStartedPastDate
+					| (eventIsToday && thisEventStartTime.compareTo(currentTime) <= 0));
 			boolean containsEvent = upComingEventsList.contains(currentEvent);
 			// adding future events (30 max)
 			if (upComingEventsList.size() < maxUpcomingEvents && !containsEvent)
 			{
-				if (eventIsUpcomingYears)
+				if (eventIsUpcomingDate)
 					upComingEventsList.add(currentEvent);
-				else if (eventIsUpcomingMonths)
+				else if (eventIsToday && eventIsUpcomingTime)
 					upComingEventsList.add(currentEvent);
-				else if (eventIsUpcomingDays)
-					upComingEventsList.add(currentEvent);
-				else if (eventIsUpcomingHours)
-					upComingEventsList.add(currentEvent);
-			}
-
-			boolean eventWasBeforeThisYear = thisEventEndDate.getYear() < today.getYear();
-			boolean eventWasBeforeThisMonth = thisEventEndDate.getMonth() < today.getMonth();
-			boolean eventWasBeforeThisDay = thisEventEndDate.getDay() < today.getDay();
-			boolean eventWasBeforeThisHour = thisEventEndTime.getHour() < currentTime.getHour();
-
-			// removing old events
-			if (upComingEventsList.contains(currentEvent))
-			{
-				if (eventWasBeforeThisYear)
-					upComingEventsList.remove(currentEvent);
-				else if (eventWasBeforeThisMonth)
-					upComingEventsList.remove(currentEvent);
-				else if (eventWasBeforeThisDay)
-					upComingEventsList.remove(currentEvent);
-				else if (eventWasBeforeThisHour)
-					upComingEventsList.remove(currentEvent);
-			}
-
+			} else if (containsEvent && eventStarted)
+				upComingEventsList.remove(currentEvent);
 		}
 
 		// sorting events
@@ -409,10 +420,10 @@ public class FileAdapter
 			if (obj instanceof ArrayList<?>)
 			{
 				ArrayList<?> all = (ArrayList<?>) obj;
+
 				for (int i = 0; i < all.size(); i++)
 					tempList.add((Member) all.get(i));
 			}
-
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
@@ -425,9 +436,7 @@ public class FileAdapter
 		{
 			// e.printStackTrace();
 			System.out.println("Members List Binary File reached end of line");
-		}
-
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -451,10 +460,10 @@ public class FileAdapter
 			if (obj instanceof ArrayList<?>)
 			{
 				ArrayList<?> all = (ArrayList<?>) obj;
+
 				for (int i = 0; i < all.size(); i++)
 					tempList.add((Instructor) all.get(i));
 			}
-
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
@@ -469,7 +478,6 @@ public class FileAdapter
 			System.out.println("Instructor List Binary File reached end of line");
 			// TODO
 		} catch (IOException e)
-
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -493,12 +501,10 @@ public class FileAdapter
 			if (obj instanceof ArrayList<?>)
 			{
 				ArrayList<?> all = (ArrayList<?>) obj;
-				for (int i = 0; i < all.size(); i++)
-				{
-					tempList.add((Event) all.get(i));
-				}
-			}
 
+				for (int i = 0; i < all.size(); i++)
+					tempList.add((Event) all.get(i));
+			}
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
@@ -511,9 +517,7 @@ public class FileAdapter
 		{
 			// e.printStackTrace();
 			System.out.println("Events List Binary File reached end of line");
-		}
-
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -537,10 +541,10 @@ public class FileAdapter
 			if (obj instanceof ArrayList<?>)
 			{
 				ArrayList<?> all = (ArrayList<?>) obj;
+
 				for (int i = 0; i < all.size(); i++)
 					tempList.add((ClassType) all.get(i));
 			}
-
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
@@ -552,10 +556,8 @@ public class FileAdapter
 		} catch (EOFException e)
 		{
 			// e.printStackTrace();
-			System.out.println("EventsType List Binary File reached end of line");
-		}
-
-		catch (IOException e)
+			System.out.println("Class Type List Binary File reached end of line");
+		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

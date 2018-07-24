@@ -13,7 +13,7 @@ public class ClassType implements Serializable
 	 * Generated serial version UID
 	 */
 	private static final long serialVersionUID = -7574607274053354338L;
-	private String className;
+	private String classType;
 
 	/**
 	 * One-argument constructor.
@@ -21,9 +21,9 @@ public class ClassType implements Serializable
 	 * @param className
 	 *            is the ClassType classes name.
 	 */
-	public ClassType(String className)
+	public ClassType(String className) throws NullPointerException
 	{
-		this.className = className;
+		this.classType = className;
 	}
 
 	/**
@@ -31,9 +31,9 @@ public class ClassType implements Serializable
 	 * 
 	 * @return the ClassTypes class name.
 	 */
-	public String getClassName()
+	public String getClassType()
 	{
-		return className;
+		return classType;
 	}
 
 	/**
@@ -42,9 +42,9 @@ public class ClassType implements Serializable
 	 * @param className
 	 *            is what the ClassTypes class name will be set to.
 	 */
-	public void setClassName(String className)
+	public void setClassType(String className) throws NullPointerException
 	{
-		this.className = className;
+		this.classType = className;
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class ClassType implements Serializable
 	 *            the object to compare with
 	 * @return true if the given object is equal to this ClassType.
 	 */
-	public boolean equals(Object obj)
+	public boolean equals(Object obj) throws NullPointerException
 	{
 		if (!(obj instanceof ClassType))
 		{
@@ -62,7 +62,7 @@ public class ClassType implements Serializable
 		}
 		ClassType temp = (ClassType) obj;
 
-		return className.equals(temp.className);
+		return classType.equals(temp.classType);
 	}
 
 	/**
@@ -72,6 +72,6 @@ public class ClassType implements Serializable
 	 */
 	public String toString()
 	{
-		return className;
+		return classType;
 	}
 }

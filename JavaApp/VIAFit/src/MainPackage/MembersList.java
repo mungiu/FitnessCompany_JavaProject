@@ -43,9 +43,12 @@ public class MembersList implements Serializable
 	 * @param membersList
 	 *            is what MemberList, members list will be set to.
 	 */
-	public void setMembersList(ArrayList<Member> membersList)
+	public void setMembersList(ArrayList<Member> membersList) throws NullPointerException
 	{
-		this.membersList = membersList;
+		this.membersList.clear();
+
+		for (int i = 0; i < membersList.size(); i++)
+			this.membersList.add(membersList.get(i));
 	}
 
 	/**
@@ -54,7 +57,7 @@ public class MembersList implements Serializable
 	 * @param biggest
 	 *            is what the MembersList last member ID number will be set to.
 	 */
-	public void setLastMemberID(int biggest)
+	public void setLastMemberID(int biggest) throws NullPointerException
 	{
 		lastMemberID = biggest;
 	}

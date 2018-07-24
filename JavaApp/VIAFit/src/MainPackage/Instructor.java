@@ -64,7 +64,7 @@ public class Instructor implements Serializable
 	 * @param name
 	 *            is what the instructors first name will be set to.
 	 */
-	public void setName(String name)
+	public void setName(String name) throws NullPointerException
 	{
 		this.name = name;
 	}
@@ -115,7 +115,7 @@ public class Instructor implements Serializable
 
 		if (qualifiedForList.size() != 0)
 			for (int i = 0; i < qualifiedForList.size(); i++)
-				list += qualifiedForList.get(i).getClassName() + ", ";
+				list += qualifiedForList.get(i).getClassType() + ", ";
 
 		if (name.length() >= 16 && name.length() < 25)
 			nameTab = "\t";

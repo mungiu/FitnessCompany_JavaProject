@@ -36,7 +36,7 @@ public class EventsList implements Serializable
 	 * @return temp An ArrayList<Event> containing all upcoming and ongoing events
 	 *         the given member attended
 	 */
-	public ArrayList<Event> getAllAttendingEventsForMember(Member member)
+	public ArrayList<Event> getAllAttendingEventsForMember(Member member) throws NullPointerException
 	{
 		ArrayList<Event> temp = new ArrayList<Event>();
 
@@ -55,12 +55,12 @@ public class EventsList implements Serializable
 	 *            A String to compare class type
 	 * @return allEventOfType an ArrayList<Event>
 	 */
-	public ArrayList<Event> getAllEventsOfType(String input)
+	public ArrayList<Event> getAllEventsOfType(String input) throws NullPointerException
 	{
 		ArrayList<Event> allEventOfType = new ArrayList<Event>();
 
 		for (int i = 0; i < eventsList.size(); i++)
-			if (eventsList.get(i).getClassType().equals(input))
+			if (eventsList.get(i).getClassTypeString().equals(input))
 				allEventOfType.add(eventsList.get(i));
 
 		return allEventOfType;
@@ -72,13 +72,12 @@ public class EventsList implements Serializable
 	 * @param eventsList
 	 *            is what the EventsList event list will be set to.
 	 */
-	public void setEventsList(ArrayList<Event> eventsList)
+	public void setEventsList(ArrayList<Event> eventsList) throws NullPointerException
 	{
 		this.eventsList.clear();
+
 		for (int i = 0; i < eventsList.size(); i++)
-		{
 			this.eventsList.add(eventsList.get(i));
-		}
 	}
 
 }

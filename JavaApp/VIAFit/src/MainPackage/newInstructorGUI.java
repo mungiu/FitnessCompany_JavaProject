@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -295,7 +298,7 @@ public class newInstructorGUI extends JFrame
 	///////////////////////////////////// GUI
 	///////////////////////////////////// ///////////////////////////////////////
 
-	public newInstructorGUI()
+	public newInstructorGUI() throws FileNotFoundException, ClassNotFoundException, EOFException, IOException
 	{
 
 		super("Instructor - ViaFit Fitness centre");

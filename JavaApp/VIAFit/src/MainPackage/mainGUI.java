@@ -15,6 +15,9 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EventListener;
 
@@ -116,77 +119,119 @@ public class mainGUI extends JFrame
 		public void actionPerformed(ActionEvent e)
 		{
 			if (e.getSource() == about)
-			{
 				JOptionPane.showMessageDialog(null,
 						"This is a program written by Group 1 for the SEP1 Project.\nMade for ViaFit Fitness Centre.\nVersion 1.0",
 						"About", JOptionPane.PLAIN_MESSAGE);
-			}
 			if (e.getSource() == exitButton)
-			{
 				System.exit(0);
-			}
 			if (e.getSource() == eventNew)
 			{
-				newEventGUI g = new newEventGUI();
-				g.editEventArea(true);
-				fileAdapter.updateEventsList();
-				fileAdapter.updateClassTypesList();
-				if (fileAdapter.getEventsList().getEventsList().size() != 0)
+				try
 				{
-					int biggest = 0;
-					for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
+					newEventGUI g = new newEventGUI();
+
+					g.editEventArea(true);
+					fileAdapter.updateEventsList();
+					fileAdapter.updateClassTypesList();
+					if (fileAdapter.getEventsList().getEventsList().size() != 0)
 					{
-						if (fileAdapter.getEventsList().getEventsList().get(i).getEventID() >= biggest)
-						{
-							biggest = fileAdapter.getEventsList().getEventsList().get(i).getEventID();
-						}
-					}
-					g.getEventIDInput().setText(biggest + 1 + "");
-				} else
+						int biggest = 0;
+						for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
+							if (fileAdapter.getEventsList().getEventsList().get(i).getEventID() >= biggest)
+								biggest = fileAdapter.getEventsList().getEventsList().get(i).getEventID();
+						g.getEventIDInput().setText(biggest + 1 + "");
+					} else
+						g.getEventIDInput().setText(1 + "");
+				} catch (FileNotFoundException e1)
 				{
-					g.getEventIDInput().setText(1 + "");
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (EOFException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
+
 			if (e.getSource() == memberNew)
 			{
-				newMemberGUI g = new newMemberGUI();
-				g.editMemberGUI(true);
-				fileAdapter.updateMembersList();
-				if (fileAdapter.getMembersList().getMembersList().size() != 0)
+				try
 				{
-					int biggest = 0;
-					for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
+					newMemberGUI g = new newMemberGUI();
+
+					g.editMemberGUI(true);
+					fileAdapter.updateMembersList();
+					if (fileAdapter.getMembersList().getMembersList().size() != 0)
 					{
-						if (fileAdapter.getMembersList().getMembersList().get(i).getMemberID() >= biggest)
-						{
-							biggest = fileAdapter.getMembersList().getMembersList().get(i).getMemberID();
-						}
-					}
-					g.getMemberIDInput().setText(biggest + 1 + "");
-				} else
+						int biggest = 0;
+						for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
+							if (fileAdapter.getMembersList().getMembersList().get(i).getMemberID() >= biggest)
+								biggest = fileAdapter.getMembersList().getMembersList().get(i).getMemberID();
+						g.getMemberIDInput().setText(biggest + 1 + "");
+					} else
+						g.getMemberIDInput().setText(1 + "");
+				} catch (FileNotFoundException e1)
 				{
-					g.getMemberIDInput().setText(1 + "");
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (EOFException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
+
 			if (e.getSource() == instructorNew)
 			{
-				newInstructorGUI g = new newInstructorGUI();
-				g.editInstructorArea(true);
-				fileAdapter.updateInstructorsList();
-				if (fileAdapter.getInstructorsList().getInstructorsList().size() != 0)
+				try
 				{
-					int biggest = 0;
-					for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
+					newInstructorGUI g = new newInstructorGUI();
+
+					g.editInstructorArea(true);
+					fileAdapter.updateInstructorsList();
+					if (fileAdapter.getInstructorsList().getInstructorsList().size() != 0)
 					{
-						if (fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID() >= biggest)
-						{
-							biggest = fileAdapter.getInstructorsList().getInstructorsList().get(i).getInstructorID();
-						}
-					}
-					g.getInstructorIDInput().setText(biggest + 1 + "");
-				} else
+						int biggest = 0;
+						for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
+							if (fileAdapter.getInstructorsList().getInstructorsList().get(i)
+									.getInstructorID() >= biggest)
+								biggest = fileAdapter.getInstructorsList().getInstructorsList().get(i)
+										.getInstructorID();
+						g.getInstructorIDInput().setText(biggest + 1 + "");
+					} else
+						g.getInstructorIDInput().setText(1 + "");
+				} catch (FileNotFoundException e1)
 				{
-					g.getInstructorIDInput().setText(1 + "");
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (EOFException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 			if (e.getSource() == eventAll)
@@ -194,9 +239,8 @@ public class mainGUI extends JFrame
 				fileAdapter.updateEventsList();
 				listBigInfoBox.clear();
 				for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-				{
 					listBigInfoBox.addElement(fileAdapter.getEventsList().getEventsList().get(i));
-				}
+
 				searchOption.setSelectedIndex(2);
 			}
 			if (e.getSource() == memberAll)
@@ -204,9 +248,8 @@ public class mainGUI extends JFrame
 				fileAdapter.updateMembersList();
 				listBigInfoBox.clear();
 				for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
-				{
 					listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
-				}
+
 				searchOption.setSelectedIndex(0);
 			}
 			if (e.getSource() == instructorAll)
@@ -214,9 +257,8 @@ public class mainGUI extends JFrame
 				fileAdapter.updateInstructorsList();
 				listBigInfoBox.clear();
 				for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
-				{
 					listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
-				}
+
 				searchOption.setSelectedIndex(1);
 			}
 			if (e.getSource() == searchButton || e.getSource() == search)
@@ -231,14 +273,12 @@ public class mainGUI extends JFrame
 						fileAdapter.updateMembersList();
 						listBigInfoBox.clear();
 						for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
-						{
 							listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
-						}
+
 						searchOption.setSelectedIndex(0);
 					} else
 					{
 						for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
-						{
 							if (fileAdapter.getMembersList().getMembersList().get(i).getName().toLowerCase()
 									.contains(search.getText().toLowerCase())
 									|| fileAdapter.getMembersList().getMembersList().get(i).getEMail()
@@ -251,13 +291,11 @@ public class mainGUI extends JFrame
 							{
 								tempFound1.add(fileAdapter.getMembersList().getMembersList().get(i));
 							}
-						}
 
 						listBigInfoBox.clear();
+
 						for (int j = 0; j < tempFound1.size(); j++)
-						{
 							listBigInfoBox.addElement(tempFound1.get(j));
-						}
 					}
 				}
 				if (searchOption.getSelectedItem().toString().equals("Instructor"))
@@ -270,14 +308,12 @@ public class mainGUI extends JFrame
 						fileAdapter.updateInstructorsList();
 						listBigInfoBox.clear();
 						for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
-						{
 							listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
-						}
+
 						searchOption.setSelectedIndex(1);
 					} else
 					{
 						for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
-						{
 							if (fileAdapter.getInstructorsList().getInstructorsList().get(i).getName().toLowerCase()
 									.contains(search.getText().toLowerCase())
 									|| (checkIfOnlyInts(search.getText())
@@ -286,13 +322,11 @@ public class mainGUI extends JFrame
 							{
 								tempFound1.add(fileAdapter.getInstructorsList().getInstructorsList().get(i));
 							}
-						}
 
 						listBigInfoBox.clear();
+
 						for (int j = 0; j < tempFound1.size(); j++)
-						{
 							listBigInfoBox.addElement(tempFound1.get(j));
-						}
 					}
 				}
 				if (searchOption.getSelectedItem().toString().equals("Event"))
@@ -305,15 +339,13 @@ public class mainGUI extends JFrame
 						fileAdapter.updateEventsList();
 						listBigInfoBox.clear();
 						for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-						{
 							listBigInfoBox.addElement(fileAdapter.getEventsList().getEventsList().get(i));
-						}
+
 						searchOption.setSelectedIndex(2);
 					} else
 					{
 						for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-						{
-							if (fileAdapter.getEventsList().getEventsList().get(i).getClassName().toLowerCase()
+							if (fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString().toLowerCase()
 									.contains(search.getText().toLowerCase())
 									|| fileAdapter.getEventsList().getEventsList().get(i).getClassTypeString()
 											.toLowerCase().contains(search.getText().toLowerCase())
@@ -323,13 +355,10 @@ public class mainGUI extends JFrame
 
 								tempFound.add(fileAdapter.getEventsList().getEventsList().get(i));
 							}
-						}
 
 						listBigInfoBox.clear();
 						for (int j = 0; j < tempFound.size(); j++)
-						{
 							listBigInfoBox.addElement(tempFound.get(j));
-						}
 					}
 				}
 			}
@@ -341,20 +370,77 @@ public class mainGUI extends JFrame
 					if (searchOption.getSelectedItem().toString().equals("Member"))
 					{
 						Member temp = (Member) bigInfoBox.getSelectedValue();
-						newMemberGUI tempWindow = new newMemberGUI();
-						tempWindow.fillWithMember(temp);
+						try
+						{
+							newMemberGUI tempWindow = new newMemberGUI();
+							tempWindow.fillWithMember(temp);
+						} catch (FileNotFoundException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClassNotFoundException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (EOFException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 					if (searchOption.getSelectedItem().toString().equals("Instructor"))
 					{
 						Instructor temp = (Instructor) bigInfoBox.getSelectedValue();
-						newInstructorGUI tempWindow = new newInstructorGUI();
-						tempWindow.fillWithInstructor(temp);
+						try
+						{
+							newInstructorGUI tempWindow = new newInstructorGUI();
+							tempWindow.fillWithInstructor(temp);
+						} catch (FileNotFoundException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClassNotFoundException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (EOFException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 					if (searchOption.getSelectedItem().toString().equals("Event"))
 					{
 						Event temp = (Event) bigInfoBox.getSelectedValue();
-						newEventGUI tempWindow = new newEventGUI();
-						tempWindow.fillWithEvent(temp);
+						try
+						{
+							newEventGUI tempWindow = new newEventGUI();
+							tempWindow.fillWithEvent(temp);
+						} catch (FileNotFoundException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClassNotFoundException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (EOFException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				}
 			}
@@ -364,15 +450,31 @@ public class mainGUI extends JFrame
 				{
 					Event temp = null;
 					for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-					{
 						if (fileAdapter.getEventsList().getEventsList().get(i).toSmallString()
 								.equals(upcomingEvents.getSelectedValue()))
-						{
 							temp = fileAdapter.getEventsList().getEventsList().get(i);
-						}
+
+					try
+					{
+						newEventGUI tempWindow = new newEventGUI();
+						tempWindow.fillWithEvent(temp);
+					} catch (FileNotFoundException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ClassNotFoundException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (EOFException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-					newEventGUI tempWindow = new newEventGUI();
-					tempWindow.fillWithEvent(temp);
 				}
 			}
 			if (e.getSource() == ongoingDetails)
@@ -381,15 +483,31 @@ public class mainGUI extends JFrame
 				{
 					Event temp = null;
 					for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-					{
 						if (fileAdapter.getEventsList().getEventsList().get(i).toSmallString()
 								.equals(ongoingEvents.getSelectedValue()))
-						{
 							temp = fileAdapter.getEventsList().getEventsList().get(i);
-						}
+
+					try
+					{
+						newEventGUI tempWindow = new newEventGUI();
+						tempWindow.fillWithEvent(temp);
+					} catch (FileNotFoundException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ClassNotFoundException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (EOFException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-					newEventGUI tempWindow = new newEventGUI();
-					tempWindow.fillWithEvent(temp);
 				}
 			}
 			if (e.getSource() == searchOption)
@@ -397,17 +515,11 @@ public class mainGUI extends JFrame
 				if (listBigInfoBox.isEmpty() == false)
 				{
 					if (searchOption.getSelectedIndex() == 0 && listBigInfoBox.getElementAt(0) instanceof Member)
-					{
 						setTopLabel(searchOption.getSelectedItem().toString());
-					}
 					if (searchOption.getSelectedIndex() == 1 && listBigInfoBox.getElementAt(0) instanceof Instructor)
-					{
 						setTopLabel(searchOption.getSelectedItem().toString());
-					}
 					if (searchOption.getSelectedIndex() == 2 && listBigInfoBox.getElementAt(0) instanceof Event)
-					{
 						setTopLabel(searchOption.getSelectedItem().toString());
-					}
 				}
 			}
 		}
@@ -417,9 +529,8 @@ public class mainGUI extends JFrame
 			if (e.getSource() == search)
 			{
 				if (search.getText().equals("Search"))
-				{
 					search.setText("");
-				} else
+				else
 					search.setText(search.getText());
 			}
 		}
@@ -427,12 +538,8 @@ public class mainGUI extends JFrame
 		public void focusLost(FocusEvent e)
 		{
 			if (e.getSource() == search)
-			{
 				if (search.getText().equals(""))
-				{
 					search.setText("Search");
-				}
-			}
 		}
 	}
 
@@ -470,15 +577,15 @@ public class mainGUI extends JFrame
 		{
 			if (e.getSource() == ongoingEvents)
 			{
-				// what should happen here
+				// TODO what should happen here
 			}
 			if (e.getSource() == upcomingEvents)
 			{
-				// what should happen here
+				// TODO what should happen here
 			}
 			if (e.getSource() == bigInfoBox)
 			{
-				// what should happen here
+				// TODO what should happen here
 			}
 		}
 	}
@@ -496,9 +603,8 @@ public class mainGUI extends JFrame
 			fileAdapter.updateEventsList();
 			listBigInfoBox.clear();
 			for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-			{
 				listBigInfoBox.addElement(fileAdapter.getEventsList().getEventsList().get(i));
-			}
+
 			searchOption.setSelectedIndex(2);
 		}
 		if (type.equals("Member"))
@@ -506,9 +612,8 @@ public class mainGUI extends JFrame
 			fileAdapter.updateMembersList();
 			listBigInfoBox.clear();
 			for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
-			{
 				listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
-			}
+
 			searchOption.setSelectedIndex(0);
 		}
 		if (type.equals("Instructor"))
@@ -516,9 +621,8 @@ public class mainGUI extends JFrame
 			fileAdapter.updateInstructorsList();
 			listBigInfoBox.clear();
 			for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
-			{
 				listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
-			}
+
 			searchOption.setSelectedIndex(1);
 		}
 	}
@@ -533,9 +637,8 @@ public class mainGUI extends JFrame
 		{
 			listOngoing = new DefaultListModel<String>();
 			for (int i = 0; i < fileAdapter.getOnGoingEventsList().size(); i++)
-			{
 				listOngoing.addElement(fileAdapter.getOnGoingEventsList().get(i).toSmallString());
-			}
+
 			ongoingEvents.setModel(listOngoing);
 		}
 	}
@@ -550,9 +653,8 @@ public class mainGUI extends JFrame
 		{
 			listUpcoming = new DefaultListModel<String>();
 			for (int i = 0; i < fileAdapter.getUpComingEventsList().size(); i++)
-			{
 				listUpcoming.addElement(fileAdapter.getUpComingEventsList().get(i).toSmallString());
-			}
+
 			upcomingEvents.setModel(listUpcoming);
 		}
 	}
@@ -560,21 +662,18 @@ public class mainGUI extends JFrame
 	public boolean checkIfOnlyInts(String text)
 	{
 		for (int i = 0; i < text.length(); i++)
-		{
 			if (!(text.charAt(i) == '1' || text.charAt(i) == '2' || text.charAt(i) == '3' || text.charAt(i) == '4'
 					|| text.charAt(i) == '5' || text.charAt(i) == '6' || text.charAt(i) == '7' || text.charAt(i) == '8'
 					|| text.charAt(i) == '9' || text.charAt(i) == '0'))
-			{
 				return false;
-			}
-		}
+
 		return true;
 	}
 
 	/////////////////////////////////////// GUI
 	/////////////////////////////////////// ///////////////////////////////////////
 
-	public mainGUI()
+	public mainGUI() throws FileNotFoundException, ClassNotFoundException, EOFException, IOException
 	{
 		super("ViaFit Fitness centre V. 1.0");
 
@@ -851,9 +950,7 @@ public class mainGUI extends JFrame
 				int yesno = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?",
 						"Confirm closing application", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (yesno == JOptionPane.YES_OPTION)
-				{
 					System.exit(0);
-				}
 			}
 		});
 

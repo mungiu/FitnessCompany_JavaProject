@@ -10,6 +10,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -463,7 +466,7 @@ public class newMemberGUI extends JFrame
 	/////////////////////////////////////// GUI
 	/////////////////////////////////////// ///////////////////////////////////////
 
-	public newMemberGUI()
+	public newMemberGUI() throws FileNotFoundException, ClassNotFoundException, EOFException, IOException
 	{
 		super("Member - ViaFit Fitness centre");
 

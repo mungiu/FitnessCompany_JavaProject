@@ -414,11 +414,11 @@ public class MyDate implements Serializable, Comparable<MyDate>
 	}
 
 	@Override
-	public int compareTo(MyDate date)
+	public int compareTo(MyDate date) throws NullPointerException
 	{
 		boolean thisDateIsSameYear = this.getYear() == date.getYear();
-		boolean thisDateIsSameMonth = this.getMonth() == date.getMonth();
-		boolean thisDateIsSameDay = this.getDay() == date.getDay();
+		boolean thisDateIsSameMonth = (thisDateIsSameYear && this.getMonth() == date.getMonth());
+		boolean thisDateIsSameDay = (thisDateIsSameMonth && this.getDay() == date.getDay());
 
 		boolean thisDateIsEarlierYear = this.getYear() < date.getYear();
 		boolean thisDateIsEarlierMonth = thisDateIsSameYear && this.getMonth() < date.getMonth();
@@ -426,7 +426,7 @@ public class MyDate implements Serializable, Comparable<MyDate>
 
 		if (thisDateIsEarlierYear | thisDateIsEarlierMonth | thisDateIsEarlierDay)
 			return -1;
-		else if (thisDateIsSameYear && thisDateIsSameMonth && thisDateIsSameDay)
+		else if (thisDateIsSameDay)
 			return 0;
 		else
 			return 1;

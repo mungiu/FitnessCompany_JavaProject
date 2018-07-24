@@ -33,8 +33,11 @@ public class InstructorsList implements Serializable
 	 * @param instructorsList
 	 *            is what the InstructorList instructor list will be set to.
 	 */
-	public void setInstructorsList(ArrayList<Instructor> instructorsList)
+	public void setInstructorsList(ArrayList<Instructor> instructorsList) throws NullPointerException
 	{
-		this.instructorsList = instructorsList;
+		this.instructorsList.clear();
+
+		for (int i = 0; i < instructorsList.size(); i++)
+			this.instructorsList.add(instructorsList.get(i));
 	}
 }

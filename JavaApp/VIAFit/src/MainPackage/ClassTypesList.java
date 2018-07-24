@@ -27,17 +27,17 @@ public class ClassTypesList implements Serializable
 	{
 		String[] temp = new String[1];
 		temp[0] = "Choose Event Type";
+
 		if (classTypesList != null)
 		{
 			temp = new String[classTypesList.size() + 1];
 			temp[0] = "Choose Event Type";
-			for (int i = 0; i < classTypesList.size(); i++)
-			{
-				temp[i + 1] = classTypesList.get(i).getClassName();
-			}
-		}
-		return temp;
 
+			for (int i = 0; i < classTypesList.size(); i++)
+				temp[i + 1] = classTypesList.get(i).getClassType();
+		}
+
+		return temp;
 	}
 
 	/**
@@ -55,13 +55,12 @@ public class ClassTypesList implements Serializable
 	 * 
 	 * @param classTypesList
 	 */
-	public void setClassTypesList(ArrayList<ClassType> classTypesList)
+	public void setClassTypesList(ArrayList<ClassType> classTypesList) throws NullPointerException
 	{
 		this.classTypesList.clear();
+
 		for (int i = 0; i < classTypesList.size(); i++)
-		{
 			this.classTypesList.add(classTypesList.get(i));
-		}
 	}
 
 }
