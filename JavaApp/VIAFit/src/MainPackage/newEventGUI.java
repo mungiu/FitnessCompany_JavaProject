@@ -107,6 +107,7 @@ public class newEventGUI extends JFrame
 	private JComboBox<String> instructorComboBottom;
 	private DefaultComboBoxModel<String> comboModel;
 	private DefaultComboBoxModel<String> instructorModel;
+	private String[] allInstructors;
 
 	private JCheckBox newTypeCheck;
 	private JCheckBox weeklyCheck;
@@ -744,8 +745,7 @@ public class newEventGUI extends JFrame
 		id = new JTextField("");
 
 		fileAdapter.updateInstructorsList();
-		String[] allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
-
+		allInstructors = new String[fileAdapter.getInstructorsList().getInstructorsList().size()];
 		for (int k = 0; k < fileAdapter.getInstructorsList().getInstructorsList().size(); k++)
 			allInstructors[k] = fileAdapter.getInstructorsList().getInstructorsList().get(k).toSmallString();
 

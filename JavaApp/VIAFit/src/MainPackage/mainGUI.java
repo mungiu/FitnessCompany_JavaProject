@@ -598,32 +598,50 @@ public class mainGUI extends JFrame
 	 */
 	public void updateBigInfoBox(String type)
 	{
-		if (type.equals("Event"))
+		try
 		{
-			fileAdapter.updateEventsList();
-			listBigInfoBox.clear();
-			for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
-				listBigInfoBox.addElement(fileAdapter.getEventsList().getEventsList().get(i));
+			if (type.equals("Event"))
+			{
+				fileAdapter.updateEventsList();
+				listBigInfoBox.clear();
+				for (int i = 0; i < fileAdapter.getEventsList().getEventsList().size(); i++)
+					listBigInfoBox.addElement(fileAdapter.getEventsList().getEventsList().get(i));
 
-			searchOption.setSelectedIndex(2);
+				searchOption.setSelectedIndex(2);
+			}
+		} catch (NullPointerException e)
+		{
+			System.out.println("Events List binary file is empty, nothing to update");
 		}
-		if (type.equals("Member"))
+		try
 		{
-			fileAdapter.updateMembersList();
-			listBigInfoBox.clear();
-			for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
-				listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
+			if (type.equals("Member"))
+			{
+				fileAdapter.updateMembersList();
+				listBigInfoBox.clear();
+				for (int i = 0; i < fileAdapter.getMembersList().getMembersList().size(); i++)
+					listBigInfoBox.addElement(fileAdapter.getMembersList().getMembersList().get(i));
 
-			searchOption.setSelectedIndex(0);
+				searchOption.setSelectedIndex(0);
+			}
+		} catch (NullPointerException e)
+		{
+			System.out.println("Members List binary file is empty, nothing to update");
 		}
-		if (type.equals("Instructor"))
+		try
 		{
-			fileAdapter.updateInstructorsList();
-			listBigInfoBox.clear();
-			for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
-				listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
+			if (type.equals("Instructor"))
+			{
+				fileAdapter.updateInstructorsList();
+				listBigInfoBox.clear();
+				for (int i = 0; i < fileAdapter.getInstructorsList().getInstructorsList().size(); i++)
+					listBigInfoBox.addElement(fileAdapter.getInstructorsList().getInstructorsList().get(i));
 
-			searchOption.setSelectedIndex(1);
+				searchOption.setSelectedIndex(1);
+			}
+		} catch (NullPointerException e)
+		{
+			System.out.println("Instructors List binary file is empty, nothing to update");
 		}
 	}
 

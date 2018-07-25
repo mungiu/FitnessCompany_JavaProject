@@ -27,7 +27,7 @@ public class FileAdapter
 	private InstructorsList instructorsList;
 	private ClassTypesList classTypesList;
 
-	public FileAdapter() throws FileNotFoundException, ClassNotFoundException, EOFException, IOException
+	public FileAdapter() throws FileNotFoundException, ClassNotFoundException, IOException
 	{
 		eventsListBinFileName = "allEvents.bin";
 		instructorsListBinFileName = "allInstructors.bin";
@@ -35,27 +35,32 @@ public class FileAdapter
 		classTypeListBinFileName = "allClassTypes.bin";
 
 		myFileIO = new MyFileIO();
+		try
+		{
+			/// CHECK if lists already exists and copy OR create new lists
+			if (myFileIO.readObjectFromFile(eventsListBinFileName).equals(null))
+				eventsList = new EventsList();
+			else
+				updateEventsList();
 
-		/// CHECK if lists already exists and copy OR create new lists
-		if (myFileIO.readObjectFromFile(eventsListBinFileName) == null)
-			eventsList = new EventsList();
-		else
-			updateEventsList();
+			if (myFileIO.readObjectFromFile(membersListBinFileName).equals(null))
+				membersList = new MembersList();
+			else
+				updateMembersList();
 
-		if (myFileIO.readObjectFromFile(membersListBinFileName) == null)
-			membersList = new MembersList();
-		else
-			updateMembersList();
+			if (myFileIO.readObjectFromFile(instructorsListBinFileName).equals(null))
+				instructorsList = new InstructorsList();
+			else
+				updateInstructorsList();
 
-		if (myFileIO.readObjectFromFile(instructorsListBinFileName) == null)
-			instructorsList = new InstructorsList();
-		else
-			updateInstructorsList();
-
-		if (myFileIO.readObjectFromFile(classTypeListBinFileName) == null)
-			classTypesList = new ClassTypesList();
-		else
-			updateInstructorsList();
+			if (myFileIO.readObjectFromFile(classTypeListBinFileName).equals(null))
+				classTypesList = new ClassTypesList();
+			else
+				updateInstructorsList();
+		} catch (EOFException e)
+		{
+			System.out.println("One of the binary files reached end of line when File adapter was instantiated");
+		}
 
 		onGoingEventsList = new ArrayList<Event>();
 		upComingEventsList = new ArrayList<Event>();
@@ -133,9 +138,14 @@ public class FileAdapter
 		MyDate today = MyDate.today();
 
 		ArrayList<Event> temp = new ArrayList<Event>();
-		for (int i = 0; i < eventsList.getEventsList().size(); i++)
-			temp.add(eventsList.getEventsList().get(i));
-
+		try
+		{
+			for (int i = 0; i < eventsList.getEventsList().size(); i++)
+				temp.add(eventsList.getEventsList().get(i));
+		} catch (NullPointerException e)
+		{
+			System.out.println("Events list binary file is still empty, nothing to update");
+		}
 		Event currentEvent;
 
 		MyClock thisEventStartTime;
@@ -188,8 +198,14 @@ public class FileAdapter
 		MyDate today = MyDate.today();
 
 		ArrayList<Event> temp = new ArrayList<Event>();
-		for (int i = 0; i < eventsList.getEventsList().size(); i++)
-			temp.add(eventsList.getEventsList().get(i));
+		try
+		{
+			for (int i = 0; i < eventsList.getEventsList().size(); i++)
+				temp.add(eventsList.getEventsList().get(i));
+		} catch (NullPointerException e)
+		{
+			System.out.println("Events List binary file is still empty, nothing to update");
+		}
 
 		Event currentEvent;
 
@@ -239,7 +255,13 @@ public class FileAdapter
 	 */
 	public void updateInstructorsList()
 	{
-		instructorsList.setInstructorsList(readInstructorsListFromBin());
+		try
+		{
+			instructorsList.setInstructorsList(readInstructorsListFromBin());
+		} catch (NullPointerException e)
+		{
+			System.out.println("Instructors List binary file is empty, nothing to update");
+		}
 	}
 
 	/**
@@ -247,7 +269,13 @@ public class FileAdapter
 	 */
 	public void updateMembersList()
 	{
-		membersList.setMembersList(readMembersListFromBin());
+		try
+		{
+			membersList.setMembersList(readMembersListFromBin());
+		} catch (NullPointerException e)
+		{
+			System.out.println("Members List binary file is empty, nothing to update");
+		}
 	}
 
 	/**
@@ -255,7 +283,13 @@ public class FileAdapter
 	 */
 	public void updateEventsList()
 	{
-		eventsList.setEventsList(readEventsListFromBin());
+		try
+		{
+			eventsList.setEventsList(readEventsListFromBin());
+		} catch (NullPointerException e)
+		{
+			System.out.println("Events List binary file is empty, nothing to update");
+		}
 	}
 
 	/**
@@ -263,7 +297,13 @@ public class FileAdapter
 	 */
 	public void updateClassTypesList()
 	{
-		classTypesList.setClassTypesList(readClassTypesListFromBin());
+		try
+		{
+			classTypesList.setClassTypesList(readClassTypesListFromBin());
+		} catch (NullPointerException e)
+		{
+			System.out.println("Class Types List binary file is empty, nothing to update");
+		}
 	}
 
 	/**
